@@ -18,7 +18,6 @@ function* fetchArticleList() {
     sort: 'update_time' })
   if (res.data.code === 'OK') {
     const { result, total } = res.data.data
-    console.log(result)
     yield put(initArticleList(result, total))
   }
 }
