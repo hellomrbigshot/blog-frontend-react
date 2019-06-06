@@ -1,0 +1,4 @@
+export const GET_ARTICLE_DETAIL = 'detail/GET_ARTICLE_DETAIL'
+export const INIT_ARTICLE_DETAIL = 'detail/INIT_ARTICLE_LIST'
+export const GET_COMMENT_LIST = 'detail/GET_COMMENT_LIST'
+export const INIT_COMMENT_LIST = 'detail/INIT_COMMENT_LIST'
