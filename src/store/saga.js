@@ -5,4 +5,5 @@ import { saga as detailSaga } from '../views/detail/store'
 export default function* rootSaga() {
   yield fork(homeSaga.getArticleList)
   yield fork(detailSaga.getArticleDetail)
+  yield fork(detailSaga.getCommentList)
 }

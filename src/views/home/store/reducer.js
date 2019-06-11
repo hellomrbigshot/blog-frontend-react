@@ -1,10 +1,10 @@
 import { INIT_ARTICLE_LIST } from './actionTypes'
 import { fromJS } from 'immutable'
-const defaultState = fromJS({
+const initialState = fromJS({
   articleList: [],
   total: 0
 })
-export default (state = defaultState, action) => {
+export default (state = initialState, action) => {
   switch(action.type) {
     case INIT_ARTICLE_LIST:
       const { list, total } = action

@@ -1,11 +1,11 @@
 import { fromJS } from 'immutable'
 import { SEARCH_FOCUS, SEARCH_BLUR } from './actionTypes'
 
-const defaultState = fromJS({
+const initialState = fromJS({
   focused: false
 })
 
-export default (state = defaultState, action) => {
+export default (state = initialState, action) => {
   switch(action.type) {
     case SEARCH_FOCUS:
       return state.set('focused', true)

@@ -1,12 +1,20 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getArticleDetail, getCommentList } from './store/actionCreators'
+import { DetailWrapper } from './styled'
+import ArticleDetail from './components/articleDetail'
 
 class Detail extends Component {
   render() {
-    console.log(this.props.match.params.id)
+    const { detail } = this.props
     return (
-      <div>详情页</div>
+      <DetailWrapper>
+        {
+          detail.get('content') ?
+          <ArticleDetail/> : null
+        }
+        
+      </DetailWrapper>
     )
   }
   componentDidMount() {

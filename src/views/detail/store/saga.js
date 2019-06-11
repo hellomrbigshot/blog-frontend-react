@@ -21,7 +21,7 @@ export function* getCommentList() {
 }
 
 function* fetchCommentList(action) {
-  const res = yield axios.post('/api/comment/getpagecommentlist', qs.stringity({ page_id: action.id }))
+  const res = yield axios.post('/api/comment/getpagecommentlist', qs.stringify({ page_id: action.id }))
   if (res.data.code === 'OK') {
     const list = res.data.data
     yield put(initCommentList(list))
