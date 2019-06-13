@@ -54,7 +54,7 @@ axios.interceptors.response.use(
     if (error.response) {
       switch (error.response.status) {
         case 401:
-          Cookies.remove('username')
+          Cookies.remove('user')
           break
           // 跳到登录页
         default:

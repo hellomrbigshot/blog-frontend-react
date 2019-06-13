@@ -151,3 +151,22 @@ export const Button = styled.div`
     color: #fff;
   }
 `
+
+export const AvatarWrapper = styled.div`
+  width: 80px;
+  height: 56px;
+  float: right;
+  position: relative;
+  margin-right: 12px;
+  padding: 8px 16px 8px 24px;
+  box-sizing: border-box;
+`
+
+export const AvatarContent = styled.img`
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+`

@@ -11,7 +11,7 @@ function* axiosLogin(action) {
   let loginRes = yield fetch.post('/api/signin', { ...action.user })
   if (loginRes.data.code === 'OK') {
     let userInfo = yield fetch.post('/api/signin/getUserInfo', { username: action.user.username })
-    yield put(loginSuccess(userInfo.data.data))
+    yield put(loginSuccess(userInfo.data.data.username))
   }
 }
 
@@ -23,6 +23,6 @@ export function* axiosRegister(action) {
   let registerRes = yield fetch.post('/api/signup', { ...action.user })
   if (registerRes.data.code === 'OK') {
     let userInfo = yield fetch.post('/api/signin/getUserInfo', { username: action.user.username })
-    yield put(registerSuccess(userInfo.data.data))
+    yield put(registerSuccess(userInfo.data.data.username))
   }
 }

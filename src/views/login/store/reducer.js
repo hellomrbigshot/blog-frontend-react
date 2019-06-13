@@ -3,28 +3,18 @@ import { fromJS } from 'immutable'
 import Cookies from 'js-cookie'
 
 const initialState = fromJS({
-  user: {
-    username: Cookies.get('username') || '',
-    avatar: '',
-    _id: ''
-  }
+  user: Cookies.get('user') || ''
 })
 export default (state = initialState, action) => {
-  let username = '',
-      _id = ''
-  if (action.user) {
-    username = action.user.username
-    _id = action.user._id
-  }
   switch (action.type) {
     case LOGIN_SUCCESS:
-      Cookies.set('username', username)
-      return state.merge({ username, _id })
+      Cookies.set('user', action.user)
+      return state.set('user', action.user)
     case REGISTER_SUCCESS:
-      Cookies.set('username', username)
-      return state.merge({ username, _id })
+      Cookies.set('user', action.user)
+      return state.set('user', action.user)
     case LOGOUT:
-      return state.merge({ username: '', avatar: '', _id: '' })
+      return state.set('user', '')
     default:
       return state
   }

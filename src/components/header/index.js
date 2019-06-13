@@ -1,15 +1,15 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 import { CSSTransition } from 'react-transition-group'
 import classnames from 'classnames'
-import { HeaderWrapper, Logo, SearchWrapper, Nav, NavSearch, NavItem, Addition, Button } from './style'
+import { HeaderWrapper, Logo, SearchWrapper, Nav, NavSearch, NavItem, Addition, Button, AvatarWrapper, AvatarContent } from './style'
 import { actionCreators } from './store'
 
 
 class Header extends Component {
   render() {
-    const { inputFocus, inputBlur, focused, location: { pathname } } = this.props
+    const { inputFocus, inputBlur, focused, location: { pathname }, user } = this.props
     const hideHeaderPath = ['/login', '/register']
     const hideHeader = hideHeaderPath.includes(pathname.trim())
     return hideHeader ? null : (
@@ -44,12 +44,22 @@ class Header extends Component {
               写文章
             </Button>
           </Link>
-          <Link to="register">
-            <Button className="reg">注册</Button>
-          </Link>
-          <Link to="login">
-            <Button className="login">登录</Button>
-          </Link>
+          {
+            user ? 
+            <AvatarWrapper>
+              <AvatarContent src={`/api/file/avatar/user/?username=${user}`}/>
+            </AvatarWrapper> :
+            (
+              <Fragment>
+                <Link to="register">
+                  <Button className="reg">注册</Button>
+                </Link>
+                <Link to="login">
+                  <Button className="login">登录</Button>
+                </Link>
+              </Fragment>
+            )
+          }
         </Addition>
       </HeaderWrapper>
     )
@@ -58,7 +68,8 @@ class Header extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    focused: state.getIn(['header', 'focused'])
+    focused: state.getIn(['header', 'focused']),
+    user: state.getIn(['user', 'user'])
   }
 }
 const mapDispatchToProps = (dispatch) => {
