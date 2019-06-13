@@ -32,7 +32,7 @@ export const Info = styled.div`
       padding: 0 2px;
       line-height: 20px;
       color: #555;
-      border-bottom: 1px solid #555;
+      border-bottom: 1px solid #ccc;
       &:hover {
         color: #222;
         border-bottom-color: #222;

@@ -1,11 +1,11 @@
-import { takeEvery, put } from 'redux-saga/effects'
+import { takeLatest, put } from 'redux-saga/effects'
 import { GET_ARTICLE_DETAIL, GET_COMMENT_LIST } from './actionTypes'
 import axios from 'axios'
 import { initArticleDetail, initCommentList } from './actionCreators'
 import qs from 'qs'
 
 export function* getArticleDetail() {
-  yield takeEvery(GET_ARTICLE_DETAIL, fetchArticleDetail)
+  yield takeLatest(GET_ARTICLE_DETAIL, fetchArticleDetail)
 }
 
 function* fetchArticleDetail(action) {
@@ -17,7 +17,7 @@ function* fetchArticleDetail(action) {
 }
 
 export function* getCommentList() {
-  yield takeEvery(GET_COMMENT_LIST, fetchCommentList)
+  yield takeLatest(GET_COMMENT_LIST, fetchCommentList)
 }
 
 function* fetchCommentList(action) {

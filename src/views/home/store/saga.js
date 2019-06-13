@@ -1,10 +1,10 @@
-import { takeEvery, put } from 'redux-saga/effects'
+import { takeLatest, put } from 'redux-saga/effects'
 import { initArticleList } from './actionCreators'
 import { GET_ARTICLE_LIST } from './actionTypes'
 import { fetch } from '../../../common'
 
 export function* getArticleList() {
-  yield takeEvery(GET_ARTICLE_LIST, fetchArticleList)
+  yield takeLatest(GET_ARTICLE_LIST, fetchArticleList)
 }
 
 function* fetchArticleList() {

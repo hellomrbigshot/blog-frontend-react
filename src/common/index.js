@@ -30,13 +30,14 @@ const formatTime = (time, type = '3') => {
       break
     // yyyy-mm-dd
     case '2':
-      let date = new Date(time)
       str = `${time.getFullYear()}-${padStart2(time.getMonth() + 1)}-${padStart2(time.getDate())}`
       break
     // 倒计时
     case '3':
       str = timeType3(time)
       break
+    default:
+      str = ''
   }
   return str
 }
