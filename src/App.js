@@ -5,6 +5,8 @@ import store from './store'
 import Header from './components/header'
 import Home from './views/home'
 import Detail from './views/detail'
+import Login from './views/login'
+import Register from './views/login/register'
 
 class App extends Component {
   render() {
@@ -15,6 +17,8 @@ class App extends Component {
           <div style={{paddingTop: '57px'}}>
             <Route path="/" exact component={Home}/>
             <Route path="/detail/:id" exact component={Detail}/>
+            <Route path="/login" exact component={Login}/>
+            <Route path="/register" exact component={Register}/>
           </div>
         </Router>
       </Provider>

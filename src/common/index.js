@@ -1,5 +1,6 @@
 import marked from 'marked'
 import hljs from 'highlight.js'
+import * as fetch from './fetch'
 
 marked.setOptions({ 
   renderer: new marked.Renderer(),
@@ -66,5 +67,6 @@ function padStart2(num = 0) {
 
 export {
   marked,
-  formatTime
+  formatTime,
+  fetch
 }

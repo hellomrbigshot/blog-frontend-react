@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { CSSTransition } from 'react-transition-group'
 import classnames from 'classnames'
 import { HeaderWrapper, Logo, SearchWrapper, Nav, NavSearch, NavItem, Addition, Button } from './style'
@@ -9,8 +9,10 @@ import { actionCreators } from './store'
 
 class Header extends Component {
   render() {
-    const { inputFocus, inputBlur, focused } = this.props
-    return (
+    const { inputFocus, inputBlur, focused, location: { pathname } } = this.props
+    const hideHeaderPath = ['/login', '/register']
+    const hideHeader = hideHeaderPath.includes(pathname.trim())
+    return hideHeader ? null : (
       <HeaderWrapper>
         <Link to="/">
           <Logo/>
@@ -69,4 +71,5 @@ const mapDispatchToProps = (dispatch) => {
     }
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Header)
+// export default connect(mapStateToProps, mapDispatchToProps)(Header)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header))

@@ -7,6 +7,7 @@
     "classnames": "^2.2.6",
     "highlight.js": "^9.15.8",
     "immutable": "^4.0.0-rc.12",
+    "js-cookie": "^2.2.0",
     "marked": "^0.6.2",
     "qs": "^6.7.0",
     "react": "^16.8.6",
