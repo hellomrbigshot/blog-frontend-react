@@ -150,6 +150,9 @@ export const Button = styled.div`
   .iconfont {
     color: #fff;
   }
+  &:hover {
+    cursor: pointer;
+  }
 `
 
 export const AvatarWrapper = styled.div`
@@ -158,8 +161,21 @@ export const AvatarWrapper = styled.div`
   float: right;
   position: relative;
   margin-right: 12px;
-  padding: 8px 16px 8px 24px;
+  padding: 8px 24px 8px 16px;
   box-sizing: border-box;
+  &:before {
+    content: '';
+    position: absolute;
+    top: 25px;
+    right: 7px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid #999;
+  }
+  &:hover {
+    cursor: pointer;
+    background: #f5f5f5;
+  }
 `
 
 export const AvatarContent = styled.img`
@@ -169,4 +185,38 @@ export const AvatarContent = styled.img`
   border-radius: 50%;
   border: none;
   outline: none;
+  position: relative;
+`
+
+export const DropdownWrapper = styled.div`
+  position: absolute;
+  width: 160px;
+  box-sizing: border-box;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .1);
+  top: 57px;
+  left: 0;
+  background: #fff;
+`
+
+export const DrapdownItem = styled.div`
+  padding: 10px 20px;
+  line-height: 30px;
+  a {
+    font-size: 14px;
+    color: #333;
+    display: block;
+    overflow: hidden;
+    .iconfont {
+      float: left;
+      line-height: 30px;
+    }
+    span {
+      float: left;
+      margin-left: 15px;
+    }
+  }
+  &:hover {
+    background: #f5f5f5;
+  }
 `

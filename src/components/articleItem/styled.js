@@ -42,5 +42,5 @@ export const Info = styled.div`
 `
 
 export const Article = styled.div`
-  font-weight: 300;
+  
 `

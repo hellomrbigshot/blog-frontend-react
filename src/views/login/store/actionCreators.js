@@ -1,4 +1,4 @@
-import { LOGIN, LOGIN_SUCCESS, LOGOUT, REGISTER, REGISTER_SUCCESS } from './actionTypes'
+import { LOGIN, LOGIN_SUCCESS, LOGOUT, REGISTER, REGISTER_SUCCESS, LOGOUT_SUCCESS } from './actionTypes'
 
 export const login = (user) => {
   return {
@@ -17,6 +17,12 @@ export const loginSuccess = (user) => {
 export const logout = () => {
   return {
     type: LOGOUT
+  }
+}
+
+export const logoutSuccess = () => {
+  return {
+    type: LOGOUT_SUCCESS
   }
 }
 

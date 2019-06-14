@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, REGISTER_SUCCESS, LOGOUT } from './actionTypes'
+import { LOGIN_SUCCESS, REGISTER_SUCCESS, LOGOUT_SUCCESS } from './actionTypes'
 import { fromJS } from 'immutable'
 import Cookies from 'js-cookie'
 
@@ -13,7 +13,8 @@ export default (state = initialState, action) => {
     case REGISTER_SUCCESS:
       Cookies.set('user', action.user)
       return state.set('user', action.user)
-    case LOGOUT:
+    case LOGOUT_SUCCESS:
+      Cookies.remove('user')
       return state.set('user', '')
     default:
       return state
