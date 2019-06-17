@@ -1,8 +1,9 @@
-import { INIT_ARTICLE_LIST } from './actionTypes'
+import { INIT_ARTICLE_LIST, TOGGLE_BACK_TOP } from './actionTypes'
 import { fromJS } from 'immutable'
 const initialState = fromJS({
   articleList: [],
-  total: 0
+  total: 0,
+  showBackTop: false
 })
 export default (state = initialState, action) => {
   switch(action.type) {
@@ -12,6 +13,9 @@ export default (state = initialState, action) => {
         articleList: state.get('articleList').concat(fromJS(list)),
         total
       })
+    case TOGGLE_BACK_TOP:
+      const { show } = action
+      return state.set('showBackTop', show)
     default:
       return state
   }

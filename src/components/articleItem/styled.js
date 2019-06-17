@@ -12,7 +12,7 @@ export const Header = styled.div`
   font-size: 26px;
   height: 41px;
   line-height: 41px;
-  font-weight: 350;
+  font-weight: 349;
   color: #333;
 `
 
@@ -23,7 +23,7 @@ export const Info = styled.div`
   line-height: 18px;
   box-sizing: border-box;
   span {
-    font-weight: 350;
+    font-weight: 349;
     display:inline-block;
     border-right: 1px solid #
     padding-right: 5px;

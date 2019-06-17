@@ -1,4 +1,4 @@
-import { GET_ARTICLE_LIST, INIT_ARTICLE_LIST } from './actionTypes'
+import { GET_ARTICLE_LIST, INIT_ARTICLE_LIST, TOGGLE_BACK_TOP } from './actionTypes'
 
 export const getArticleList = () => {
   return {
@@ -11,5 +11,12 @@ export const initArticleList = (list, total) => {
     type: INIT_ARTICLE_LIST,
     list,
     total
+  }
+}
+
+export const toggleBackTop = (show) => {
+  return {
+    type: TOGGLE_BACK_TOP,
+    show
   }
 }

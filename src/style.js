@@ -56,6 +56,6 @@ table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed, 
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary {
-  font-weight: 350;
+  font-weight: 349;
 }
 `

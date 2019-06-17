@@ -20,7 +20,7 @@ export const Info = styled.div`
   font-size: 12px;
   line-height: 18px;
   color: #999;
-  font-weight: 350;
+  font-weight: 349;
   margin-bottom: 10px;
   span {
     line-height: 18px;
