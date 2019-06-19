@@ -97,15 +97,20 @@ export const NavItem = styled.div`
   line-height: 56px;
   padding: 0 5px;
   margin-left: 10px;
-  color: #555;
   font-size: 17px;
   font-weight: 300;
   &.first-nav {
     margin-left: 50px;
   }
+  a {
+    color: #555;
+  }
   &:hover {
     cursor: pointer;
-    font-weight: normal;
+    a {
+      color: #555;
+      font-weight: 400;
+    }
   }
 `
 
@@ -119,6 +124,7 @@ export const Addition = styled.div`
 export const Button = styled.div`
   height: 24px;
   line-height: 24px;
+  box-sizing: content-box;
   margin-top: 9px;
   padding: 6px 15px;
   border-radius: 19px;

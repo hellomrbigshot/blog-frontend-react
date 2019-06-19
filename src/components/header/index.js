@@ -11,7 +11,7 @@ import { actionCreators as loginCreator } from '../../views/login/store'
 class Header extends Component {
   render() {
     const { inputFocus, inputBlur, focused, location: { pathname }, user, mouseIn, handleMouseEnter, handleMouseLeave } = this.props
-    const hideHeaderPath = ['/login', '/register']
+    const hideHeaderPath = ['/login', '/register', '/404']
     const hideHeader = hideHeaderPath.includes(pathname.trim())
     return hideHeader ? null : (
       <HeaderWrapper>
@@ -29,11 +29,15 @@ class Header extends Component {
                 onFocus={inputFocus} 
                 onBlur={inputBlur}
                 className={focused ? 'focused' : ''}
+                ref={input => {this.keywords = input}}
+                onKeyDown={(event) => this.handleKeyDown(event, this.keywords)}
               />
             </CSSTransition>
-            <i className={classnames('iconfont', 'icon-fangdajing', {focused: focused})} />
+            <i onClick={() => this.handleSearch(this.keywords)} className={classnames('iconfont', 'icon-fangdajing', {focused: focused})} />
           </SearchWrapper>
-          <NavItem className="first-nav">标签</NavItem>
+          <NavItem className="first-nav">
+            <Link to="/tags/list">标签</Link>
+          </NavItem>
           <NavItem>留言</NavItem>
           <NavItem>待办</NavItem>
           <NavItem>实验室</NavItem>
@@ -113,6 +117,19 @@ class Header extends Component {
         </DrapdownItem>
       </DropdownWrapper>
     )
+  }
+  handleKeyDown(event, keywords) {
+    const KEYCODE = event.keyCode
+    const KEYWORDS = keywords.value
+    if (KEYCODE === 13 && KEYWORDS) { // enter 触发搜索
+      // this.props.history.push({ pathname: `/home?keywords=${encodeURIComponent(KEYWORDS)}` })
+      this.props.history.push({ pathname: `/home`, query: { keywords: KEYWORDS }})
+    }
+  }
+  handleSearch(keywords) {
+    if (keywords) {
+
+    }
   }
 }
 

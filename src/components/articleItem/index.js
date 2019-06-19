@@ -2,7 +2,7 @@ import React from 'react'
 import { ArticleItem, Header, Info, Article } from './styled'
 import { Link } from 'react-router-dom'
 import 'highlight.js/styles/solarized-light.css'
-import { marked } from '../../common'
+import { marked, formatTime } from '../../common'
 
 
 function articleItem(props) {
@@ -11,7 +11,7 @@ function articleItem(props) {
     <ArticleItem>
       <Link to={`/detail/${article.get('_id')}`}><Header>{article.get('title')}</Header></Link>
       <Info>
-        <span>创建于2天前</span>
+        <span>更新于 {formatTime(article.get('update_time'))}</span>
         <span> | 作者<Link to="">{article.get('create_user')}</Link></span>
         <span> | 标签{showTags(article.get('tags'))}</span>
       </Info>

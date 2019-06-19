@@ -7,7 +7,7 @@ export function* getArticleList() {
   yield takeLatest(GET_ARTICLE_LIST, fetchArticleList)
 }
 
-function* fetchArticleList() {
+function* fetchArticleList(action) {
   let res = yield fetch.post(
     '/api/page/pagelist', 
     { 
@@ -15,11 +15,12 @@ function* fetchArticleList() {
       status: 'normal',
       content: '',	
       pageSize: 10,
-      page: 1,
+      page: action.page,
       secret: false,
       sort: 'update_time' 
     }
   )
-    const { result, total } = res.data.data
-    yield put(initArticleList(result, total))
+  const { result, total } = res.data.data
+  yield put(initArticleList(result, total))
+  window.scrollTo(0, 0)
 }

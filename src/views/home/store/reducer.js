@@ -10,7 +10,7 @@ export default (state = initialState, action) => {
     case INIT_ARTICLE_LIST:
       const { list, total } = action
       return state.merge({
-        articleList: state.get('articleList').concat(fromJS(list)),
+        articleList: fromJS(list),
         total
       })
     case TOGGLE_BACK_TOP:
