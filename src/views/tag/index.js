@@ -18,7 +18,7 @@ class TagList extends Component {
             tagList.map((tag, i) => (
               <TagItem key={tag.get('_id')}>
                 <TagHeader>
-                  <Link to="">{tag.get('name')}</Link>
+                  <Link to={`/tags/detail/${tag.get('name')}`}>{tag.get('name')}</Link>
                 </TagHeader>
                 <TagDesc>{tag.get('description')}</TagDesc>
                 <TagBottom>共有 {tag.get('page_num')} 篇文章</TagBottom>
@@ -26,7 +26,9 @@ class TagList extends Component {
             ))
           }
         </ListWrapper>
-        <Pagination total={total} onChange={pageChange} />
+        {
+          tagList.size === 0 ? null : <Pagination total={total} onChange={pageChange} />
+        }
       </TagWrapper>
     )
   }

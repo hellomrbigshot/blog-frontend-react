@@ -1,2 +1,6 @@
 export const GET_TAG_LIST = 'tag/GET_TAG_LIST'
 export const INIT_TAG_LIST = 'tag/INIT_TAG_LIST'
+export const GET_TAG_DETAIL = 'tag/GET_TAG_DETAIL'
+export const INIT_TAG_DETAIL = 'tag/INIT_TAG_DETAIL'
+export const GET_ARTICLE_LIST = 'tag/GET_ARTICLE_LIST'
+export const INIT_ARTICLE_LIST = 'tag/INIT_ARTICLE_LIST'

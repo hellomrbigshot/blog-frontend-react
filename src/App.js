@@ -19,7 +19,7 @@ class App extends Component {
         <Router>
           <ScrollToTop />
           <Header />
-          <div style={{paddingTop: '57px'}}>
+          <div style={{paddingTop: '57px', width: '800px', margin: '100px auto'}}>
             <Switch>
               <Redirect exact from="/" to="/home" />
               <Route path="/home" component={Home}/>
@@ -27,7 +27,7 @@ class App extends Component {
               <Route path="/login" exact component={Login}/>
               <Route path="/register" exact component={Register}/>
               <Route path="/tags/list" exact component={TagList}/>
-              <Route path="/tags/detail/:tag" exact component={TagDetail}/>
+              <Route path="/tags/detail/:tag" component={TagDetail}/>
               <Route path="/404" exact component={NoMatch}/>
               <Redirect from="*" to="/404"/>
             </Switch>

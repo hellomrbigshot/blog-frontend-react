@@ -1,9 +1,14 @@
 import { fromJS } from 'immutable'
-import { INIT_TAG_LIST } from './actionTypes'
+import { INIT_TAG_LIST, INIT_TAG_DETAIL, INIT_ARTICLE_LIST } from './actionTypes'
 
 const initialState = fromJS({
   total: 0,
-  tagList: []
+  tagList: [],
+  tagDetail: {
+    total: 0,
+    articleList: [],
+    detail: {}
+  }
 })
 
 export default (state = initialState, action) => {
@@ -13,6 +18,14 @@ export default (state = initialState, action) => {
       return state.merge({
         tagList: fromJS(list),
         total
+      })
+    case INIT_TAG_DETAIL:
+      const { data } = action
+      return state.setIn(['tagDetail', 'detail'], fromJS(data))
+    case INIT_ARTICLE_LIST:
+      return state.mergeIn(['tagDetail'], {
+        total: action.total,
+        articleList: fromJS(action.list)
       })
     default:
       return state

@@ -2,7 +2,6 @@ import styled from 'styled-components'
 
 export const DetailWrapper = styled.div`
   width: 800px;
-  margin: 80px auto;
   font-family: Lato, PingFang SC, Microsoft YaHei, sans-serif;
 `
 
