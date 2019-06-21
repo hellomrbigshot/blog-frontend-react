@@ -17,8 +17,8 @@ class Register extends Component {
             <Link to="/register" className="active">注册</Link>
           </LoginInfo>
           <Input placeholder="请输入账号" />
-          <Input placeholder="请输入密码" />
-          <Input placeholder="请确认密码" />
+          <Input placeholder="请输入密码" type="password"/>
+          <Input placeholder="请确认密码" type="password"/>
           <Button className="active">注册</Button>
         </LoginBox>
       </LoginWrapper>

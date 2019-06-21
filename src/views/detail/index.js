@@ -3,17 +3,20 @@ import { connect } from 'react-redux'
 import { getArticleDetail, getCommentList } from './store/actionCreators'
 import { DetailWrapper } from './styled'
 import ArticleDetail from './components/articleDetail'
+import showCommentList from './components/commentList'
 
 class Detail extends Component {
   render() {
-    const { detail } = this.props
+    const { detail, commentList } = this.props
     return (
       <DetailWrapper>
         {
           detail.get('content') ?
           <ArticleDetail/> : null
         }
-        
+        {
+          commentList.size > 0 ? showCommentList(commentList) : null
+        }
       </DetailWrapper>
     )
   }

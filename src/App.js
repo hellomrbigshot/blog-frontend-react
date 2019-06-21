@@ -19,17 +19,17 @@ class App extends Component {
         <Router>
           <ScrollToTop />
           <Header />
-          <div style={{paddingTop: '57px', width: '800px', margin: '100px auto'}}>
+          <div style={{paddingTop: '37px', width: '800px', margin: '100px auto'}}>
             <Switch>
               <Redirect exact from="/" to="/home" />
               <Route path="/home" component={Home}/>
               <Route path="/detail/:id" exact component={Detail}/>
               <Route path="/login" exact component={Login}/>
               <Route path="/register" exact component={Register}/>
-              <Route path="/tags/list" exact component={TagList}/>
-              <Route path="/tags/detail/:tag" component={TagDetail}/>
+              <Route path="/tag/list" exact component={TagList}/>
+              <Route path="/tag/detail/:tag" component={TagDetail}/>
               <Route path="/404" exact component={NoMatch}/>
-              <Redirect from="*" to="/404"/>
+              {/* <Redirect from="*" to="/404"/> */}
             </Switch>
           </div>
         </Router>

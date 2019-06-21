@@ -8,7 +8,6 @@ class articleDetail extends Component {
   render() {
     const { article } = this.props
     const tags = article.get('tags')
-    console.log(tags)
     return (
       <div>
         <Header>{article.get('title')}</Header>
@@ -28,7 +27,7 @@ function showTags(tags) {
   if (!tags) return ''
   tags = tags.toJS()
   return tags.map((tag, i) => (
-    <Link key={i} to="">{tag}{ i === tags.length - 1 ? '' : ','}</Link>
+    <Link key={i} to={`/tag/detail/${tag}`}>{tag}{ i === tags.length - 1 ? '' : ','}</Link>
   ))
 }
 

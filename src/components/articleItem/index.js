@@ -24,7 +24,7 @@ function showTags(tags) {
   if (!tags) return null 
   tags = tags.toJS()
   return tags.map((tag, i) => {
-    return <Link key={i} to="">{tag}{ i === tags.length - 1 ? '' : ','}</Link>
+    return <Link key={i} to={`/tag/detail/${tag}`}>{tag}{ i === tags.length - 1 ? '' : ','}</Link>
   })
 }
 

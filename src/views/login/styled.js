@@ -73,6 +73,9 @@ export const Button = styled.div`
   padding: 9px 18px;
   line-height: 25px;
   border-radius: 25px;
+  &:hover {
+    cursor: pointer;
+  }
   &.primary {
     background: #3194d0;
     color: #fff;

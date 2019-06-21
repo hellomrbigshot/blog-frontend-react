@@ -21,7 +21,7 @@ class Login extends Component {
             <Link to="/register">注册</Link>
           </LoginInfo>
           <Input placeholder="请输入账号" ref={(input) => {this.account = input}}/>
-          <Input placeholder="请输入密码" ref={(input) => {this.password = input}}/>
+          <Input placeholder="请输入密码" type="password" ref={(input) => {this.password = input}}/>
           <Button className="primary" onClick={() => this.props.loginSubmit(this.account, this.password)}>登录</Button>
         </LoginBox>
       </LoginWrapper>

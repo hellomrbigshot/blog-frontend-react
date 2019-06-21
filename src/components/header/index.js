@@ -36,7 +36,7 @@ class Header extends Component {
             <i onClick={() => this.handleSearch(this.keywords)} className={classnames('iconfont', 'icon-fangdajing', {focused: focused})} />
           </SearchWrapper>
           <NavItem className="first-nav">
-            <Link to="/tags/list">标签</Link>
+            <Link to="/tag/list">标签</Link>
           </NavItem>
           <NavItem>留言</NavItem>
           <NavItem>待办</NavItem>
@@ -62,10 +62,10 @@ class Header extends Component {
             </AvatarWrapper> :
             (
               <Fragment>
-                <Link to="register">
+                <Link to="/register">
                   <Button className="reg">注册</Button>
                 </Link>
-                <Link to="login">
+                <Link to="/login">
                   <Button className="login">登录</Button>
                 </Link>
               </Fragment>

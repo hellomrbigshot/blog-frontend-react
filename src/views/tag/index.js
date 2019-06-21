@@ -11,14 +11,14 @@ class TagList extends Component {
     const { total, tagList, pageChange } = this.props
     return (
       <TagWrapper>
-        <Header>当前总共 {total} 个标签</Header>
+        <Header>当前总共 <span>{total}</span> 个标签</Header>
         <ListWrapper>
           {
             tagList.size === 0 ? null : 
             tagList.map((tag, i) => (
               <TagItem key={tag.get('_id')}>
                 <TagHeader>
-                  <Link to={`/tags/detail/${tag.get('name')}`}>{tag.get('name')}</Link>
+                  <Link to={`/tag/detail/${tag.get('name')}`}>{tag.get('name')}</Link>
                 </TagHeader>
                 <TagDesc>{tag.get('description')}</TagDesc>
                 <TagBottom>共有 {tag.get('page_num')} 篇文章</TagBottom>

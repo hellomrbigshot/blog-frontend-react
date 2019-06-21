@@ -6,12 +6,20 @@ export const TagWrapper = styled.div`
 `
 
 export const Header = styled.h2`
-  font-size: 14px;
+  font-size: 16px;
   font-weight: normal;
+  color: #aaa;
+  margin-bottom: 20px;
+  span {
+    font-size: 24px;
+    font-weight: 500;
+    font-style: oblique;
+    color: #333;
+  }
 `
 
 export const ListWrapper = styled.div`
-  margin: 26px 0;
+  margin: 26px 0 40px;
 `
 
 export const TagItem = styled.div`
@@ -25,13 +33,13 @@ export const TagHeader = styled.div`
     margin-bottom: 5px;
     font-size: 18px;
     font-weight: 400;
-    color: #333;
+    color: #666;
     line-height: 20px;
-    border-bottom: 1.5px solid #fff;
+    border-bottom: 1.3px solid #fff;
     float: left;
     &:hover {
-      color: #333;
-      border-bottom-color: #333;
+      color: #666;
+      border-bottom-color: #666;
     }
   }
 `
