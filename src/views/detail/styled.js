@@ -104,3 +104,14 @@ export const ReplyContent = styled.div`
   font-size: 12px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, .1);
 `
+
+export const CommentAction = styled.div`
+  overflow: hidden;
+  font-size: 12px;
+  div {
+    float: right;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+`
