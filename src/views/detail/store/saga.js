@@ -1,4 +1,4 @@
-import { takeLatest, put } from 'redux-saga/effects'
+import { takeLatest, put, select } from 'redux-saga/effects'
 import { GET_ARTICLE_DETAIL, GET_COMMENT_LIST, HANDLE_SUBMIT_COMMENT } from './actionTypes'
 import axios from 'axios'
 import { initArticleDetail, initCommentList, handleConcatComment } from './actionCreators'
@@ -36,7 +36,10 @@ export function* submitComment() {
 }
 
 function* fetchSubmitComment(action) {
-  const res = yield axios.post('/api/comment/create', qs.stringify(action.data))
+  const user = yield select(state => state.getIn(['user', 'user']))
+  const data = JSON.parse(JSON.stringify(action.data))
+  data.create_user = user
+  const res = yield axios.post('/api/comment/create', qs.stringify(data))
   if (res.data.code === 'OK') {
     yield put(handleConcatComment(res.data.data, action.index))
   }
