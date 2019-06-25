@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { getArticleDetail, getCommentList } from './store/actionCreators'
 import { DetailWrapper } from './styled'
 import ArticleDetail from './components/articleDetail'
-import showCommentList from './components/commentList'
+import CommentList from './components/commentList'
 
 class Detail extends Component {
   render() {
@@ -15,7 +15,7 @@ class Detail extends Component {
           <ArticleDetail/> : null
         }
         {
-          commentList.size > 0 ? showCommentList(commentList) : null
+          commentList.size > 0 ? <CommentList/> : null
         }
       </DetailWrapper>
     )

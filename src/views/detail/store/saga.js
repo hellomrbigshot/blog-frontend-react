@@ -1,7 +1,7 @@
 import { takeLatest, put } from 'redux-saga/effects'
-import { GET_ARTICLE_DETAIL, GET_COMMENT_LIST } from './actionTypes'
+import { GET_ARTICLE_DETAIL, GET_COMMENT_LIST, HANDLE_SUBMIT_COMMENT } from './actionTypes'
 import axios from 'axios'
-import { initArticleDetail, initCommentList } from './actionCreators'
+import { initArticleDetail, initCommentList, handleConcatComment } from './actionCreators'
 import qs from 'qs'
 
 export function* getArticleDetail() {
@@ -23,7 +23,22 @@ export function* getCommentList() {
 function* fetchCommentList(action) {
   const res = yield axios.post('/api/comment/getpagecommentlist', qs.stringify({ page_id: action.id }))
   if (res.data.code === 'OK') {
-    const list = res.data.data
+    const list = res.data.data.map(item => { 
+      item.showReplyInput = false
+      return item
+    })
     yield put(initCommentList(list))
   }
 }
+
+export function* submitComment() {
+  yield takeLatest(HANDLE_SUBMIT_COMMENT, fetchSubmitComment)
+}
+
+function* fetchSubmitComment(action) {
+  const res = yield axios.post('/api/comment/create', qs.stringify(action.data))
+  if (res.data.code === 'OK') {
+    yield put(handleConcatComment(res.data.data, action.index))
+  }
+}
+

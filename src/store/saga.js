@@ -8,6 +8,7 @@ export default function* rootSaga() {
   yield fork(homeSaga.getArticleList)
   yield fork(detailSaga.getArticleDetail)
   yield fork(detailSaga.getCommentList)
+  yield fork(detailSaga.submitComment)
   yield fork(userSaga.login)
   yield fork(userSaga.register)
   yield fork(userSaga.logout)

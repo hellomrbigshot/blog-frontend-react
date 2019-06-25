@@ -115,3 +115,8 @@ export const CommentAction = styled.div`
     }
   }
 `
+
+export const CommentReply = styled.div`
+  margin-top: 5px;
+  
+`
