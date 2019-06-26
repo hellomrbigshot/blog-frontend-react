@@ -36,8 +36,13 @@ export function* logout() {
 }
 
 export function* axiosLogout() { // 登出
-  let res = yield fetch.post('/api/signout')
-  if (res.data.code === 'OK') {
-    yield put(logoutSuccess())
+  try {
+    let res = yield fetch.post('/api/signout')
+    if (res.data.code === 'OK') {
+      yield put(logoutSuccess())
+    }
+  } catch(e) {
+    console.log(e)
   }
+  
 }

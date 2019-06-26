@@ -20,7 +20,7 @@ class Detail extends Component {
           commentList.size > 0 ? <CommentList/> : null
         }
         <div>
-          <h2 style={{fontSize: '20px', fontWeight: 'normal'}}>留言：</h2>
+          <h2 style={{fontSize: '20px', fontWeight: 'normal', marginBottom: '10px'}}>留言：</h2>
           <TextArea 
             rows={5}
             onChange={input=>this.commentContent=input.target.value} 

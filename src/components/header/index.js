@@ -110,10 +110,10 @@ class Header extends Component {
           </Link>
         </DrapdownItem>
         <DrapdownItem>
-          <Link to="" onClick={logout}>
+          <a href="#" onClick={logout}>
             <i className="iconfont icon-signout_detail_toil" />
             <span>退出</span>
-          </Link>
+          </a>
         </DrapdownItem>
       </DropdownWrapper>
     )
