@@ -6,9 +6,10 @@ import { actionCreators } from './store'
 
 class Login extends Component {
   render() {
-    const { user } = this.props
+    const { user, loginSubmit } = this.props
+    const redirectUrl = this.props.location.query ? this.props.location.query.redirect : null
     return user ? 
-      <Redirect to="/" /> : 
+      <Redirect to={redirectUrl?redirectUrl:'/'} /> : 
       (
         <LoginWrapper>
         <Link to="/">
@@ -22,7 +23,7 @@ class Login extends Component {
           </LoginInfo>
           <Input placeholder="请输入账号" ref={(input) => {this.account = input}}/>
           <Input placeholder="请输入密码" type="password" ref={(input) => {this.password = input}}/>
-          <Button className="primary" onClick={() => this.props.loginSubmit(this.account, this.password)}>登录</Button>
+          <Button className="primary" onClick={() => loginSubmit(this.account, this.password)}>登录</Button>
         </LoginBox>
       </LoginWrapper>
     )

@@ -8,10 +8,14 @@ export function* login() {
 }
 
 function* axiosLogin(action) { // 登录
-  let loginRes = yield fetch.post('/api/signin', { ...action.user })
-  if (loginRes.data.code === 'OK') {
-    let userInfo = yield fetch.post('/api/signin/getUserInfo', { username: action.user.username })
-    yield put(loginSuccess(userInfo.data.data.username))
+  try {
+    let loginRes = yield fetch.post('/api/signin', { ...action.user })
+    if (loginRes.data.code === 'OK') {
+      let userInfo = yield fetch.post('/api/signin/getUserInfo', { username: action.user.username })
+      yield put(loginSuccess(userInfo.data.data.username))
+    }
+  } catch(e) {
+    console.log(e)
   }
 }
 

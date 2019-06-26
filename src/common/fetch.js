@@ -1,6 +1,7 @@
 import axios from 'axios'
 import qs from 'qs'
 import Cookies from 'js-cookie'
+import { message } from 'antd'
 
 let loadingArr = [],
     timer = null
@@ -38,6 +39,7 @@ axios.interceptors.response.use(
       return res
     } else {
       // 提示报错信息
+      message.error(res.data.data, 10)
       return Promise.reject(res.data)
     }
   },
