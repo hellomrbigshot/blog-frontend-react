@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { 
@@ -18,7 +19,7 @@ import { showReplyInput, handleSubmitComment } from '../store/actionCreators';
 
 class CommentList extends Component {
   render() {
-    const { commentList, articleDetail, handleReplyComment, handleSubmitReply } = this.props
+    const { commentList, articleDetail, handleReplyComment, handleSubmitReply, user } = this.props
     return (
       <CommentWrapper>
         <h2>留言板：</h2>
@@ -51,7 +52,7 @@ class CommentList extends Component {
                 }
                 <div>{comment.get('content')}</div>
                 <CommentAction>
-                  <div onClick={()=>handleReplyComment(i)}>回复</div>
+                  <div onClick={()=>handleReplyComment(i, user)}>回复</div>
                 </CommentAction>
                 {
                   comment.get('showReplyInput') ? (<CommentReply>
@@ -92,9 +93,10 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, props) => {
   return {
-    handleReplyComment(i) {
+    handleReplyComment(i, user) {
+      !user && props.history.push({ pathname:'/login', query: { redirect: props.location.pathname }})
       dispatch(showReplyInput(i))
     },
     handleSubmitReply(comment, i, replyContent, articleDetail) {
@@ -122,4 +124,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CommentList)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CommentList))

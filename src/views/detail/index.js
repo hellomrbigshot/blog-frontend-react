@@ -40,7 +40,6 @@ class Detail extends Component {
   }
   handleFocus() {
     if (!this.props.user) {
-      console.log('to login')
       const path = {
         pathname: '/login',
         query: {
