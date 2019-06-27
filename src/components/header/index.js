@@ -38,7 +38,9 @@ class Header extends Component {
           <NavItem className="first-nav">
             <Link to="/tag/list">标签</Link>
           </NavItem>
-          <NavItem>留言</NavItem>
+          <NavItem>
+            <Link to="/comment/list">留言</Link>
+          </NavItem>
           <NavItem>待办</NavItem>
           <NavItem>实验室</NavItem>
         </Nav>
@@ -98,7 +100,7 @@ class Header extends Component {
           </Link>
         </DrapdownItem>
         <DrapdownItem>
-          <Link to="">
+          <Link to="/comment/list">
             <i className="iconfont icon-comment" />
             <span>我的评论</span>
           </Link>

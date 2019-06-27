@@ -1,24 +1,50 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Tabs, Pagination } from 'antd'
+import { Redirect } from 'react-router-dom'
+import { actionCreators } from './store'
+
+const { TabPane } = Tabs
 
 class Comment extends Component {
   render() {
-    const { user } = this.props
+    const { user, getCommentList, total } = this.props
     return (
-      <div></div>
+      !user ? 
+      <Redirect to={{pathname: '/login', query:{redirect: '/comment/list'}}} /> :
+      <Tabs defaultActiveKey="to_user" onChange={key=>getCommentList(key, 1)}>
+        <TabPane tab="我收到的" key="to_user">
+          {
+            total > 10 ? <Pagination total={total} onChange={page=>getCommentList('to_user', page)} /> : null
+          }
+          
+        </TabPane>
+        <TabPane tab="我发起的" key="create_user">
+          {
+            total > 10 ? <Pagination total={total} onChange={page=>getCommentList('create_user', page)} /> : null
+          }
+        </TabPane>
+      </Tabs>
     )
+  }
+  componentDidMount() {
+    this.props.getCommentList('to_user', 1)
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    user: state.getIn(['user', 'user'])
+    user: state.getIn(['user', 'user']),
+    commentList: state.getIn(['comment', 'commentList']),
+    total: state.getIn(['comment', 'total'])
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-
+    getCommentList(type, page) {
+      dispatch(actionCreators.getCommentList(type, page))
+    }
   }
 }
 
