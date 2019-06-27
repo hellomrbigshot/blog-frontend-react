@@ -4,7 +4,7 @@ import { Avatar } from 'antd'
 import { CommentWrapper, CommentAvatar, CommentRight, CommentHeader, Time, CommentContent, ReplyContent } from '../styled'
 import { formatTime } from '../../../common/index'
 
-export default (commentList, push) => {
+export default (commentList, push, type = 'to_user') => {
   return (
     <Fragment>
       {
@@ -17,8 +17,20 @@ export default (commentList, push) => {
             </CommentAvatar>
             <CommentRight>
               <CommentHeader>
-                <Link to="">{comment.get('create_user')} </Link>
-                回复我说：
+                {
+                  type === 'to_user' ? 
+                  (<Fragment>
+                    <Link to="">{comment.get('create_user')} </Link>
+                    回复我说：
+                  </Fragment>) :
+                  (<Fragment>
+                    {
+                      comment.get('reply_user') ? '回复：' : '发布评论：'
+                    }
+                  </Fragment>)
+                  
+                }
+                
                 <Time>{formatTime(comment.get('create_time'))}</Time>
               </CommentHeader>
               <CommentContent>{comment.get('content')}</CommentContent>

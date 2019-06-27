@@ -16,7 +16,7 @@ class Comment extends Component {
       <Tabs defaultActiveKey="to_user" onChange={key=>getCommentList(key, 1)}>
         <TabPane tab="我收到的" key="to_user">
           {
-            showCommentList(commentList, this.props.history.push)
+            showCommentList(commentList, this.props.history.push, 'to_user')
           }
           {
             total > 10 ? <Pagination style={{marginTop: '20px'}} total={total} onChange={page=>getCommentList('to_user', page)} /> : null
@@ -25,7 +25,7 @@ class Comment extends Component {
         </TabPane>
         <TabPane tab="我发起的" key="create_user">
           {
-            showCommentList(commentList, this.props.history.push)
+            showCommentList(commentList, this.props.history.push, 'create_user')
           }
           {
             total > 10 ? <Pagination style={{marginTop: '20px'}} total={total} onChange={page=>getCommentList('create_user', page)} /> : null
