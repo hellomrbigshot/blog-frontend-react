@@ -15,7 +15,7 @@ import {
 } from '../styled'
 import { Avatar, Button, Input } from 'antd'
 import { formatTime } from '../../../common'
-import { showReplyInput, handleSubmitComment } from '../store/actionCreators';
+import { actionCreators } from '../store'
 
 class CommentList extends Component {
   render() {
@@ -97,29 +97,15 @@ const mapDispatchToProps = (dispatch, props) => {
   return {
     handleReplyComment(i, user) {
       !user && props.history.push({ pathname:'/login', query: { redirect: props.location.pathname }})
-      dispatch(showReplyInput(i))
+      dispatch(actionCreators.showReplyInput(i))
     },
-    handleSubmitReply(comment, i, replyContent, articleDetail) {
+    handleSubmitReply(comment, i, replyContent) {
       const formData = {
         content: replyContent,
         reply_user: comment.get('create_user'),
-        reply_content: comment.get('content'),
-        to_user: articleDetail.get('create_user'),
-        page_title: articleDetail.get('title'),
-        page_id: articleDetail.get('_id')
+        reply_content: comment.get('content')
       }
-      dispatch(handleSubmitComment(formData, i))
-    },
-    handleSubmitComment(commentContent, articleDetail) {
-      const formData = {
-        content: commentContent,
-        reply_user: '',
-        reply_content: '',
-        to_user: articleDetail.get('create_user'),
-        page_title: articleDetail.get('title'),
-        page_id: articleDetail.get('_id')
-      }
-      dispatch(handleSubmitComment(formData))
+      dispatch(actionCreators.handleSubmitComment(formData, i))
     }
   }
 }

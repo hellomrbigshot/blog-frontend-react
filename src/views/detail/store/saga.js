@@ -37,9 +37,15 @@ export function* submitComment() {
 
 function* fetchSubmitComment(action) {
   const user = yield select(state => state.getIn(['user', 'user']))
+  const articleDetail = yield select(state => state.getIn(['detail', 'detail']))
   const data = JSON.parse(JSON.stringify(action.data))
-  data.create_user = user
-  const res = yield axios.post('/api/comment/create', qs.stringify(data))
+  const sendData = Object.assign(data, {
+    create_user: user,
+    to_user: articleDetail.get('create_user'),
+    page_id: articleDetail.get('_id'),
+    page_title: articleDetail.get('title')
+  })
+  const res = yield axios.post('/api/comment/create', qs.stringify(sendData))
   if (res.data.code === 'OK') {
     yield put(handleConcatComment(res.data.data, action.index))
   }

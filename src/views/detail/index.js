@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Input, Button } from 'antd'
-import { getArticleDetail, getCommentList } from './store/actionCreators'
+import { actionCreators } from './store'
 import { DetailWrapper } from './styled'
 import ArticleDetail from './components/articleDetail'
 import CommentList from './components/commentList'
 
 class Detail extends Component {
   render() {
-    const { detail, commentList, handleSubmitComment, user, history: { push }, location: { pathname }} = this.props
+    const { detail, commentList, handleSubmitComment, comment } = this.props
     const { TextArea } = Input
     return (
       <DetailWrapper>
@@ -21,17 +21,18 @@ class Detail extends Component {
         }
         <div>
           <h2 style={{fontSize: '20px', fontWeight: 'normal', marginBottom: '10px'}}>留言：</h2>
-          <TextArea 
+          <TextArea
+            value={comment}
             rows={5}
-            onChange={input=>this.commentContent=input.target.value} 
+            onChange={input=>this.handleInputChange(input.target.value)} 
             onFocus={this.handleFocus.bind(this)}
-            onPressEnter={()=>handleSubmitComment(this.commentContent)}
+            onPressEnter={()=>handleSubmitComment(comment)}
           />
           <div style={{overflow: 'hidden'}}>
             <Button 
               style={{marginTop: '10px', float: 'right'}} 
               size="small"
-              onClick={()=>handleSubmitComment(this.commentContent)}
+              onClick={()=>handleSubmitComment(comment)}
             >提交</Button>
           </div>
         </div>
@@ -49,6 +50,10 @@ class Detail extends Component {
       this.props.history.push(path)
     }
   }
+  handleInputChange(comment) {
+    this.commentContent = comment
+    this.props.handleCommentChange(comment)
+  }
   componentDidMount() {
     this.props.getArticleDetail(this.props.match.params.id)
     this.props.getCommentList(this.props.match.params.id)
@@ -59,23 +64,32 @@ const mapStateToProps = (state) => {
   return {
     detail: state.getIn(['detail', 'detail']),
     commentList: state.getIn(['detail', 'commentList']),
-    user: state.getIn(['user', 'user'])
+    user: state.getIn(['user', 'user']),
+    comment: state.getIn(['detail', 'comment'])
   }
 }
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
     getArticleDetail(id) {
-      dispatch(getArticleDetail(id))
+      dispatch(actionCreators.getArticleDetail(id))
     },
     getCommentList(id) {
-      dispatch(getCommentList(id))
+      dispatch(actionCreators.getCommentList(id))
+    },
+    handleCommentChange(comment) {
+      dispatch(actionCreators.handleCommentChange(comment))
     },
     handleSubmitComment(comment) {
       if (!comment.trim()) {
         return false
       }
-    
+      const formData = {
+        content: comment,
+        reply_user: '',
+        reply_content: ''
+      }
+      dispatch(actionCreators.handleSubmitComment(formData))
     }
   }
 }

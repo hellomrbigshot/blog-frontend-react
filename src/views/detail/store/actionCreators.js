@@ -1,4 +1,4 @@
-import { INIT_ARTICLE_DETAIL, GET_ARTICLE_DETAIL, GET_COMMENT_LIST, INIT_COMMENT_LIST, SHOW_REPLY_INPUT, HANDLE_SUBMIT_COMMENT, HANDLE_CONCAT_COMMENT } from "./actionTypes"
+import { INIT_ARTICLE_DETAIL, GET_ARTICLE_DETAIL, GET_COMMENT_LIST, INIT_COMMENT_LIST, SHOW_REPLY_INPUT, HANDLE_SUBMIT_COMMENT, HANDLE_CONCAT_COMMENT, HANDLE_COMMENT_CHANGE } from "./actionTypes"
 
 export const getArticleDetail = (id) => { // 获取文章详情
   return {
@@ -33,6 +33,13 @@ export const showReplyInput = (index) => { // 显示回复框
   return {
     type: SHOW_REPLY_INPUT,
     index
+  }
+}
+
+export const handleCommentChange = (data) => { // 评论输入框改变
+  return {
+    type: HANDLE_COMMENT_CHANGE,
+    data
   }
 }
 
