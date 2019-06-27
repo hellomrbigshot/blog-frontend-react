@@ -90,6 +90,7 @@ const mapDispatchToProps = (dispatch, props) => {
         reply_content: ''
       }
       dispatch(actionCreators.handleSubmitComment(formData))
+      document.querySelector('#commentList').scrollIntoView()
     }
   }
 }

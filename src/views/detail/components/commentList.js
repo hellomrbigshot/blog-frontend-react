@@ -21,7 +21,7 @@ class CommentList extends Component {
   render() {
     const { commentList, articleDetail, handleReplyComment, handleSubmitReply, user } = this.props
     return (
-      <CommentWrapper>
+      <CommentWrapper id="commentList">
         <h2>留言板：</h2>
         {
           commentList.map((comment, i) => (
@@ -106,6 +106,7 @@ const mapDispatchToProps = (dispatch, props) => {
         reply_content: comment.get('content')
       }
       dispatch(actionCreators.handleSubmitComment(formData, i))
+      document.querySelector('#commentList').scrollIntoView()
     }
   }
 }
