@@ -4,6 +4,7 @@ import { saga as detailSaga } from '../views/detail/store'
 import { saga as userSaga } from '../views/login/store'
 import { saga as tagSaga } from '../views/tag/store'
 import { saga as commentSaga } from '../views/comment/store'
+import { saga as draftSaga } from '../views/draft/store'
 
 export default function* rootSaga() {
   yield fork(homeSaga.getArticleList)
@@ -17,4 +18,5 @@ export default function* rootSaga() {
   yield fork(tagSaga.getTagDetail)
   yield fork(tagSaga.getArticleList)
   yield fork(commentSaga.getCommentList)
+  yield fork(draftSaga.getDraftList)
 }

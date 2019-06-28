@@ -94,7 +94,7 @@ class Header extends Component {
           </Link>
         </DrapdownItem>
         <DrapdownItem>
-          <Link to="">
+          <Link to="/draft">
             <i className="iconfont icon-draft" />
             <span>我的草稿</span>
           </Link>

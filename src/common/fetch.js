@@ -1,7 +1,9 @@
 import axios from 'axios'
 import qs from 'qs'
 import Cookies from 'js-cookie'
+import store from '../store'
 import { message } from 'antd'
+import { actionCreators } from '../views/login/store'
 
 let loadingArr = [],
     timer = null
@@ -57,6 +59,7 @@ axios.interceptors.response.use(
       switch (error.response.status) {
         case 401:
           Cookies.remove('user')
+          console.log(store.dispatch(actionCreators.logoutSuccess()))
           break
           // 跳到登录页
         default:
