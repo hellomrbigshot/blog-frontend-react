@@ -15,13 +15,13 @@ class TagList extends Component {
         <ListWrapper>
           {
             tagList.size === 0 ? null : 
-            tagList.map((tag, i) => (
+            tagList.map(tag => (
               <TagItem key={tag.get('_id')}>
                 <TagHeader>
                   <Link to={`/tag/detail/${tag.get('name')}`}>{tag.get('name')}</Link>
                 </TagHeader>
                 <TagDesc>{tag.get('description')}</TagDesc>
-                <TagBottom>共有 {tag.get('page_num')} 篇文章</TagBottom>
+                <TagBottom>共有 <Link to={`/tag/detail/${tag.get('name')}`}>{tag.get('page_num')}</Link> 篇文章</TagBottom>
               </TagItem>
             ))
           }

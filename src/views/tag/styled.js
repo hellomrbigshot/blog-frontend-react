@@ -23,40 +23,41 @@ export const ListWrapper = styled.div`
 `
 
 export const TagItem = styled.div`
-  margin-bottom: 26px;
+  box-shadow: 0 0 3px #ddd;
+  width: 98%;
+  padding: 12px 20px;
+  margin: 0 auto 10px;
+  border-radius: 5px;
 `
 
 export const TagHeader = styled.div`
   overflow: hidden;
+  padding: 12px 0;
+  border-bottom: 1px solid #ddd;
   a {
     display: block;
     margin-bottom: 5px;
     font-size: 18px;
     font-weight: 400;
-    color: #666;
-    line-height: 20px;
     border-bottom: 1.3px solid #fff;
     float: left;
-    &:hover {
-      color: #666;
-      border-bottom-color: #666;
-    }
   }
 `
 
 export const TagDesc = styled.div`
-  font-size: 13px;
+  font-size: 12px;
+  padding: 12px 0;
   word-wrap: break-word;
   line-height: 1.4;
-  margin-bottom: 3px;
-  font-weight: normal;
-  color: #555;
+  color: #888;
+  border-bottom: 1px solid #ddd;
 `
 
 export const TagBottom = styled.div`
   line-height: 1.4;
   color: #222;
-  font-size: 12px;
+  font-size: 13px;
+  padding: 12px 0;
 `
 
 export const TagDetailWrapper = styled.div`
