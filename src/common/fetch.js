@@ -3,7 +3,7 @@ import qs from 'qs'
 import Cookies from 'js-cookie'
 import store from '../store'
 import { message } from 'antd'
-import { actionCreators } from '../views/login/store'
+import { actionCreators } from '../views/user/store'
 
 let loadingArr = [],
     timer = null

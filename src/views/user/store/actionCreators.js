@@ -1,4 +1,13 @@
-import { LOGIN, LOGIN_SUCCESS, LOGOUT, REGISTER, REGISTER_SUCCESS, LOGOUT_SUCCESS } from './actionTypes'
+import { 
+  LOGIN, 
+  LOGIN_SUCCESS, 
+  LOGOUT, 
+  REGISTER, 
+  REGISTER_SUCCESS, 
+  LOGOUT_SUCCESS,
+  GET_DRAFT_LIST,
+  INIT_DRAFT_LIST
+} from './actionTypes'
 
 export const login = (user) => {
   return {
@@ -39,3 +48,17 @@ export const registerSuccess = (user) => {
     user
   }
 }
+
+export const getDraftList = () => {
+  return {
+    type: GET_DRAFT_LIST
+  }
+}
+
+export const initDraftList = (data) => {
+  return {
+    type: INIT_DRAFT_LIST,
+    data
+  }
+}
+

@@ -5,7 +5,7 @@ import { CSSTransition } from 'react-transition-group'
 import classnames from 'classnames'
 import { HeaderWrapper, Logo, SearchWrapper, Nav, NavSearch, NavItem, Addition, Button, AvatarWrapper, AvatarContent, DropdownWrapper, DrapdownItem } from './style'
 import { actionCreators } from './store'
-import { actionCreators as loginCreator } from '../../views/login/store'
+import { actionCreators as loginCreator } from '../../views/user/store'
 
 
 class Header extends Component {
@@ -88,13 +88,13 @@ class Header extends Component {
           </Link>
         </DrapdownItem>
         <DrapdownItem>
-          <Link to="">
+          <Link to="/user/list">
             <i className="iconfont icon-blogs" />
             <span>我的文章</span>
           </Link>
         </DrapdownItem>
         <DrapdownItem>
-          <Link to="/draft">
+          <Link to="/user/draft">
             <i className="iconfont icon-draft" />
             <span>我的草稿</span>
           </Link>

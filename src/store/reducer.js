@@ -3,7 +3,7 @@ import { reducer as headerReducer } from '../components/header/store'
 import { reducer as homeReducer } from '../views/home/store'
 import { reducer as detailReducer } from '../views/detail/store'
 import { reducer as appReducer } from './app'
-import { reducer as userReducer } from '../views/login/store'
+import { reducer as userReducer } from '../views/user/store'
 import { reducer as tagReducer } from '../views/tag/store'
 import { reducer as commentReducer } from '../views/comment/store'
 import { reducer as draftReducer } from '../views/draft/store'
@@ -15,6 +15,5 @@ export default combineReducers({
   app: appReducer,
   user: userReducer,
   tag: tagReducer,
-  comment: commentReducer,
-  draft: draftReducer
+  comment: commentReducer
 })

@@ -36,7 +36,7 @@ class Draft extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    draftList: state.getIn(['draft', 'draftList']),
+    draftList: state.getIn(['user', 'draftList']),
     user: state.getIn(['user', 'user'])
   }
 }
