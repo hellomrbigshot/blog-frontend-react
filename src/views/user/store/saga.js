@@ -1,7 +1,7 @@
 import { takeLatest, put, select } from 'redux-saga/effects'
-import { LOGIN, REGISTER, LOGOUT, GET_DRAFT_LIST } from './actionTypes'
+import { LOGIN, REGISTER, LOGOUT, GET_DRAFT_LIST, GET_ARTICLE_LIST } from './actionTypes'
 import { fetch } from '../../../common'
-import { loginSuccess, registerSuccess, logoutSuccess, initDraftList } from './actionCreators'
+import { loginSuccess, registerSuccess, logoutSuccess, initDraftList, initArticleList } from './actionCreators'
 
 export function* login() {
   yield takeLatest(LOGIN, axiosLogin)
@@ -67,5 +67,27 @@ function* axiosGetDraftList() {
     }
   } catch(e) {
     console.log(e.error)
+  }
+}
+
+export function* getArticleList() {
+  yield takeLatest(GET_ARTICLE_LIST, axiosGetArticleList)
+}
+
+function* axiosGetArticleList(action) {
+  const user = yield select(state => state.getIn(['user', 'user']))
+  const formData = {
+    type: 'create_user',
+    content: user,
+    status: 'normal',
+    page: action.page,
+    pageSize: 10
+  }
+  try {
+    const res = yield fetch.post('/api/page/limitpagelist', formData)
+    const data = res.data.data
+    yield put(initArticleList(data.result, data.total))
+  } catch(e) {
+    console.log(e)
   }
 }

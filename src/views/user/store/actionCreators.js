@@ -6,7 +6,9 @@ import {
   REGISTER_SUCCESS, 
   LOGOUT_SUCCESS,
   GET_DRAFT_LIST,
-  INIT_DRAFT_LIST
+  INIT_DRAFT_LIST,
+  GET_ARTICLE_LIST,
+  INIT_ARTICLE_LIST
 } from './actionTypes'
 
 export const login = (user) => {
@@ -62,3 +64,17 @@ export const initDraftList = (data) => {
   }
 }
 
+export const getArticleList = (page) => {
+  return {
+    type: GET_ARTICLE_LIST,
+    page
+  }
+}
+
+export const initArticleList = (list, total) => {
+  return {
+    type: INIT_ARTICLE_LIST,
+    list,
+    total
+  }
+}

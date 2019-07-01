@@ -127,3 +127,56 @@ export const DraftItem = styled.div`
     font-size: 12px;
   }
 `
+
+export const ArticleWrapper = styled.div`
+  h2 {
+    font-weight: normal;
+    padding-bottom: 30px;
+  }
+`
+
+export const ArticleList = styled.div`
+  margin-bottom: 20px;
+` 
+
+export const TimelineDot = styled.div`
+  width: 13px;
+  height: 13px;
+  border: 1.2px solid #aaa;
+  border-radius: 50%;
+  background: #fff;
+`
+
+export const ArticleYear = styled.div`
+  font-size: 22px;
+  color: #555;
+`
+
+export const ArticleItem = styled.div`
+  a {
+    color: #666;
+    padding-bottom: 10px;
+    display: block;
+    border-bottom: 1px dashed #ccc;
+    overflow: hidden;
+    line-height: 24px;
+  }
+  a:hover {
+    color: #222;
+    border-bottom-color: #222;
+  }
+`
+
+export const ArticleTime = styled.span`
+  font-size: 12px;
+  float: left;
+`
+
+export const ArticleTitle = styled.span`
+  padding-left: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 16px;
+  text-overflow: ellipsis;
+  float: left;
+`
