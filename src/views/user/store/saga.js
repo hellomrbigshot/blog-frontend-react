@@ -87,6 +87,7 @@ function* axiosGetArticleList(action) {
     const res = yield fetch.post('/api/page/limitpagelist', formData)
     const data = res.data.data
     yield put(initArticleList(data.result, data.total))
+    window.scrollTo(0, 0)
   } catch(e) {
     console.log(e)
   }

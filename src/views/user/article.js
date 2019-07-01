@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { fromJS } from 'immutable'
-import { Pagination, Timeline } from 'antd'
+import { Pagination, Timeline, Tag } from 'antd'
 import classnames from 'classnames'
 import { Link } from 'react-router-dom'
 import { actionCreators } from './store'
@@ -38,6 +38,10 @@ class LimitArticleList extends Component {
                           <Link to={`/detail/${article.get('_id')}`}>
                             <ArticleTime>{article.get('create_time').slice(5, 10)}</ArticleTime>
                             <ArticleTitle>{article.get('title')}</ArticleTitle>
+                            {
+                              article.get('secret') ? 
+                              (<Fragment><span> | </span><Tag color="#f50">私密</Tag></Fragment>) : null
+                            }
                           </Link>
                         </ArticleItem>
                       </Timeline.Item>
