@@ -180,3 +180,85 @@ export const ArticleTitle = styled.span`
   text-overflow: ellipsis;
   float: left;
 `
+
+export const UserInfoWrapper = styled.div`
+  overflow: hidden;
+  margin-bottom: 30px;
+  h2 {
+    font-size: 26px;
+    color: #555;
+    line-height: 36px;
+  }
+`
+
+export const BioWrapper = styled.div`
+  margin-top: 5px;
+  padding: 10px 20px 10px 10px;
+  background: #eeeeef;
+  width: 400px;
+  height: 100px;
+  border-radius: 5px;
+`
+
+export const UserAvatarWrapper = styled.div`
+  float: left;
+  margin-right: 20px;
+  width: 150px; 
+`
+
+export const UserInfoDetailWrapper = styled.div`
+  float: left;
+  width: calc(100% - 170px);
+`
+
+export const LimitArticleList = styled.div`
+  h2 {
+    font-size: 20px;
+    color: #555;
+  }
+`
+
+export const LimitArticleItem = styled.div`
+  a {
+    position: relative;
+    margin: 30px 0;
+    padding: 0 0 10px 25px;
+    display: block;
+    overflow: hidden;
+    line-height: 32px;
+    border-bottom: 1px dashed #ccc;
+    transition: all .2s ease-in-out;
+    div {
+      float: left;
+      &.time {
+        font-size: 12px;
+        color: #555;
+      }
+      &.title {
+        font-size: 16px;
+        color: #666;
+        margin-left: 10px;
+      }
+    }
+    &:hover {
+      &:before {
+        background: #222;
+      }
+      border-bottom-color: #222;
+    }
+    &:before {
+      box-sizing: content-box;
+      content: '';
+      position: absolute;
+      left: 6px;
+      top: 12px;
+      width: 6px;
+      height: 6px;
+      margin-left: -4px;
+      background: #bbb;
+      border-radius: 50%;
+      border: 1px solid #fff;
+      transition: background .2s ease-in-out;
+    }
+  }
+`

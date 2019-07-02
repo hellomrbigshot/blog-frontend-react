@@ -15,6 +15,8 @@ export default function* rootSaga() {
   yield fork(userSaga.logout)
   yield fork(userSaga.getDraftList)
   yield fork(userSaga.getArticleList)
+  yield fork(userSaga.getUserInfo)
+  yield fork(userSaga.getLimitArticleList)
   yield fork(tagSaga.getTagList)
   yield fork(tagSaga.getTagDetail)
   yield fork(tagSaga.getArticleList)

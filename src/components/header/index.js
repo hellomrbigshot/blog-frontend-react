@@ -78,11 +78,11 @@ class Header extends Component {
     )
   }
   getDropDown() {
-    const { logout } = this.props
+    const { logout, user } = this.props
     return (
       <DropdownWrapper>
         <DrapdownItem style={{marginTop: '5px'}}>
-          <Link to="">
+          <Link to={`/user/info/${user}`}>
             <i className="iconfont icon-UserSettings" />
             <span>我的主页</span>
           </Link>

@@ -1,7 +1,7 @@
 import { takeLatest, put, select } from 'redux-saga/effects'
-import { LOGIN, REGISTER, LOGOUT, GET_DRAFT_LIST, GET_ARTICLE_LIST } from './actionTypes'
+import { LOGIN, REGISTER, LOGOUT, GET_DRAFT_LIST, GET_ARTICLE_LIST, GET_USER_INFO, GET_LIMIT_ARTICLE_LIST } from './actionTypes'
 import { fetch } from '../../../common'
-import { loginSuccess, registerSuccess, logoutSuccess, initDraftList, initArticleList } from './actionCreators'
+import { loginSuccess, registerSuccess, logoutSuccess, initDraftList, initArticleList, initUserInfo, initLimitArticleList } from './actionCreators'
 
 export function* login() {
   yield takeLatest(LOGIN, axiosLogin)
@@ -87,6 +87,41 @@ function* axiosGetArticleList(action) {
     const res = yield fetch.post('/api/page/limitpagelist', formData)
     const data = res.data.data
     yield put(initArticleList(data.result, data.total))
+    window.scrollTo(0, 0)
+  } catch(e) {
+    console.log(e)
+  }
+}
+
+export function* getUserInfo() {
+  yield takeLatest(GET_USER_INFO, axiosGetUserInfo)
+}
+
+function* axiosGetUserInfo(action) {
+  try {
+    const res = yield fetch.post('/api/signin/getUserInfo', { username: action.user })
+    yield put(initUserInfo(res.data.data))
+  } catch(e) {
+    console.log(e)
+  }
+}
+
+export function* getLimitArticleList() {
+  yield takeLatest(GET_LIMIT_ARTICLE_LIST, axiosGetLimitArticleList)
+}
+
+function* axiosGetLimitArticleList(action) {
+  const formData = {
+    type: 'create_user',
+    status: 'normal',
+    content: action.user,
+    pageSize: 10,
+    page: action.page,
+    secret: false
+  }
+  try {
+    const res = yield fetch.post('/api/page/pagelist', formData)
+    yield put(initLimitArticleList(res.data.data.result, res.data.data.total))
     window.scrollTo(0, 0)
   } catch(e) {
     console.log(e)

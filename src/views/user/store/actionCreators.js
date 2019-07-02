@@ -8,7 +8,11 @@ import {
   GET_DRAFT_LIST,
   INIT_DRAFT_LIST,
   GET_ARTICLE_LIST,
-  INIT_ARTICLE_LIST
+  INIT_ARTICLE_LIST,
+  GET_USER_INFO,
+  INIT_USER_INFO,
+  GET_LIMIT_ARTICLE_LIST,
+  INIT_LIMIT_ARTICLE_LIST
 } from './actionTypes'
 
 export const login = (user) => {
@@ -74,6 +78,36 @@ export const getArticleList = (page) => {
 export const initArticleList = (list, total) => {
   return {
     type: INIT_ARTICLE_LIST,
+    list,
+    total
+  }
+}
+
+export const getUserInfo = (user) => {
+  return {
+    type: GET_USER_INFO,
+    user
+  }
+}
+
+export const initUserInfo = (detail) => {
+  return {
+    type: INIT_USER_INFO,
+    detail
+  }
+}
+
+export const getLimitArticleList = (user, page = 1) => {
+  return {
+    type: GET_LIMIT_ARTICLE_LIST,
+    user,
+    page
+  }
+}
+
+export const initLimitArticleList = (list, total) => {
+  return {
+    type: INIT_LIMIT_ARTICLE_LIST,
     list,
     total
   }

@@ -1,52 +1,70 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link, Redirect } from 'react-router-dom'
-import { LoginWrapper, LoginBox, Input, Button, LoginInfo, Logo } from './styled'
-import { actionCreators } from './store'
+import { Pagination, Avatar } from 'antd'
+import { Link } from 'react-router-dom'
+import { getUserInfo, getLimitArticleList } from './store/actionCreators'
+import { UserInfoWrapper, UserAvatarWrapper, UserInfoDetailWrapper, BioWrapper, LimitArticleList, LimitArticleItem } from './styled'
 
-class Login extends Component {
+class UserInfo extends Component {
   render() {
-    const { user, loginSubmit } = this.props
-    const redirectUrl = this.props.location.query ? this.props.location.query.redirect : null
-    return user ? 
-      <Redirect to={redirectUrl?redirectUrl:'/'} /> : 
-      (
-        <LoginWrapper>
-        <Link to="/">
-          <Logo/>
-        </Link>
-        <LoginBox>
-          <LoginInfo>
-            <Link className="active" to="/login">登录</Link>
-            <b>·</b>
-            <Link to="/register">注册</Link>
-          </LoginInfo>
-          <Input placeholder="请输入账号" ref={(input) => {this.account = input}}/>
-          <Input placeholder="请输入密码" type="password" ref={(input) => {this.password = input}}/>
-          <Button className="primary" onClick={() => loginSubmit(this.account, this.password)}>登录</Button>
-        </LoginBox>
-      </LoginWrapper>
+    const { total, getLimitArticleList, userInfo, articleList } = this.props
+    const user = this.props.match.params.name
+    return (
+      <div>
+        <UserInfoWrapper>
+          <UserAvatarWrapper>
+            <Avatar size={150} src={`/api/file/avatar/user/?username=${user}`} />
+          </UserAvatarWrapper>
+          <UserInfoDetailWrapper>
+            <h2>{user}</h2>
+            <BioWrapper>{userInfo.get('bio')}</BioWrapper>
+          </UserInfoDetailWrapper>
+        </UserInfoWrapper>
+        <LimitArticleList>
+          <h2>相关文章</h2>
+          {
+            articleList.map(article => (
+              <LimitArticleItem key={article.get('_id')}>
+                <Link to={`/detail/${article.get('_id')}`}>
+                  <div className="time">{article.get('create_time').slice(5, 10)}</div>
+                  <div className="title">{article.get('title')}</div>
+                </Link>
+              </LimitArticleItem>
+            ))
+          }
+        </LimitArticleList>
+        {
+          total > 10 ? <Pagination total={total} onChange={getLimitArticleList} /> : null
+        }
+      </div>
     )
+  }
+  componentDidMount() {
+    const user = this.props.match.params.name
+    this.props.getUserInfo(user)
+    this.props.getLimitArticleList()
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    user: state.getIn(['user', 'user'])
+    articleList: state.getIn(['user', 'userInfo', 'articleList']),
+    userInfo: state.getIn(['user', 'userInfo', 'info']),
+    total: state.getIn(['user', 'userInfo', 'total'])
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, props) => {
   return {
-    loginSubmit(accountEle, passwordEle) {
-      const username = accountEle.value.trim()
-      const password = passwordEle.value.trim()
-      if (username && password) {
-        dispatch(actionCreators.login({ username, password }))
-      } else {
-        console.log('账号密码不能为空')
-      }
+    getUserInfo() {
+      const name = props.match.params.name
+      dispatch(getUserInfo(name))
+    },
+    getLimitArticleList(page = 1) {
+      const name = props.match.params.name
+      dispatch(getLimitArticleList(name, page))
     }
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserInfo)
