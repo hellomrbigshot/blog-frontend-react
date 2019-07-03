@@ -58,4 +58,7 @@ figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary {
   font-weight: 349;
 }
+#root {
+  padding-top: 1px;
+}
 `

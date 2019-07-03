@@ -2,14 +2,14 @@ import styled from 'styled-components'
 import logoPic from '../../statics/image/logo_black_transparent.png'
 
 export const LoginWrapper = styled.div`
-  postion: fixed;
+  position: fixed;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
 `
 
-export const LoginBox = styled.form`
+export const LoginBox = styled.div`
   box-sizing: border-box;
   position: absolute;
   width: 400px;
@@ -20,6 +20,9 @@ export const LoginBox = styled.form`
   box-shadow: 0 0 8px rgba(0, 0, 0, .1);
   background-color: #fff;
   padding: 50px 50px 30px;
+  .login-form {
+    margin-top: 40px;
+  }
 `
 
 export const LoginInfo = styled.div`
