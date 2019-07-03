@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link, Redirect } from 'react-router-dom'
 import { Form, Input, Icon, Button } from 'antd'
 import { LoginWrapper, LoginBox, LoginInfo, Logo } from './styled'
+import { actionCreators } from './store'
 
 class RegisterForm extends Component {
   render() {
@@ -36,7 +37,7 @@ class RegisterForm extends Component {
               {getFieldDecorator('password', {
                 rules: [{ required: true, message: 'Please input your Password!' }],
               })(
-                <Input
+                <Input.Password
                   prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                   size="large"
                   placeholder="请输入密码"
@@ -44,18 +45,52 @@ class RegisterForm extends Component {
               )}
             </Form.Item>
             <Form.Item>
-              <Button shape="round" type="primary" htmlType="submit" block size="large" onClick={this.handleSubmit}>注册</Button>
+              {getFieldDecorator('repassword', {
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please confirm your password!',
+                  },
+                  {
+                    validator: this.compareToFirstPassword,
+                  },
+                ]
+              })(
+                <Input.Password
+                  prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                  size="large"
+                  placeholder="请确认密码"
+                />
+              )}
+            </Form.Item>
+            <Form.Item>
+              <Button 
+                shape="round" 
+                style={{background: '#3db922', color: '#fff'}} 
+                htmlType="submit" 
+                block 
+                size="large" 
+                onClick={this.handleSubmit}
+              >注册</Button>
             </Form.Item>
           </Form>
         </LoginBox>
       </LoginWrapper>
     )
   }
+  compareToFirstPassword = (rule, value, callback) => { // 比较两次密码
+    const { form } = this.props
+    if (value && value !== form.getFieldValue('password')) {
+      callback('Two passwords that you enter is inconsistent!')
+    } else {
+      callback()
+    }
+  }
   handleSubmit = e => {
     e.preventDefault()
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        this.props.dispatchLogin(values)
+        this.props.dispatchRegister(values)
       }
     })
   }
@@ -65,13 +100,15 @@ const WrappedNormalRegisterForm = Form.create({ name: 'normal_register' })(Regis
 
 const mapStateToProps = (state) => {
   return {
-
+    user: state.getIn(['user', 'user'])
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-
+    dispatchRegister(user) {
+      dispatch(actionCreators.register(user))
+    }
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(WrappedNormalRegisterForm)

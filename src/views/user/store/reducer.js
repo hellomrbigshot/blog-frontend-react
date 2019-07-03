@@ -28,9 +28,6 @@ export default (state = initialState, action) => {
     case LOGIN_SUCCESS:
       Cookies.set('user', action.user)
       return state.set('user', action.user)
-    case REGISTER_SUCCESS:
-      Cookies.set('user', action.user)
-      return state.set('user', action.user)
     case LOGOUT_SUCCESS:
       Cookies.remove('user')
       return state.set('user', '')

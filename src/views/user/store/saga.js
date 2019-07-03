@@ -27,7 +27,7 @@ export function* axiosRegister(action) { // 注册
   let registerRes = yield fetch.post('/api/signup', { ...action.user })
   if (registerRes.data.code === 'OK') {
     let userInfo = yield fetch.post('/api/signin/getUserInfo', { username: action.user.username })
-    yield put(registerSuccess(userInfo.data.data.username))
+    yield put(loginSuccess(userInfo.data.data.username))
   }
 }
 
