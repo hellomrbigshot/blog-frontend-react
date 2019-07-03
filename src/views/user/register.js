@@ -30,6 +30,7 @@ class RegisterForm extends Component {
                   prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
                   size="large" 
                   placeholder="请输入账号"
+                  autocomplete="new-password"
                 />
               )}
             </Form.Item>
@@ -41,6 +42,7 @@ class RegisterForm extends Component {
                   prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                   size="large"
                   placeholder="请输入密码"
+                  autocomplete="new-password"
                 />
               )}
             </Form.Item>
@@ -60,6 +62,7 @@ class RegisterForm extends Component {
                   prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                   size="large"
                   placeholder="请确认密码"
+                  autocomplete="new-password"
                 />
               )}
             </Form.Item>
