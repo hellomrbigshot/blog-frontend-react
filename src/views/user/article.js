@@ -3,14 +3,14 @@ import { connect } from 'react-redux'
 import { fromJS } from 'immutable'
 import { Pagination, Timeline, Tag } from 'antd'
 import classnames from 'classnames'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { actionCreators } from './store'
 import { ArticleWrapper, ArticleList, ArticleItem, TimelineDot, ArticleYear, ArticleTime, ArticleTitle } from './styled'
 
 class LimitArticleList extends Component {
   render() {
-    const { articleList, total, getArticleList } = this.props
-    return (
+    const { articleList, total, getArticleList, user } = this.props
+    return !user ? <Redirect to={{pathname:'/login', query:{redirect:'/user/list'}}} /> : (
       <ArticleWrapper>
         <h2>我的文章</h2>
         <ArticleList>
@@ -83,7 +83,8 @@ class LimitArticleList extends Component {
 export const mapStateToProps = (state) => {
   return {
     articleList: state.getIn(['user', 'article', 'articleList']),
-    total: state.getIn(['user', 'article', 'total'])
+    total: state.getIn(['user', 'article', 'total']),
+    user: state.getIn(['user', 'user'])
   }
 }
 
