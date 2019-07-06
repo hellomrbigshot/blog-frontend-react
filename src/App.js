@@ -15,6 +15,7 @@ import CommentList from './views/comment'
 import Draft from './views/user/draft'
 import LimitList  from './views/user/article'
 import UserInfo from './views/user'
+import Write from './views/write'
 
 class App extends Component {
   render() {
@@ -36,6 +37,7 @@ class App extends Component {
               <Route path="/user/info/:name" exact component={UserInfo}/>
               <Route path="/tag/detail/:tag" component={TagDetail}/>
               <Route path="/comment/list" component={CommentList}/>
+              <Route path="/write" component={Write}></Route>
               <Route path="/404" exact component={NoMatch}/>
               
               {/* <Redirect from="*" to="/404"/> */}
