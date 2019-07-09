@@ -13,40 +13,46 @@ import TagList from './views/tag'
 import TagDetail from './views/tag/detail'
 import CommentList from './views/comment'
 import Draft from './views/user/draft'
-import LimitList  from './views/user/article'
+import LimitList from './views/user/article'
 import UserInfo from './views/user'
 import Write from './views/write'
 
 class App extends Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <Router>
-          <ScrollToTop />
-          <Header />
-          <div style={{paddingTop: '37px', width: '800px', margin: '100px auto'}}>
-            <Switch>
-              <Redirect exact from="/" to="/home" />
-              <Route path="/home" component={Home}/>
-              <Route path="/detail/:id" exact component={Detail}/>
-              <Route path="/login" exact component={Login}/>
-              <Route path="/register" exact component={Register}/>
-              <Route path="/tag/list" exact component={TagList}/>
-              <Route path="/user/draft" exact component={Draft}/>
-              <Route path="/user/list" exact component={LimitList}/>
-              <Route path="/user/info/:name" exact component={UserInfo}/>
-              <Route path="/tag/detail/:tag" component={TagDetail}/>
-              <Route path="/comment/list" component={CommentList}/>
-              <Route path="/write" component={Write}></Route>
-              <Route path="/404" exact component={NoMatch}/>
-              
-              {/* <Redirect from="*" to="/404"/> */}
-            </Switch>
-          </div>
-        </Router>
-      </Provider>
-    )
-  }
+    render() {
+        return (
+            <Provider store={store}>
+                <Router>
+                    <ScrollToTop />
+                    <Header />
+                    <div
+                        style={{
+                            paddingTop: '37px',
+                            width: '800px',
+                            margin: '100px auto'
+                        }}
+                    >
+                        <Switch>
+                            <Redirect exact from="/" to="/home" />
+                            <Route path="/home" component={Home} />
+                            <Route path="/detail/:id" exact component={Detail} />
+                            <Route path="/login" exact component={Login} />
+                            <Route path="/register" exact component={Register} />
+                            <Route path="/tag/list" exact component={TagList} />
+                            <Route path="/user/draft" exact component={Draft} />
+                            <Route path="/user/list" exact component={LimitList} />
+                            <Route path="/user/info/:name" exact component={UserInfo} />
+                            <Route path="/tag/detail/:tag" component={TagDetail} />
+                            <Route path="/comment/list" component={CommentList} />
+                            <Route path="/write" component={Write} />
+                            <Route path="/404" exact component={NoMatch} />
+
+                            {/* <Redirect from="*" to="/404"/> */}
+                        </Switch>
+                    </div>
+                </Router>
+            </Provider>
+        )
+    }
 }
 
 export default App
