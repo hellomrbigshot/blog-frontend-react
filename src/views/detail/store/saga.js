@@ -5,49 +5,48 @@ import { initArticleDetail, initCommentList, handleConcatComment } from './actio
 import qs from 'qs'
 
 export function* getArticleDetail() {
-  yield takeLatest(GET_ARTICLE_DETAIL, fetchArticleDetail)
+    yield takeLatest(GET_ARTICLE_DETAIL, fetchArticleDetail)
 }
 
 function* fetchArticleDetail(action) {
-  const res = yield axios.post('/api/page/detail', qs.stringify({ id: action.id }))
-  if (res.data.code === 'OK') {
-    const detail = res.data.data
-    yield put(initArticleDetail(detail))
-  }
+    const res = yield axios.post('/api/page/detail', qs.stringify({ id: action.id }))
+    if (res.data.code === 'OK') {
+        const detail = res.data.data
+        yield put(initArticleDetail(detail))
+    }
 }
 
 export function* getCommentList() {
-  yield takeLatest(GET_COMMENT_LIST, fetchCommentList)
+    yield takeLatest(GET_COMMENT_LIST, fetchCommentList)
 }
 
 function* fetchCommentList(action) {
-  const res = yield axios.post('/api/comment/getpagecommentlist', qs.stringify({ page_id: action.id }))
-  if (res.data.code === 'OK') {
-    const list = res.data.data.map(item => { 
-      item.showReplyInput = false
-      return item
-    })
-    yield put(initCommentList(list))
-  }
+    const res = yield axios.post('/api/comment/getpagecommentlist', qs.stringify({ page_id: action.id }))
+    if (res.data.code === 'OK') {
+        const list = res.data.data.map(item => {
+            item.showReplyInput = false
+            return item
+        })
+        yield put(initCommentList(list))
+    }
 }
 
 export function* submitComment() {
-  yield takeLatest(HANDLE_SUBMIT_COMMENT, fetchSubmitComment)
+    yield takeLatest(HANDLE_SUBMIT_COMMENT, fetchSubmitComment)
 }
 
 function* fetchSubmitComment(action) {
-  const user = yield select(state => state.getIn(['user', 'user']))
-  const articleDetail = yield select(state => state.getIn(['detail', 'detail']))
-  const data = JSON.parse(JSON.stringify(action.data))
-  const sendData = Object.assign(data, {
-    create_user: user,
-    to_user: articleDetail.get('create_user'),
-    page_id: articleDetail.get('_id'),
-    page_title: articleDetail.get('title')
-  })
-  const res = yield axios.post('/api/comment/create', qs.stringify(sendData))
-  if (res.data.code === 'OK') {
-    yield put(handleConcatComment(res.data.data, action.index))
-  }
+    const user = yield select(state => state.getIn(['user', 'user']))
+    const articleDetail = yield select(state => state.getIn(['detail', 'detail']))
+    const data = JSON.parse(JSON.stringify(action.data))
+    const sendData = Object.assign(data, {
+        create_user: user,
+        to_user: articleDetail.get('create_user'),
+        page_id: articleDetail.get('_id'),
+        page_title: articleDetail.get('title')
+    })
+    const res = yield axios.post('/api/comment/create', qs.stringify(sendData))
+    if (res.data.code === 'OK') {
+        yield put(handleConcatComment(res.data.data, action.index))
+    }
 }
-

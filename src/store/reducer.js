@@ -9,12 +9,12 @@ import { reducer as commentReducer } from '../views/comment/store'
 import { reducer as writeReducer } from '../views/write/store'
 
 export default combineReducers({
-  header: headerReducer,
-  home: homeReducer,
-  detail: detailReducer,
-  app: appReducer,
-  user: userReducer,
-  tag: tagReducer,
-  comment: commentReducer,
-  write: writeReducer
+    header: headerReducer,
+    home: homeReducer,
+    detail: detailReducer,
+    app: appReducer,
+    user: userReducer,
+    tag: tagReducer,
+    comment: commentReducer,
+    write: writeReducer
 })

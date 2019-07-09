@@ -7,13 +7,8 @@ import { actionCreators } from './store'
 
 class RegisterForm extends Component {
     render() {
-        const {
-            user,
-            form: { getFieldDecorator }
-        } = this.props
-        const redirectUrl = this.props.location.query
-            ? this.props.location.query.redirect
-            : null
+        const { user, form: { getFieldDecorator }} = this.props
+        const redirectUrl = this.props.location.query ? this.props.location.query.redirect : null
         return user ? (
             <Redirect to={redirectUrl ? redirectUrl : '/'} />
         ) : (
@@ -40,12 +35,7 @@ class RegisterForm extends Component {
                                 ]
                             })(
                                 <Input
-                                    prefix={
-                                        <Icon
-                                            type="user"
-                                            style={{ color: 'rgba(0,0,0,.25)' }}
-                                        />
-                                    }
+                                    prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
                                     size="large"
                                     placeholder="请输入账号"
                                     autoComplete="new-password"
@@ -62,12 +52,7 @@ class RegisterForm extends Component {
                                 ]
                             })(
                                 <Input.Password
-                                    prefix={
-                                        <Icon
-                                            type="lock"
-                                            style={{ color: 'rgba(0,0,0,.25)' }}
-                                        />
-                                    }
+                                    prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                                     size="large"
                                     placeholder="请输入密码"
                                     autoComplete="new-password"
@@ -87,12 +72,7 @@ class RegisterForm extends Component {
                                 ]
                             })(
                                 <Input.Password
-                                    prefix={
-                                        <Icon
-                                            type="lock"
-                                            style={{ color: 'rgba(0,0,0,.25)' }}
-                                        />
-                                    }
+                                    prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                                     size="large"
                                     placeholder="请确认密码"
                                     autoComplete="new-password"
@@ -135,9 +115,7 @@ class RegisterForm extends Component {
     }
 }
 
-const WrappedNormalRegisterForm = Form.create({ name: 'normal_register' })(
-    RegisterForm
-)
+const WrappedNormalRegisterForm = Form.create({ name: 'normal_register' })(RegisterForm)
 
 const mapStateToProps = state => {
     return {

@@ -1,19 +1,19 @@
 import styled from 'styled-components'
 
 export const ArticleItem = styled.div`
-  margin-bottom: 100px;
-  font-family: Lato,PingFang SC,Microsoft YaHei,sans-serif;
-  a {
-    text-decoration: none;
-  }
+    margin-bottom: 100px;
+    font-family: Lato, PingFang SC, Microsoft YaHei, sans-serif;
+    a {
+        text-decoration: none;
+    }
 `
 
 export const Header = styled.div`
-  font-size: 26px;
-  height: 41px;
-  line-height: 41px;
-  font-weight: 349;
-  color: #333;
+    font-size: 26px;
+    height: 41px;
+    line-height: 41px;
+    font-weight: 349;
+    color: #333;
 `
 
 export const Info = styled.div`
@@ -41,6 +41,4 @@ export const Info = styled.div`
   }
 `
 
-export const Article = styled.div`
-  
-`
+export const Article = styled.div``
