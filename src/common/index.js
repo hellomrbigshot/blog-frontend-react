@@ -2,6 +2,19 @@ import marked from 'marked'
 import hljs from 'highlight.js'
 import * as fetch from './fetch'
 
+// 自定义数组删除某个元素方法
+Object.defineProperty(Array.prototype, 'remove', {
+    writable: true,
+    enumerable: false
+})
+Array.prototype.remove = function(item) {
+    let index = this.indexOf(item)
+    if (index > -1) {
+        this.splice(index, 1)
+        return this
+    }
+}
+
 marked.setOptions({
     renderer: new marked.Renderer(),
     highlight: function(code) {

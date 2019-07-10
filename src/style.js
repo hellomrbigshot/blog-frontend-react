@@ -56,7 +56,6 @@ table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed, 
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary {
-  font-weight: 349;
 }
 #root {
   padding-top: 1px;
