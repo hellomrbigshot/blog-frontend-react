@@ -4,21 +4,17 @@ import { Modal, Form, Input } from 'antd'
 const { TextArea } = Input
 
 class CreateTag extends Component {
-    state = {
-        ModalText: 'Content of the modal',
-        confirmLoading: false
-    }
     constructor() {
         super()
     }
     render() {
-        const { visible, confirmLoading, tagInfo, form: { getFieldDecorator }} = this.props
+        const { visible, tagModalLoading, tagInfo, form: { getFieldDecorator }} = this.props
         return (
             <Modal
                 title="添加标签"
                 visible={visible}
                 onOk={this.handleOk}
-                confirmLoading={confirmLoading}
+                tagModalLoading={tagModalLoading}
                 onCancel={this.handleCancel}
             >
                 <Form labelCol={{ span: 3 }} wrapperCol={{ span: 20 }} onSubmit={this.handleOk}>
@@ -51,7 +47,7 @@ class CreateTag extends Component {
         e.preventDefault()
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                this.props.handleTagSubmit(values)
+                this.props.submit(values)
             }
         })
     }

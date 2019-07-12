@@ -44,6 +44,7 @@ class App extends Component {
                             <Route path="/tag/detail/:tag" component={TagDetail} />
                             <Route path="/comment/list" component={CommentList} />
                             <Route path="/write" component={Write} />
+                            <Route path="/edit/:id" component={Write} />
                             <Route path="/404" exact component={NoMatch} />
 
                             {/* <Redirect from="*" to="/404"/> */}

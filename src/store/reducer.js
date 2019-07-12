@@ -6,7 +6,6 @@ import { reducer as appReducer } from './app'
 import { reducer as userReducer } from '../views/user/store'
 import { reducer as tagReducer } from '../views/tag/store'
 import { reducer as commentReducer } from '../views/comment/store'
-import { reducer as writeReducer } from '../views/write/store'
 
 export default combineReducers({
     header: headerReducer,
@@ -16,5 +15,4 @@ export default combineReducers({
     user: userReducer,
     tag: tagReducer,
     comment: commentReducer,
-    write: writeReducer
 })

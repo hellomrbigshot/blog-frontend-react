@@ -1,6 +1,0 @@
-export const GET_TAG_LIST = 'write/GET_TAG_LIST'
-export const INIT_TAG_LIST = 'write/INIT_TAG_LIST'
-export const CHANGE_TAG = 'write/CHANGE_TAG'
-export const ADD_TAG = 'write/ADD_TAG'
-export const ADD_TAG_SUCCESS = 'write/ADD_TAG_SUCCESS'
-export const CANCEL_ADD_TAG = 'write/CANCEL_ADD_TAG'
