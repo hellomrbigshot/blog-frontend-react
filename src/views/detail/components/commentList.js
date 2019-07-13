@@ -26,7 +26,7 @@ class CommentList extends Component {
                 {commentList.map((comment, i) => (
                     <CommentItem key={comment.get('_id')}>
                         <CommentAvatar>
-                            <Link to="">
+                            <Link to={`/user/info/${comment.get('create_user')}`}>
                                 <Avatar
                                     // size="large"
                                     src={`/api/file/avatar/user?username=${comment.get('create_user')}`}
@@ -37,12 +37,12 @@ class CommentList extends Component {
                         </CommentAvatar>
                         <CommentContent>
                             <CommentInfo>
-                                <Link to="">{comment.get('create_user')}</Link>
+                                <Link to={`/user/info/${comment.get('create_user')}`}>{comment.get('create_user')}</Link>
                                 <div>{formatTime(comment.get('create_time'))}</div>
                             </CommentInfo>
                             {comment.get('reply_user') ? (
                                 <ReplyContent>
-                                    <Link to="">{comment.get('reply_user')}</Link>：{comment.get('reply_content')}
+                                    <Link to={`/user/info/${comment.get('reply_user')}`}>{comment.get('reply_user')}</Link>：{comment.get('reply_content')}
                                 </ReplyContent>
                             ) : null}
                             <div>{comment.get('content')}</div>

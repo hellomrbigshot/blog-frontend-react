@@ -38,7 +38,7 @@ class LimitArticleList extends Component {
                                                     <ArticleTitle>{article.get('title')}</ArticleTitle>
                                                     {article.get('secret') ? (
                                                         <Fragment>
-                                                            <span> | </span>
+                                                            <span>&nbsp;|&nbsp;</span>
                                                             <Tag color="#f50">私密</Tag>
                                                         </Fragment>
                                                     ) : null}

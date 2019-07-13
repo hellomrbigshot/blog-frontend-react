@@ -18,7 +18,7 @@ export default (commentList, push, type = 'to_user') => {
                         <CommentHeader>
                             {type === 'to_user' ? (
                                 <Fragment>
-                                    <Link to="">{comment.get('create_user')} </Link>
+                                    <Link to={`/user/info/${comment.get('create_user')}`}>{comment.get('create_user')} </Link>
                                     回复我说：
                                 </Fragment>
                             ) : (
@@ -31,7 +31,7 @@ export default (commentList, push, type = 'to_user') => {
                         <ReplyContent onClick={() => handleToDetail(comment.get('page_id'))}>
                             {comment.get('reply_user') ? (
                                 <Fragment>
-                                    <Link to="">{comment.get('reply_user')}: </Link>
+                                    <Link to={`/user/info/${comment.get('reply_user')}`}>{comment.get('reply_user')}: </Link>
                                     {comment.get('reply_content')}
                                 </Fragment>
                             ) : (

@@ -15,7 +15,7 @@ function articleItem(props) {
                 <span>更新于 {formatTime(article.get('update_time'))}</span>
                 <span>
                     {' '}
-                    | 作者<Link to="">{article.get('create_user')}</Link>
+                    | 作者<Link to={`/user/info/${article.get('create_user')}`}>{article.get('create_user')}</Link>
                 </span>
                 <span> | 标签{showTags(article.get('tags'))}</span>
             </Info>

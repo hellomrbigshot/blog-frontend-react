@@ -76,7 +76,7 @@ const WriteForm = Form.create({
             <Form.Item label="是否私密：" labelCol={{span: 3}} wrapperCol={{span: 3}}>
                 {getFieldDecorator('secret', {
                     rules: [{ required: true, message: '请选择是否私密' }]
-                })(<Switch onChange={props.secretChange} />)}
+                })(<Switch checked={props.articleDetail.secret} onChange={props.secretChange} />)}
             </Form.Item>
             <Form.Item>
                 <Button size="large" onClick={()=>submit('draft')}>保存草稿</Button>
@@ -234,7 +234,7 @@ class Write extends Component {
         let url = null
         if (sendData._id) {
             url = '/api/page/edit'
-            sendData.id = sendData.id
+            sendData.id = sendData._id
         } else {
             url = '/api/page/new'
         }
