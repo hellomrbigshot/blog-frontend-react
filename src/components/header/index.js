@@ -145,12 +145,12 @@ class Header extends Component {
         const KEYWORDS = keywords.value
         if (KEYCODE === 13 && KEYWORDS) {
             // enter 触发搜索
-            // this.props.history.push({ pathname: `/home?keywords=${encodeURIComponent(KEYWORDS)}` })
-            this.props.history.push({ pathname: `/home`, query: { keywords: KEYWORDS } })
+            this.props.history.push(`/home/${KEYWORDS}`)
         }
     }
     handleSearch(keywords) {
         if (keywords) {
+          this.props.history.push(`/home/${keywords}`)
         }
     }
 }

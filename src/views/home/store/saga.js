@@ -8,16 +8,25 @@ export function* getArticleList() {
 }
 
 function* fetchArticleList(action) {
-    let res = yield fetch.post('/api/page/pagelist', {
-        type: '',
-        status: 'normal',
-        content: '',
-        pageSize: 10,
-        page: action.page,
-        secret: false,
-        sort: 'update_time'
-    })
-    const { result, total } = res.data.data
-    yield put(initArticleList(result, total))
-    window.scrollTo(0, 0)
+  try {
+    const URL = !action.keywords ? '/api/page/pagelist' : '/api/page/searchpage'
+    let formData = !action.keywords ? {
+      type: '',
+      status: 'normal',
+      content: '',
+      pageSize: 10,
+      page: action.page,
+      secret: false,
+      sort: 'update_time'
+    } : {
+      keywords: action.keywords
+    }
+    let res = yield fetch.post(URL, formData)
+  const { result, total } = res.data.data
+  yield put(initArticleList(result, total))
+  window.scrollTo(0, 0)
+  } catch(e) {
+    console.log(e.message)
+  }
+    
 }

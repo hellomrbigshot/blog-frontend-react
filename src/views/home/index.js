@@ -13,46 +13,50 @@ class Home extends Component {
         this.debounceChangeBackTop = debounce(this.props.changeBackTop, 100)
     }
     render() {
-        const { articleList, showBackTop, handleBackTop, total, pageChange } = this.props
+        const { articleList, total, getArticleList } = this.props
         return (
             <HomeWrapper>
                 {articleList.map((article, i) => {
                     return <ArticleItem article={article} key={i} />
                 })}
                 <BackTop />
-                {total > 10 ? <Pagination onChange={pageChange} total={total} /> : null}
+                {total > 10 ? <Pagination onChange={getArticleList} total={total} /> : null}
             </HomeWrapper>
         )
     }
     componentDidMount() {
-        if (this.props.location.query && this.props.location.query.keywords) {
-            // 搜索页
-            console.log(this.props.location.query.keywords)
+        if (this.props.match.params && this.props.match.params.keywords) {
+            // 搜索
+            const KEYWORDS = this.props.match.params.keywords.trim()
+            this.props.getArticleList(1, KEYWORDS)
+            this.keywords = KEYWORDS
         } else {
-            this.props.getArticleList()
+            this.props.getArticleList(1)
         }
-        // this.bindEvents()
     }
-    // componentWillUnmount() {
-    //   window.removeEventListener('scroll', this.debounceChangeBackTop)
-    // }
-    // bindEvents() {
-    //   window.addEventListener('scroll', this.debounceChangeBackTop)
-    // }
+    componentDidUpdate() {
+        if (this.props.match.params && this.props.match.params.keywords) {
+            // 搜索
+            const KEYWORDS = this.props.match.params.keywords.trim()
+            if (this.keywords !== KEYWORDS) {
+                this.props.getArticleList(1, KEYWORDS)
+                this.keywords = KEYWORDS
+            }
+        }
+    }
 }
 
 const mapStateToProps = state => {
     return {
         articleList: state.getIn(['home', 'articleList']),
         total: state.getIn(['home', 'total'])
-        // showBackTop: state.getIn(['home', 'showBackTop'])
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        getArticleList() {
-            dispatch(actionCreators.getArticleList())
+        getArticleList(page, keywords) {
+            dispatch(actionCreators.getArticleList(page, keywords))
         },
         changeBackTop() {
             if (document.documentElement.scrollTop > 100) {
@@ -70,9 +74,6 @@ const mapDispatchToProps = dispatch => {
                     clearInterval(timer)
                 }
             }, 30)
-        },
-        pageChange(page) {
-            dispatch(actionCreators.getArticleList(page))
         }
     }
 }

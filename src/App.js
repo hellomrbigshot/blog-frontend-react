@@ -33,7 +33,7 @@ class App extends Component {
                     >
                         <Switch>
                             <Redirect exact from="/" to="/home" />
-                            <Route path="/home" component={Home} />
+                            <Route path="/home/:keywords?" component={Home} />
                             <Route path="/detail/:id" exact component={Detail} />
                             <Route path="/login" exact component={Login} />
                             <Route path="/register" exact component={Register} />
@@ -46,8 +46,7 @@ class App extends Component {
                             <Route path="/write" component={Write} />
                             <Route path="/edit/:id" component={Write} />
                             <Route path="/404" exact component={NoMatch} />
-
-                            {/* <Redirect from="*" to="/404"/> */}
+                            <Redirect from="*" to="/404"/>
                         </Switch>
                     </div>
                 </Router>
