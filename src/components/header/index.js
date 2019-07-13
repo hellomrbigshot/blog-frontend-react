@@ -64,8 +64,12 @@ class Header extends Component {
                     <NavItem>
                         <Link to="/comment/list">留言</Link>
                     </NavItem>
-                    <NavItem>待办</NavItem>
-                    <NavItem>实验室</NavItem>
+                    <NavItem>
+                        <Link to="">待办</Link>
+                    </NavItem>
+                    <NavItem>
+                        <Link to="">实验室</Link>
+                    </NavItem>
                 </Nav>
                 <Addition>
                     <Link to="/write">

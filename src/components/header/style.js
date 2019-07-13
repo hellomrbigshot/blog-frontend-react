@@ -95,21 +95,16 @@ export const NavItem = styled.div`
     float: left;
     height: 56px;
     line-height: 56px;
-    padding: 0 5px;
-    margin-left: 10px;
     font-size: 17px;
-    font-weight: 300;
+    margin-left: 10px;
+    padding: 0 5px;
     &.first-nav {
         margin-left: 50px;
     }
     a {
-        color: #555;
-    }
-    &:hover {
-        cursor: pointer;
-        a {
-            color: #555;
-            font-weight: 400;
+        color: #666;
+        &:hover {
+            color: #222;
         }
     }
 `
@@ -206,9 +201,9 @@ export const DropdownWrapper = styled.div`
 `
 
 export const DrapdownItem = styled.div`
-    padding: 10px 20px;
-    line-height: 30px;
     a {
+        padding: 10px 20px;
+        line-height: 30px;
         font-size: 14px;
         color: #333;
         display: block;
