@@ -150,7 +150,7 @@ class Header extends Component {
     }
     handleSearch(keywords) {
         if (keywords) {
-          this.props.history.push(`/home/${keywords}`)
+            this.props.history.push(`/home/${keywords}`)
         }
     }
 }

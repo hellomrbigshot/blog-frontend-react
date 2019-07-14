@@ -46,7 +46,7 @@ class App extends Component {
                             <Route path="/write" component={Write} />
                             <Route path="/edit/:id" component={Write} />
                             <Route path="/404" exact component={NoMatch} />
-                            <Redirect from="*" to="/404"/>
+                            <Redirect from="*" to="/404" />
                         </Switch>
                     </div>
                 </Router>
