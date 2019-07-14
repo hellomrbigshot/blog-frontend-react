@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+- 8.9.1
+branchs:
+  only:
+  - master
+before_install:
+- openssl aes-256-cbc -K $encrypted_dfd5fdc6b788_key -iv $encrypted_dfd5fdc6b788_iv
+  -in id_rsa.enc -out ~/.ssh/id_rsa -d
