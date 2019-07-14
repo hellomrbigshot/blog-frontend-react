@@ -10,9 +10,9 @@ cache:
   - node_modules
 install:
 - git pull
-- rm -f package-lock.json && npm install
+- rm -f package-lock.json && cnpm install
 script:
-- npm run build
+- cnpm run build
 after_success: 
 - chmod 600 ~/.ssh/id_rsa
 - scp -o stricthostkeychecking=no -r ./build/* travis@118.24.157.36:/var/www/react_pc

@@ -38,7 +38,13 @@ class LoginForm extends Component {
                         <Form.Item>
                             {getFieldDecorator('password', {
                                 rules: [{ required: true, message: 'Please input your Password!' }]
-                            })(<Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} size="large" placeholder="请输入密码" />)}
+                            })(
+                                <Input.Password
+                                    prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                    size="large"
+                                    placeholder="请输入密码"
+                                />
+                            )}
                         </Form.Item>
                         <Form.Item>
                             <Button shape="round" type="primary" htmlType="submit" block size="large" onClick={this.handleSubmit}>

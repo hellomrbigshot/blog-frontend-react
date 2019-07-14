@@ -200,8 +200,8 @@ export const DropdownWrapper = styled.div`
     background: #fff;
 `
 
-export const DrapdownItem = styled.div`
-    a {
+export const DropdownItem = styled.div`
+    a, div {
         padding: 10px 20px;
         line-height: 30px;
         font-size: 14px;

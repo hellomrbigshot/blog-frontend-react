@@ -103,9 +103,6 @@ class Write extends Component {
             tags: []
         }
     }
-    constructor() {
-        super()
-    }
     render() {
         const { user } = this.props
         const fields = this.state

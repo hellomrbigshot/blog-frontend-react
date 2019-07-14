@@ -4,9 +4,6 @@ import { Modal, Form, Input } from 'antd'
 const { TextArea } = Input
 
 class CreateTag extends Component {
-    constructor() {
-        super()
-    }
     render() {
         const { visible, tagModalLoading, tagInfo, form: { getFieldDecorator }} = this.props
         return (

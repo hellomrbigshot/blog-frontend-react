@@ -1,7 +1,6 @@
 import { takeLatest, put, select } from 'redux-saga/effects'
 import { GET_COMMENT_LIST } from './actionTypes'
 import { fetch } from '../../../common/index'
-import qs from 'qs'
 import { initCommentList } from './actionCreators'
 
 export function* getCommentList() {

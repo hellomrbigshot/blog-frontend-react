@@ -7,7 +7,10 @@ import { actionCreators } from './store'
 
 class RegisterForm extends Component {
     render() {
-        const { user, form: { getFieldDecorator }} = this.props
+        const {
+            user,
+            form: { getFieldDecorator }
+        } = this.props
         const redirectUrl = this.props.location.query ? this.props.location.query.redirect : null
         return user ? (
             <Redirect to={redirectUrl ? redirectUrl : '/'} />

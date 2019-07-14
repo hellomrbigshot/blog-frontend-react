@@ -15,7 +15,7 @@ import {
     AvatarWrapper,
     AvatarContent,
     DropdownWrapper,
-    DrapdownItem
+    DropdownItem
 } from './style'
 import { actionCreators } from './store'
 import { actionCreators as loginCreator } from '../../views/user/store'
@@ -65,10 +65,10 @@ class Header extends Component {
                         <Link to="/comment/list">留言</Link>
                     </NavItem>
                     <NavItem>
-                        <Link to="">待办</Link>
+                        <Link to="/">待办</Link>
                     </NavItem>
                     <NavItem>
-                        <Link to="">实验室</Link>
+                        <Link to="/">实验室</Link>
                     </NavItem>
                 </Nav>
                 <Addition>
@@ -101,42 +101,42 @@ class Header extends Component {
         const { logout, user } = this.props
         return (
             <DropdownWrapper>
-                <DrapdownItem style={{ marginTop: '5px' }}>
+                <DropdownItem style={{ marginTop: '5px' }}>
                     <Link to={`/user/info/${user}`}>
                         <i className="iconfont icon-UserSettings" />
                         <span>我的主页</span>
                     </Link>
-                </DrapdownItem>
-                <DrapdownItem>
+                </DropdownItem>
+                <DropdownItem>
                     <Link to="/user/list">
                         <i className="iconfont icon-blogs" />
                         <span>我的文章</span>
                     </Link>
-                </DrapdownItem>
-                <DrapdownItem>
+                </DropdownItem>
+                <DropdownItem>
                     <Link to="/user/draft">
                         <i className="iconfont icon-draft" />
                         <span>我的草稿</span>
                     </Link>
-                </DrapdownItem>
-                <DrapdownItem>
+                </DropdownItem>
+                <DropdownItem>
                     <Link to="/comment/list">
                         <i className="iconfont icon-comment" />
                         <span>我的评论</span>
                     </Link>
-                </DrapdownItem>
-                <DrapdownItem>
-                    <Link to="">
+                </DropdownItem>
+                <DropdownItem>
+                    <Link to="/">
                         <i className="iconfont icon-todo" />
                         <span>我的待办</span>
                     </Link>
-                </DrapdownItem>
-                <DrapdownItem>
-                    <a href="#" onClick={logout}>
+                </DropdownItem>
+                <DropdownItem>
+                    <div onClick={logout}>
                         <i className="iconfont icon-signout_detail_toil" />
                         <span>退出</span>
-                    </a>
-                </DrapdownItem>
+                    </div>
+                </DropdownItem>
             </DropdownWrapper>
         )
     }

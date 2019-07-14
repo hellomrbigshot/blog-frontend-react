@@ -1,7 +1,7 @@
 import { takeLatest, put, select } from 'redux-saga/effects'
 import { LOGIN, REGISTER, LOGOUT, GET_DRAFT_LIST, GET_ARTICLE_LIST, GET_USER_INFO, GET_LIMIT_ARTICLE_LIST } from './actionTypes'
 import { fetch } from '../../../common'
-import { loginSuccess, registerSuccess, logoutSuccess, initDraftList, initArticleList, initUserInfo, initLimitArticleList } from './actionCreators'
+import { loginSuccess, logoutSuccess, initDraftList, initArticleList, initUserInfo, initLimitArticleList } from './actionCreators'
 
 export function* login() {
     yield takeLatest(LOGIN, axiosLogin)
