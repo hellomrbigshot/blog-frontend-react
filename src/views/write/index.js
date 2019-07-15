@@ -193,7 +193,7 @@ class Write extends Component {
     handleTagCancel = () => { // 删除添加的 tag
         const { articleDetail, tagInfo } = this.state
         const detail = JSON.parse(JSON.stringify(articleDetail))
-        detail.tags = detail.tags.remove(tagInfo.name)
+        detail.tags.splice(detail.tags.indexOf(tagInfo.name))
         this.setState({
             articleDetail: detail,
             tagInfo: {
