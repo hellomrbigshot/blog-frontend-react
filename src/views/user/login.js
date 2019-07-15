@@ -12,7 +12,6 @@ class LoginForm extends Component {
             form: { getFieldDecorator }
         } = this.props
         const redirectUrl = this.props.location.query ? this.props.location.query.redirect : null
-        console.log(redirectUrl)
         const registerPath = redirectUrl ? { pathname: '/register', query: { redirect: redirectUrl } } : '/register'
         return user ? (
             <Redirect to={redirectUrl ? redirectUrl : '/'} />
