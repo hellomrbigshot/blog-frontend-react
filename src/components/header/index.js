@@ -70,6 +70,9 @@ class Header extends Component {
                     <NavItem>
                         <Link to="/">实验室</Link>
                     </NavItem>
+                    <NavItem>
+                        <Link to="/">关于</Link>
+                    </NavItem>
                 </Nav>
                 <Addition>
                     <Link to="/write">
