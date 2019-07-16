@@ -71,7 +71,7 @@ class Header extends Component {
                         <Link to="/">实验室</Link>
                     </NavItem>
                     <NavItem>
-                        <Link to="/">关于</Link>
+                        <a href="https://www.hellomrbigbigshot.xyz" to="">Vue版本</a>
                     </NavItem>
                 </Nav>
                 <Addition>
