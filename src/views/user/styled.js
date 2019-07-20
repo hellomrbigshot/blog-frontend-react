@@ -23,6 +23,12 @@ export const LoginBox = styled.div`
     .login-form {
         margin-top: 40px;
     }
+    /deep/ input {
+        background-color: transparent !important;
+        &:-webkit-autofill {
+            -webkit-transition: background-color 10000s cubic-bezier(1, -100, 1, -100) 0s;
+        }
+    }
 `
 
 export const LoginInfo = styled.div`
@@ -52,40 +58,6 @@ export const LoginInfo = styled.div`
             color: #3db922;
             border-bottom-color: #3db922;
         }
-    }
-`
-
-export const Input = styled.input`
-    height: 50px;
-    line-height: 20px;
-    box-sizing: border-box;
-    font-size: 14px;
-    padding: 4px 12px 4px 30px;
-    width: 100%;
-    border-radius: 4px;
-    outline: none;
-    border: 1px solid #ddd;
-    margin-top: 40px;
-`
-
-export const Button = styled.div`
-    margin-top: 40px;
-    height: 43px;
-    box-sizing: border-box;
-    text-align: center;
-    padding: 9px 18px;
-    line-height: 25px;
-    border-radius: 25px;
-    &:hover {
-        cursor: pointer;
-    }
-    &.primary {
-        background: #3194d0;
-        color: #fff;
-    }
-    &.active {
-        background: #3db922;
-        color: #fff;
     }
 `
 
