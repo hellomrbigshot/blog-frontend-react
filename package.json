@@ -23,16 +23,18 @@
     "redux": "^4.0.1",
     "redux-immutable": "^4.0.0",
     "redux-saga": "^1.0.2",
+    "source-map-explorer": "^2.0.1",
     "styled-components": "^4.2.1"
   },
   "devDependencies": {
     "redux-devtools-extension": "^2.13.8"
   },
   "scripts": {
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
-    "eject": "react-app-rewired eject"
+    "eject": "react-scripts eject"
   },
   "proxy": "http://localhost:8081",
   "browserslist": {
