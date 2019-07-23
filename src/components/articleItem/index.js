@@ -1,7 +1,6 @@
 import React from 'react'
 import { ArticleItem, Header, Info, Article } from './styled'
 import { Link } from 'react-router-dom'
-import 'highlight.js/styles/solarized-light.css'
 import { marked, formatTime } from '../../common'
 
 function articleItem(props) {
