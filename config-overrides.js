@@ -2,7 +2,7 @@ const path = require('path')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const { override, fixBabelImports, addWebpackExternals, addWebpackAlias } = require('customize-cra')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
 
 const Custom = config => {
     let plugins = [
@@ -11,14 +11,15 @@ const Custom = config => {
             chunkFilename: '[id].css',
             ignoreOrder: true
         }),
-        new UglifyJsPlugin({
-            parallel: true,
-            uglifyOptions: {
-                warnings: false,
+        new ParallelUglifyPlugin({
+            cacheDir: '.cache/',
+            uglifyJS: {
                 output: {
                     comments: false
-                }
-            }
+                },
+                warnings: false
+            },
+            sourceMap: false
         }),
         new CompressionWebpackPlugin({
             filename: '[path].gz[query]',
@@ -28,7 +29,9 @@ const Custom = config => {
             minRatio: 0.8
         })
     ]
-    if (process.env.NODE !== 'development') {
+    console.log(process.env)
+    debugger
+    if (process.env.NODE_ENV !== 'development') {
         config.plugins = [...config.plugins, ...plugins]
     }
     return config
