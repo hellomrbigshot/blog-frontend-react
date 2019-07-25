@@ -1,8 +1,8 @@
 const path = require('path')
-const CompressionWebpackPlugin = require('compression-webpack-plugin')
+// const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const { override, fixBabelImports, addWebpackExternals, addWebpackAlias } = require('customize-cra')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+// const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
 
 const Custom = config => {
     let plugins = [
@@ -38,9 +38,9 @@ module.exports = override(
         libraryDirectory: 'es',
         style: 'css'
     }),
-    addWebpackExternals({
-        hljs: 'hljs'
-    }),
+    // addWebpackExternals({
+    //     hljs: 'hljs'
+    // }),
     addWebpackAlias({
         '@ant-design/icons/lib/dist$': path.resolve(__dirname, './src/icons.js')
     }),

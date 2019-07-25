@@ -1,7 +1,8 @@
 import marked from 'marked'
-import hljs from 'hljs'
+import hljs from './highlight'
 import * as fetch from './fetch'
 
+// hljs.initHighlightingOnLoad()
 marked.setOptions({
     renderer: new marked.Renderer(),
     highlight: function(code) {
