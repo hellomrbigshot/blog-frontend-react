@@ -198,6 +198,24 @@ export const DropdownWrapper = styled.div`
     top: 57px;
     left: 0;
     background: #fff;
+    height: 0;
+    overflow: hidden;
+    &.fade-enter {
+        height: 0;
+        transition: all 0.4s ease-in;
+    }
+    &.slide-enter-active {
+        height: 255px;
+    }
+    &.slide-exit {
+        transition: all 0.4s ease-in;
+    }
+    &.slide-exit-active {
+        height: 0;
+    }
+    &.mouse-in {
+        height: 255px;
+    }
 `
 
 export const DropdownItem = styled.div`
