@@ -65,9 +65,6 @@ class Header extends Component {
                         <Link to="/comment/list">留言</Link>
                     </NavItem>
                     <NavItem>
-                        <Link to="/">待办</Link>
-                    </NavItem>
-                    <NavItem>
                         <Link to="/">实验室</Link>
                     </NavItem>
                     <NavItem>
@@ -101,9 +98,9 @@ class Header extends Component {
         )
     }
     getDropDown() {
-        const { logout, user } = this.props
+        const { logout, user, handleMouseEnter, handleMouseLeave } = this.props
         return (
-            <DropdownWrapper>
+            <DropdownWrapper onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                 <DropdownItem style={{ marginTop: '5px' }}>
                     <Link to={`/user/info/${user}`}>
                         <i className="iconfont icon-UserSettings" />
@@ -126,12 +123,6 @@ class Header extends Component {
                     <Link to="/comment/list">
                         <i className="iconfont icon-comment" />
                         <span>我的评论</span>
-                    </Link>
-                </DropdownItem>
-                <DropdownItem>
-                    <Link to="/">
-                        <i className="iconfont icon-todo" />
-                        <span>我的待办</span>
                     </Link>
                 </DropdownItem>
                 <DropdownItem>
