@@ -81,7 +81,9 @@ class Header extends Component {
                     {user ? (
                         <AvatarWrapper onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                             <AvatarContent src={`/api/file/avatar/user/?username=${user}`} />
-                            {mouseIn ? this.getDropDown() : null}
+                            <CSSTransition in={mouseIn} timeout={400} classNames="fade">
+                                {this.getDropDown()}
+                            </CSSTransition>
                         </AvatarWrapper>
                     ) : (
                         <Fragment>
@@ -98,9 +100,9 @@ class Header extends Component {
         )
     }
     getDropDown() {
-        const { logout, user, handleMouseEnter, handleMouseLeave } = this.props
+        const { logout, user, handleMouseEnter, handleMouseLeave, mouseIn } = this.props
         return (
-            <DropdownWrapper onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+            <DropdownWrapper onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className={mouseIn ? 'mouse-in' : ''}>
                 <DropdownItem style={{ marginTop: '5px' }}>
                     <Link to={`/user/info/${user}`}>
                         <i className="iconfont icon-UserSettings" />

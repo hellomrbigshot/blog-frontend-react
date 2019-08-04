@@ -195,9 +195,28 @@ export const DropdownWrapper = styled.div`
     box-sizing: border-box;
     border-radius: 0 0 4px 4px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    top: 57px;
+    top: 56px;
     left: 0;
     background: #fff;
+    height: 0;
+    overflow: hidden;
+    &.fade-enter {
+        height: 0;
+        transition: all .4s ease-in-out;
+    }
+    &.fade-enter-active {
+        height: 255px;
+    }
+    &.fade-exit {
+        transition: all 0.4s ease-in-out;
+        height: 255px;
+    }
+    &.fade-exit-active {
+        height: 0;
+    }
+    &.mouse-in {
+        height: 255px;
+    }
 `
 
 export const DropdownItem = styled.div`
