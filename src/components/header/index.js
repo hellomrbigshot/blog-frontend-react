@@ -34,6 +34,7 @@ class Header extends Component {
         } = this.props
         const hideHeaderPath = ['/login', '/register', '/404']
         const hideHeader = hideHeaderPath.includes(pathname.trim())
+        const vueIcon = `<use xlink:href='#icon-vue' />`
         return hideHeader ? null : (
             <HeaderWrapper>
                 <Link to="/">
@@ -68,7 +69,14 @@ class Header extends Component {
                         <Link to="/">实验室</Link>
                     </NavItem>
                     <NavItem>
-                        <a href="https://www.hellomrbigbigshot.xyz" to="">Vue版本</a>
+                        <a href="https://www.hellomrbigbigshot.xyz">
+                        <svg
+                          className="icon"
+                          style={{ fontSize: '16px' }}
+                          aria-hidden="true" dangerouslySetInnerHTML={{ __html: vueIcon }}
+                        />
+                          版本
+                        </a>
                     </NavItem>
                 </Nav>
                 <Addition>

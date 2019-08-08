@@ -95,8 +95,8 @@ export const NavItem = styled.div`
     float: left;
     height: 56px;
     line-height: 56px;
-    font-size: 17px;
-    margin-left: 10px;
+    font-size: 16px;
+    margin-left: 15px;
     padding: 0 5px;
     &.first-nav {
         margin-left: 50px;
