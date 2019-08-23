@@ -3,34 +3,35 @@ import { connect } from 'react-redux'
 import { Form, Select, Input, Switch, Button } from 'antd'
 import { Redirect } from 'react-router-dom'
 import CreateTag from './components/createTag'
+import MEditor from 'react-m-editor'
 import { fetch } from '../../common'
 
 const { Option } = Select
-const { TextArea } = Input
 
 const WriteForm = Form.create({
     name: 'write',
-    onFieldsChange(props, changedFields, allFields) {
-        // props.onChange(changedFields, allFields)
-    },
-    mapPropsToFields(props) {
-        return {
-            title: Form.createFormField({
-                value: props.articleDetail.title
-            }),
-            tags: Form.createFormField({
-                value: props.articleDetail.tags
-            }),
-            content: Form.createFormField({
-                value: props.articleDetail.content
-            }),
-            secret: Form.createFormField({
-                value: props.articleDetail.secret
-            })
-        }
-    }
+    // onFieldsChange(props, changedFields, allFields) {
+    //     // props.onChange(changedFields, allFields)
+    // },
+    // mapPropsToFields(props) {
+    //     return {
+    //         title: Form.createFormField({
+    //             value: props.articleDetail.title
+    //         }),
+    //         tags: Form.createFormField({
+    //             value: props.articleDetail.tags
+    //         }),
+    //         content: Form.createFormField({
+    //             value: props.articleDetail.content
+    //         }),
+    //         secret: Form.createFormField({
+    //             value: props.articleDetail.secret
+    //         })
+    //     }
+    // }
+
 })(props => {
-    const { getFieldDecorator } = props.form
+    const { articleDetail, tagSelect, tagList, form: { getFieldDecorator }} = props
     const submit = (type) => {
         props.form.validateFields((error, values) => {
             if (!error) {
@@ -42,12 +43,14 @@ const WriteForm = Form.create({
         <Form>
             <Form.Item>
                 {getFieldDecorator('title', {
-                    rules: [{ required: true, message: '请输入文章标题' }]
-                })(<Input size="large" onChange={props.titleChange} placeholder="请输入标题" />)}
+                    rules: [{ required: true, message: '请输入文章标题' }],
+                    initialValue: articleDetail.title
+                })(<Input size="large" placeholder="请输入标题" />)}
             </Form.Item>
             <Form.Item>
                 {getFieldDecorator('tags', {
-                    rules: [{ required: true, type: 'array', message: '请选择标签' }]
+                    rules: [{ required: true, type: 'array', message: '请选择标签' }],
+                    initialValue: articleDetail.tags
                 })(
                     <Select
                         size="large"
@@ -57,10 +60,9 @@ const WriteForm = Form.create({
                         autoClearSearchValue
                         mode="tags"
                         filterOption
-                        onSelect={props.tagSelect}
-                        onChange={props.tagChange}
+                        onSelect={tagSelect}
                     >
-                        {props.tagList.map(tag => (
+                        {tagList.map(tag => (
                             <Option key={tag} value={tag}>
                                 {tag}
                             </Option>
@@ -70,13 +72,16 @@ const WriteForm = Form.create({
             </Form.Item>
             <Form.Item>
                 {getFieldDecorator('content', {
-                    rules: [{ required: true, message: '请输入文章内容' }]
-                })(<TextArea onChange={props.contentChange} rows={14} />)}
+                    rules: [{ required: true, message: '请输入文章内容' }],
+                    initialValue: articleDetail.content
+                })(<MEditor />)}
             </Form.Item>
             <Form.Item label="是否私密：" labelCol={{span: 3}} wrapperCol={{span: 3}}>
                 {getFieldDecorator('secret', {
-                    rules: [{ required: true, message: '请选择是否私密' }]
-                })(<Switch checked={props.articleDetail.secret} onChange={props.secretChange} />)}
+                    rules: [{ required: true, message: '请选择是否私密' }],
+                    valuePropName: 'checked',
+                    initialValue: articleDetail.secret
+                })(<Switch/>)}
             </Form.Item>
             <Form.Item>
                 <Button size="large" onClick={()=>submit('draft')}>保存草稿</Button>
@@ -169,16 +174,15 @@ class Write extends Component {
         })
     }
     titleChange = e => {
-        console.log('trigger')
         const detail = JSON.parse(JSON.stringify(this.state.articleDetail))
         detail.title = e.target.value
         this.setState({
             articleDetail: detail
         })
     }
-    contentChange = e => {
+    contentChange = obj => {
         const detail = JSON.parse(JSON.stringify(this.state.articleDetail))
-        detail.content = e.target.value
+        detail.content = obj.content
         this.setState({
             articleDetail: detail
         })
@@ -227,6 +231,7 @@ class Write extends Component {
         })
     }
     submit = (values) => { // 提交新建表单
+        console.log(values)
         const sendData = Object.assign(this.state.articleDetail, values)
         let url = null
         if (sendData._id) {
