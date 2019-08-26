@@ -9316,9 +9316,9 @@ react-lifecycles-compat@^3.0.2, react-lifecycles-compat@^3.0.4:
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
 react-m-editor@^1.0.4:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/react-m-editor/-/react-m-editor-1.0.5.tgz#0a2118dbf1a8e5b3f7034571ffb023817668706f"
-  integrity sha512-iidrzNUrBM4Fjq1haQ1Rur0TnHxdfa5Mtn3l6Mgnsq6Tnsmh/l9XzAorladmgjnvz25lVAqYLUDIG40MqSzIDw==
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/react-m-editor/-/react-m-editor-1.0.6.tgz#3440921cfde28a9db9cfb6c4aaf89d1035bf5d05"
+  integrity sha512-FODDnVB1YpGgwoTanJCIDy7oxOhC2i9ZtsFa9ovehs6WUGOPmMVtH7zPJjsIvos+XdoOd9W7iYZdMU0KPhXuCA==
   dependencies:
     classnames "^2.2.6"
     highlight.js "^9.15.10"

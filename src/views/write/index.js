@@ -74,7 +74,7 @@ const WriteForm = Form.create({
                 {getFieldDecorator('content', {
                     rules: [{ required: true, message: '请输入文章内容' }],
                     initialValue: articleDetail.content
-                })(<MEditor />)}
+                })(<MEditor theme='dark'/>)}
             </Form.Item>
             <Form.Item label="是否私密：" labelCol={{span: 3}} wrapperCol={{span: 3}}>
                 {getFieldDecorator('secret', {
