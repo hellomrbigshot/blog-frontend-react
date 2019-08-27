@@ -41,4 +41,6 @@ export const Info = styled.div`
   }
 `
 
-export const Article = styled.div``
+export const Article = styled.div`
+    font-size: 15px;
+`
