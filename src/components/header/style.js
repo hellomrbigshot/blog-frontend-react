@@ -10,7 +10,7 @@ export const HeaderWrapper = styled.div`
     right: 0;
     top: 0;
     background: #fff;
-    z-index: 2;
+    z-index: 3;
     border-bottom: 1px solid #f0f0f0;
 `
 

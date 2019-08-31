@@ -37,6 +37,7 @@ export const Info = styled.div`
 `
 
 export const Content = styled.div`
+    font-size: 15px;
     margin-bottom: 120px;
 `
 

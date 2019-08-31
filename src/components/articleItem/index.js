@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { ArticleItem, Header, Info, Article } from './styled'
 import { Link } from 'react-router-dom'
 import { marked, formatTime } from '../../common'
@@ -25,13 +25,14 @@ function articleItem(props) {
 
 function showTags(tags) {
     if (!tags) return null
-    tags = tags.toJS()
     return tags.map((tag, i) => {
         return (
-            <Link key={i} to={`/tag/detail/${tag}`}>
-                {tag}
-                {i === tags.length - 1 ? '' : ','}
-            </Link>
+          <Fragment>
+            <Link key={i} to={`/tag/detail/${tag}`}>{tag}</Link>
+            {
+              i === tags.size - 1 ? null : <Fragment> ,</Fragment>
+            }
+          </Fragment>
         )
     })
 }

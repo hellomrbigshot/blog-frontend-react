@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { Header, Info, Content } from '../styled'
 import { Link } from 'react-router-dom'
@@ -34,12 +34,14 @@ class articleDetail extends Component {
 
 function showTags(tags) {
     if (!tags) return ''
-    tags = tags.toJS()
+
     return tags.map((tag, i) => (
-        <Link key={i} to={`/tag/detail/${tag}`}>
-            {tag}
-            {i === tags.length - 1 ? '' : ','}
-        </Link>
+      <Fragment>
+        <Link key={i} to={`/tag/detail/${tag}`}>{tag}</Link>
+        {
+          i === tags.size - 1 ? null : <Fragment> ,</Fragment>
+        }
+      </Fragment>
     ))
 }
 
