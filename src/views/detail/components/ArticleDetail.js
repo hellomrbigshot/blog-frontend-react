@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { marked, formatTime } from '../../../common'
 
 class articleDetail extends Component {
+  
     render() {
         const { article, user } = this.props
         const tags = article.get('tags')
