@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 export const DetailWrapper = styled.div`
-    width: 800px;
     font-family: Lato, PingFang SC, Microsoft YaHei, sans-serif;
 `
 
@@ -21,6 +20,8 @@ export const Info = styled.div`
     color: #999;
     font-weight: 349;
     margin-bottom: 10px;
+    overflow: hidden;
+    white-space: nowrap;
     span {
         line-height: 18px;
         display: inline-block;
