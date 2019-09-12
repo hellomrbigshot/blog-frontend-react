@@ -22,10 +22,12 @@ export const login = user => {
     }
 }
 
-export const loginSuccess = user => {
+export const loginSuccess = (user, token, refreshToken) => {
     return {
         type: LOGIN_SUCCESS,
-        user
+        user,
+        token,
+        refreshToken
     }
 }
 

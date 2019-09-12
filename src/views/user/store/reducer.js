@@ -1,13 +1,6 @@
-import {
-    LOGIN_SUCCESS,
-    LOGOUT_SUCCESS,
-    INIT_DRAFT_LIST,
-    INIT_ARTICLE_LIST,
-    INIT_USER_INFO,
-    INIT_LIMIT_ARTICLE_LIST
-} from './actionTypes'
 import { fromJS } from 'immutable'
 import Cookies from 'js-cookie'
+import { LOGIN_SUCCESS, LOGOUT_SUCCESS, INIT_DRAFT_LIST, INIT_ARTICLE_LIST, INIT_USER_INFO, INIT_LIMIT_ARTICLE_LIST } from './actionTypes'
 
 const initialState = fromJS({
     user: Cookies.get('user') || '',
@@ -25,10 +18,16 @@ const initialState = fromJS({
 export default (state = initialState, action) => {
     switch (action.type) {
         case LOGIN_SUCCESS:
+            // 登录成功
             Cookies.set('user', action.user)
+            Cookies.set('token', action.token)
+            Cookies.set('refreshToken', action.refreshToken)
             return state.set('user', action.user)
         case LOGOUT_SUCCESS:
+            // 退出成功
             Cookies.remove('user')
+            Cookies.remove('token')
+            Cookies.remove('refreshToken')
             return state.set('user', '')
         case INIT_DRAFT_LIST:
             return state.set('draftList', fromJS(action.data))

@@ -78,6 +78,7 @@ export const TagDetailWrapper = styled.div`
         margin: 0 0 10px 20px;
         font-size: 22px;
         color: #555;
+        line-height: 1.5;
         small {
             color: #bbb;
         }
@@ -85,6 +86,7 @@ export const TagDetailWrapper = styled.div`
     div {
         margin-left: 20px;
         font-size: 12px;
+        line-height: 1.5;
     }
 `
 
