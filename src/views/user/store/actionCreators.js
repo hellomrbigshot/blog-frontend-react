@@ -50,10 +50,12 @@ export const register = user => {
     }
 }
 
-export const registerSuccess = user => {
+export const registerSuccess = (user, token, refreshToken) => {
     return {
         type: REGISTER_SUCCESS,
-        user
+        user,
+        token,
+        refreshToken
     }
 }
 

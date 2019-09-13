@@ -39,7 +39,6 @@ axios.interceptors.response.use(
         if (!loadingArr.length) {
             // 隐藏 loading
         }
-        console.log(res)
         if (res.data.code === 'OK') {
             return res
         } else {
