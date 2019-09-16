@@ -60,10 +60,9 @@ axios.interceptors.response.use(
         if (error.response) {
             switch (error.response.status) {
                 case 402:
-                    // 登录超时
-                   store.dispatch(actionCreators.logoutSuccess())
-                    break
-                // 跳到登录页
+                  // 登录超时 跳转登录页
+                  store.dispatch(actionCreators.logoutSuccess())
+                  break
                 default:
                     break
             }
