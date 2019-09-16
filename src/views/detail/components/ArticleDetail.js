@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { marked, formatTime } from '../../../common'
 
 class articleDetail extends Component {
+  
     render() {
         const { article, user } = this.props
         const tags = article.get('tags')
@@ -36,8 +37,8 @@ function showTags(tags) {
     if (!tags) return ''
 
     return tags.map((tag, i) => (
-      <Fragment>
-        <Link key={i} to={`/tag/detail/${tag}`}>{tag}</Link>
+      <Fragment key={i}>
+        <Link to={`/tag/detail/${tag}`}>{tag}</Link>
         {
           i === tags.size - 1 ? null : <Fragment> ,</Fragment>
         }

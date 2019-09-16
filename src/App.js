@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './store'
-import Header from './components/header'
+import Header from './components/Header'
 import Home from './views/home'
 import Detail from './views/detail'
 import Login from './views/user/login'
 import Register from './views/user/register'
 import NoMatch from './views/404'
-import ScrollToTop from './components/scrollTop'
+import ScrollToTop from './components/ScrollTop'
 import TagList from './views/tag'
 import TagDetail from './views/tag/detail'
 import CommentList from './views/comment'
@@ -16,6 +16,7 @@ import Draft from './views/user/draft'
 import LimitList from './views/user/article'
 import UserInfo from './views/user'
 import Write from './views/write'
+import { AppWrapper } from './style'
 
 class App extends Component {
     render() {
@@ -24,13 +25,7 @@ class App extends Component {
                 <Router>
                     <ScrollToTop />
                     <Header />
-                    <div
-                        style={{
-                            paddingTop: '37px',
-                            width: '800px',
-                            margin: '100px auto'
-                        }}
-                    >
+                    <AppWrapper>
                         <Switch>
                             <Redirect exact from="/" to="/home" />
                             <Route path="/home/:keywords?" component={Home} />
@@ -48,7 +43,7 @@ class App extends Component {
                             <Route path="/404" exact component={NoMatch} />
                             <Redirect from="*" to="/404" />
                         </Switch>
-                    </div>
+                    </AppWrapper>
                 </Router>
             </Provider>
         )

@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import { Input, Button } from 'antd'
 import { actionCreators } from './store'
 import { DetailWrapper } from './styled'
-import ArticleDetail from './components/articleDetail'
-import CommentList from './components/commentList'
+import ArticleDetail from './components/ArticleDetail'
+import CommentList from './components/CommentList'
 
 class Detail extends Component {
     render() {

@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 export const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -66,4 +66,13 @@ menu, nav, output, ruby, section, summary {
   fill: currentColor;
   overflow: hidden;
 }
+`
+export const AppWrapper = styled.div`
+  padding-top: 37px;
+  max-width: 800px;
+  width: 80%;
+  margin: 100px auto;
+  @media (max-width: 600px) {
+    width: 95%
+  }
 `

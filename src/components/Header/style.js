@@ -26,7 +26,7 @@ export const Logo = styled.div`
 `
 
 export const Nav = styled.div`
-    width: 940px;
+    width: 60%;
     margin: 0 auto;
     height: 56px;
     line-height: 56px;
@@ -37,6 +37,9 @@ export const SearchWrapper = styled.div`
     height: 56px;
     position: relative;
     float: left;
+    @media (max-width: 750px) {
+        display: none;
+    }
     .iconfont {
         width: 30px;
         height: 30px;
@@ -98,6 +101,9 @@ export const NavItem = styled.div`
     font-size: 16px;
     margin-left: 15px;
     padding: 0 5px;
+    @media (max-width: 750px) {
+        display: none;
+    }
     &.first-nav {
         margin-left: 50px;
     }
@@ -114,6 +120,9 @@ export const Addition = styled.div`
     right: 0;
     height: 56px;
     top: 0;
+    @media (max-width: 750px) {
+        display: none;
+    }
 `
 
 export const Button = styled.div`

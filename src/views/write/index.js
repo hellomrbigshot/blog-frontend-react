@@ -231,7 +231,6 @@ class Write extends Component {
         })
     }
     submit = (values) => { // 提交新建表单
-        console.log(values)
         const sendData = Object.assign(this.state.articleDetail, values)
         let url = null
         if (sendData._id) {

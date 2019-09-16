@@ -25,6 +25,6 @@ function* axiosCommentList(action) {
         } = yield fetch.post('/api/comment/getusercommentlist', formData)
         yield put(initCommentList(result, total))
     } catch (e) {
-        console.log(e.error)
+        console.log(e.message)
     }
 }

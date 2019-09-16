@@ -1,3 +1,7 @@
+/**
+ * 401 为 token 过期，调用 /api/sign/refreshToken 刷新 token
+ * 402 为 refreshToken 过期，直接跳转到登录页
+ */
 import axios from 'axios'
 import qs from 'qs'
 import Cookies from 'js-cookie'
@@ -35,13 +39,12 @@ axios.interceptors.response.use(
         if (!loadingArr.length) {
             // 隐藏 loading
         }
-
         if (res.data.code === 'OK') {
             return res
         } else {
             // 提示报错信息
             message.error(res.data.data, 10)
-            return Promise.reject(res.data)
+            return Promise.reject(res)
         }
     },
     error => {
@@ -56,34 +59,73 @@ axios.interceptors.response.use(
         }
         if (error.response) {
             switch (error.response.status) {
-                case 401:
-                    Cookies.remove('user')
-                    console.log(store.dispatch(actionCreators.logoutSuccess()))
+                case 402:
+                    // 登录超时
+                   store.dispatch(actionCreators.logoutSuccess())
                     break
                 // 跳到登录页
                 default:
                     break
             }
         }
-        console.log(error)
-        return Promise.reject(error.response.data)
+        return Promise.reject(error)
     }
 )
 
-export const post = (url, data, header = {}) => {
+const fetchRefreshToken = () => {
+  const token = Cookies.get('refreshToken')
+  return axios({
+    url: '/api/signin/refreshToken',
+    headers: { Authorization: `Beare ${token}` },
+    method: 'get'
+  })
+}
+
+export const post = (url, formData, headers = {}) => {
+    const token = Cookies.get('token')
+    headers = Object.assign({}, headers, { Authorization: `Beare ${token}` })
     return axios({
         url,
-        header,
+        headers,
         method: 'post',
-        data: qs.stringify(data)
+        data: qs.stringify(formData)
+    }).then(res => {
+      return res
+    }).catch(e => {
+      if (e.response.status === 401) {
+        // token 超时，访问刷新 token 接口
+        return fetchRefreshToken().then(res => {
+          const { data } = res.data
+          const { token, refresh_token: refreshToken } = data
+          Cookies.set('token', token)
+          Cookies.set('refreshToken', refreshToken)
+          return post(url, formData, headers) // 重新调用这个接口
+        })
+      }
     })
 }
 
-export const get = (url, data, header = {}) => {
-    return axios({
-        url,
-        header,
-        method: 'get',
-        data: data
-    })
+
+export const get = (url, formData, headers = {}) => {
+  const token = Cookies.get('token')
+  headers = Object.assign({}, headers, { Authorization: `Beare ${token}` })
+  return axios({
+      url,
+      headers,
+      method: 'get',
+      data: formData
+  }).then(res => {
+    return res
+  }).catch(e => {
+    if (e.response.status === 401) {
+      // token 超时，访问刷新 token 接口
+      fetchRefreshToken().then(res => {
+        const { data } = res.data
+        const { token, refresh_token: refreshToken } = data
+        Cookies.set('token', token)
+        Cookies.set('refreshToken', refreshToken)
+        return get(url, formData, headers) // 重新调用这个接口
+      })
+    }
+  })
 }

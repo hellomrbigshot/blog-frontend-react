@@ -10,11 +10,13 @@ export function* login() {
 function* axiosLogin(action) {
     // 登录
     try {
-        let loginRes = yield fetch.post('/api/signin', { ...action.user })
-        if (loginRes.data.code === 'OK') {
-            let userInfo = yield fetch.post('/api/signin/getUserInfo', { username: action.user.username })
-            yield put(loginSuccess(userInfo.data.data.username))
-        }
+        const { username } = action.user
+        const {
+            data: { data }
+        } = yield fetch.post('/api/signin', { ...action.user })
+        const { token, refresh_token: refreshToken } = data
+        // let userInfo = yield fetch.post('/api/signin/getUserInfo', { username: action.user.username })
+        yield put(loginSuccess(username, token, refreshToken))
     } catch (e) {
         console.log(e)
     }
@@ -26,11 +28,16 @@ export function* register() {
 
 export function* axiosRegister(action) {
     // 注册
-    let registerRes = yield fetch.post('/api/signup', { ...action.user })
-    if (registerRes.data.code === 'OK') {
-        let userInfo = yield fetch.post('/api/signin/getUserInfo', { username: action.user.username })
-        yield put(loginSuccess(userInfo.data.data.username))
+    try {
+      const { username } = action.user
+      const { data: { data } } = yield fetch.post('/api/signup', { ...action.user })
+      const { token, refresh_token: refreshToken } = data
+      // let userInfo = yield fetch.post('/api/signin/getUserInfo', { username: action.user.username })
+      yield put(loginSuccess(username, token, refreshToken))
+    } catch (e) {
+      console.log(e)
     }
+    
 }
 
 export function* logout() {
@@ -68,7 +75,7 @@ function* axiosGetDraftList() {
             yield put(initDraftList(res.data.data.result))
         }
     } catch (e) {
-        console.log(e.error)
+        console.log(e.message)
     }
 }
 

@@ -27,8 +27,8 @@ function showTags(tags) {
     if (!tags) return null
     return tags.map((tag, i) => {
         return (
-          <Fragment>
-            <Link key={i} to={`/tag/detail/${tag}`}>{tag}</Link>
+          <Fragment key={i}>
+            <Link to={`/tag/detail/${tag}`}>{tag}</Link>
             {
               i === tags.size - 1 ? null : <Fragment> ,</Fragment>
             }
