@@ -5,7 +5,6 @@ import { actionCreators } from './store'
 import { DetailWrapper } from './styled'
 import ArticleDetail from './components/ArticleDetail'
 import CommentList from './components/CommentList'
-
 class Detail extends Component {
     render() {
         const { detail, commentList, handleSubmitComment, comment } = this.props

@@ -14,6 +14,7 @@
     "marked": "^0.7.0",
     "react": "^16.8.6",
     "react-app-rewired": "^2.1.3",
+    "react-cropper": "^1.3.0",
     "react-dom": "^16.8.6",
     "react-m-editor": "^1.0.6",
     "react-redux": "^7.1.0",

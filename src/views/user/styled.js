@@ -155,33 +155,103 @@ export const ArticleTitle = styled.span`
 `
 
 export const UserInfoWrapper = styled.div`
-    overflow: hidden;
+    display: flex;
+    flex-direction: row;
     margin-bottom: 30px;
     h2 {
-        font-size: 26px;
-        color: #555;
-        line-height: 36px;
+      font-size: 26px;
+      line-height: 36px;
+      color: #555;
     }
 `
 
+export const UserInfoDetailWrapper = styled.div`
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+`
+
 export const BioWrapper = styled.div`
+    flex: 1;
     margin-top: 5px;
-    padding: 10px 20px 10px 10px;
+    padding: 15px 30px 15px 20px;
     background: #eeeeef;
-    width: 400px;
-    height: 100px;
     border-radius: 5px;
+    font-size: 15px;
+    position: relative;
+    .editIcon {
+      position: absolute;
+      display: none;
+      top: 15px;
+      right: 10px;
+      font-size: 15px;
+      &:hover {
+        cursor: pointer;
+        color: #008dff;
+      }
+    }
+    &:hover {
+      .editIcon {
+        display: block;
+      }
+    }
 `
 
 export const UserAvatarWrapper = styled.div`
-    float: left;
-    margin-right: 20px;
+    margin-right: 40px;
     width: 150px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+    &:hover {
+      .avatar-select {
+        height: 30px;
+      }
+    }
 `
 
-export const UserInfoDetailWrapper = styled.div`
-    float: left;
-    width: calc(100% - 170px);
+export const AvatarSelectButton = styled.div`
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+    height: 0;
+    z-index: 2;
+    line-height: 30px;
+    text-align: center;
+    bottom: 0;
+    left: 0;
+    background: #f5f5f5cc;
+    opacity: .5;
+    font-size: 12px;
+    transition: all .3s ease-in;
+    input {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      opacity: 0;
+      width: 100%;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+`
+
+export const BioTextArea = styled.textarea.attrs(() => ({
+  rows: 4
+}))`
+    resize: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    width: 100%;
+    border: none;
+    box-shadow: 0 0 5px #bbb;
+    outline: none;
+    &:focus {
+      border: none;
+      box-shadow: 0 0 5px #008dff !important;
+    }
 `
 
 export const LimitArticleList = styled.div`
