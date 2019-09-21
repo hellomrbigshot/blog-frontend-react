@@ -21,7 +21,7 @@ class UserInfo extends Component {
       super(props)
       this.state = {
         avatarModalVisible: false,
-        bioModalVisible: true,
+        bioModalVisible: false,
         img: '',
         cropImgData: ''
       }
@@ -89,7 +89,7 @@ class UserInfo extends Component {
                     <UserInfoDetailWrapper>
                         <h2>{user}</h2>
                         <BioWrapper>
-                          {userInfo.get('bio')}
+                          {userInfo.get('bio') || '暂时没有个人简介(lll￢ω￢)'}
                           {
                             canEdit ? 
                               <Icon
