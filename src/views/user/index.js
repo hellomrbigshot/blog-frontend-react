@@ -69,7 +69,7 @@ class UserInfo extends Component {
       this.props.getUserInfo()
     }
     render() {
-        const { total, userInfo, articleList, loginUser } = this.props
+        const { total, userInfo, articleList, loginUser, getLimitArticleList } = this.props
         const { avatarModalVisible, bioModalVisible, img, cropImgData } = this.state
         const { name: user } = this.props.match.params
         const canEdit = loginUser === user
@@ -113,7 +113,7 @@ class UserInfo extends Component {
                         </LimitArticleItem>
                     ))}
                 </LimitArticleList>
-                {total > 10 ? <Pagination total={total} onChange={this.handleFileChange} /> : null}
+                {total > 10 ? <Pagination total={total} onChange={getLimitArticleList} /> : null}
                 <AvatarCropper
                     visible={avatarModalVisible}
                     img={img}
@@ -157,7 +157,7 @@ const mapDispatchToProps = (dispatch, props) => {
             dispatch(getUserInfo(name))
         },
         getLimitArticleList(page = 1) {
-            const name = props.match.params.name
+            const { name } = props.match.params
             dispatch(getLimitArticleList(name, page))
         }
     }
