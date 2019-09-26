@@ -6,12 +6,14 @@ export const HeaderWrapper = styled.div`
     line-height: 56px;
     background: #fff;
     position: fixed;
+    display: flex;
     left: 0;
     right: 0;
     top: 0;
     background: #fff;
     z-index: 3;
-    border-bottom: 1px solid #f0f0f0;
+    box-shadow: 0 1px 0 #f0f0f0;
+    justify-content: center;
 `
 
 export const Logo = styled.div`
@@ -27,7 +29,6 @@ export const Logo = styled.div`
 
 export const Nav = styled.div`
     width: 60%;
-    margin: 0 auto;
     height: 56px;
     line-height: 56px;
     overflow: hidden;
@@ -144,14 +145,12 @@ export const Button = styled.div`
     &.reg {
         color: #666;
         border: 1px solid #bbb;
-        font-weight: 200;
         &:hover {
             border-color: #555;
         }
     }
     &.login {
         color: #555;
-        font-weight: 400;
         margin-left: 20px;
         &:hover {
             color: #222;

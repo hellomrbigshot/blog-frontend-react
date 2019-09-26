@@ -74,7 +74,6 @@ export const Logo = styled.div`
 
 export const DraftWrapper = styled.div`
     h2 {
-        font-weight: normal;
         padding-bottom: 30px;
     }
 `
@@ -103,7 +102,6 @@ export const DraftItem = styled.div`
 
 export const ArticleWrapper = styled.div`
     h2 {
-        font-weight: normal;
         padding-bottom: 30px;
     }
 `

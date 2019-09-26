@@ -9,7 +9,6 @@ export const Header = styled.div`
     font-size: 26px;
     line-height: 37px;
     margin-bottom: 10px;
-    font-weight: 380;
     color: #555;
 `
 
@@ -18,7 +17,6 @@ export const Info = styled.div`
     font-size: 12px;
     line-height: 18px;
     color: #999;
-    font-weight: 349;
     margin-bottom: 10px;
     overflow: hidden;
     white-space: nowrap;
@@ -45,7 +43,6 @@ export const Content = styled.div`
 export const CommentWrapper = styled.div`
     margin-bottom: 50px;
     h2 {
-        font-weight: normal;
         font-size: 20px;
     }
 `
