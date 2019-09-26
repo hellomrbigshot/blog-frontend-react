@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import { Avatar } from 'antd'
-import { CommentWrapper, CommentAvatar, CommentRight, CommentHeader, Time, CommentContent, ReplyContent } from '../styled'
+import { CommentWrapper, CommentAvatar, CommentRight, CommentHeader, Time, CommentContent, ReplyContent, CommentHeaderUser } from '../styled'
 import { formatTime } from '../../../common/index'
 
 export default (commentList, push, type = 'to_user') => {
@@ -16,16 +16,17 @@ export default (commentList, push, type = 'to_user') => {
                     </CommentAvatar>
                     <CommentRight>
                         <CommentHeader>
-                            {type === 'to_user' ? (
-                                <Fragment>
-                                    <Link to={`/user/info/${comment.get('create_user')}`}>{comment.get('create_user')} </Link>
-                                    回复我说：
-                                </Fragment>
-                            ) : (
-                                <Fragment>{comment.get('reply_user') ? '回复：' : '发布评论：'}</Fragment>
-                            )}
-
                             <Time>{formatTime(comment.get('create_time'))}</Time>
+                            <CommentHeaderUser>
+                              {type === 'to_user' ? (
+                                  <Fragment>
+                                      <Link to={`/user/info/${comment.get('create_user')}`}>{comment.get('create_user')} </Link>
+                                      回复我说：
+                                  </Fragment>
+                              ) : (
+                                  <Fragment>{comment.get('reply_user') ? '回复：' : '发布评论：'}</Fragment>
+                              )}
+                            </CommentHeaderUser>
                         </CommentHeader>
                         <CommentContent>{comment.get('content')}</CommentContent>
                         <ReplyContent onClick={() => handleToDetail(comment.get('page_id'))}>

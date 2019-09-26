@@ -107,9 +107,9 @@ class UserInfo extends Component {
                     {articleList.map(article => (
                         <LimitArticleItem key={article.get('_id')}>
                             <Link to={`/detail/${article.get('_id')}`}>
-                                <div className="time">{article.get('create_time').slice(5, 10)}</div>
-                                <div className="title">{article.get('title')}</div>
+                                <h1 className="title">{article.get('title')}</h1>
                             </Link>
+                            <div className="time">{article.get('create_time').slice(5, 10)}</div>
                         </LimitArticleItem>
                     ))}
                 </LimitArticleList>

@@ -16,10 +16,10 @@ class Draft extends Component {
                 <DraftList>
                     {draftList.map(draft => (
                         <DraftItem key={draft.get('_id')}>
+                            <div className="draft-time">更新于 {formatTime(draft.get('update_time'))}</div>
                             <div className="draft-title">
                                 <Link to={`/edit/${draft.get('_id')}`}>{draft.get('title')}</Link>
                             </div>
-                            <div className="draft-time">更新于 {formatTime(draft.get('update_time'))}</div>
                         </DraftItem>
                     ))}
                 </DraftList>
