@@ -100,10 +100,10 @@ export const CommentInfoTime = styled.div`
 
 export const ReplyContent = styled.div`
     margin-bottom: 10px;
-    padding: 15px 19px;
+    padding: 15px 19px 25px;
     font-size: 14px;
     border-radius: 3px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 `
 
 export const CommentAction = styled.div`

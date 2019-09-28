@@ -56,8 +56,6 @@ class CommentList extends Component {
                                 <CommentReply>
                                     <Input
                                         size="small"
-                                        // ref={input=>this.replyContent=input}
-                                        // placeholder={`回复${comment.get('create_user')}:`}
                                         onChange={this.handleInputChange.bind(this)}
                                         onPressEnter={() => handleSubmitReply(comment, i, this.replyContent, articleDetail)}
                                     />
