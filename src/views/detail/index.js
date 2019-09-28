@@ -22,8 +22,8 @@ class Detail extends Component {
                         onFocus={this.handleFocus.bind(this)}
                         onPressEnter={() => handleSubmitComment(comment)}
                     />
-                    <div style={{ overflow: 'hidden' }}>
-                        <Button style={{ marginTop: '10px', float: 'right' }} size="small" onClick={() => handleSubmitComment(comment)}>
+                    <div style={{ display: 'flex', marginTop: '10px', flexDirection: 'row-reverse' }}>
+                        <Button size="small" onClick={() => handleSubmitComment(comment)}>
                             提交
                         </Button>
                     </div>

@@ -29,7 +29,6 @@ export const TagItem = styled.div`
 `
 
 export const TagHeader = styled.div`
-    overflow: hidden;
     padding: 12px 0;
     border-bottom: 1px solid #ddd;
     a {
@@ -37,7 +36,6 @@ export const TagHeader = styled.div`
         margin-bottom: 5px;
         font-size: 18px;
         border-bottom: 1.3px solid #fff;
-        float: left;
     }
 `
 

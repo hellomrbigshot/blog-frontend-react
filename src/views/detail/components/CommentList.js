@@ -8,12 +8,15 @@ import {
     CommentAvatar,
     CommentFloor,
     CommentContent,
+    CommentContentDetail,
     CommentInfo,
+    CommentInfoTime,
     ReplyContent,
     CommentAction,
-    CommentReply
+    CommentReply,
+    CommentReplyBtn
 } from '../styled'
-import { Avatar, Button, Input } from 'antd'
+import { Avatar, Input } from 'antd'
 import { formatTime } from '../../../common'
 import { actionCreators } from '../store'
 
@@ -28,7 +31,7 @@ class CommentList extends Component {
                         <CommentAvatar>
                             <Link to={`/user/info/${comment.get('create_user')}`}>
                                 <Avatar
-                                    // size="large"
+                                    size={40}
                                     src={`/api/file/avatar/user?username=${comment.get('create_user')}`}
                                     alt={comment.create_user}
                                 />
@@ -37,15 +40,15 @@ class CommentList extends Component {
                         </CommentAvatar>
                         <CommentContent>
                             <CommentInfo>
+                                <CommentInfoTime>{formatTime(comment.get('create_time'))}</CommentInfoTime>
                                 <Link to={`/user/info/${comment.get('create_user')}`}>{comment.get('create_user')}</Link>
-                                <div>{formatTime(comment.get('create_time'))}</div>
                             </CommentInfo>
                             {comment.get('reply_user') ? (
                                 <ReplyContent>
                                     <Link to={`/user/info/${comment.get('reply_user')}`}>{comment.get('reply_user')}</Link>：{comment.get('reply_content')}
                                 </ReplyContent>
                             ) : null}
-                            <div>{comment.get('content')}</div>
+                            <CommentContentDetail>{comment.get('content')}</CommentContentDetail>
                             <CommentAction>
                                 <div onClick={() => handleReplyComment(i, user)}>回复</div>
                             </CommentAction>
@@ -54,19 +57,17 @@ class CommentList extends Component {
                                     <Input
                                         size="small"
                                         // ref={input=>this.replyContent=input}
-                                        placeholder={`回复${comment.get('create_user')}:`}
+                                        // placeholder={`回复${comment.get('create_user')}:`}
                                         onChange={this.handleInputChange.bind(this)}
                                         onPressEnter={() => handleSubmitReply(comment, i, this.replyContent, articleDetail)}
                                     />
-                                    <div style={{ marginTop: '5px', overflow: 'hidden' }}>
-                                        <Button
-                                            style={{ float: 'right' }}
+                                    <div style={{ marginTop: '5px', display: 'flex', flexDirection: 'row-reverse' }}>
+                                        <CommentReplyBtn
                                             type="primary"
-                                            size="small"
                                             onClick={() => handleSubmitReply(comment, i, this.replyContent, articleDetail)}
                                         >
                                             提交
-                                        </Button>
+                                        </CommentReplyBtn>
                                     </div>
                                 </CommentReply>
                             ) : null}
