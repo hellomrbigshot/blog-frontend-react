@@ -7,12 +7,10 @@ export const TagWrapper = styled.div`
 
 export const Header = styled.h2`
     font-size: 16px;
-    font-weight: normal;
     color: #aaa;
     margin-bottom: 20px;
     span {
         font-size: 24px;
-        font-weight: 500;
         font-style: oblique;
         color: #333;
     }
@@ -31,16 +29,13 @@ export const TagItem = styled.div`
 `
 
 export const TagHeader = styled.div`
-    overflow: hidden;
     padding: 12px 0;
     border-bottom: 1px solid #ddd;
     a {
         display: block;
         margin-bottom: 5px;
         font-size: 18px;
-        font-weight: 400;
         border-bottom: 1.3px solid #fff;
-        float: left;
     }
 `
 
@@ -129,7 +124,6 @@ export const ArticleListWrapper = styled.div`
     h2 {
         font-size: 16px;
         color: #666;
-        font-weight: 400;
         margin-bottom: 0;
         margin-left: 5px;
     }

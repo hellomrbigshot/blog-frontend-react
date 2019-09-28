@@ -6,12 +6,14 @@ export const HeaderWrapper = styled.div`
     line-height: 56px;
     background: #fff;
     position: fixed;
+    display: flex;
     left: 0;
     right: 0;
     top: 0;
     background: #fff;
     z-index: 3;
-    border-bottom: 1px solid #f0f0f0;
+    box-shadow: 0 1px 0 #f0f0f0;
+    justify-content: center;
 `
 
 export const Logo = styled.div`
@@ -27,16 +29,15 @@ export const Logo = styled.div`
 
 export const Nav = styled.div`
     width: 60%;
-    margin: 0 auto;
     height: 56px;
     line-height: 56px;
+    display: flex;
     overflow: hidden;
 `
 
 export const SearchWrapper = styled.div`
     height: 56px;
     position: relative;
-    float: left;
     @media (max-width: 750px) {
         display: none;
     }
@@ -95,10 +96,10 @@ export const NavSearch = styled.input`
 `
 
 export const NavItem = styled.div`
-    float: left;
     height: 56px;
     line-height: 56px;
     font-size: 16px;
+    min-width: 42px;
     margin-left: 15px;
     padding: 0 5px;
     @media (max-width: 750px) {
@@ -120,6 +121,8 @@ export const Addition = styled.div`
     right: 0;
     height: 56px;
     top: 0;
+    display: flex;
+    flex-direction: row-reverse;
     @media (max-width: 750px) {
         display: none;
     }
@@ -132,7 +135,6 @@ export const Button = styled.div`
     margin-top: 9px;
     padding: 6px 15px;
     border-radius: 19px;
-    float: right;
     margin-right: 10px;
     &.write {
         background: #bbb;
@@ -144,14 +146,12 @@ export const Button = styled.div`
     &.reg {
         color: #666;
         border: 1px solid #bbb;
-        font-weight: 200;
         &:hover {
             border-color: #555;
         }
     }
     &.login {
         color: #555;
-        font-weight: 400;
         margin-left: 20px;
         &:hover {
             color: #222;
@@ -168,7 +168,6 @@ export const Button = styled.div`
 export const AvatarWrapper = styled.div`
     width: 80px;
     height: 56px;
-    float: right;
     position: relative;
     margin-right: 12px;
     padding: 8px 24px 8px 16px;
@@ -236,12 +235,11 @@ export const DropdownItem = styled.div`
         color: #333;
         display: block;
         overflow: hidden;
+        display: flex
         .iconfont {
-            float: left;
             line-height: 30px;
         }
         span {
-            float: left;
             margin-left: 15px;
         }
     }

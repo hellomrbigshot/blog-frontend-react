@@ -9,7 +9,6 @@ export const Header = styled.div`
     font-size: 26px;
     line-height: 37px;
     margin-bottom: 10px;
-    font-weight: 380;
     color: #555;
 `
 
@@ -18,7 +17,6 @@ export const Info = styled.div`
     font-size: 12px;
     line-height: 18px;
     color: #999;
-    font-weight: 349;
     margin-bottom: 10px;
     overflow: hidden;
     white-space: nowrap;
@@ -45,79 +43,95 @@ export const Content = styled.div`
 export const CommentWrapper = styled.div`
     margin-bottom: 50px;
     h2 {
-        font-weight: normal;
         font-size: 20px;
     }
 `
 
 export const CommentItem = styled.div`
-    margin-top: 15px;
+    margin-top: 20px;
     padding: 8px 14px;
-    overflow: hidden;
+    display: flex;
 `
 
 export const CommentAvatar = styled.div`
-    float: left;
     margin-right: 10px;
+    width: 40px;
     a {
         display: block;
-    }
-    img {
-        display: block;
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
     }
 `
 export const CommentFloor = styled.div`
     font-size: 12px;
     color: #999;
     text-align: center;
-    margin-top: 3px;
+    margin-top: 8px;
 `
 
 export const CommentContent = styled.div`
-    float: left;
-    width: calc(100% - 42px);
+    flex: 1;
     a {
-        color: #000000a6;
+        color: #333;
         &:hover {
-            color: #000000a6;
+          color: #5188a6;
         }
     }
 `
-
+  
 export const CommentInfo = styled.div`
     line-height: 25px;
-    font-size: 12px;
-    overflow: hidden;
+    font-size: 14px
     margin-bottom: 10px;
+    display: flex;
+    flex-direction: row-reverse;
     a {
-        float: left;
+      flex: 1;
     }
-    div {
-        float: right;
-    }
+`
+export const CommentContentDetail = styled.div`
+    color #666;
+`
+
+export const CommentInfoTime = styled.div`
+    width: 150px;
+    text-align: right;
+    font-size: 12px;
+    color: #999;
 `
 
 export const ReplyContent = styled.div`
     margin-bottom: 10px;
-    padding: 15px 19px;
-    font-size: 12px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px 19px 25px;
+    font-size: 14px;
+    border-radius: 3px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 `
 
 export const CommentAction = styled.div`
-    overflow: hidden;
     font-size: 12px;
+    display: flex;
+    flex-direction: row-reverse;
     div {
-        float: right;
+        color: #5188a6;
         &:hover {
-            cursor: pointer;
+            cursor: pointer;  
         }
     }
 `
 
 export const CommentReply = styled.div`
     margin-top: 5px;
+`
+
+export const CommentReplyBtn = styled.div`
+    font-size: 12px;
+    border-radius: 3px;
+    background: #1890ff;
+    width: 70px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    color: #fff;
+    &:hover {
+      cursor: pointer;
+    }
 `

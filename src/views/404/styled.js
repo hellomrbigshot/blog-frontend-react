@@ -35,8 +35,4 @@ export const Box = styled.div`
         padding-left: 40px;
         list-style-type: disc;
     }
-    li,
-    p {
-        font-weight: normal;
-    }
 `

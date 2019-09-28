@@ -9,10 +9,9 @@ export const ArticleItem = styled.div`
 `
 
 export const Header = styled.div`
-    font-size: 26px;
-    height: 41px;
-    line-height: 41px;
-    font-weight: 349;
+    font-size: 30px;
+    height: 45px;
+    line-height: 45px;
     color: #333;
 `
 
@@ -23,7 +22,6 @@ export const Info = styled.div`
   line-height: 18px;
   box-sizing: border-box;
   span {
-    font-weight: 349;
     display:inline-block;
     border-right: 1px solid #
     padding-right: 5px;

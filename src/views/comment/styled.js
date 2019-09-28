@@ -1,28 +1,27 @@
 import styled from 'styled-components'
 
 export const CommentWrapper = styled.div`
-    overflow: hidden;
+    display: flex;
     margin-top: 15px;
     padding: 8px 14px;
 `
 export const CommentAvatar = styled.div`
-    float: left;
-    margin-right: 16px;
+    margin-right: 15px;
     a {
         display: block;
     }
 `
 
 export const CommentRight = styled.div`
-    float: left;
-    width: calc(100% - 56px);
+    flex: 1;
 `
 
 export const CommentHeader = styled.div`
+    flex-direction: row-reverse;
     font-size: 12px;
     color: #999;
     line-height: 22px;
-    position: relative;
+    display: flex;
     a {
         font-size: 14px;
         color: ##2d8cf0;
@@ -30,10 +29,12 @@ export const CommentHeader = styled.div`
 `
 
 export const Time = styled.div`
-    position: absolute;
-    right: 0;
-    line-height: 22px;
-    top: 0;
+    width: 100px;
+    text-align: right;
+`
+
+export const CommentHeaderUser = styled.div`
+    flex: 1;
 `
 
 export const CommentContent = styled.div`

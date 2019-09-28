@@ -1,18 +1,21 @@
 import { takeLatest, put, select } from 'redux-saga/effects'
 import { GET_ARTICLE_DETAIL, GET_COMMENT_LIST, HANDLE_SUBMIT_COMMENT } from './actionTypes'
-import axios from 'axios'
 import { initArticleDetail, initCommentList, handleConcatComment } from './actionCreators'
-import qs from 'qs'
+import { fetch } from '../../../common'
 
 export function* getArticleDetail() {
     yield takeLatest(GET_ARTICLE_DETAIL, fetchArticleDetail)
 }
 
 function* fetchArticleDetail(action) {
-    const res = yield axios.post('/api/page/detail', qs.stringify({ id: action.id }))
-    if (res.data.code === 'OK') {
-        const detail = res.data.data
-        yield put(initArticleDetail(detail))
+    try {
+        const res = yield fetch.post('/api/page/detail', { id: action.id })
+        if (res.data.code === 'OK') {
+            const detail = res.data.data
+            yield put(initArticleDetail(detail))
+        }
+    } catch (e) {
+        console.log(e)
     }
 }
 
@@ -21,13 +24,17 @@ export function* getCommentList() {
 }
 
 function* fetchCommentList(action) {
-    const res = yield axios.post('/api/comment/getpagecommentlist', qs.stringify({ page_id: action.id }))
-    if (res.data.code === 'OK') {
-        const list = res.data.data.map(item => {
-            item.showReplyInput = false
-            return item
-        })
-        yield put(initCommentList(list))
+    try {
+        const res = yield fetch.post('/api/comment/getpagecommentlist', { page_id: action.id })
+        if (res.data.code === 'OK') {
+            const list = res.data.data.map(item => {
+                item.showReplyInput = false
+                return item
+            })
+            yield put(initCommentList(list))
+        }
+    } catch (e) {
+        console.log(e)
     }
 }
 
@@ -45,8 +52,12 @@ function* fetchSubmitComment(action) {
         page_id: articleDetail.get('_id'),
         page_title: articleDetail.get('title')
     })
-    const res = yield axios.post('/api/comment/create', qs.stringify(sendData))
-    if (res.data.code === 'OK') {
-        yield put(handleConcatComment(res.data.data, action.index))
+    try {
+        const res = yield fetch.post('/api/comment/create', sendData)
+        if (res.data.code === 'OK') {
+            yield put(handleConcatComment(res.data.data, action.index))
+        }
+    } catch (e) {
+        console.log(e)
     }
 }
