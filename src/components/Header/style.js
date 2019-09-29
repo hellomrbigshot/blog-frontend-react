@@ -65,11 +65,12 @@ export const SearchWrapper = styled.div`
 
 export const NavSearch = styled.input`
     height: 38px;
+    line-height: 18px;
     box-sizing: border-box;
     position: relative;
     display: block;
     top: 9px;
-    padding: 0 35px 0 20px;
+    padding: 10px 35px 10px 20px;
     border-radius: 19px;
     width: 160px;
     font-size: 14px;
