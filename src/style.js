@@ -1,6 +1,5 @@
 import styled, { createGlobalStyle } from 'styled-components'
-// import LatoLight from './common/static/fonts/Lato-Light.ttf'
-import Lato from './common/static/fonts/Lato-Regular.ttf'
+import Lato from './common/static/fonts/Lato-Regular.woff2'
 import PingFangSC from './common/static/fonts/PingFangSC-Regular.woff2'
 export const GlobalStyle = createGlobalStyle`
 @font-face{

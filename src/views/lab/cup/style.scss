@@ -1,3 +1,7 @@
+$cupThickness: .8rem;
+$waterColor:  #1890ff;
+$cupInnerColor: #1890ff;
+
 .cup-wrapper {
   display: flex;
   width: 100%;
@@ -5,7 +9,7 @@
   justify-content: center;
   align-items: center;
   background: #a52a2a;
-  min-height: 70vh;
+  min-height: 75vh;
   .cup-main {
     width: 20rem;
     height: 30rem;
@@ -13,14 +17,14 @@
     border-bottom-left-radius: 2rem;
     border-bottom-right-radius: 2rem;
     position: relative;
-    z-index: 2;
+    z-index: 1;
     &:before {
       content: '';
       position: absolute;
       width: 100%;
-      border: 1rem solid #fff;
+      border: $cupThickness solid #fff;
       height: 4rem;
-      background: #ddd;
+      background: $cupInnerColor;
       border-radius: 50%;
       top: -2rem;
     }
@@ -32,19 +36,19 @@
       height: 14rem;
       right: -6.5rem;
       top: 6rem;
-      border: 2rem solid #fff;
+      border: 1.8rem solid #fff;
       // background: #a52a2a;
       z-index: -1;
     }
     .cup-water {
       position: absolute;
-      left: 1rem;
-      right: 1rem;
-      bottom: 1rem;
-      height: 20rem;
+      left: $cupThickness;
+      right: $cupThickness;
+      bottom: $cupThickness;
+      height: calc(100% - .8rem);
       border-bottom-left-radius: 2rem;
       border-bottom-right-radius: 2rem;
-      background: #1890ff;
+      background: $waterColor;
     }
   }
 }
