@@ -1,15 +1,6 @@
 import styled, { createGlobalStyle } from 'styled-components'
-import Lato from './common/static/fonts/Lato-Regular.woff2'
-import PingFangSC from './common/static/fonts/PingFangSC-Regular.woff2'
 export const GlobalStyle = createGlobalStyle`
-@font-face{
-  font-family: 'Lato';
-  src: url('${Lato}');
-}
-@font-face{
-  font-family: 'PingFang SC';
-  src: url('${PingFangSC}');
-}
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -27,7 +18,7 @@ time, mark, audio, video {
 	padding: 0;
 	border: 0;
   vertical-align: baseline;
-  font-family: Lato, "PingFang SC", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
 }
 a {
   text-decoration: none;
