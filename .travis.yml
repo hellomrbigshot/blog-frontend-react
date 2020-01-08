@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-- 8.9.1
+- 10.18.0
 branchs:
   only:
   - master
@@ -10,13 +10,13 @@ cache:
   - node_modules
 install:
 - git pull
-- rm -f package-lock.json && npm install
+- rm -f yarn-lock.json && yarn
 script:
-- npm run build
+- yarn build
 after_success: 
 - chmod 600 ~/.ssh/id_rsa
-- rm -rm travis@118.24.157.36:/var/www/react_pc/*
-- scp -o stricthostkeychecking=no -r ./build/* travis@118.24.157.36:/var/www/react_pc
+- rm -rm /var/www/react_pc/*
+- scp -o stricthostkeychecking=no -r ./build/* /var/www/react_pc
 before_install:
 - openssl aes-256-cbc -K $encrypted_dfd5fdc6b788_key -iv $encrypted_dfd5fdc6b788_iv
   -in id_rsa.enc -out ~/.ssh/id_rsa -d
