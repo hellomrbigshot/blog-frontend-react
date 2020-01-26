@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { connect } from 'react-redux'
+import React, { useState, useEffect, useCallback } from 'react'
+import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import { Pagination, Avatar, Icon, Message } from 'antd'
 import { Link } from 'react-router-dom'
 import { getUserInfo, getLimitArticleList } from './store/actionCreators'
@@ -16,16 +16,20 @@ import {
   AvatarSelectButton
 } from './styled'
 
-function UserInfo (props) {
+function UserInfo ({ match: { params: { name: user } } }) {
+  const dispatch = useDispatch()
   const [avatarModalVisible, setAvatarModalVisible] = useState(false)
   const [bioModalVisible, setBioModalVisible] = useState(false)
   const [img, setImg] = useState('')
   const [cropImgData, setCropImgData] = useState('')
-  const { name: user } = props.match.params
+  const articleList = useSelector(state => state.getIn(['user', 'userInfo', 'articleList']))
+  const userInfo = useSelector(state => state.getIn(['user', 'userInfo', 'info']), shallowEqual)
+  const total = useSelector(state => state.getIn(['user', 'userInfo', 'total']))
+  const loginUser = useSelector(state => state.getIn(['user', 'user']))
   useEffect(() => {
-    props.getUserInfo(user)
-    props.getLimitArticleList()
-  }, [props, props.match.params.name, user])
+    dispatch(getUserInfo(user))
+    dispatch(getLimitArticleList(user, 1))
+  }, [dispatch, user])
   const handleFileChange = file => {
     if (file) {
       const URL = window.URL || window.webkitURL
@@ -46,7 +50,6 @@ function UserInfo (props) {
     setAvatarModalVisible(false)
   }
   const handleCropperOk = async imgData => {
-    const { loginUser } = props
     await post('/api/file/uploadAvatar', { imgData, username: loginUser })
     window.location.reload()
   }
@@ -55,13 +58,15 @@ function UserInfo (props) {
       Message.error('描述不能为空')
       return false
     }
-    const username = props.loginUser
+    const username = loginUser
     await post('/api/user/updatebio', { username, bio })
     setBioModalVisible(false)
-    props.getUserInfo()
+    getUserInfo()
   }
-  const { total, userInfo, articleList, loginUser, getLimitArticleList } = props
   const canEdit = loginUser === user
+  const handlePageChange = useCallback(page => {
+    dispatch(getLimitArticleList(user, page))
+  }, [dispatch, user])
   return (
     <div>
       <UserInfoWrapper>
@@ -93,7 +98,7 @@ function UserInfo (props) {
           </LimitArticleItem>
         ))}
       </LimitArticleList>
-      {total > 10 ? <Pagination total={total} onChange={getLimitArticleList} /> : null}
+      {total > 10 ? <Pagination total={total} onChange={handlePageChange} /> : null}
       <AvatarCropper
         visible={avatarModalVisible}
         img={img}
@@ -113,26 +118,4 @@ function UserInfo (props) {
   )
 }
 
-const mapStateToProps = state => {
-  return {
-    articleList: state.getIn(['user', 'userInfo', 'articleList']),
-    userInfo: state.getIn(['user', 'userInfo', 'info']),
-    total: state.getIn(['user', 'userInfo', 'total']),
-    loginUser: state.getIn(['user', 'user'])
-  }
-}
-
-const mapDispatchToProps = (dispatch, props) => {
-  return {
-    getUserInfo() {
-      const name = props.match.params.name
-      dispatch(getUserInfo(name))
-    },
-    getLimitArticleList(page = 1) {
-      const { name } = props.match.params
-      dispatch(getLimitArticleList(name, page))
-    }
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(UserInfo)
+export default UserInfo
