@@ -1,52 +1,35 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Redirect, Link } from 'react-router-dom'
-import { actionCreators } from './store'
+import { getDraftList } from './store/actionCreators'
 import { DraftWrapper, DraftList, DraftItem } from './styled'
 import { formatTime } from '../../common'
 
-class Draft extends Component {
-    render() {
-        const { user, draftList } = this.props
-        return !user ? (
-            <Redirect to={{ pathname: '/login', query: { redirect: '/draft' } }} />
-        ) : (
-            <DraftWrapper>
-                <h2>草稿箱</h2>
-                <DraftList>
-                    {draftList.map(draft => (
-                        <DraftItem key={draft.get('_id')}>
-                            <div className="draft-time">更新于 {formatTime(draft.get('update_time'))}</div>
-                            <div className="draft-title">
-                                <Link to={`/edit/${draft.get('_id')}`}>{draft.get('title')}</Link>
-                            </div>
-                        </DraftItem>
-                    ))}
-                </DraftList>
-            </DraftWrapper>
-        )
-    }
-    componentDidMount() {
-        this.props.getDraftList()
-    }
+function Draft () {
+  const user = useSelector(state => state.getIn(['user', 'draftList']))
+  const draftList = useSelector(state => state.getIn(['user', 'draftList']))
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getDraftList())
+  }, [dispatch])
+
+  return !user ? (
+    <Redirect to={{ pathname: '/login', query: { redirect: '/draft' } }} />
+  ) : (
+    <DraftWrapper>
+      <h2>草稿箱</h2>
+      <DraftList>
+        {draftList.map(draft => (
+          <DraftItem key={draft.get('_id')}>
+            <div className="draft-time">更新于 {formatTime(draft.get('update_time'))}</div>
+            <div className="draft-title">
+              <Link to={`/edit/${draft.get('_id')}`}>{draft.get('title')}</Link>
+            </div>
+          </DraftItem>
+        ))}
+      </DraftList>
+    </DraftWrapper>
+  )
 }
 
-const mapStateToProps = state => {
-    return {
-        draftList: state.getIn(['user', 'draftList']),
-        user: state.getIn(['user', 'user'])
-    }
-}
-
-const mapDispatchToProps = dispatch => {
-    return {
-        getDraftList() {
-            dispatch(actionCreators.getDraftList())
-        }
-    }
-}
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Draft)
+export default Draft
