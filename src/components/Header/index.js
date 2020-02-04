@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 import { CSSTransition } from 'react-transition-group'
 import classnames from 'classnames'
@@ -20,12 +20,19 @@ import {
 import { actionCreators } from './store'
 import { actionCreators as loginCreator } from '../../views/user/store'
 
-function Header(props) {
+function Header({ location: { pathname }, history }) {
+  const dispatch = useDispatch()
+  const focused = useSelector(state => state.getIn(['header', 'focused']))
+  const user = useSelector(state => state.getIn(['user', 'user']))
+  const mouseIn = useSelector(state => state.getIn(['header', 'mouseIn']))
   let keywords = ''
   const getDropDown = () => {
-    const { logout, user, handleMouseEnter, handleMouseLeave, mouseIn } = props
     return (
-      <DropdownWrapper className={mouseIn ? 'mouse-in' : ''} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+      <DropdownWrapper
+        className={mouseIn ? 'mouse-in' : ''}
+        onMouseEnter={() => dispatch(actionCreators.mouseIn())}
+        onMouseLeave={() => dispatch(actionCreators.mouseLeave())}
+      >
         <DropdownItem style={{ marginTop: '5px' }}>
           <Link to={`/user/info/${user}`}>
             <i className="iconfont icon-UserSettings" />
@@ -51,7 +58,7 @@ function Header(props) {
           </Link>
         </DropdownItem>
         <DropdownItem>
-          <div onClick={logout}>
+          <div onClick={() => dispatch(loginCreator.logout())}>
             <i className="iconfont icon-signout_detail_toil" />
             <span>退出</span>
           </div>
@@ -64,24 +71,14 @@ function Header(props) {
     const KEYWORDS = keywords.value
     if (KEYCODE === 13 && KEYWORDS) {
       // enter 触发搜索
-      props.history.push(`/home/${KEYWORDS}`)
+      history.push(`/home/${KEYWORDS}`)
     }
   }
   const handleSearch = keywords => {
     if (keywords) {
-      props.history.push(`/home/${keywords.value}`)
+      history.push(`/home/${keywords.value}`)
     }
   }
-  const {
-    inputFocus,
-    inputBlur,
-    focused,
-    location: { pathname },
-    user,
-    mouseIn,
-    handleMouseEnter,
-    handleMouseLeave
-  } = props
   const hideHeaderPath = ['/login', '/register', '/404']
   const hideHeader = hideHeaderPath.includes(pathname.trim())
   const vueIcon = `<use xlink:href='#icon-vue' />`
@@ -95,8 +92,8 @@ function Header(props) {
           <CSSTransition in={focused} timeout={400} classNames="slide">
             <NavSearch
               placeholder="搜索"
-              onFocus={inputFocus}
-              onBlur={inputBlur}
+              onFocus={() => dispatch(actionCreators.searchFocus())}
+              onBlur={() => dispatch(actionCreators.searchBlur())}
               className={focused ? 'focused' : ''}
               ref={input => {
                 keywords = input
@@ -116,7 +113,7 @@ function Header(props) {
           <Link to="/lab/list">实验室</Link>
         </NavItem>
         <NavItem>
-          <a href="https://www.hellomrbigbigshot.xyz">
+          <a href="https://vue.hellomrbigbigshot.xyz">
             <svg className="icon" style={{ fontSize: '16px' }} aria-hidden="true" dangerouslySetInnerHTML={{ __html: vueIcon }} />
             版本
           </a>
@@ -130,7 +127,7 @@ function Header(props) {
           </Button>
         </Link>
         {user ? (
-          <AvatarWrapper onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+          <AvatarWrapper onMouseEnter={() => dispatch(actionCreators.mouseIn())} onMouseLeave={() => dispatch(actionCreators.mouseLeave())}>
             <AvatarContent src={`/api/file/avatar/user/?username=${user}`} />
             <CSSTransition in={mouseIn} timeout={400} classNames="fade">
               {getDropDown()}
@@ -150,32 +147,4 @@ function Header(props) {
     </HeaderWrapper>
   )
 }
-
-const mapStateToProps = state => {
-  return {
-    focused: state.getIn(['header', 'focused']),
-    user: state.getIn(['user', 'user']),
-    mouseIn: state.getIn(['header', 'mouseIn'])
-  }
-}
-const mapDispatchToProps = dispatch => {
-  return {
-    inputFocus() {
-      dispatch(actionCreators.searchFocus())
-    },
-    inputBlur() {
-      dispatch(actionCreators.searchBlur())
-    },
-    logout() {
-      dispatch(loginCreator.logout())
-    },
-    handleMouseEnter() {
-      dispatch(actionCreators.mouseIn())
-    },
-    handleMouseLeave() {
-      dispatch(actionCreators.mouseLeave())
-    }
-  }
-}
-// export default connect(mapStateToProps, mapDispatchToProps)(Header)
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header))
+export default withRouter(Header)

@@ -3,8 +3,7 @@ import { ArticleItem, Header, Info, Article } from './styled'
 import { Link } from 'react-router-dom'
 import { marked, formatTime } from '../../common'
 
-function articleItem(props) {
-    const { article } = props
+function articleItem({ article }) {
     return (
         <ArticleItem>
             <Link to={`/detail/${article.get('_id')}`}>
