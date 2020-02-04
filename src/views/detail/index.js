@@ -1,93 +1,78 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, { useEffect, useCallback } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Input, Button } from 'antd'
-import { actionCreators } from './store'
+import { handleCommentChange, getArticleDetail, getCommentList, handleSubmitComment as submitComment } from './store/actionCreators'
 import { DetailWrapper } from './styled'
 import ArticleDetail from './components/ArticleDetail'
 import CommentList from './components/CommentList'
-class Detail extends Component {
-    render() {
-        const { detail, commentList, handleSubmitComment, comment } = this.props
-        const { TextArea } = Input
-        return (
-            <DetailWrapper>
-                {detail.get('content') ? <ArticleDetail /> : null}
-                {commentList.size > 0 ? <CommentList /> : null}
-                <div>
-                    <h2 style={{ fontSize: '20px', fontWeight: 'normal', marginBottom: '10px' }}>留言：</h2>
-                    <TextArea
-                        value={comment}
-                        rows={5}
-                        onChange={input => this.handleInputChange(input.target.value)}
-                        onFocus={this.handleFocus.bind(this)}
-                        onPressEnter={() => handleSubmitComment(comment)}
-                    />
-                    <div style={{ display: 'flex', marginTop: '10px', flexDirection: 'row-reverse' }}>
-                        <Button size="small" onClick={() => handleSubmitComment(comment)}>
-                            提交
-                        </Button>
-                    </div>
-                </div>
-            </DetailWrapper>
-        )
+function Detail({
+  match: {
+    params: { id },
+    location,
+    history
+  }
+}) {
+  const dispatch = useDispatch()
+  const detail = useSelector(state => state.getIn(['detail', 'detail']))
+  const commentList = useSelector(state => state.getIn(['detail', 'commentList']))
+  const comment = useSelector(state => state.getIn(['detail', 'comment']))
+  const user = useSelector(state => state.getIn(['user', 'user']))
+  useEffect(() => {
+    dispatch(getArticleDetail(id))
+    dispatch(getCommentList(id))
+  }, [id, dispatch])
+  const handleSubmitComment = useCallback(() => {
+    if (!comment.trim()) {
+      return false
     }
-    handleFocus() {
-        if (!this.props.user) {
-            const path = {
-                pathname: '/login',
-                query: {
-                    redirect: this.props.location.pathname
-                }
-            }
-            this.props.history.push(path)
+    const formData = {
+      content: comment,
+      reply_user: '',
+      reply_content: ''
+    }
+    dispatch(submitComment(formData))
+    document.querySelector('#commentList').scrollIntoView()
+  }, [dispatch, comment])
+  const handleFocus = useCallback(() => {
+    console.log('trigger')
+    if (!user) {
+      const path = {
+        pathname: '/login',
+        query: {
+          redirect: location.pathname
         }
+      }
+      history.push(path)
     }
-    handleInputChange(comment) {
-        this.commentContent = comment
-        this.props.handleCommentChange(comment)
-    }
-    componentDidMount() {
-        this.props.getArticleDetail(this.props.match.params.id)
-        this.props.getCommentList(this.props.match.params.id)
-    }
+  }, [user, history, location])
+  const handleInputChange = useCallback(
+    comment => {
+      dispatch(handleCommentChange(comment))
+    },
+    [dispatch]
+  )
+  const { TextArea } = Input
+  return (
+    <DetailWrapper>
+      {detail.get('content') ? <ArticleDetail article={detail} user={user} /> : null}
+      {commentList.size > 0 ? <CommentList article={detail} user={user} commentList={commentList} /> : null}
+      <div>
+        <h2 style={{ fontSize: '20px', fontWeight: 'normal', marginBottom: '10px' }}>留言：</h2>
+        <TextArea
+          value={comment}
+          rows={5}
+          onChange={input => handleInputChange(input.target.value)}
+          onFocus={handleFocus}
+          onPressEnter={handleSubmitComment}
+        />
+        <div style={{ display: 'flex', marginTop: '10px', flexDirection: 'row-reverse' }}>
+          <Button size="small" onClick={handleSubmitComment}>
+            提交
+          </Button>
+        </div>
+      </div>
+    </DetailWrapper>
+  )
 }
 
-const mapStateToProps = state => {
-    return {
-        detail: state.getIn(['detail', 'detail']),
-        commentList: state.getIn(['detail', 'commentList']),
-        user: state.getIn(['user', 'user']),
-        comment: state.getIn(['detail', 'comment'])
-    }
-}
-
-const mapDispatchToProps = (dispatch, props) => {
-    return {
-        getArticleDetail(id) {
-            dispatch(actionCreators.getArticleDetail(id))
-        },
-        getCommentList(id) {
-            dispatch(actionCreators.getCommentList(id))
-        },
-        handleCommentChange(comment) {
-            dispatch(actionCreators.handleCommentChange(comment))
-        },
-        handleSubmitComment(comment) {
-            if (!comment.trim()) {
-                return false
-            }
-            const formData = {
-                content: comment,
-                reply_user: '',
-                reply_content: ''
-            }
-            dispatch(actionCreators.handleSubmitComment(formData))
-            document.querySelector('#commentList').scrollIntoView()
-        }
-    }
-}
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Detail)
+export default Detail
