@@ -1,7 +1,7 @@
 import React from 'react'
 import { Modal } from 'antd'
 import { BioTextArea } from '../styled'
-function bioEditModal (props) {
+function bioEditModal(props) {
   const { visible, onCancel, onOk } = props
   let bio = ''
   return (

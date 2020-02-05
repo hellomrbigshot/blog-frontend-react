@@ -1,56 +1,53 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Modal, Form, Input } from 'antd'
 
 const { TextArea } = Input
 
-class CreateTag extends Component {
-    render() {
-        const { visible, tagModalLoading, tagInfo, form: { getFieldDecorator }} = this.props
-        return (
-            <Modal
-                title="添加标签"
-                visible={visible}
-                onOk={this.handleOk}
-                tagModalLoading={tagModalLoading}
-                onCancel={this.handleCancel}
-            >
-                <Form labelCol={{ span: 3 }} wrapperCol={{ span: 20 }} onSubmit={this.handleOk}>
-                    <Form.Item label="标签">
-                        {getFieldDecorator('name', {
-                            initialValue: tagInfo.name,
-                            rules: [
-                                {
-                                    required: true,
-                                    message: '请输入标签名',
-                                }
-                            ]
-                        })(<Input disabled={true} placeholder="请输入标签名"/>)}
-                    </Form.Item>
-                    <Form.Item label="描述">
-                        {getFieldDecorator('description', {
-                            rules: [
-                                {
-                                    required: true,
-                                    message: '请输入标签描述',
-                                }
-                            ]
-                        })(<TextArea rows={4} placeholder="请输入标签描述"/>)}
-                    </Form.Item>
-                </Form>
-            </Modal>
-        )
-    }
-    handleOk = e => {
-        e.preventDefault()
-        this.props.form.validateFields((err, values) => {
-            if (!err) {
-                this.props.submit(values)
-            }
-        })
-    }
-    handleCancel = () => {
-        this.props.cancel()
-    }
+function CreateTag({ visible, tagModalLoading, tagInfo, form: { getFieldDecorator, validateFields }, cancel, submit }) {
+  const handleOk = e => {
+    e.preventDefault()
+    validateFields((err, values) => {
+      if (!err) {
+        submit(values)
+      }
+    })
+  }
+  const handleCancel = () => {
+    cancel()
+  }
+  return (
+    <Modal
+      title="添加标签"
+      visible={visible}
+      tagModalLoading={tagModalLoading}
+      onOk={handleOk}
+      onCancel={handleCancel}
+    >
+      <Form labelCol={{ span: 3 }} wrapperCol={{ span: 20 }} onSubmit={handleOk}>
+        <Form.Item label="标签">
+          {getFieldDecorator('name', {
+            initialValue: tagInfo.name,
+            rules: [
+              {
+                required: true,
+                message: '请输入标签名'
+              }
+            ]
+          })(<Input disabled={true} placeholder="请输入标签名" />)}
+        </Form.Item>
+        <Form.Item label="描述">
+          {getFieldDecorator('description', {
+            rules: [
+              {
+                required: true,
+                message: '请输入标签描述'
+              }
+            ]
+          })(<TextArea rows={4} placeholder="请输入标签描述" />)}
+        </Form.Item>
+      </Form>
+    </Modal>
+  )
 }
 
 const WrappedCreateTag = Form.create({ name: 'create_tag' })(CreateTag)

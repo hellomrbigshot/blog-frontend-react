@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './store'
@@ -20,38 +20,36 @@ import Lab from './views/lab'
 import Cup from './views/lab/cup'
 import { AppWrapper } from './style'
 
-class App extends Component {
-    render() {
-        return (
-            <Provider store={store}>
-                <Router>
-                    <ScrollToTop />
-                    <Header />
-                    <AppWrapper>
-                        <Switch>
-                            <Redirect exact from='/' to='/home' />
-                            <Route path='/home/:keywords?' component={Home} />
-                            <Route path='/detail/:id' exact component={Detail} />
-                            <Route path='/login' exact component={Login} />
-                            <Route path='/register' exact component={Register} />
-                            <Route path='/tag/list' exact component={TagList} />
-                            <Route path='/user/draft' exact component={Draft} />
-                            <Route path='/user/list' exact component={LimitList} />
-                            <Route path='/user/info/:name' exact component={UserInfo} />
-                            <Route path='/tag/detail/:tag' component={TagDetail} />
-                            <Route path='/comment/list' component={CommentList} />
-                            <Route path='/write' component={Write} />
-                            <Route path='/edit/:id' component={Write} />
-                            <Route path='/lab/list' component={Lab} />
-                            <Route path='/lab/cup' component={Cup} />
-                            <Route path='/404' exact component={NoMatch} />
-                            <Redirect from='*' to='/404' />
-                        </Switch>
-                    </AppWrapper>
-                </Router>
-            </Provider>
-        )
-    }
+function App() {
+  return (
+    <Provider store={store}>
+      <Router>
+        <ScrollToTop />
+        <Header />
+        <AppWrapper>
+          <Switch>
+            <Redirect exact from="/" to="/home" />
+            <Route path="/home/:keywords?" component={Home} />
+            <Route path="/detail/:id" exact component={Detail} />
+            <Route path="/login" exact component={Login} />
+            <Route path="/register" exact component={Register} />
+            <Route path="/tag/list" exact component={TagList} />
+            <Route path="/user/draft" exact component={Draft} />
+            <Route path="/user/list" exact component={LimitList} />
+            <Route path="/user/info/:name" exact component={UserInfo} />
+            <Route path="/tag/detail/:tag" component={TagDetail} />
+            <Route path="/comment/list" component={CommentList} />
+            <Route path="/write" component={Write} />
+            <Route path="/edit/:id" component={Write} />
+            <Route path="/lab/list" component={Lab} />
+            <Route path="/lab/cup" component={Cup} />
+            <Route path="/404" exact component={NoMatch} />
+            <Redirect from="*" to="/404" />
+          </Switch>
+        </AppWrapper>
+      </Router>
+    </Provider>
+  )
 }
 
 export default App
