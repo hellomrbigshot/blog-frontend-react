@@ -1,6 +1,6 @@
 {
   "name": "blog-frontend-react",
-  "version": "0.1.2",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -47,7 +47,7 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "proxy": "https://hellomrbigbigshot.xyz",
+  "proxy": "https://localhost:8081",
   "browserslist": {
     "production": [
       ">0.2%",
