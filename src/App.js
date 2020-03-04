@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-d
 import { Provider } from 'react-redux'
 import store from './store'
 import Header from './components/Header'
+import Footer from './components/Footer'
 import Home from './views/home'
 import Detail from './views/detail'
 import Login from './views/user/login'
@@ -47,6 +48,7 @@ function App() {
             <Redirect from="*" to="/404" />
           </Switch>
         </AppWrapper>
+        <Footer/>
       </Router>
     </Provider>
   )
