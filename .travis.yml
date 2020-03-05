@@ -15,7 +15,7 @@ script:
 - yarn build
 after_success: 
 - chmod 600 ~/.ssh/id_rsa
-- rm -rm /var/www/react_pc/*
+- rm -rf /var/www/react_pc/*
 - scp -o stricthostkeychecking=no -r ./build/* /var/www/react_pc
 before_install:
 - openssl aes-256-cbc -K $encrypted_dfd5fdc6b788_key -iv $encrypted_dfd5fdc6b788_iv
