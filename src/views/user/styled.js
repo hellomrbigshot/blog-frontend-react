@@ -7,6 +7,7 @@ export const LoginWrapper = styled.div`
     right: 0;
     top: 0;
     bottom: 0;
+    background: #fff;
 `
 
 export const LoginBox = styled.div`
