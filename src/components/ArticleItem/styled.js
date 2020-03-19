@@ -15,6 +15,20 @@ export const Header = styled.div`
     color: #333;
 `
 
+export const Header2 = styled.div`
+    font-size: 14px;
+    color: #000000a6;
+    margin-top: 10px;
+    width: 70px;
+    line-height: 30px;
+    text-align: center;
+    border-bottom: 2px solid #666;
+    &:hover {
+      border-bottom-color: #222;
+      color: #222;
+    }
+`
+
 export const Info = styled.div`
   color: #999;
   font-size: 12px;

@@ -13,7 +13,10 @@ function Detail({
   }
 }) {
   const dispatch = useDispatch()
-  const detail = useSelector(state => state.getIn(['detail', 'detail']))
+  let detail = useSelector(state => state.getIn(['detail', 'detail']))
+  if (detail.get('content')) {
+    detail = detail.set('content', detail.get('content').replace('<--阅读全文-->', ''))
+  }
   const commentList = useSelector(state => state.getIn(['detail', 'commentList']))
   const comment = useSelector(state => state.getIn(['detail', 'comment']))
   const user = useSelector(state => state.getIn(['user', 'user']))
