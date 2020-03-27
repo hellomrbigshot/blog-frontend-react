@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { marked, formatTime } from '../../common'
 
 function articleItem({ article }) {
-  const showMore = article.get('content').includes('<--阅读全文-->')
+  const showMore = article.get('showMore')
 
     return (
         <ArticleItem>
@@ -19,7 +19,7 @@ function articleItem({ article }) {
                 </span>
                 <span> | 标签{showTags(article.get('tags'))}</span>
             </Info>
-            <Article className="m-editor-preview" dangerouslySetInnerHTML={{ __html: marked(article.get('content').split('<--阅读全文-->')[0]) }} />
+            <Article className="m-editor-preview" dangerouslySetInnerHTML={{ __html: marked(article.get('content')) }} />
             {
               showMore ? (
                 <Link to={`/detail/${article.get('_id')}`}>
