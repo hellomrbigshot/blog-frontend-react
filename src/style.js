@@ -73,6 +73,7 @@ export const AppWrapper = styled.div`
   max-width: 800px;
   width: 80%;
   margin: 100px auto;
+  min-height: calc(100vh - 244px);
   @media (max-width: 600px) {
     width: 95%
   }
