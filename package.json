@@ -3,11 +3,12 @@
   "version": "1.0.1",
   "private": true,
   "dependencies": {
+    "@ant-design/compatible": "^1.0.2",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
-    "axios": "^0.19.0",
     "antd": "^4.1.0",
+    "axios": "^0.19.0",
     "babel-plugin-import": "^1.12.0",
     "classnames": "^2.2.6",
     "customize-cra": "0.4.1",
@@ -47,7 +48,7 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "proxy": "https://hellomrbigbigshot.xyz",
+  "proxy": "http://localhost:8081",
   "browserslist": {
     "production": [
       ">0.2%",

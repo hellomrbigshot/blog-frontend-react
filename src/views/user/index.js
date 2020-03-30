@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
-import { Pagination, Avatar, Icon, Message } from 'antd'
+import { EditOutlined } from '@ant-design/icons'
+import { Pagination, Avatar, Message } from 'antd'
 import { Link } from 'react-router-dom'
 import { getUserInfo, getLimitArticleList } from './store/actionCreators'
 import { post } from '../../common/fetch'
@@ -83,7 +84,7 @@ function UserInfo ({ match: { params: { name: user } } }) {
           <h2>{user}</h2>
           <BioWrapper>
             {userInfo.get('bio') || '暂时没有个人简介(lll￢ω￢)'}
-            {canEdit ? <Icon className="editIcon" type="edit" onClick={() => setBioModalVisible(true)} /> : null}
+            {canEdit ? <EditOutlined className="editIcon" onClick={() => setBioModalVisible(true)} /> : null}
           </BioWrapper>
         </UserInfoDetailWrapper>
       </UserInfoWrapper>

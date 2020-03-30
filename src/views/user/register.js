@@ -1,7 +1,10 @@
 import React, { useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, Redirect } from 'react-router-dom'
-import { Form, Input, Icon, Button } from 'antd'
+import { LockOutlined, UserOutlined } from '@ant-design/icons'
+import { Form } from '@ant-design/compatible'
+import '@ant-design/compatible/assets/index.css'
+import { Input, Button } from 'antd'
 import { LoginWrapper, LoginBox, LoginInfo, Logo } from './styled'
 import { actionCreators } from './store'
 
@@ -58,7 +61,7 @@ function RegisterForm({ location: { query }, form }) {
               ]
             })(
               <Input
-                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                 size="large"
                 placeholder="请输入账号"
                 autoComplete="new-password"
@@ -75,7 +78,7 @@ function RegisterForm({ location: { query }, form }) {
               ]
             })(
               <Input.Password
-                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                 size="large"
                 placeholder="请输入密码"
                 autoComplete="new-password"
@@ -95,7 +98,7 @@ function RegisterForm({ location: { query }, form }) {
               ]
             })(
               <Input.Password
-                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                 size="large"
                 placeholder="请确认密码"
                 autoComplete="new-password"
