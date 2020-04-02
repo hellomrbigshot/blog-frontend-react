@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 import { CSSTransition } from 'react-transition-group'
 import classnames from 'classnames'
-// import { Switch } from 'antd'
+import { Switch } from 'antd'
+import { BulbTwoTone } from '@ant-design/icons'
 import {
   HeaderWrapper,
   Logo,
@@ -21,7 +22,7 @@ import {
 import { actionCreators } from './store'
 import { actionCreators as loginCreator } from '../../views/user/store'
 
-function Header({ location: { pathname }, history }) {
+function Header ({ location: { pathname }, history }) {
   const dispatch = useDispatch()
   const focused = useSelector(state => state.getIn(['header', 'focused']))
   const user = useSelector(state => state.getIn(['user', 'user']))
@@ -80,6 +81,9 @@ function Header({ location: { pathname }, history }) {
       history.push(`/home/${keywords.value}`)
     }
   }
+  const handleSwitch = val => {
+    dispatch(actionCreators.themeSwitch(val ? 'light' : 'dark'))
+  }
   const hideHeaderPath = ['/login', '/register', '/404']
   const hideHeader = hideHeaderPath.includes(pathname.trim())
   const vueIcon = `<use xlink:href='#icon-vue' />`
@@ -118,6 +122,14 @@ function Header({ location: { pathname }, history }) {
             <svg className="icon" style={{ fontSize: '16px' }} aria-hidden="true" dangerouslySetInnerHTML={{ __html: vueIcon }} />
             版本
           </a>
+        </NavItem>
+        <NavItem>
+          <Switch
+            checkedChildren={<BulbTwoTone twoToneColor="#fff" />}
+            unCheckedChildren={<BulbTwoTone twoToneColor="#fcee80" />}
+            defaultChecked
+            onChange={handleSwitch}
+          />
         </NavItem>
       </Nav>
       <Addition>

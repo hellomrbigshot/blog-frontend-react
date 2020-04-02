@@ -16,7 +16,7 @@ export const mouseLeave = () => ({
   type: MOUSE_LEAVE
 })
 
-export const thmeSwitch = (data) => ({
+export const themeSwitch = (data) => ({
   type: THEME_SWITCH,
   data
 })

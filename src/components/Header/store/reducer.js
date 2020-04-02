@@ -4,7 +4,7 @@ import { SEARCH_FOCUS, SEARCH_BLUR, MOUSE_IN, MOUSE_LEAVE, THEME_SWITCH } from '
 const initialState = fromJS({
   focused: false,
   mouseIn: false,
-  theme: 'light'
+  theme: 'dark'
 })
 
 export default (state = initialState, action) => {
