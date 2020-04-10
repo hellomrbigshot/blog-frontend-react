@@ -29,27 +29,29 @@ function ThemeApp () {
       <Router>
         <ScrollToTop />
         <Header />
-        <AppWrapper>
-          <Switch>
-            <Redirect exact from="/" to="/home" />
-            <Route path="/home/:keywords?" component={Home} />
-            <Route path="/detail/:id" exact component={Detail} />
-            <Route path="/login" exact component={Login} />
-            <Route path="/register" exact component={Register} />
-            <Route path="/tag/list" exact component={TagList} />
-            <Route path="/user/draft" exact component={Draft} />
-            <Route path="/user/list" exact component={LimitList} />
-            <Route path="/user/info/:name" exact component={UserInfo} />
-            <Route path="/tag/detail/:tag" component={TagDetail} />
-            <Route path="/comment/list" component={CommentList} />
-            <Route path="/write" component={Write} />
-            <Route path="/edit/:id" component={Write} />
-            <Route path="/lab/list" component={Lab} />
-            <Route path="/lab/cup" component={Cup} />
-            <Route path="/404" exact component={NoMatch} />
-            <Redirect from="*" to="/404" />
-          </Switch>
-        </AppWrapper>
+        <div style={{ background: themeInfo[theme].mainBg, overflow: 'auto' }}>
+          <AppWrapper>
+            <Switch>
+              <Redirect exact from="/" to="/home" />
+              <Route path="/home/:keywords?" component={Home} />
+              <Route path="/detail/:id" exact component={Detail} />
+              <Route path="/login" exact component={Login} />
+              <Route path="/register" exact component={Register} />
+              <Route path="/tag/list" exact component={TagList} />
+              <Route path="/user/draft" exact component={Draft} />
+              <Route path="/user/list" exact component={LimitList} />
+              <Route path="/user/info/:name" exact component={UserInfo} />
+              <Route path="/tag/detail/:tag" component={TagDetail} />
+              <Route path="/comment/list" component={CommentList} />
+              <Route path="/write" component={Write} />
+              <Route path="/edit/:id" component={Write} />
+              <Route path="/lab/list" component={Lab} />
+              <Route path="/lab/cup" component={Cup} />
+              <Route path="/404" exact component={NoMatch} />
+              <Redirect from="*" to="/404" />
+            </Switch>
+          </AppWrapper>
+        </div>
         <Footer />
       </Router>
     </ThemeProvider>

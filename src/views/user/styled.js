@@ -82,14 +82,14 @@ export const DraftList = styled.div``
 export const DraftItem = styled.div`
   padding: 10px 5px;
   overflow: hidden;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid ${props => props.theme['mainBorderColor']};
   display: flex;
   flex-direction: row-reverse;
   .draft-title {
     flex: 1;
     a {
       line-height: 22px;
-      color: #000;
+      color: ${props => props.theme['mainColor']};
       font-size: 15px;
       flex: 1;
       &:hover {
@@ -99,7 +99,7 @@ export const DraftItem = styled.div`
   }
   .draft-time {
     line-height: 22px;
-    color: #999;
+    color: ${props => props.theme['descColor']};
     font-size: 12px;
     text-align: right;
     width: 200px;
@@ -121,32 +121,34 @@ export const TimelineDot = styled.div`
   height: 13px;
   border: 1.2px solid #aaa;
   border-radius: 50%;
-  background: #fff;
+  background: ${props => props.theme['mainBg']};
 `
 
 export const ArticleYear = styled.div`
   font-size: 22px;
-  color: #555;
+  color: ${props => props.theme['descColor']};
 `
 
 export const ArticleItem = styled.div`
   a {
-    color: #666;
+    color: ${props => props.theme['mainColor']};
     padding-bottom: 10px;
     display: block;
-    border-bottom: 1px dashed #ccc;
+    border-bottom: 1px dashed ${props => props.theme['mainBorderColor']};
     overflow: hidden;
     line-height: 24px;
     display: flex;
+    transition: all ease .5s;
   }
   a:hover {
-    color: #222;
-    border-bottom-color: #222;
+    color: ${props => props.theme['mainColorHover']};
+    border-bottom-color: ${props => props.theme['mainColorHover']};
   }
 `
 
 export const ArticleTime = styled.span`
   font-size: 12px;
+  color: ${props => props.theme['user/articleTime']};
 `
 
 export const ArticleTitle = styled.span`
@@ -162,9 +164,7 @@ export const UserInfoWrapper = styled.div`
   flex-direction: row;
   margin-bottom: 30px;
   h2 {
-    font-size: 26px;
     line-height: 36px;
-    color: #555;
   }
 `
 
@@ -178,7 +178,7 @@ export const BioWrapper = styled.div`
   flex: 1;
   margin-top: 5px;
   padding: 15px 30px 15px 20px;
-  background: #eeeeef;
+  background: ${props => props.theme['user/bioBg']};
   border-radius: 5px;
   font-size: 15px;
   position: relative;
@@ -223,8 +223,9 @@ export const AvatarSelectButton = styled.div`
   text-align: center;
   bottom: 0;
   left: 0;
-  background: #f5f5f5cc;
-  opacity: 0.5;
+  background: ${props => props.theme['mainBg']};
+  color: ${props => props.theme['mainColor']};
+  opacity: 0.7;
   font-size: 12px;
   transition: all 0.3s ease-in;
   input {
@@ -249,7 +250,9 @@ export const BioTextArea = styled.textarea.attrs(() => ({
   border-radius: 5px;
   width: 100%;
   border: none;
-  box-shadow: 0 0 5px #bbb;
+  box-shadow: 0 0 5px ${props => props.theme['boxShadow']};
+  background: ${props => props.theme['mainBg']};
+  color: ${props => props.theme['mainColor']};
   outline: none;
   &:focus {
     border: none;
@@ -260,23 +263,23 @@ export const BioTextArea = styled.textarea.attrs(() => ({
 export const LimitArticleList = styled.div`
   h2 {
     font-size: 20px;
-    color: #555;
   }
 `
 
 export const LimitArticleItem = styled.div`
     margin: 30px 0;
     position: relative;
-    border-bottom: 1px dashed #ccc;
+    border-bottom: 1px dashed ${props => props.theme['mainBorderColor']};
+    transition: all ease .5s;
     &:hover {
         a:before {
-            background: #222;
+            background: ${props => props.theme['mainColorHover']};
         }
-        border-bottom-color: #222;
+        border-bottom-color: ${props => props.theme['mainColorHover']};
     }
     .time {
         font-size: 12px;
-        color: #555;
+        color: ${props => props.theme['descColor']};
         position: absolute;
         top: 5px;
         left: 20px;
@@ -287,7 +290,7 @@ export const LimitArticleItem = styled.div`
         transition: all 0.2s ease-in-out;
         .title {
             font-size: 16px;
-            color: #666;
+            color: ${props => props.theme['mainColor']};
             margin: 20px 0 10px 60px
             line-height: 32px;
             font-weight: 350;
@@ -301,9 +304,9 @@ export const LimitArticleItem = styled.div`
             width: 6px;
             height: 6px;
             margin-left: -4px;
-            background: #bbb;
+            background: ${props => props.theme['mainColor']};
             border-radius: 50%;
-            border: 1px solid #fff;
+            border: 1px solid ${props => props.theme['mainBg']};
             transition: background 0.2s ease-in-out;
         }
     }

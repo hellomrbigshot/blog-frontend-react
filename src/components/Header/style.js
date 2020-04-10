@@ -4,8 +4,8 @@ import styled from 'styled-components'
 export const HeaderWrapper = styled.div`
     height: 56px;
     line-height: 56px;
-    background: ${props => props.theme['header/bg']};
-    color: ${props => props.theme['header/color']};
+    background: ${props => props.theme['mainBg']};
+    color: ${props => props.theme['mainColor']};
     position: fixed;
     display: flex;
     left: 0;
@@ -110,7 +110,7 @@ export const NavItem = styled.div`
         margin-left: 50px;
     }
     a {
-        color: ${props => props.theme['header/linkColor']};
+        color: ${props => props.theme['mainColor']};
         &:hover {
             color: ${props => props.theme['header/linkColorHover']};
         }
@@ -139,7 +139,7 @@ export const Button = styled.div`
     margin-right: 10px;
     &.write {
         background: ${props => props.theme['header/btnWriteBg']};
-        color: ${props => props.theme['header/btnWriteColor']};
+        color: ${props => props.theme['mainBg']};
         &:hover {
             background: ${props => props.theme['header/btnWriteHoverBg']};
         }
@@ -159,7 +159,7 @@ export const Button = styled.div`
         }
     }
     .iconfont {
-        color: ${props => props.theme['header/btnIconColor']};
+        color: ${props => props.theme['mainBg']};
     }
     &:hover {
         cursor: pointer;
@@ -203,7 +203,7 @@ export const DropdownWrapper = styled.div`
     width: 160px;
     box-sizing: border-box;
     border-radius: 0 0 4px 4px;
-    box-shadow: 0 2px 8px ${props => props.theme.boxShadow};
+    box-shadow: 0 2px 8px ${props => props.theme['header/boxShadowColor']};
     top: 56px;
     left: 0;
     background: ${props => props.theme.mainBg};
@@ -214,7 +214,6 @@ export const DropdownWrapper = styled.div`
         transition: all .4s ease-in-out;
     }
     &.fade-enter-active {
-        height: 255px;
     }
     &.fade-exit {
         transition: all 0.4s ease-in-out;
@@ -233,7 +232,7 @@ export const DropdownItem = styled.div`
         padding: 10px 20px;
         line-height: 30px;
         font-size: 14px;
-        color: ${props => props.theme['header/linkColor']};
+        color: ${props => props.theme['mainColor']};
         display: block;
         overflow: hidden;
         display: flex

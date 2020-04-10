@@ -19,12 +19,11 @@ export const CommentRight = styled.div`
 export const CommentHeader = styled.div`
     flex-direction: row-reverse;
     font-size: 12px;
-    color: #999;
+    color: ${props => props.theme['descColor']};
     line-height: 22px;
     display: flex;
     a {
         font-size: 14px;
-        color: ##2d8cf0;
     }
 `
 
@@ -40,18 +39,18 @@ export const CommentHeaderUser = styled.div`
 export const CommentContent = styled.div`
     line-height: 21px;
     font-size: 14px;
-    color: #515a6e;
+    color: ${props => props.theme['descColor']};
 `
 
 export const ReplyContent = styled.div`
     margin: 10px 0;
     padding: 10px;
     color: #888;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 4px ${props => props.theme['boxShadow']};
     &:hover {
         cursor: pointer;
         .reply-article {
-            color: #5188a6;
+            color: ${props => props.theme['mainColor']};
         }
     }
 `

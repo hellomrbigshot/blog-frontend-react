@@ -5,6 +5,7 @@ import { CSSTransition } from 'react-transition-group'
 import classnames from 'classnames'
 import { Switch } from 'antd'
 import { BulbTwoTone } from '@ant-design/icons'
+import toggleAntdTheme from '../../common/theme'
 import {
   HeaderWrapper,
   Logo,
@@ -60,10 +61,10 @@ function Header ({ location: { pathname }, history }) {
           </Link>
         </DropdownItem>
         <DropdownItem>
-          <div onClick={() => dispatch(loginCreator.logout())}>
+          <Link to='' onClick={() => dispatch(loginCreator.logout())}>
             <i className="iconfont icon-signout_detail_toil" />
             <span>退出</span>
-          </div>
+          </Link>
         </DropdownItem>
       </DropdownWrapper>
     )
@@ -82,6 +83,7 @@ function Header ({ location: { pathname }, history }) {
     }
   }
   const handleSwitch = val => {
+    toggleAntdTheme(val ? 'light' : 'dark')
     dispatch(actionCreators.themeSwitch(val ? 'light' : 'dark'))
   }
   const hideHeaderPath = ['/login', '/register', '/404']
@@ -106,7 +108,10 @@ function Header ({ location: { pathname }, history }) {
               onKeyDown={event => handleKeyDown(event, keywords)}
             />
           </CSSTransition>
-          <i onClick={() => handleSearch(keywords)} className={classnames('iconfont', 'icon-fangdajing', { focused: focused })} />
+          <i
+            className={classnames('iconfont', 'icon-fangdajing', { focused: focused })}
+            onClick={() => handleSearch(keywords)}
+          />
         </SearchWrapper>
         <NavItem className="first-nav">
           <Link to="/tag/list">标签</Link>
@@ -119,15 +124,20 @@ function Header ({ location: { pathname }, history }) {
         </NavItem>
         <NavItem>
           <a href="https://vue.hellomrbigbigshot.xyz">
-            <svg className="icon" style={{ fontSize: '16px' }} aria-hidden="true" dangerouslySetInnerHTML={{ __html: vueIcon }} />
+            <svg
+              className="icon"
+              style={{ fontSize: '16px' }}
+              aria-hidden="true"
+              dangerouslySetInnerHTML={{ __html: vueIcon }}
+            />
             版本
           </a>
         </NavItem>
         <NavItem>
           <Switch
+            defaultChecked
             checkedChildren={<BulbTwoTone twoToneColor="#fff" />}
             unCheckedChildren={<BulbTwoTone twoToneColor="#fcee80" />}
-            defaultChecked
             onChange={handleSwitch}
           />
         </NavItem>
@@ -140,7 +150,10 @@ function Header ({ location: { pathname }, history }) {
           </Button>
         </Link>
         {user ? (
-          <AvatarWrapper onMouseEnter={() => dispatch(actionCreators.mouseIn())} onMouseLeave={() => dispatch(actionCreators.mouseLeave())}>
+          <AvatarWrapper
+            onMouseEnter={() => dispatch(actionCreators.mouseIn())}
+            onMouseLeave={() => dispatch(actionCreators.mouseLeave())}
+          >
             <AvatarContent src={`/api/file/avatar/user/?username=${user}`} />
             <CSSTransition in={mouseIn} timeout={400} classNames="fade">
               {getDropDown()}

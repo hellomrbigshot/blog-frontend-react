@@ -7,12 +7,10 @@ export const TagWrapper = styled.div`
 
 export const Header = styled.h2`
     font-size: 16px;
-    color: #aaa;
     margin-bottom: 20px;
     span {
         font-size: 24px;
         font-style: oblique;
-        color: #333;
     }
 `
 
@@ -21,7 +19,7 @@ export const ListWrapper = styled.div`
 `
 
 export const TagItem = styled.div`
-    box-shadow: 0 0 3px #ddd;
+    box-shadow: 0 0 3px ${props => props.theme['boxShadow']};
     width: 98%;
     padding: 12px 20px;
     margin: 0 auto 10px;
@@ -30,12 +28,11 @@ export const TagItem = styled.div`
 
 export const TagHeader = styled.div`
     padding: 12px 0;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid ${props => props.theme['mainBorderColor']};
     a {
         display: block;
         margin-bottom: 5px;
         font-size: 18px;
-        border-bottom: 1.3px solid #fff;
     }
 `
 
@@ -44,13 +41,13 @@ export const TagDesc = styled.div`
     padding: 12px 0;
     word-wrap: break-word;
     line-height: 1.4;
-    color: #888;
-    border-bottom: 1px solid #ddd;
+    color: ${props => props.theme['descColor']};
+    border-bottom: 1px solid ${props => props.theme['mainBorderColor']};
 `
 
 export const TagBottom = styled.div`
     line-height: 1.4;
-    color: #222;
+    color: ${props => props.theme['mainColor']};
     font-size: 13px;
     padding: 12px 0;
 `
@@ -66,16 +63,15 @@ export const TagDetailWrapper = styled.div`
         width: 8px;
         height: 8px;
         margin-left: -4px;
-        background: #bbb;
+        background: ${props => props.theme['descColor']};
         border-radius: 50%;
     }
     h2 {
         margin: 0 0 10px 20px;
         font-size: 22px;
-        color: #555;
         line-height: 1.5;
         small {
-            color: #bbb;
+            color: ${props => props.theme['mainColor']};
         }
     }
     div {
@@ -97,7 +93,7 @@ export const ArticleListWrapper = styled.div`
     article {
         position: relative;
         padding: 20px 0 10px;
-        border-bottom: 1px dashed #ccc;
+        border-bottom: 1px dashed ${props => props.theme['mainBorderColor']};
         transition: border 0.2s ease-in-out;
         &:before {
             box-sizing: content-box;
@@ -108,28 +104,28 @@ export const ArticleListWrapper = styled.div`
             width: 6px;
             height: 6px;
             margin-left: -4px;
-            background: #bbb;
+            background: ${props => props.theme['descColor']};
             border-radius: 50%;
-            border: 1px solid #fff;
+            border: 1px solid ${props => props.theme['mainBg']};
             transition: background 0.2s ease-in-out;
         }
         &:hover {
-            border-bottom-color: #666;
+            border-bottom-color: ${props => props.theme['mainColorHover']};
             &:before {
-                background: #666;
+                background: ${props => props.theme['mainColorHover']};
             }
         }
     }
 
     h2 {
         font-size: 16px;
-        color: #666;
         margin-bottom: 0;
         margin-left: 5px;
+        color: ${props => props.theme['mainColor']};
     }
     span {
         font-size: 12px;
         margin-left: 20px;
-        color: #555;
+        color: ${props => props.theme['descColor']};
     }
 `
