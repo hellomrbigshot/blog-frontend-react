@@ -9,14 +9,14 @@ export const Header = styled.div`
     font-size: 26px;
     line-height: 37px;
     margin-bottom: 10px;
-    color: #555;
+    color: ${props => props.theme['mainColor']};
 `
 
 export const Info = styled.div`
     text-align: center;
     font-size: 12px;
     line-height: 18px;
-    color: #999;
+    color: ${props => props.theme['descColor']};;
     margin-bottom: 10px;
     overflow: hidden;
     white-space: nowrap;
@@ -26,11 +26,11 @@ export const Info = styled.div`
         padding-right: 5px;
     }
     a {
-        color: #555;
-        border-bottom: 1px solid #ccc;
+        color: ${props => props.theme['mainColor']};
+        border-bottom: 1px solid ${props => props.theme['mainBorderColor']};
         &:hover {
-            color: #222;
-            border-bottom-color: #222;
+            color: ${props => props.theme['mainColorHover']};
+            border-bottom-color: ${props => props.theme['mainColorHover']};
         }
     }
 `
@@ -38,6 +38,10 @@ export const Info = styled.div`
 export const Content = styled.div`
     font-size: 15px;
     margin-bottom: 120px;
+    blockquote {
+      background: #f8f8f8;
+      color: #333;
+    }
 `
 
 export const CommentWrapper = styled.div`
@@ -62,7 +66,7 @@ export const CommentAvatar = styled.div`
 `
 export const CommentFloor = styled.div`
     font-size: 12px;
-    color: #999;
+    color: ${props => props.theme['mainColor']};
     text-align: center;
     margin-top: 8px;
 `
@@ -70,9 +74,9 @@ export const CommentFloor = styled.div`
 export const CommentContent = styled.div`
     flex: 1;
     a {
-        color: #333;
+        color: ${props => props.theme['mainColor']};
         &:hover {
-          color: #5188a6;
+          color: ${props => props.theme['mainColorHover']};
         }
     }
 `
@@ -88,14 +92,14 @@ export const CommentInfo = styled.div`
     }
 `
 export const CommentContentDetail = styled.div`
-    color #666;
+    color: ${props => props.theme['descColor']};
 `
 
 export const CommentInfoTime = styled.div`
     width: 150px;
     text-align: right;
     font-size: 12px;
-    color: #999;
+    color: ${props => props.theme['descColor']};
 `
 
 export const ReplyContent = styled.div`
@@ -103,7 +107,7 @@ export const ReplyContent = styled.div`
     padding: 15px 19px 25px;
     font-size: 14px;
     border-radius: 3px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 1px 1px ${props => props.theme['boxShadow']};
 `
 
 export const CommentAction = styled.div`
@@ -111,7 +115,7 @@ export const CommentAction = styled.div`
     display: flex;
     flex-direction: row-reverse;
     div {
-        color: #5188a6;
+        color: ${props => props.theme['mainColor']};
         &:hover {
             cursor: pointer;  
         }

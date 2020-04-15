@@ -1,18 +1,18 @@
 import styled from 'styled-components'
-import logoPic from '../../statics/image/logo_black_transparent.png'
+
 
 export const HeaderWrapper = styled.div`
     height: 56px;
     line-height: 56px;
-    background: #fff;
+    background: ${props => props.theme['mainBg']};
+    color: ${props => props.theme['mainColor']};
     position: fixed;
     display: flex;
     left: 0;
     right: 0;
     top: 0;
-    background: #fff;
     z-index: 3;
-    box-shadow: 0 1px 0 #f0f0f0;
+    box-shadow: 0 1px 0 ${props => props.theme['header/boxShadowColor']};
     justify-content: center;
 `
 
@@ -23,7 +23,7 @@ export const Logo = styled.div`
     height: 40px;
     top: 50%;
     transform: translateY(-50%);
-    background: url(${logoPic});
+    background: url(${props => props.theme['logo']});
     background-size: contain;
 `
 
@@ -49,7 +49,7 @@ export const SearchWrapper = styled.div`
         position: absolute;
         top: 13px;
         right: 5px;
-        color: #969696;
+        color: ${props => props.theme['header/searchIconColor']};
         font-size: 17px;
         display: block;
         border-radius: 50%;
@@ -57,8 +57,8 @@ export const SearchWrapper = styled.div`
             cursor: pointer;
         }
         &.focused {
-            color: #fff;
-            background: #969696;
+            color: ${props => props.theme['header/searchIconFocusColor']};
+            background: ${props => props.theme['header/searchIconFocusBg']};
         }
     }
 `
@@ -74,10 +74,10 @@ export const NavSearch = styled.input`
     border-radius: 19px;
     width: 160px;
     font-size: 14px;
-    color: #777;
+    color: ${props => props.theme['header/searchColor']};
     outline: none;
     border: none;
-    background: #eee;
+    background: ${props => props.theme['header/searchBg']};
     &.slide-enter {
         width: 160px;
         transition: all 0.4s ease-in;
@@ -110,9 +110,9 @@ export const NavItem = styled.div`
         margin-left: 50px;
     }
     a {
-        color: #666;
+        color: ${props => props.theme['mainColor']};
         &:hover {
-            color: #222;
+            color: ${props => props.theme['header/linkColorHover']};
         }
     }
 `
@@ -138,28 +138,28 @@ export const Button = styled.div`
     border-radius: 19px;
     margin-right: 10px;
     &.write {
-        background: #bbb;
-        color: #fff;
+        background: ${props => props.theme['header/btnWriteBg']};
+        color: ${props => props.theme['mainBg']};
         &:hover {
-            background: #666;
+            background: ${props => props.theme['header/btnWriteHoverBg']};
         }
     }
     &.reg {
-        color: #666;
-        border: 1px solid #bbb;
+        color: ${props => props.theme['header/btnRegColor']};
+        border: 1px solid ${props => props.theme['header/btnRegBorder']};
         &:hover {
-            border-color: #555;
+            border-color: ${props => props.theme['header/btnRegHoverBorder']};
         }
     }
     &.login {
-        color: #555;
+        color: ${props => props.theme['header/btnLoginColor']};
         margin-left: 20px;
         &:hover {
-            color: #222;
+            color: ${props => props.theme['header/btnLoginHoverColor']};
         }
     }
     .iconfont {
-        color: #fff;
+        color: ${props => props.theme['mainBg']};
     }
     &:hover {
         cursor: pointer;
@@ -180,11 +180,11 @@ export const AvatarWrapper = styled.div`
         right: 7px;
         border-left: 5px solid transparent;
         border-right: 5px solid transparent;
-        border-top: 6px solid #999;
+        border-top: 6px solid ${props => props.theme['header/linkColor']};
     }
     &:hover {
         cursor: pointer;
-        background: #f5f5f5;
+        background: ${props => props.theme['header/avatarHoverBg']};
     }
 `
 
@@ -203,10 +203,10 @@ export const DropdownWrapper = styled.div`
     width: 160px;
     box-sizing: border-box;
     border-radius: 0 0 4px 4px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px ${props => props.theme['header/boxShadowColor']};
     top: 56px;
     left: 0;
-    background: #fff;
+    background: ${props => props.theme.mainBg};
     height: 0;
     overflow: hidden;
     &.fade-enter {
@@ -214,7 +214,6 @@ export const DropdownWrapper = styled.div`
         transition: all .4s ease-in-out;
     }
     &.fade-enter-active {
-        height: 255px;
     }
     &.fade-exit {
         transition: all 0.4s ease-in-out;
@@ -233,7 +232,7 @@ export const DropdownItem = styled.div`
         padding: 10px 20px;
         line-height: 30px;
         font-size: 14px;
-        color: #333;
+        color: ${props => props.theme['mainColor']};
         display: block;
         overflow: hidden;
         display: flex
@@ -245,6 +244,6 @@ export const DropdownItem = styled.div`
         }
     }
     &:hover {
-        background: #f5f5f5;
+        background: ${props => props.theme['header/avatarHoverBg']};
     }
 `

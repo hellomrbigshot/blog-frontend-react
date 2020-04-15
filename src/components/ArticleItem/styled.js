@@ -1,36 +1,37 @@
 import styled from 'styled-components'
 
 export const ArticleItem = styled.div`
-    margin-bottom: 100px;
-    font-family: Lato, PingFang SC, Microsoft YaHei, sans-serif;
-    a {
-        text-decoration: none;
-    }
+  margin-bottom: 100px;
+  font-family: Lato, PingFang SC, Microsoft YaHei, sans-serif;
+  a {
+    text-decoration: none;
+  }
 `
 
 export const Header = styled.div`
-    font-size: 30px;
-    height: 45px;
-    line-height: 45px;
-    color: #333;
+  font-size: 30px;
+  height: 45px;
+  line-height: 45px;
+  color: ${(props) => props.theme['mainColor']};
 `
 
 export const Header2 = styled.div`
-    font-size: 14px;
-    color: #000000a6;
-    margin-top: 10px;
-    width: 70px;
-    line-height: 30px;
-    text-align: center;
-    border-bottom: 2px solid #666;
-    &:hover {
-      border-bottom-color: #222;
-      color: #222;
-    }
+  font-size: 14px;
+  color: ${(props) => props.theme['mainColor']};
+  margin-top: 10px;
+  width: 70px;
+  line-height: 30px;
+  text-align: center;
+  transition: all ease 0.5s;
+  border-bottom: 2px solid ${(props) => props.theme['mainColor']};
+  &:hover {
+    border-bottom-color: ${(props) => props.theme['mainColorHover']};
+    color: ${(props) => props.theme['mainColorHover']};
+  }
 `
 
 export const Info = styled.div`
-  color: #999;
+  color: ${(props) => props.theme['descColor']};
   font-size: 12px;
   margin-bottom: 20px;
   line-height: 18px;
@@ -43,16 +44,21 @@ export const Info = styled.div`
       display: inline-block;
       padding: 0 2px;
       line-height: 20px;
-      color: #555;
-      border-bottom: 1px solid #ccc;
+      transition: all ease .5s;
+      color: ${(props) => props.theme['mainColor']};
+      border-bottom: 1px solid ${(props) => props.theme['mainColor']};
       &:hover {
-        color: #222;
-        border-bottom-color: #222;
+        color: ${(props) => props.theme['mainColorHover']};
+        border-bottom-color: ${(props) => props.theme['mainColorHover']};
       }
     }
   }
 `
 
 export const Article = styled.div`
-    font-size: 15px;
+  font-size: 15px;
+  blockquote {
+    background: #f8f8f8;
+    color: #333;
+  }
 `
