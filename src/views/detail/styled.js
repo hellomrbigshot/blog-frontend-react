@@ -38,6 +38,10 @@ export const Info = styled.div`
 export const Content = styled.div`
     font-size: 15px;
     margin-bottom: 120px;
+    blockquote {
+      background: #f8f8f8;
+      color: #333;
+    }
 `
 
 export const CommentWrapper = styled.div`

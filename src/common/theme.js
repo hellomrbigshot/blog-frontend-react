@@ -4,8 +4,7 @@ import lightTheme from '../theme/antdTheme/light'
 
 const toggleTheme = (theme) => {
   const themeColor = theme === 'light' ? lightTheme : darkTheme
-  window.less
-    .modifyVars(themeColor)
+  window.less.modifyVars(themeColor)
     .then(() => { 
       console.log('主题切换成功')
     })

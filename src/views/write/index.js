@@ -17,6 +17,7 @@ const WriteForm = Form.create({
     articleDetail,
     tagSelect,
     tagList,
+    theme,
     form: { getFieldDecorator }
   } = props
   const submit = type => {
@@ -52,7 +53,7 @@ const WriteForm = Form.create({
         {getFieldDecorator('content', {
           rules: [{ required: true, message: '请输入文章内容' }],
           initialValue: articleDetail.content
-        })(<MEditor theme="dark" />)}
+        })(<MEditor theme={theme} />)}
       </Form.Item>
       <Form.Item label="是否私密：" labelCol={{ span: 3 }} wrapperCol={{ span: 3 }}>
         {getFieldDecorator('secret', {
@@ -75,6 +76,7 @@ const WriteForm = Form.create({
 
 function Write ({ match: { params = null }, history }) {
   const user = useSelector(state => state.getIn(['user', 'user']))
+  const theme = useSelector(state => state.getIn(['header', 'theme']))
   const [tagInfo, setTagInfo] = useState({ name: '', desription: '' })
   const [tagList, setTagList] = useState([])
   const [visible, setVisible] = useState(false)
@@ -181,6 +183,7 @@ function Write ({ match: { params = null }, history }) {
       <WriteForm
         articleDetail={articleDetail}
         tagList={tagList}
+        theme={theme}
         tagSelect={tagSelect}
         tagChange={tagChange}
         titleChange={titleChange}

@@ -1,4 +1,5 @@
 const light = {
+  '@primary-1': 'color(~`colorPalette("@{primary-color}", 1) `)',
   '@primary-color': '#1890ff', // 全局主色
   '@link-color': '#1890ff', // 链接色
   '@success-color': '#52c41a', // 成功色
@@ -10,6 +11,7 @@ const light = {
   '@disabled-color': 'rgba(0, 0, 0, 0.25)', // 失效色
   '@border-color-base': '#d9d9d9', // 边框色
   '@box-shadow-base': '0 2px 8px rgba(0, 0, 0, 0.15)', // 浮层阴影
-  '@component-background': '#fff'
+  '@component-background': '#fffffe',
+  '@item-hover-bg': '#f5f5f5'
 }
 export default light
