@@ -5,30 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
     <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_1242222_l46f0yvz48.css">
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/simple-m-editor@0.2.7/dist/simple-m-editor.css">
-    <!--
-      Notice the use of %PUBLIC_URL% in the tag above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
+    <!-- <link rel="stylesheet" type="text/css" href="https://unpkg.com/simple-m-editor@0.2.7/dist/simple-m-editor.css"> -->
     <title>世说新语</title>
   </head>
   <body>
+    <link rel="stylesheet/less" type="text/css" href="/color.less" />
+    <script>
+      window.less = {
+        async: false,
+        env: 'production'
+      };
+    </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.7.2/less.min.js"></script>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start`.
-      To create a production bundle, use `npm run build`.
-    -->
     <script src="//at.alicdn.com/t/font_1242222_l46f0yvz48.js"></script>
   </body>
 </html>
