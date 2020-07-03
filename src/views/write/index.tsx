@@ -75,8 +75,8 @@ const WriteForm = Form.create({
 })
 
 function Write ({ match: { params = null }, history }) {
-  const user = useSelector(state => state.getIn(['user', 'user']))
-  const theme = useSelector(state => state.getIn(['header', 'theme']))
+  const user = useSelector(state: IState => state.user.user)
+  const theme = useSelector(state: IState => state.header.theme)
   const [tagInfo, setTagInfo] = useState({ name: '', desription: '' })
   const [tagList, setTagList] = useState([])
   const [visible, setVisible] = useState(false)

@@ -1,21 +1,27 @@
 import { START_FETCH, FINISH_FETCH } from './actionTypes'
-import { fromJS } from 'immutable'
+interface IState {
+  /** 是否加载中 */ 
+  isFetch: boolean,
+  // 错误信息
+  error: string
+}
 
-const initialState = fromJS({
+const initialState: IState = {
   isFetch: false,
   error: ''
-})
+}
 interface IAction {
   type: string
 }
 export default (state = initialState, action: IAction) => {
   switch (action.type) {
     case START_FETCH:
-      return state.set('isFetch', true)
+      state.isFetch = true
+      return state
     case FINISH_FETCH:
-      return state.set('isFetch', false)
+      state.isFetch = false
+      return state
     default:
       return state
   }
 }
-

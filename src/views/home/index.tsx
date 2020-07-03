@@ -5,14 +5,20 @@ import { HomeWrapper } from './styled'
 import ArticleItem from '../../components/ArticleItem'
 import { Pagination, BackTop } from 'antd'
 
+interface IState {
+  home: {
+    articleList: object[],
+    total: number
+  }
+}
 function Home({
   match: {
     params: { keywords = '' }
   }
 }) {
   const dispatch = useDispatch()
-  const articleList = useSelector(state => state.getIn(['home', 'articleList']))
-  const total = useSelector(state => state.getIn(['home', 'total']))
+  const articleList = useSelector((state: IState) => state.home.articleList)
+  const total = useSelector((state: IState) => state.home.total)
   useEffect(() => {
     dispatch(actionCreators.getArticleList(1, keywords))
   }, [dispatch, keywords])

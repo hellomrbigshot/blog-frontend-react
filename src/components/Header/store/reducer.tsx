@@ -1,24 +1,40 @@
-import { fromJS } from 'immutable'
 import { SEARCH_FOCUS, SEARCH_BLUR, MOUSE_IN, MOUSE_LEAVE, THEME_SWITCH } from './actionTypes'
 
-const initialState = fromJS({
+type IState = {
+  /** 搜索框聚焦 */
+  focused: boolean,
+  /** 鼠标移入 */
+  mouseIn: boolean,
+  /** 主体 */
+  theme: 'light' | 'dark'
+}
+const initialState: IState = {
   focused: false,
   mouseIn: false,
   theme: 'light'
-})
+}
+interface IAction {
+  type: string,
+  data: 'light' | 'dark'
+}
 
-export default (state = initialState, action: { type: string, data?: string }) => {
+export default (state = initialState, action: IAction) => {
   switch (action.type) {
     case SEARCH_FOCUS:
-      return state.set('focused', true)
+      state.focused = true
+      return state
     case SEARCH_BLUR:
-      return state.set('focused', false)
+      state.focused = false
+      return state
     case MOUSE_IN:
-      return state.set('mouseIn', true)
+      state.mouseIn = true
+      return state
     case MOUSE_LEAVE:
-      return state.set('mouseIn', false)
+      state.mouseIn = false
+      return state
     case THEME_SWITCH:
-      return state.set('theme', action.data)
+      state.theme = action.data
+      return state
     default:
       return state
   }

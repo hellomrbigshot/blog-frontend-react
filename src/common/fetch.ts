@@ -80,7 +80,7 @@ const fetchRefreshToken = () => {
   })
 }
 
-export const post = (url: string, formData: object, headers: object = {}): Promise<object | AxiosResponse<any> | undefined> => {
+export const post = (url: string, formData?: object, headers?: object): Promise<object | AxiosResponse<any> | undefined> => {
   const token = Cookies.get('token')
   headers = Object.assign({}, headers, { Authorization: `Beare ${token}` })
   return axios({

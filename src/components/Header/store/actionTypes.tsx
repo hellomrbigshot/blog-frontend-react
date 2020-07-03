@@ -1,5 +1,10 @@
-export const SEARCH_FOCUS = 'header/SEARCH_FOCUS'
-export const SEARCH_BLUR = 'header/SEARCH_BLUR'
-export const MOUSE_IN = 'header/MOUSE_IN'
-export const MOUSE_LEAVE = 'header/MOUSE_LEAVE'
-export const THEME_SWITCH = 'header/THEME_SWITCH'
+/** 搜索框鼠标聚焦 */
+export const SEARCH_FOCUS: string = 'header/SEARCH_FOCUS'
+/** 搜索框鼠标失焦 */
+export const SEARCH_BLUR: string = 'header/SEARCH_BLUR'
+/** 鼠标移入 */
+export const MOUSE_IN: string = 'header/MOUSE_IN'
+/** 鼠标移出 */
+export const MOUSE_LEAVE: string = 'header/MOUSE_LEAVE'
+/** 主题切换 */
+export const THEME_SWITCH: string = 'header/THEME_SWITCH'

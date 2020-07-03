@@ -8,9 +8,14 @@ import { Input, Button } from 'antd'
 import { LoginWrapper, LoginBox, LoginInfo, Logo } from './styled'
 import { actionCreators } from './store'
 
-function RegisterForm({ location: { query }, form }) {
+interface IState {
+  user: {
+    user: string
+  }
+}
+function RegisterForm({ location: { query }, form }: any) {
   const dispatch = useDispatch()
-  const user = useSelector(state => state.getIn(['user', 'user']))
+  const user = useSelector((state: IState) => state.user.user)
   const redirectUrl = query ? query.redirect : null
   const { getFieldDecorator } = form
   const compareToFirstPassword = useCallback(
@@ -27,7 +32,7 @@ function RegisterForm({ location: { query }, form }) {
   const handleSubmit = useCallback(
     e => {
       e.preventDefault()
-      form.validateFields((err, values) => {
+      form.validateFields((err: string, values: any) => {
         if (!err) {
           dispatch(actionCreators.register(values))
         }

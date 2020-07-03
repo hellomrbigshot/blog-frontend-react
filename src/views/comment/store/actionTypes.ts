@@ -1,2 +1,4 @@
-export const GET_COMMENT_LIST = 'comment/GET_COMMENT_LIST'
-export const INIT_COMMENT_LIST = 'comment/INIT_COMMENT_LIST'
+/** 获取评论列表 */
+export const GET_COMMENT_LIST: string = 'comment/GET_COMMENT_LIST'
+/** 初始化评论列表 */
+export const INIT_COMMENT_LIST: string = 'comment/INIT_COMMENT_LIST'

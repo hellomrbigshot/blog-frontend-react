@@ -41,8 +41,8 @@ module.exports = override(
     // addWebpackExternals({
     //     hljs: 'hljs'
     // }),
-    addWebpackAlias({
-        '@ant-design/icons/lib/dist$': path.resolve(__dirname, './src/icons.js')
-    }),
+    // addWebpackAlias({
+    //     '@ant-design/icons/lib/dist$': path.resolve(__dirname, './src/icons.js')
+    // }),
     Custom
 )

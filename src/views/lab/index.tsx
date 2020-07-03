@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Card } from 'antd'
 import { config } from './config'
 
-function Lab() {
+function Lab () {
   return (
     <Fragment>
       {config.map((item, i) => (

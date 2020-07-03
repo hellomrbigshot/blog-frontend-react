@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import { EditOutlined } from '@ant-design/icons'
-import { Pagination, Avatar, Message } from 'antd'
-import { Link } from 'react-router-dom'
+import { Pagination, Avatar, message } from 'antd'
+import { Link, RouteComponentProps } from 'react-router-dom'
 import { getUserInfo, getLimitArticleList } from './store/actionCreators'
 import { post } from '../../common/fetch'
 import AvatarCropper from './components/AvatarCropper'
@@ -17,21 +17,39 @@ import {
   AvatarSelectButton
 } from './styled'
 
-function UserInfo ({ match: { params: { name: user } } }) {
+interface IState {
+  user: {
+    user: string,
+    userInfo: {
+      articleList: any[],
+      info: any,
+      total: number
+    }
+  }
+}
+interface IRoute {
+  match: {
+    params: {
+      name: string
+    }
+  }
+}
+function UserInfo ({ match: { params } }: RouteComponentProps & IRoute) {
+  const user = params.name
   const dispatch = useDispatch()
   const [avatarModalVisible, setAvatarModalVisible] = useState(false)
   const [bioModalVisible, setBioModalVisible] = useState(false)
   const [img, setImg] = useState('')
   const [cropImgData, setCropImgData] = useState('')
-  const articleList = useSelector(state => state.getIn(['user', 'userInfo', 'articleList']))
-  const userInfo = useSelector(state => state.getIn(['user', 'userInfo', 'info']), shallowEqual)
-  const total = useSelector(state => state.getIn(['user', 'userInfo', 'total']))
-  const loginUser = useSelector(state => state.getIn(['user', 'user']))
+  const articleList = useSelector((state: IState) => state.user.userInfo.articleList)
+  const userInfo = useSelector(((state: IState) => state.user.userInfo.info), shallowEqual)
+  const total = useSelector((state: IState) => state.user.userInfo.total)
+  const loginUser = useSelector((state: IState) => state.user.user)
   useEffect(() => {
     dispatch(getUserInfo(user))
     dispatch(getLimitArticleList(user, 1))
   }, [dispatch, user])
-  const handleFileChange = file => {
+  const handleFileChange = (file: any) => {
     if (file) {
       const URL = window.URL || window.webkitURL
       setAvatarModalVisible(true)
@@ -40,7 +58,7 @@ function UserInfo ({ match: { params: { name: user } } }) {
       return false
     }
   }
-  const handleCropperChange = imgData => {
+  const handleCropperChange = (imgData: any) => {
     if (imgData) {
       setCropImgData(imgData)
     }
@@ -50,13 +68,13 @@ function UserInfo ({ match: { params: { name: user } } }) {
     setCropImgData('')
     setAvatarModalVisible(false)
   }
-  const handleCropperOk = async imgData => {
+  const handleCropperOk = async (imgData: any) => {
     await post('/api/file/uploadAvatar', { imgData, username: loginUser })
     window.location.reload()
   }
-  const handleBioOk = async bio => {
+  const handleBioOk = async (bio: string) => {
     if (!bio.trim()) {
-      Message.error('描述不能为空')
+      message.error('描述不能为空')
       return false
     }
     const username = loginUser
@@ -104,15 +122,15 @@ function UserInfo ({ match: { params: { name: user } } }) {
         visible={avatarModalVisible}
         img={img}
         cropImgData={cropImgData}
-        onCropper={imgData => handleCropperChange(imgData)}
-        onCancel={imgData => handleCropperCancel(imgData)}
-        onOk={imgData => handleCropperOk(imgData)}
+        onCropper={(imgData: any) => handleCropperChange(imgData)}
+        onCancel={(imgData: any) => handleCropperCancel()}
+        onOk={(imgData: any) => handleCropperOk(imgData)}
       />
       {userInfo.get('username') ? (
         <BioEditModal
           visible={bioModalVisible}
           onCancel={() => setBioModalVisible(false)}
-          onOk={input => handleBioOk(input)}
+          onOk={(input: string) => handleBioOk(input)}
         />
       ) : null}
     </div>

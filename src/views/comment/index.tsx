@@ -11,11 +11,20 @@ interface IProp {
     push: Function
   }
 }
+interface IState {
+  user: {
+    user: string,
+  }
+  comment: {
+    commentList: object[],
+    total: number
+  }
+}
 function Comment({ history }: IProp) {
   const dispatch = useDispatch()
-  const user = useSelector(state => state.getIn(['user', 'user']))
-  const commentList = useSelector(state => state.getIn(['comment', 'commentList']))
-  const total = useSelector(state => state.getIn(['comment', 'total']))
+  const user = useSelector((state: IState) => state.user.user)
+  const commentList = useSelector((state: IState) => state.comment.commentList)
+  const total = useSelector((state: IState) => state.comment.total)
   useEffect(() => {
     dispatch(actionCreators.getCommentList('to_user', 1))
   }, [dispatch])
@@ -23,7 +32,7 @@ function Comment({ history }: IProp) {
     dispatch(actionCreators.getCommentList(type, page))
   }
   return !user ? (
-    <Redirect to={{ pathname: '/login', query: { redirect: '/comment/list' } }} />
+    <Redirect to={{ pathname: '/login', state: { redirect: '/comment/list' } }} />
   ) : (
     <Tabs defaultActiveKey="to_user" onChange={key => getCommentList(key, 1)}>
       <TabPane tab="我收到的" key="to_user">

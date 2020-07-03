@@ -2,8 +2,15 @@ import blackLogo from '../statics/image/logo_black_transparent.png'
 import whiteLogo from '../statics/image/logo_white_transparent.png'
 import { light as headerLight, dark as headerDark } from './modules/header'
 import { light as userLight, dark as userDark } from './modules/user'
-
-export default {
+interface ITheme {
+  light: {
+    [x: string]: string
+  },
+  dark: {
+    [x: string]: string
+  }
+}
+const Theme: ITheme = {
   light: {
     logo: blackLogo,
     mainBg: '#fff',
@@ -31,3 +38,4 @@ export default {
     ...userDark
   }
 }
+export default Theme

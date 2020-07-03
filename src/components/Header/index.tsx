@@ -22,14 +22,23 @@ import {
 } from './style'
 import { actionCreators } from './store'
 import { actionCreators as loginCreator } from '../../views/user/store'
-
+// import { RootState } from '../../store/reducer'
+interface IState {
+  header: {
+    focused: boolean,
+    mouseIn: boolean
+  },
+  user: {
+    user: ''
+  }
+}
 type Tkeywords = string | null | HTMLInputElement
 function Header ({ location: { pathname }, history }: RouteComponentProps & {}) {
   const dispatch = useDispatch()
-  const focused: boolean = useSelector(state => state.getIn(['header', 'focused']))
-  const user: string = useSelector(state => state.getIn(['user', 'user']))
-  const mouseIn: boolean = useSelector(state => state.getIn(['header', 'mouseIn']))
-  let keywords: string | null | HTMLInputElement = ''
+  const focused: boolean = useSelector((state: IState) => state.header.focused)
+  const user: string = useSelector((state: IState) => state.user.user)
+  const mouseIn: boolean = useSelector((state: IState) => state.header.mouseIn)
+  let keywords: Tkeywords = ''
   const getDropDown = () => {
     return (
       <DropdownWrapper
@@ -72,7 +81,7 @@ function Header ({ location: { pathname }, history }: RouteComponentProps & {}) 
   }
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>, keywords: Tkeywords) => {
     const KEYCODE: number = event.keyCode
-    const KEYWORDS: string = keywords.value
+    const KEYWORDS: Tkeywords = keywords
     if (KEYCODE === 13 && KEYWORDS) {
       // enter 触发搜索
       history.push(`/home/${KEYWORDS}`)
@@ -80,7 +89,7 @@ function Header ({ location: { pathname }, history }: RouteComponentProps & {}) 
   }
   const handleSearch = (keywords: Tkeywords) => {
     if (keywords) {
-      history.push(`/home/${keywords.value}`)
+      history.push(`/home/${keywords}`)
     }
   }
   const handleSwitch = (val: boolean) => {

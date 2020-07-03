@@ -5,11 +5,36 @@ import { Pagination } from 'antd'
 import { getTagDetail, getArticleList } from './store/actionCreators'
 import { TagDetailWrapper, ArticleListWrapper } from './styled'
 
-function TagDetail({ match: { params: { tag } } }) {
+interface IState {
+  tag: {
+    tagDetail: {
+      detail: IDetail,
+      articleList: IArticle[]
+      total: number
+    }
+  }
+}
+interface IDetail {
+  description: string,
+  name: string
+}
+interface IArticle {
+  _id: string,
+  create_time: string,
+  title: string
+}
+interface IRoute {
+  match: {
+    params: {
+      tag: string
+    }
+  }
+}
+function TagDetail({ match: { params: { tag } } }: IRoute) {
   const dispatch = useDispatch()
-  const detail = useSelector(state => state.getIn(['tag', 'tagDetail', 'detail']))
-  const articleList = useSelector(state => state.getIn(['tag', 'tagDetail', 'articleList']))
-  const total = useSelector(state => state.getIn(['tag', 'tagDetail', 'total']))
+  const detail = useSelector((state: IState) => state.tag.tagDetail.detail)
+  const articleList = useSelector((state: IState) => state.tag.tagDetail.articleList)
+  const total = useSelector((state: IState) => state.tag.tagDetail.total)
   useEffect(() => {
     dispatch(getTagDetail(tag))
     dispatch(getArticleList(tag))
@@ -24,16 +49,16 @@ function TagDetail({ match: { params: { tag } } }) {
     <div>
       <TagDetailWrapper>
         <h2>
-          {detail.get('name')} <small>标签</small>
+          {detail.name} <small>标签</small>
         </h2>
-        <div>{detail.get('description')}</div>
+        <div>{detail.description}</div>
       </TagDetailWrapper>
       <ArticleListWrapper>
         {articleList.map(article => (
-          <article key={article.get('_id')}>
-            <Link to={`/detail/${article.get('_id')}`}>
-              <span>{article.get('create_time').substring(5, 10)}</span>
-              <h2>{article.get('title')}</h2>
+          <article key={article._id}>
+            <Link to={`/detail/${article._id}`}>
+              <span>{article.create_time.substring(5, 10)}</span>
+              <h2>{article.title}</h2>
             </Link>
           </article>
         ))}

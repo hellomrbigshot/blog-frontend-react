@@ -1,25 +1,40 @@
 import React, { useEffect, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Input, Button } from 'antd'
+import { RouteComponentProps } from 'react-router-dom'
 import { handleCommentChange, getArticleDetail, getCommentList, handleSubmitComment as submitComment } from './store/actionCreators'
 import { DetailWrapper } from './styled'
 import ArticleDetail from './components/ArticleDetail'
 import CommentList from './components/CommentList'
-function Detail({
+interface IState {
+  detail: {
+    detail: any,
+    commentList: object[],
+    comment: string
+  },
+  user: {
+    user: string
+  }
+}
+interface IRoute {
   match: {
-    params: { id },
-    location,
-    history
+    params: {
+      id: string
+    },
+    location: {
+      pathname: string
+    },
+    history: {
+      push: Function
+    }
   }
-}) {
+}
+function Detail ({ match: { params: { id }, location, history } }: RouteComponentProps & IRoute) {
   const dispatch = useDispatch()
-  let detail = useSelector(state => state.getIn(['detail', 'detail']))
-  if (detail.get('content')) {
-    detail = detail.set('content', detail.get('content'))
-  }
-  const commentList = useSelector(state => state.getIn(['detail', 'commentList']))
-  const comment = useSelector(state => state.getIn(['detail', 'comment']))
-  const user = useSelector(state => state.getIn(['user', 'user']))
+  let detail = useSelector((state: IState) => state.detail.detail)
+  const commentList = useSelector((state: IState) => state.detail.commentList)
+  const comment = useSelector((state: IState) => state.detail.comment)
+  const user = useSelector((state: IState) => state.user.user)
   useEffect(() => {
     dispatch(getArticleDetail(id))
     dispatch(getCommentList(id))
@@ -34,7 +49,7 @@ function Detail({
       reply_content: ''
     }
     dispatch(submitComment(formData))
-    document.querySelector('#commentList').scrollIntoView()
+    document.querySelector('#commentList') && (document.querySelector('#commentList') as Element).scrollIntoView()
   }, [dispatch, comment])
   const handleFocus = useCallback(() => {
     console.log('trigger')
@@ -57,8 +72,8 @@ function Detail({
   const { TextArea } = Input
   return (
     <DetailWrapper>
-      {detail.get('content') ? <ArticleDetail article={detail} user={user} /> : null}
-      {commentList.size > 0 ? <CommentList article={detail} user={user} commentList={commentList} /> : null}
+      {detail.content ? <ArticleDetail article={detail} user={user} /> : null}
+      {commentList.length > 0 ? <CommentList article={detail} user={user} commentList={commentList} /> : null}
       <div>
         <h2 style={{ fontSize: '20px', fontWeight: 'normal', marginBottom: '10px' }}>留言：</h2>
         <TextArea

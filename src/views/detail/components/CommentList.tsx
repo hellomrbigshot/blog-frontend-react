@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { ChangeEvent } from 'react'
 import { withRouter } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import { RouteComponentProps } from 'react-router-dom'
 import {
   CommentWrapper,
   CommentItem,
@@ -20,56 +21,72 @@ import { Avatar, Input } from 'antd'
 import { formatTime } from '../../../common'
 import { showReplyInput, handleSubmitComment } from '../store/actionCreators'
 
-function CommentList({ commentList, article, user, history, location }) {
-  let replyContent = null
+interface IComment {
+  content: string,
+  create_user: string,
+  reply_user: string,
+  create_time: Date,
+  reply_content: string,
+  showReplyInput?: boolean,
+  _id?: string
+}
+interface IParams extends RouteComponentProps {
+  commentList: IComment[],
+  article: object,
+  user: string
+}
+function CommentList ({ commentList, article, user, history, location }: IParams) {
+  let replyContent: string = ''
   const dispatch = useDispatch()
-  const handleInputChange = input => {
+  const handleInputChange = (input: ChangeEvent<HTMLInputElement>) => {
     // 获取 input 的值
     replyContent = input.target.value
   }
-  const handleReplyComment = (i, user) => {
-    !user && history.push({ pathname: '/login', query: { redirect: location.pathname } })
+  const handleReplyComment = (i: number, user: string) => {
+    !user && history.push({ pathname: '/login', state: { redirect: location.pathname } })
     dispatch(showReplyInput(i))
+    
   }
-  const handleSubmitReply = (comment, i, replyContent) => {
+  const handleSubmitReply = (comment: IComment, i: number, replyContent: string) => {
     const formData = {
       content: replyContent,
-      reply_user: comment.get('create_user'),
-      reply_content: comment.get('content')
+      reply_user: comment.create_user,
+      reply_content: comment.content
     }
     dispatch(handleSubmitComment(formData, i))
-    document.querySelector('#commentList').scrollIntoView()
+    const listDom: Element | null = document.querySelector('#commentList')
+    listDom?.scrollIntoView()
   }
   return (
     <CommentWrapper id="commentList">
       <h2>留言板：</h2>
-      {commentList.map((comment, i) => (
-        <CommentItem key={comment.get('_id')}>
+      {commentList.map((comment: IComment, i: number) => (
+        <CommentItem key={comment._id}>
           <CommentAvatar>
-            <Link to={`/user/info/${comment.get('create_user')}`}>
-              <Avatar size={40} src={`/api/file/avatar/user?username=${comment.get('create_user')}`} alt={comment.create_user} />
+            <Link to={`/user/info/${comment.create_user}`}>
+              <Avatar size={40} src={`/api/file/avatar/user?username=${comment.create_user}`} alt={comment.create_user} />
             </Link>
-            <CommentFloor>{commentList.size - i}楼</CommentFloor>
+            <CommentFloor>{commentList.length - i}楼</CommentFloor>
           </CommentAvatar>
           <CommentContent>
             <CommentInfo>
-              <CommentInfoTime>{formatTime(comment.get('create_time'))}</CommentInfoTime>
-              <Link to={`/user/info/${comment.get('create_user')}`}>{comment.get('create_user')}</Link>
+              <CommentInfoTime>{formatTime(comment.create_time)}</CommentInfoTime>
+              <Link to={`/user/info/${comment.create_user}`}>{comment.create_user}</Link>
             </CommentInfo>
-            {comment.get('reply_user') ? (
+            {comment.reply_user ? (
               <ReplyContent>
-                <Link to={`/user/info/${comment.get('reply_user')}`}>{comment.get('reply_user')}</Link>：{comment.get('reply_content')}
+                <Link to={`/user/info/${comment.reply_user}`}>{comment.reply_user}</Link>：{comment.reply_content}
               </ReplyContent>
             ) : null}
-            <CommentContentDetail>{comment.get('content')}</CommentContentDetail>
+            <CommentContentDetail>{comment.content}</CommentContentDetail>
             <CommentAction>
               <div onClick={() => handleReplyComment(i, user)}>回复</div>
             </CommentAction>
-            {comment.get('showReplyInput') ? (
+            {comment.showReplyInput ? (
               <CommentReply>
-                <Input size="small" onChange={handleInputChange} onPressEnter={() => handleSubmitReply(comment, i, replyContent, article)} />
+                <Input size="small" onChange={handleInputChange} onPressEnter={() => handleSubmitReply(comment, i, replyContent)} />
                 <div style={{ marginTop: '5px', display: 'flex', flexDirection: 'row-reverse' }}>
-                  <CommentReplyBtn type="primary" onClick={() => handleSubmitReply(comment, i, replyContent, article)}>
+                  <CommentReplyBtn onClick={() => handleSubmitReply(comment, i, replyContent)}>
                     提交
                   </CommentReplyBtn>
                 </div>

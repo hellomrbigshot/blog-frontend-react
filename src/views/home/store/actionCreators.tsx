@@ -1,6 +1,6 @@
 import { GET_ARTICLE_LIST, INIT_ARTICLE_LIST, TOGGLE_BACK_TOP } from './actionTypes'
 
-export const getArticleList = (page = 1, keywords) => {
+export const getArticleList = (page = 1, keywords: string) => {
     return {
         type: GET_ARTICLE_LIST,
         page,
@@ -8,7 +8,7 @@ export const getArticleList = (page = 1, keywords) => {
     }
 }
 
-export const initArticleList = (list, total) => {
+export const initArticleList = (list: object[], total: number) => {
     return {
         type: INIT_ARTICLE_LIST,
         list,
@@ -16,7 +16,7 @@ export const initArticleList = (list, total) => {
     }
 }
 
-export const toggleBackTop = show => {
+export const toggleBackTop = (show: boolean) => {
     return {
         type: TOGGLE_BACK_TOP,
         show

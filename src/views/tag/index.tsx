@@ -5,10 +5,16 @@ import { Link } from 'react-router-dom'
 import { Pagination } from 'antd'
 import { actionCreators } from './store'
 
+interface IState {
+  tag: {
+    tagList: any[],
+    total: number
+  }
+}
 function TagList() {
   const dispatch = useDispatch()
-  const tagList = useSelector(state => state.getIn(['tag', 'tagList']))
-  const total = useSelector(state => state.getIn(['tag', 'total']))
+  const tagList = useSelector((state: IState) => state.tag.tagList)
+  const total = useSelector((state: IState) => state.tag.total)
   useEffect(() => {
     dispatch(actionCreators.getTagList())
   }, [dispatch])
@@ -22,21 +28,21 @@ function TagList() {
         当前总共 <span>{total}</span> 个标签
       </Header>
       <ListWrapper>
-        {tagList.size === 0
+        {tagList.length === 0
           ? null
           : tagList.map(tag => (
-              <TagItem key={tag.get('_id')}>
+              <TagItem key={tag._id}>
                 <TagHeader>
-                  <Link to={`/tag/detail/${tag.get('name')}`}>{tag.get('name')}</Link>
+                  <Link to={`/tag/detail/${tag.name}`}>{tag.name}</Link>
                 </TagHeader>
-                <TagDesc>{tag.get('description')}</TagDesc>
+                <TagDesc>{tag.description}</TagDesc>
                 <TagBottom>
-                  共有 <Link to={`/tag/detail/${tag.get('name')}`}>{tag.get('page_num')}</Link> 篇文章
+                  共有 <Link to={`/tag/detail/${tag.name}`}>{tag.page_num}</Link> 篇文章
                 </TagBottom>
               </TagItem>
             ))}
       </ListWrapper>
-      {tagList.size === 0 ? null : <Pagination total={total} onChange={pageChange} />}
+      {tagList.length === 0 ? null : <Pagination total={total} onChange={pageChange} />}
     </TagWrapper>
   )
 }
