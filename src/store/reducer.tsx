@@ -8,7 +8,7 @@ import { reducer as userReducer } from '../views/user/store/index'
 import { reducer as tagReducer } from '../views/tag/store'
 // import { reducer as commentReducer } from '../views/comment/store'
 const rootReducer = combineReducers(produce, {
-  // header: headerReducer,
+  header: headerReducer,
   home: homeReducer,
   detail: detailReducer,
   app: appReducer,
