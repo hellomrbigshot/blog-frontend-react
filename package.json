@@ -56,7 +56,7 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "proxy": "https://hellomrbigbigshot.xyz",
+  "proxy": "http://localhost:8081",
   "browserslist": {
     "production": [
       ">0.2%",
