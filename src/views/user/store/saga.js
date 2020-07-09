@@ -63,7 +63,7 @@ export function* getDraftList() {
 function* axiosGetDraftList() {
     const user = yield select(state => state.getIn(['user', 'user']))
     const formData = {
-        type: 'creator',
+        type: 'create_user',
         content: user,
         status: 'draft',
         page: 1,
