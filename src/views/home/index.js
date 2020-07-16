@@ -8,8 +8,10 @@ import { Pagination, BackTop } from 'antd'
 function Home({
   match: {
     params: { keywords = '' }
-  }
+  },
+  location
 }) {
+  console.log(location)
   const dispatch = useDispatch()
   const articleList = useSelector(state => state.getIn(['home', 'articleList']))
   const total = useSelector(state => state.getIn(['home', 'total']))

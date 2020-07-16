@@ -20,6 +20,12 @@ marked.setOptions({
     xhtml: false
 })
 
+/**
+ * 
+ * @param {date} time 
+ * @param {string} type 
+ */
+
 const formatTime = (time, type = '3') => {
     if (!time) return null
     let str = ''
@@ -45,7 +51,7 @@ const formatTime = (time, type = '3') => {
     return str
 }
 
-function timeType3(t) {
+const timeType3 = (t) => {
     let nowTime = new Date().getTime(),
         time = new Date(t).getTime()
     if (nowTime - time < 60 * 1000) {
@@ -64,13 +70,17 @@ function timeType3(t) {
     }
 }
 
-function padStart2(num = 0) {
+/**
+ * @description 位数不足自动补全两位
+ * @param {string | number} num 
+ */
+const padStart2 = (num = 0) => {
     num = typeof num === 'string' ? num : String(num)
     return num.padStart(2, '0')
 }
 
 // 防抖函数
-function debounce(fun, wait = 100, immediate = false) {
+const debounce = (fun, wait = 100, immediate = false) => {
     let time
     return function() {
         const args = arguments
@@ -92,7 +102,7 @@ function debounce(fun, wait = 100, immediate = false) {
     }
 }
 
-function throttle(fun, wait) {
+const throttle = (fun, wait) => {
     let previous = 0
     return function() {
         let now = +new Date()
@@ -102,6 +112,6 @@ function throttle(fun, wait) {
             previous = now
         }
     }
-}
+} 
 
 export { marked, formatTime, fetch, debounce, throttle }

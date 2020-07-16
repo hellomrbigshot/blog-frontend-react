@@ -1,5 +1,13 @@
 import { fromJS } from 'immutable'
-import { INIT_ARTICLE_DETAIL, INIT_COMMENT_LIST, SHOW_REPLY_INPUT, HANDLE_CONCAT_COMMENT, HANDLE_COMMENT_CHANGE } from './actionTypes'
+import {
+  INIT_ARTICLE_DETAIL,
+  INIT_COMMENT_LIST,
+  SHOW_REPLY_INPUT,
+  HANDLE_CONCAT_COMMENT,
+  HANDLE_COMMENT_CHANGE,
+  RESET_ARTICLE_DETAIL,
+  RESET_COMMENT_LIST
+} from './actionTypes'
 const initialState = fromJS({
   detail: {},
   commentList: [],
@@ -21,6 +29,10 @@ export default (state = initialState, action) => {
           .set('comment', '')
           .set('commentList', fromJS([action.data]).concat(state.get('commentList').setIn([action.index, 'showReplyInput'], false)))
       else return state.set('comment', '').set('commentList', fromJS([action.data]).concat(state.get('commentList')))
+    case RESET_ARTICLE_DETAIL:
+      return state.set('detail', fromJS({}))
+    case RESET_COMMENT_LIST:
+      return state.set('commentList', fromJS([]))
     default:
       return state
   }
