@@ -25,7 +25,7 @@ function* fetchArticleList(action) {
               }
         let res = yield fetch.post(URL, formData)
         const { result, total } = res.data.data
-        yield put(initArticleList(result, total))
+        yield put(initArticleList(result, action.page, total))
         window.scrollTo(0, 0)
     } catch (e) {
         console.log(e.message)

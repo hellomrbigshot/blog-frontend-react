@@ -1,6 +1,7 @@
 import marked from 'marked'
 import hljs from './highlight'
 import * as fetch from './fetch'
+import { useLocation } from 'react-router-dom'
 
 // hljs.initHighlightingOnLoad()
 marked.setOptions({
@@ -114,4 +115,10 @@ const throttle = (fun, wait) => {
     }
 } 
 
-export { marked, formatTime, fetch, debounce, throttle }
+const useQuery = (key) => {
+  const location = useLocation()
+  const query = new URLSearchParams(location.search)
+  return query.get(key)
+}
+
+export { marked, formatTime, fetch, debounce, throttle, useQuery }

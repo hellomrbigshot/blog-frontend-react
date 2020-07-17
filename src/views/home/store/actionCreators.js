@@ -1,6 +1,6 @@
 import { GET_ARTICLE_LIST, INIT_ARTICLE_LIST, TOGGLE_BACK_TOP } from './actionTypes'
 
-export const getArticleList = (page = 1, keywords) => {
+export const getArticleList = (page, keywords) => {
     return {
         type: GET_ARTICLE_LIST,
         page,
@@ -8,11 +8,12 @@ export const getArticleList = (page = 1, keywords) => {
     }
 }
 
-export const initArticleList = (list, total) => {
+export const initArticleList = (list, page, total) => {
     return {
         type: INIT_ARTICLE_LIST,
         list,
-        total
+        total,
+        page
     }
 }
 
