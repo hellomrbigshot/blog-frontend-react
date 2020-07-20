@@ -142,7 +142,7 @@ export const CommentReplyBtn = styled.div`
 
 export const SkeletonDiv = styled.div`
   height: 25px;
-  background: #f2f3f5;
+  background: ${props => props.theme['skeletonBg']};
   border-radius: 3px;
 `
 

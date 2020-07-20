@@ -37,6 +37,6 @@ function* axiosGetArticleList(action) {
         status: 'normal',
         secret: false
     })
-    yield put(initArticleList(res.data.data.result, res.data.data.total))
+    yield put(initArticleList(res.data.data.result, action.page, res.data.data.total))
     window.scrollTo(0, 0)
 }

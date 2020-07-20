@@ -1,43 +1,71 @@
-import React, { useEffect, useCallback } from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Pagination } from 'antd'
-import { getTagDetail, getArticleList } from './store/actionCreators'
+import { getTagDetail, getArticleList, resetArticleList, resetTagDetail } from './store/actionCreators'
 import { TagDetailWrapper, ArticleListWrapper } from './styled'
+import { useParams, useHistory } from 'react-router-dom'
+import { useQuery } from '../../common'
+import ArticleListSkeleton from './components/ArticleListSkeleton'
+import TagDetailSkeleton from './components//TagDetailSkeleton'
 
-function TagDetail({ match: { params: { tag } } }) {
+function TagDetail() {
+  const { tag } = useParams()
+  const history = useHistory()
   const dispatch = useDispatch()
+  let _page = useQuery('page')
+  _page = _page ? _page - 0 : 1
   const detail = useSelector(state => state.getIn(['tag', 'tagDetail', 'detail']))
+  const tagName = detail.get('name')
+  const page = useSelector(state => state.getIn(['tag', 'tagDetail', 'page']))
   const articleList = useSelector(state => state.getIn(['tag', 'tagDetail', 'articleList']))
   const total = useSelector(state => state.getIn(['tag', 'tagDetail', 'total']))
   useEffect(() => {
-    dispatch(getTagDetail(tag))
-    dispatch(getArticleList(tag))
-  }, [dispatch, tag])
-  const pageChange = useCallback(
-    page => {
-      dispatch(getArticleList(tag, page))
-    },
-    [dispatch, tag]
-  )
+    if (tag !== tagName) {
+      dispatch(resetTagDetail())
+      dispatch(resetArticleList())
+      dispatch(getTagDetail(tag))
+      dispatch(getArticleList(tag, _page)) 
+    } else if (_page !== page) {
+      dispatch(resetArticleList())
+      dispatch(getArticleList(tag, _page))
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, tag, _page])
+  const pageChange = (page) => {
+    history.push(`?page=${page}`)
+  }
   return (
     <div>
-      <TagDetailWrapper>
-        <h2>
-          {detail.get('name')} <small>标签</small>
-        </h2>
-        <div>{detail.get('description')}</div>
-      </TagDetailWrapper>
-      <ArticleListWrapper>
-        {articleList.map(article => (
-          <article key={article.get('_id')}>
-            <Link to={`/detail/${article.get('_id')}`}>
-              <span>{article.get('create_time').substring(5, 10)}</span>
-              <h2>{article.get('title')}</h2>
-            </Link>
-          </article>
-        ))}
-      </ArticleListWrapper>
+      {
+        detail.get('name')
+          ? (
+              <TagDetailWrapper>
+                <h2>
+                  {detail.get('name')} <small>标签</small>
+                </h2>
+                <div>{detail.get('description')}</div>
+              </TagDetailWrapper>
+            )
+          : (<TagDetailSkeleton/>)
+      }
+      {
+        articleList.size && total
+          ? (
+              <ArticleListWrapper>
+                {articleList.map(article => (
+                  <article key={article.get('_id')}>
+                    <Link to={`/detail/${article.get('_id')}`}>
+                      <span>{article.get('create_time').substring(5, 10)}</span>
+                      <h2>{article.get('title')}</h2>
+                    </Link>
+                  </article>
+                ))}
+              </ArticleListWrapper>
+            )
+          : (<ArticleListSkeleton/>)
+      }
+      
       {total > 10 ? <Pagination total={total} onChange={pageChange} /> : null}
     </div>
   )

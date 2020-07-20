@@ -6,6 +6,7 @@ import { light as userLight, dark as userDark } from './modules/user'
 export default {
   light: {
     logo: blackLogo,
+    skeletonBg: '#f2f3f5',
     mainBg: '#fff',
     hColor: '#000000d',
     boxShadow: 'rgba(0, 0, 0, .1)',
@@ -19,6 +20,7 @@ export default {
   },
   dark: {
     logo: whiteLogo,
+    skeletonBg: '#29272a',
     mainBg: '#2a2c33',
     hColor: '#fff',
     boxShadow: 'rgba(255, 255, 255, .1)',
