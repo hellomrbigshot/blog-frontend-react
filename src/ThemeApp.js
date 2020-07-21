@@ -24,6 +24,10 @@ import themeInfo from './theme'
 
 function ThemeApp () {
   const theme = useSelector(state => state.getIn(['header', 'theme']))
+  const handleInitDetail = (nextState, replace) => {
+    console.log(nextState)
+    replace({ path: '/tag/list' })
+  }
   return (
     <ThemeProvider theme={themeInfo[theme]}>
       <Router>
@@ -34,7 +38,12 @@ function ThemeApp () {
             <Switch>
               <Redirect exact from="/" to="/home" />
               <Route path="/home/:keywords?" component={Home} />
-              <Route path="/detail/:id" exact component={Detail} />
+              <Route
+                path="/detail/:id"
+                exact
+                component={Detail}
+                onEnter={handleInitDetail}
+              />
               <Route path="/login" exact component={Login} />
               <Route path="/register" exact component={Register} />
               <Route path="/tag/list" exact component={TagList} />

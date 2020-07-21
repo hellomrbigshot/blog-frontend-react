@@ -62,3 +62,38 @@ export const Article = styled.div`
     color: #333;
   }
 `
+
+export const SkeletonDiv = styled.div`
+  height: 25px;
+  background: ${props => props.theme['skeletonBg']};
+  border-radius: 3px;
+`
+
+export const SkeletonWrapper = styled.div`
+  margin-bottom: 100px;
+`
+
+export const SkeletonHeader = styled(SkeletonDiv)`
+  width: 60%;
+  max-width: 300px;
+`
+
+export const SkeletonDescWrapper = styled.div`
+  margin-top: 20px;
+  display: flex;
+  justify-content: left;
+`
+
+export const SkeletonDesc = styled(SkeletonDiv)`
+  width: 80px;
+  margin-left: 20px;
+  height: 20px;
+  &:first-child {
+    margin-left: 0;
+  }
+`
+
+export const SkeletonContent = styled(SkeletonDiv)`
+  width: 100%;
+  margin-top: 20px;
+`

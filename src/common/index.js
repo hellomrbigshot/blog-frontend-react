@@ -1,6 +1,7 @@
 import marked from 'marked'
 import hljs from './highlight'
 import * as fetch from './fetch'
+import { useLocation } from 'react-router-dom'
 
 // hljs.initHighlightingOnLoad()
 marked.setOptions({
@@ -19,6 +20,12 @@ marked.setOptions({
     smartypants: false,
     xhtml: false
 })
+
+/**
+ * 
+ * @param {date} time 
+ * @param {string} type 
+ */
 
 const formatTime = (time, type = '3') => {
     if (!time) return null
@@ -45,7 +52,7 @@ const formatTime = (time, type = '3') => {
     return str
 }
 
-function timeType3(t) {
+const timeType3 = (t) => {
     let nowTime = new Date().getTime(),
         time = new Date(t).getTime()
     if (nowTime - time < 60 * 1000) {
@@ -64,13 +71,17 @@ function timeType3(t) {
     }
 }
 
-function padStart2(num = 0) {
+/**
+ * @description 位数不足自动补全两位
+ * @param {string | number} num 
+ */
+const padStart2 = (num = 0) => {
     num = typeof num === 'string' ? num : String(num)
     return num.padStart(2, '0')
 }
 
 // 防抖函数
-function debounce(fun, wait = 100, immediate = false) {
+const debounce = (fun, wait = 100, immediate = false) => {
     let time
     return function() {
         const args = arguments
@@ -92,7 +103,7 @@ function debounce(fun, wait = 100, immediate = false) {
     }
 }
 
-function throttle(fun, wait) {
+const throttle = (fun, wait) => {
     let previous = 0
     return function() {
         let now = +new Date()
@@ -102,6 +113,12 @@ function throttle(fun, wait) {
             previous = now
         }
     }
+} 
+
+const useQuery = (key) => {
+  const location = useLocation()
+  const query = new URLSearchParams(location.search)
+  return query.get(key)
 }
 
-export { marked, formatTime, fetch, debounce, throttle }
+export { marked, formatTime, fetch, debounce, throttle, useQuery }

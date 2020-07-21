@@ -1,10 +1,11 @@
 import React, { useEffect, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Input, Button } from 'antd'
-import { handleCommentChange, getArticleDetail, getCommentList, handleSubmitComment as submitComment } from './store/actionCreators'
+import { handleCommentChange, getArticleDetail, resetArticleDetail, resetCommentList, getCommentList, handleSubmitComment as submitComment } from './store/actionCreators'
 import { DetailWrapper } from './styled'
 import ArticleDetail from './components/ArticleDetail'
 import CommentList from './components/CommentList'
+import ArticleDetailSkeleton from './components/ArticleDetailSkeleton'
 function Detail({
   match: {
     params: { id },
@@ -14,15 +15,18 @@ function Detail({
 }) {
   const dispatch = useDispatch()
   let detail = useSelector(state => state.getIn(['detail', 'detail']))
-  if (detail.get('content')) {
-    detail = detail.set('content', detail.get('content'))
-  }
+  const _id = useSelector(state => state.getIn(['detail', 'detail', '_id']))
   const commentList = useSelector(state => state.getIn(['detail', 'commentList']))
   const comment = useSelector(state => state.getIn(['detail', 'comment']))
   const user = useSelector(state => state.getIn(['user', 'user']))
   useEffect(() => {
-    dispatch(getArticleDetail(id))
-    dispatch(getCommentList(id))
+    if (_id !== id) {
+      dispatch(resetArticleDetail())
+      dispatch(resetCommentList())
+      dispatch(getArticleDetail(id))
+      dispatch(getCommentList(id))
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, dispatch])
   const handleSubmitComment = useCallback(() => {
     if (!comment.trim()) {
@@ -57,23 +61,25 @@ function Detail({
   const { TextArea } = Input
   return (
     <DetailWrapper>
-      {detail.get('content') ? <ArticleDetail article={detail} user={user} /> : null}
-      {commentList.size > 0 ? <CommentList article={detail} user={user} commentList={commentList} /> : null}
-      <div>
-        <h2 style={{ fontSize: '20px', fontWeight: 'normal', marginBottom: '10px' }}>留言：</h2>
-        <TextArea
-          value={comment}
-          rows={5}
-          onChange={input => handleInputChange(input.target.value)}
-          onFocus={handleFocus}
-          onPressEnter={handleSubmitComment}
-        />
-        <div style={{ display: 'flex', marginTop: '10px', flexDirection: 'row-reverse' }}>
-          <Button size="small" onClick={handleSubmitComment}>
-            提交
-          </Button>
-        </div>
-      </div>
+      {detail.get('content') ? <ArticleDetail article={detail} user={user} /> : <ArticleDetailSkeleton />}
+      { commentList && commentList.size > 0 ? <CommentList article={detail} user={user} commentList={commentList} /> : null}
+      {detail.get('content')
+        ? <div>
+            <h2 style={{ fontSize: '20px', fontWeight: 'normal', marginBottom: '10px' }}>留言：</h2>
+            <TextArea
+              value={comment}
+              rows={5}
+              onChange={input => handleInputChange(input.target.value)}
+              onFocus={handleFocus}
+              onPressEnter={handleSubmitComment}
+            />
+            <div style={{ display: 'flex', marginTop: '10px', flexDirection: 'row-reverse' }}>
+              <Button size="small" onClick={handleSubmitComment}>
+                提交
+              </Button>
+            </div>
+          </div>
+        : null}
     </DetailWrapper>
   )
 }
