@@ -1,4 +1,4 @@
-import { INIT_TAG_LIST, GET_TAG_LIST, GET_TAG_DETAIL, INIT_TAG_DETAIL, GET_ARTICLE_LIST, INIT_ARTICLE_LIST, RESET_ARTICLE_LIST, RESET_TAG_DETAIL } from './actionTypes'
+import { INIT_TAG_LIST, GET_TAG_LIST, GET_TAG_DETAIL, INIT_TAG_DETAIL, GET_ARTICLE_LIST, INIT_ARTICLE_LIST, RESET_ARTICLE_LIST, RESET_TAG_DETAIL, RESET_TAG_LIST } from './actionTypes'
 
 export const getTagList = (page = 1) => {
   return {
@@ -7,10 +7,11 @@ export const getTagList = (page = 1) => {
   }
 }
 
-export const initTagList = (list, total) => {
+export const initTagList = (list, page, total) => {
   return {
     type: INIT_TAG_LIST,
     list,
+    page,
     total
   }
 }
@@ -55,5 +56,11 @@ export const resetArticleList = () => {
 export const resetTagDetail = () => {
   return {
     type: RESET_TAG_DETAIL
+  }
+}
+
+export const resetTagList = () => {
+  return {
+    type: RESET_TAG_LIST
   }
 }

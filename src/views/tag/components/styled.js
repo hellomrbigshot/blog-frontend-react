@@ -28,3 +28,32 @@ export const ArticleItem = styled.div`
   margin: 20px 0 10px 0;
   background: ${prop => prop.theme['skeletonBg']};
 `
+
+export const TagItemWrapper = styled.div`
+  padding: 12px 20px;
+  width: 98%;
+  border-radius: 5px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, .1);
+  margin: 0 auto 10px;
+`
+
+export const TagItemHeader = styled.div`
+  height: 23px;
+  padding: 12px;
+  width: 200px;
+  background: ${prop => prop.theme['skeletonBg']}
+`
+
+export const TagItemDesc = styled.div`
+  height: 12px;
+  margin-top: 5px;
+  background: ${prop => prop.theme['skeletonBg']}
+`
+
+export const TagItemFooter = styled.div`
+  height: 18px;
+  padding: 12px 0;
+  width: 150px;
+  margin-top: 12px;
+  background: ${prop => prop.theme['skeletonBg']}
+`
