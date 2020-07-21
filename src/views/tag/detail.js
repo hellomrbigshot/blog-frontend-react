@@ -63,7 +63,7 @@ function TagDetail() {
                 ))}
               </ArticleListWrapper>
             )
-          : (<ArticleListSkeleton/>)
+          : ( total ? <ArticleListSkeleton/> : null)
       }
       
       {total > 10 ? <Pagination current={page} total={total} onChange={pageChange} /> : null}
