@@ -17,6 +17,7 @@ import UserInfo from './views/user'
 import Write from './views/write'
 import Lab from './views/lab'
 import Cup from './views/lab/cup'
+import ChangeLog from './views/ChangeLog'
 import { AppWrapper } from './style'
 import { ThemeProvider } from 'styled-components'
 import { useSelector } from 'react-redux'
@@ -57,6 +58,7 @@ function ThemeApp () {
               <Route path="/lab/list" component={Lab} />
               <Route path="/lab/cup" component={Cup} />
               <Route path="/404" exact component={NoMatch} />
+              <Route path="/changelog" component={ChangeLog}/>
               <Redirect from="*" to="/404" />
             </Switch>
           </AppWrapper>
