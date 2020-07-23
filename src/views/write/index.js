@@ -90,7 +90,7 @@ function Write ({ match: { params = null }, history }) {
   }, [id])
   const getArticleDetail = (id) => {
     fetch
-      .post('/api/page/detail', { id })
+      .post('/api/page/editdetail', { id })
       .then(res => {
         setArticleDetail(res.data.data)
       })

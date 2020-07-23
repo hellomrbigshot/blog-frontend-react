@@ -44,8 +44,8 @@
   },
   "scripts": {
     "analyze": "source-map-explorer 'build/static/js/*.js'",
-    "start": "yarn color && react-app-rewired start",
-    "build": "yarn color && react-app-rewired build",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-scripts eject",
     "color": "node color.js"
@@ -53,7 +53,7 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "proxy": "https://hellomrbigbigshot.xyz",
+  "proxy": "http://localhost:8081",
   "browserslist": {
     "production": [
       ">0.2%",

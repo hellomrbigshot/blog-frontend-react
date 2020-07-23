@@ -20,6 +20,7 @@ function TagDetail() {
   const page = useSelector(state => state.getIn(['tag', 'tagDetail', 'page']))
   const articleList = useSelector(state => state.getIn(['tag', 'tagDetail', 'articleList']))
   const total = useSelector(state => state.getIn(['tag', 'tagDetail', 'total']))
+  const fetchArray = useSelector(state => state.getIn(['app', 'fetchArray']))
   useEffect(() => {
     if (tag !== tagName) {
       dispatch(resetTagDetail())
@@ -50,7 +51,7 @@ function TagDetail() {
           : (<TagDetailSkeleton/>)
       }
       {
-        articleList.size && total
+        !fetchArray.size
           ? (
               <ArticleListWrapper>
                 {articleList.map(article => (
@@ -63,7 +64,7 @@ function TagDetail() {
                 ))}
               </ArticleListWrapper>
             )
-          : ( total ? <ArticleListSkeleton/> : null)
+          : <ArticleListSkeleton/>
       }
       
       {total > 10 ? <Pagination current={page} total={total} onChange={pageChange} /> : null}

@@ -8,12 +8,13 @@ export const getArticleList = (page, keywords) => {
   }
 }
 
-export const initArticleList = (list, page, total) => {
+export const initArticleList = (list, page, total, keywords) => {
   return {
     type: INIT_ARTICLE_LIST,
     list,
     total,
     page,
+    keywords
   }
 }
 
