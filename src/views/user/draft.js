@@ -12,9 +12,9 @@ function Draft () {
   useEffect(() => {
     dispatch(getDraftList())
   }, [dispatch])
-
+  const redirectUrl = encodeURIComponent('/draft')
   return !user ? (
-    <Redirect to={{ pathname: '/login', query: { redirect: '/draft' } }} />
+    <Redirect to={`/login?redirect=${redirectUrl}`} />
   ) : (
     <DraftWrapper>
       <h2>草稿箱</h2>

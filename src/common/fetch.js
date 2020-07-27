@@ -7,6 +7,7 @@ import qs from 'qs'
 import Cookies from 'js-cookie'
 import store from '../store'
 import { message } from 'antd'
+import { createBrowserHistory } from 'history'
 import { actionCreators } from '../views/user/store'
 import { deleteFetch, addFetch } from '../store/app/actionCreators'
 
@@ -38,8 +39,12 @@ axios.interceptors.response.use(
     if (error.response) {
       switch (error.response.status) {
         case 402:
+          const history = createBrowserHistory()
+          const { pathname } = history.location
           // 登录超时 跳转登录页
           store.dispatch(actionCreators.logoutSuccess())
+          window.location.href=`/login?redirect=${encodeURIComponent(pathname)}`
+          // history.push(`/login?redirect=${encodeURIComponent(pathname)}`)
           break
         default:
           break

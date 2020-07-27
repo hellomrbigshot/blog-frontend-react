@@ -7,6 +7,7 @@ import ArticleItemSkeleton from '../../components/ArticleItem/skeleton'
 import { Pagination, BackTop } from 'antd'
 import { useParams, useHistory } from 'react-router-dom'
 import { useQuery } from '../../common/index'
+import Page from '../../components/Pagination'
 
 function Home () {
   let _page = useQuery('page')
@@ -37,7 +38,8 @@ function Home () {
         : (['1', '2', '3'].map(_ => (<ArticleItemSkeleton key={_}/>)))
       }
       <BackTop />
-      {total > 10 ? <Pagination current={page} onChange={changePage} total={total} /> : null}
+      {total > 10 ? <Pagination current={page} onChange={changePage} total={total} showSizeChanger={false}/> : null}
+      <Page total={total} current={page} onChange={changePage} />
     </HomeWrapper>
   )
 }

@@ -7,13 +7,15 @@ import '@ant-design/compatible/assets/index.css'
 import { Input, Button } from 'antd'
 import { LoginWrapper, LoginBox, LoginInfo, Logo } from './styled'
 import { actionCreators } from './store'
+import { useQuery } from '../../common'
 
-function LoginForm({ location: { query }, form }) {
+function LoginForm({ form }) {
   const dispatch = useDispatch()
   const user = useSelector(state => state.getIn(['user', 'user']))
-  const redirectUrl = query ? query.redirect : null
+  const queryRedirect = useQuery('redirect')
+  const redirectUrl = queryRedirect ? decodeURIComponent(queryRedirect) : null
+  const registerPath = queryRedirect ? `/register?redirect=${encodeURIComponent(redirectUrl)}` : '/register'
   const { getFieldDecorator } = form
-  const registerPath = redirectUrl ? { pathname: '/register', query: { redirect: redirectUrl } } : '/register'
   const handleSubmit = useCallback(e => {
     e.preventDefault()
     form.validateFields((err, values) => {

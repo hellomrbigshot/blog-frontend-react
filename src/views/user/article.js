@@ -33,8 +33,9 @@ function LimitArticleList () {
     }, [])
     return fromJS(result)
   }
+  const redirectUrl = encodeURIComponent('/user/list')
   return !user ? (
-    <Redirect to={{ pathname: '/login', query: { redirect: '/user/list' } }} />
+    <Redirect to={`/login?redirect=${redirectUrl}`} />
   ) : (
     <ArticleWrapper>
       <h2>我的文章</h2>

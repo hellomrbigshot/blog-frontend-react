@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Fragment } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useHistory, useLocation } from 'react-router-dom'
@@ -63,10 +64,10 @@ function Header () {
           </Link>
         </DropdownItem>
         <DropdownItem>
-          <Link to='' onClick={() => dispatch(loginCreator.logout())}>
+          <a onClick={() => dispatch(loginCreator.logout())}>
             <i className="iconfont icon-signout_detail_toil" />
             <span>退出</span>
-          </Link>
+          </a>
         </DropdownItem>
       </DropdownWrapper>
     )
@@ -166,10 +167,10 @@ function Header () {
           </AvatarWrapper>
         ) : (
           <Fragment>
-            <Link to="/register">
+            <Link to={`/register?redirect=${encodeURIComponent(pathname)}`}>
               <Button className="reg">注册</Button>
             </Link>
-            <Link to="/login">
+            <Link to={`/login?redirect=${encodeURIComponent(pathname)}`}>
               <Button className="login">登录</Button>
             </Link>
           </Fragment>
