@@ -27,8 +27,9 @@ function CommentList({ commentList, article, user, history, location }) {
     // 获取 input 的值
     replyContent = input.target.value
   }
+  const redirectUrl = encodeURIComponent(location.pathname)
   const handleReplyComment = (i, user) => {
-    !user && history.push({ pathname: '/login', query: { redirect: location.pathname } })
+    !user && history.push(`/login?redirect=${redirectUrl}`)
     dispatch(showReplyInput(i))
   }
   const handleSubmitReply = (comment, i, replyContent) => {

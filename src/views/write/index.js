@@ -90,7 +90,7 @@ function Write ({ match: { params = null }, history }) {
   }, [id])
   const getArticleDetail = (id) => {
     fetch
-      .post('/api/page/detail', { id })
+      .post('/api/page/editdetail', { id })
       .then(res => {
         setArticleDetail(res.data.data)
       })
@@ -176,8 +176,9 @@ function Write ({ match: { params = null }, history }) {
         console.log(e.message)
       })
   }
+  const redirectUrl = encodeURIComponent('/write')
   return !user ? (
-    <Redirect to={{ pathname: '/login', query: { redirect: '/write' } }} />
+    <Redirect to={`/login?redirect=${redirectUrl}`} />
   ) : (
     <Fragment>
       <WriteForm

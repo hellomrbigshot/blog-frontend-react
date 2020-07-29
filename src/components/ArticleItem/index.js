@@ -9,7 +9,7 @@ function articleItem({ article }) {
     return (
         <ArticleItem>
             <Link to={`/detail/${article.get('_id')}`}>
-                <Header>{article.get('title')}</Header>
+                <Header title={article.get('title')}>{article.get('title')}</Header>
             </Link>
             <Info>
                 <span>更新于 {formatTime(article.get('update_time'))}</span>

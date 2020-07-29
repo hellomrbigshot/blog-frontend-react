@@ -7,25 +7,27 @@ export function* getArticleList () {
   yield takeLatest(GET_ARTICLE_LIST, fetchArticleList)
 }
 
-function* fetchArticleList (action) {
+function* fetchArticleList ({ page, keywords }) {
   try {
-    const URL = !action.keywords ? '/api/page/pagelist' : '/api/page/searchpage'
-    let formData = !action.keywords
+    const URL = !keywords ? '/api/page/pagelist' : '/api/page/searchpage'
+    let formData = !keywords
       ? {
           type: '',
           status: 'normal',
           content: '',
           pageSize: 10,
-          page: action.page,
+          page,
           secret: false,
-          sort: 'update_time',
+          sort: 'create_time',
         }
       : {
-          keywords: action.keywords,
+          keywords,
+          page,
+          pageSize: 10
         }
     let res = yield fetch.post(URL, formData)
     const { result, total } = res.data.data
-    yield put(initArticleList(result, action.page, total))
+    yield put(initArticleList(result, page, total, keywords))
     window.scrollTo(0, 0)
   } catch (e) {
     console.log(e.message)

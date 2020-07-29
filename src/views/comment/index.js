@@ -18,8 +18,9 @@ function Comment({ history }) {
   const getCommentList = (type, page) => {
     dispatch(actionCreators.getCommentList(type, page))
   }
+  const redirectUrl = encodeURIComponent('/comment/list')
   return !user ? (
-    <Redirect to={{ pathname: '/login', query: { redirect: '/comment/list' } }} />
+    <Redirect to={`/login?redirect=${redirectUrl}`} />
   ) : (
     <Tabs defaultActiveKey="to_user" onChange={key => getCommentList(key, 1)}>
       <TabPane tab="我收到的" key="to_user">

@@ -7,11 +7,14 @@ import '@ant-design/compatible/assets/index.css'
 import { Input, Button } from 'antd'
 import { LoginWrapper, LoginBox, LoginInfo, Logo } from './styled'
 import { actionCreators } from './store'
+import { useQuery } from '../../common'
 
-function RegisterForm({ location: { query }, form }) {
+function RegisterForm({ form }) {
   const dispatch = useDispatch()
   const user = useSelector(state => state.getIn(['user', 'user']))
-  const redirectUrl = query ? query.redirect : null
+  const queryRedirect = useQuery('redirect')
+  const redirectUrl = queryRedirect ? decodeURIComponent(queryRedirect) : null
+  const loginPath = queryRedirect ? `/login?redirect=${encodeURIComponent(redirectUrl)}` : '/register'
   const { getFieldDecorator } = form
   const compareToFirstPassword = useCallback(
     (rule, value, callback) => {
@@ -44,7 +47,7 @@ function RegisterForm({ location: { query }, form }) {
       </Link>
       <LoginBox>
         <LoginInfo>
-          <Link to="/login">登录</Link>
+          <Link to={loginPath}>登录</Link>
           <b>·</b>
           <Link to="/register" className="active">
             注册

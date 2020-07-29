@@ -1,19 +1,17 @@
 import React, { useEffect, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Input, Button } from 'antd'
+import { useParams, useHistory, useLocation } from 'react-router-dom'
 import { handleCommentChange, getArticleDetail, resetArticleDetail, resetCommentList, getCommentList, handleSubmitComment as submitComment } from './store/actionCreators'
 import { DetailWrapper } from './styled'
 import ArticleDetail from './components/ArticleDetail'
 import CommentList from './components/CommentList'
 import ArticleDetailSkeleton from './components/ArticleDetailSkeleton'
-function Detail({
-  match: {
-    params: { id },
-    location,
-    history
-  }
-}) {
+function Detail() {
   const dispatch = useDispatch()
+  const { pathname } = useLocation()
+  const { id } = useParams()
+  const history = useHistory()
   let detail = useSelector(state => state.getIn(['detail', 'detail']))
   const _id = useSelector(state => state.getIn(['detail', 'detail', '_id']))
   const commentList = useSelector(state => state.getIn(['detail', 'commentList']))
@@ -38,20 +36,14 @@ function Detail({
       reply_content: ''
     }
     dispatch(submitComment(formData))
-    document.querySelector('#commentList').scrollIntoView()
+    document.querySelector('#commentList') && document.querySelector('#commentList').scrollIntoView()
   }, [dispatch, comment])
   const handleFocus = useCallback(() => {
-    console.log('trigger')
     if (!user) {
-      const path = {
-        pathname: '/login',
-        query: {
-          redirect: location.pathname
-        }
-      }
-      history.push(path)
+      const redirectUrl = encodeURIComponent(pathname)
+      history.push(`/login?redirect=${redirectUrl}`)
     }
-  }, [user, history, location])
+  }, [user, history, pathname])
   const handleInputChange = useCallback(
     comment => {
       dispatch(handleCommentChange(comment))

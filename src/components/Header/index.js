@@ -1,11 +1,12 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Fragment } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Link, withRouter } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import { CSSTransition } from 'react-transition-group'
 import classnames from 'classnames'
-import { Switch } from 'antd'
-import { BulbTwoTone } from '@ant-design/icons'
-import toggleAntdTheme from '../../common/theme'
+// import { Switch } from 'antd'
+// import { BulbTwoTone } from '@ant-design/icons'
+// import toggleAntdTheme from '../../common/theme'
 import {
   HeaderWrapper,
   Logo,
@@ -23,8 +24,10 @@ import {
 import { actionCreators } from './store'
 import { actionCreators as loginCreator } from '../../views/user/store'
 
-function Header ({ location: { pathname }, history }) {
+function Header () {
   const dispatch = useDispatch()
+  const history = useHistory()
+  const { pathname } = useLocation()
   const focused = useSelector(state => state.getIn(['header', 'focused']))
   const user = useSelector(state => state.getIn(['user', 'user']))
   const mouseIn = useSelector(state => state.getIn(['header', 'mouseIn']))
@@ -61,10 +64,10 @@ function Header ({ location: { pathname }, history }) {
           </Link>
         </DropdownItem>
         <DropdownItem>
-          <Link to='' onClick={() => dispatch(loginCreator.logout())}>
+          <a onClick={() => dispatch(loginCreator.logout())}>
             <i className="iconfont icon-signout_detail_toil" />
             <span>退出</span>
-          </Link>
+          </a>
         </DropdownItem>
       </DropdownWrapper>
     )
@@ -82,10 +85,10 @@ function Header ({ location: { pathname }, history }) {
       history.push(`/home/${keywords.value}`)
     }
   }
-  const handleSwitch = val => {
-    toggleAntdTheme(val ? 'light' : 'dark')
-    dispatch(actionCreators.themeSwitch(val ? 'light' : 'dark'))
-  }
+  // const handleSwitch = val => {
+  //   toggleAntdTheme(val ? 'light' : 'dark')
+  //   dispatch(actionCreators.themeSwitch(val ? 'light' : 'dark'))
+  // }
   const hideHeaderPath = ['/login', '/register', '/404']
   const hideHeader = hideHeaderPath.includes(pathname.trim())
   const vueIcon = `<use xlink:href='#icon-vue' />`
@@ -123,6 +126,9 @@ function Header ({ location: { pathname }, history }) {
           <Link to="/lab/list">实验室</Link>
         </NavItem>
         <NavItem>
+          <Link to="/changelog">更新日志</Link>
+        </NavItem>
+        <NavItem>
           <a href="https://vue.hellomrbigbigshot.xyz">
             <svg
               className="icon"
@@ -133,14 +139,14 @@ function Header ({ location: { pathname }, history }) {
             版本
           </a>
         </NavItem>
-        <NavItem>
+        {/* <NavItem>
           <Switch
             defaultChecked
             checkedChildren={<BulbTwoTone twoToneColor="#fff" />}
             unCheckedChildren={<BulbTwoTone twoToneColor="#fcee80" />}
             onChange={handleSwitch}
           />
-        </NavItem>
+        </NavItem> */}
       </Nav>
       <Addition>
         <Link to="/write">
@@ -161,10 +167,10 @@ function Header ({ location: { pathname }, history }) {
           </AvatarWrapper>
         ) : (
           <Fragment>
-            <Link to="/register">
+            <Link to={`/register?redirect=${encodeURIComponent(pathname)}`}>
               <Button className="reg">注册</Button>
             </Link>
-            <Link to="/login">
+            <Link to={`/login?redirect=${encodeURIComponent(pathname)}`}>
               <Button className="login">登录</Button>
             </Link>
           </Fragment>
@@ -173,4 +179,4 @@ function Header ({ location: { pathname }, history }) {
     </HeaderWrapper>
   )
 }
-export default withRouter(Header)
+export default Header
