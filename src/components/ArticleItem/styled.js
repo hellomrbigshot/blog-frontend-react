@@ -12,6 +12,9 @@ export const Header = styled.div`
   font-size: 30px;
   height: 45px;
   line-height: 45px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   color: ${(props) => props.theme['mainColor']};
 `
 

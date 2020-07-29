@@ -17,7 +17,6 @@ axios.interceptors.request.use(
     return config
   },
   (error) => {
-    store.dispatch(deleteFetch())
     return Promise.reject(error)
   }
 )
