@@ -167,7 +167,7 @@ function Write ({ match: { params = null }, history }) {
       .post(url, sendData)
       .then(res => {
         if (sendData.status === 'normal') {
-          history.push({ pathname: `/detail/${res.data.data.id}` })
+          history.push({ pathname: `/detail/${res.data.data.id}/true` })
         } else {
           history.push('/user/draft')
         }

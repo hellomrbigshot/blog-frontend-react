@@ -10,7 +10,7 @@ import ArticleDetailSkeleton from './components/ArticleDetailSkeleton'
 function Detail() {
   const dispatch = useDispatch()
   const { pathname } = useLocation()
-  const { id } = useParams()
+  const { id, refresh } = useParams()
   const history = useHistory()
   let detail = useSelector(state => state.getIn(['detail', 'detail']))
   const _id = useSelector(state => state.getIn(['detail', 'detail', '_id']))
@@ -18,7 +18,7 @@ function Detail() {
   const comment = useSelector(state => state.getIn(['detail', 'comment']))
   const user = useSelector(state => state.getIn(['user', 'user']))
   useEffect(() => {
-    if (_id !== id) {
+    if (_id !== id || refresh) {
       dispatch(resetArticleDetail())
       dispatch(resetCommentList())
       dispatch(getArticleDetail(id))
