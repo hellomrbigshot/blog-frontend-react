@@ -40,7 +40,7 @@ function ThemeApp () {
               <Redirect exact from="/" to="/home" />
               <Route path="/home/:keywords?" component={Home} />
               <Route
-                path="/detail/:id"
+                path="/detail/:id/:refresh?"
                 exact
                 component={Detail}
                 onEnter={handleInitDetail}
