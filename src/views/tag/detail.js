@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Pagination } from 'antd'
+import Page from '../../components/Pagination'
 import { getTagDetail, getArticleList, resetArticleList, resetTagDetail } from './store/actionCreators'
 import { TagDetailWrapper, ArticleListWrapper } from './styled'
 import { useParams, useHistory } from 'react-router-dom'
@@ -67,7 +67,7 @@ function TagDetail() {
           : <ArticleListSkeleton/>
       }
       
-      {total > 10 ? <Pagination current={page} total={total} onChange={pageChange} /> : null}
+      {total > 10 ? <Page current={page} total={total} onChange={pageChange} /> : null}
     </div>
   )
 }

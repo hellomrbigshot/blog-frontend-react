@@ -1,7 +1,8 @@
 import React, { useEffect, Fragment, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fromJS } from 'immutable'
-import { Pagination, Timeline, Tag } from 'antd'
+import { Timeline, Tag } from 'antd'
+import Page from '../../components/Pagination'
 import classnames from 'classnames'
 import { Link, Redirect } from 'react-router-dom'
 import { getArticleList } from './store/actionCreators'
@@ -75,7 +76,7 @@ function LimitArticleList () {
           ))}
         </Timeline>
       </ArticleList>
-      {total > 10 ? <Pagination total={total} onChange={handlePageChange} /> : null}
+      {total > 10 ? <Page total={total} onChange={handlePageChange} /> : null}
     </ArticleWrapper>
   )
 }

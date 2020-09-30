@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { TagWrapper, Header, ListWrapper, TagItem, TagHeader, TagDesc, TagBottom } from './styled'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory, Link } from 'react-router-dom'
-import { Pagination } from 'antd'
+import Page from '../../components/Pagination'
 import { actionCreators } from './store'
 import { useQuery } from '../../common'
 import TagListSkeleton from './components/TagListSkeleton'
@@ -45,7 +45,7 @@ function TagList() {
             </TagItem>
           ))}
       </ListWrapper>
-      {tagList.size === 0 ? null : <Pagination current={page} total={total} onChange={pageChange} />}
+      {tagList.size === 0 ? null : <Page current={page} total={total} onChange={pageChange} />}
     </TagWrapper>
   )
 }
