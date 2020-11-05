@@ -4,6 +4,21 @@ export const CommentWrapper = styled.div`
     display: flex;
     margin-top: 15px;
     padding: 8px 14px;
+    border-radius: 5px;
+    position: relative;
+    &.unread-comment {
+      &:after {
+        content: '';
+        display: block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        position: absolute;
+        background: #FF3333;
+        right: 0;
+        top: 10px;
+      }
+    }
 `
 export const CommentAvatar = styled.div`
     margin-right: 15px;

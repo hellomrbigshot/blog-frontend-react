@@ -1,9 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useHistory, useLocation } from 'react-router-dom'
 import { CSSTransition } from 'react-transition-group'
 import classnames from 'classnames'
+import io from 'socket.io-client'
+import Cookies from 'js-cookie'
 // import { Switch } from 'antd'
 // import { BulbTwoTone } from '@ant-design/icons'
 // import toggleAntdTheme from '../../common/theme'
@@ -19,7 +21,8 @@ import {
   AvatarWrapper,
   AvatarContent,
   DropdownWrapper,
-  DropdownItem
+  DropdownItem,
+  IconBell
 } from './style'
 import { actionCreators } from './store'
 import { actionCreators as loginCreator } from '../../views/user/store'
@@ -31,7 +34,33 @@ function Header () {
   const focused = useSelector(state => state.getIn(['header', 'focused']))
   const user = useSelector(state => state.getIn(['user', 'user']))
   const mouseIn = useSelector(state => state.getIn(['header', 'mouseIn']))
+  const socket = useSelector(state => state.getIn(['header', 'socket']))
+  const message = useSelector(state => state.getIn(['header', 'message']))
   let keywords = ''
+  useEffect(() => {
+    if (user && !socket) {
+      let newSocket = io.connect(`${process.env.NODE_ENV === 'development' ? 'http://localhost:8082' : 'https://hellomrbigbigshot.xyz'}`, {
+        reconnection: false, // 禁止自动重连
+        query: `token=${Cookies.get('token')}`
+      })
+      newSocket.on('unread-comment', data => {
+        dispatch(actionCreators.messageChange(data))
+      })
+      newSocket.on('connect_error', (error) => {
+        console.log(error)
+      })
+      dispatch(actionCreators.socketInit(newSocket))
+      newSocket.connect()
+    } else {
+      if (socket && !user) {
+        console.log('disconnect')
+        socket.disconnect()
+        dispatch(actionCreators.socketInit(null))
+      }
+    }
+    // return 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user, socket, message])
   const getDropDown = () => {
     return (
       <DropdownWrapper
@@ -149,32 +178,40 @@ function Header () {
         </NavItem> */}
       </Nav>
       <Addition>
+        {user ? (
+          <Fragment>
+            <Link to="/comment/list">
+              <IconBell
+                className={classnames('iconfont', 'icon-bell1', { 'icon-red': message > 0 })}
+                number={message}
+              />
+            </Link>
+            <AvatarWrapper
+              onMouseEnter={() => dispatch(actionCreators.mouseIn())}
+              onMouseLeave={() => dispatch(actionCreators.mouseLeave())}
+            >
+              <AvatarContent src={`/api/file/avatar/user/?username=${user}`} />
+              <CSSTransition in={mouseIn} timeout={400} classNames="fade">
+                {getDropDown()}
+              </CSSTransition>
+            </AvatarWrapper>
+          </Fragment>
+        ) : (
+          <Fragment>
+            <Link to={`/login?redirect=${encodeURIComponent(pathname)}`}>
+              <Button className="login">登录</Button>
+            </Link>
+            <Link to={`/register?redirect=${encodeURIComponent(pathname)}`}>
+              <Button className="reg">注册</Button>
+            </Link>
+          </Fragment>
+        )}
         <Link to="/write">
           <Button className="write">
             <i className={classnames('iconfont', 'icon-yumaobi')} />
             写文章
           </Button>
         </Link>
-        {user ? (
-          <AvatarWrapper
-            onMouseEnter={() => dispatch(actionCreators.mouseIn())}
-            onMouseLeave={() => dispatch(actionCreators.mouseLeave())}
-          >
-            <AvatarContent src={`/api/file/avatar/user/?username=${user}`} />
-            <CSSTransition in={mouseIn} timeout={400} classNames="fade">
-              {getDropDown()}
-            </CSSTransition>
-          </AvatarWrapper>
-        ) : (
-          <Fragment>
-            <Link to={`/register?redirect=${encodeURIComponent(pathname)}`}>
-              <Button className="reg">注册</Button>
-            </Link>
-            <Link to={`/login?redirect=${encodeURIComponent(pathname)}`}>
-              <Button className="login">登录</Button>
-            </Link>
-          </Fragment>
-        )}
       </Addition>
     </HeaderWrapper>
   )

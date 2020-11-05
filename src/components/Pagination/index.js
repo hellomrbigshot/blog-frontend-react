@@ -8,7 +8,6 @@ function Pagination ({ current = 1, total, pageSize = 10, onChange }) {
     setPage(current)
   }, [current])
   const handlePageChange = (_page) => {
-    console.log(_page)
     setPage(_page)
     onChange && onChange(_page)
   }

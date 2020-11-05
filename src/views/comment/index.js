@@ -13,12 +13,14 @@ function Comment({ history }) {
   const user = useSelector(state => state.getIn(['user', 'user']))
   const commentList = useSelector(state => state.getIn(['comment', 'commentList']))
   const total = useSelector(state => state.getIn(['comment', 'total']))
-  useEffect(() => {
-    dispatch(actionCreators.getCommentList('to_user', 1))
-  }, [dispatch])
   const getCommentList = (type, page) => {
     dispatch(actionCreators.getCommentList(type, page))
   }
+  useEffect(() => {
+    getCommentList('to_user', 1)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch])
+  
   const redirectUrl = encodeURIComponent('/comment/list')
   return !user ? (
     <Redirect to={`/login?redirect=${redirectUrl}`} />

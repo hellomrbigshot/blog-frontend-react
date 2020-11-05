@@ -26,7 +26,7 @@ import themeInfo from './theme'
 function ThemeApp () {
   const theme = useSelector(state => state.getIn(['header', 'theme']))
   const handleInitDetail = (nextState, replace) => {
-    console.log(nextState)
+    // console.log(nextState)
     replace({ path: '/tag/list' })
   }
   return (
