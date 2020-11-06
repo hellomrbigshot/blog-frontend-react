@@ -22,4 +22,4 @@ script:
 - yarn build
 after_success:
 - rm -rf root@39.104.15.110:/home/www/react_pc/*
-- scp -r ./build/* root@39.104.15.110:/home/www/react_pc
+- scp -o stricthostkeychecking=no -r ./build/* root@39.104.15.110:/home/www/react_pc
