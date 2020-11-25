@@ -14,7 +14,7 @@
     "customize-cra": "1.0.0",
     "fs": "^0.0.1-security",
     "global": "^4.4.0",
-    "highlight.js": "^10.1.1",
+    "highlight.js": "^10.1.2",
     "history": "^5.0.0",
     "immutable": "^4.0.0-rc.12",
     "js-cookie": "^2.2.0",
