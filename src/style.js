@@ -59,7 +59,8 @@ figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary {
 }
 #root {
-  padding-top: 1px;
+  height: 100vh;
+  overflow-y: scroll;
 }
 .icon {
   width: 1em; height: 1em;

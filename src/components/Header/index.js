@@ -27,7 +27,7 @@ import {
 import { actionCreators } from './store'
 import { actionCreators as loginCreator } from '../../views/user/store'
 
-function Header () {
+function Header ({ scrollShowHeader }) {
   const dispatch = useDispatch()
   const history = useHistory()
   const { pathname } = useLocation()
@@ -122,7 +122,7 @@ function Header () {
   const hideHeader = hideHeaderPath.includes(pathname.trim())
   const vueIcon = `<use xlink:href='#icon-vue' />`
   return hideHeader ? null : (
-    <HeaderWrapper>
+    <HeaderWrapper className={classnames({ 'hide-header': !scrollShowHeader })}>
       <Link to="/">
         <Logo />
       </Link>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
@@ -22,18 +22,38 @@ import { AppWrapper } from './style'
 import { ThemeProvider } from 'styled-components'
 import { useSelector } from 'react-redux'
 import themeInfo from './theme'
+import throttle from 'lodash/throttle'
 
 function ThemeApp () {
   const theme = useSelector(state => state.getIn(['header', 'theme']))
+  const [showHeader, setShowHeader] = useState(true)
+  const [beforeScrollTop, setBeforeScrollTop] = useState(0)
   const handleInitDetail = (nextState, replace) => {
     // console.log(nextState)
     replace({ path: '/tag/list' })
   }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const contentScroll = useCallback(throttle(() => {
+    const root = document.querySelector('#root')
+    const scrollTop = root.scrollTop
+    if (scrollTop > beforeScrollTop) { // 向下滚动
+      showHeader && scrollTop - 1200 > 0 && setShowHeader(false)
+    } else { // 向上滚动
+      !showHeader && setShowHeader(true)
+    }
+    setBeforeScrollTop(scrollTop)
+  }, 300, { leading: false }), [showHeader, beforeScrollTop, setShowHeader, setBeforeScrollTop])
+  useEffect(() => {
+    document.querySelector('#root').addEventListener('scroll', contentScroll)
+    return () => {
+      document.querySelector('#root').removeEventListener('scroll', contentScroll)
+    }
+  }, [contentScroll])
   return (
     <ThemeProvider theme={themeInfo[theme]}>
       <Router>
         <ScrollToTop />
-        <Header />
+        <Header scrollShowHeader={showHeader}/>
         <div style={{ background: themeInfo[theme].mainBg, overflow: 'auto' }}>
           <AppWrapper>
             <Switch>

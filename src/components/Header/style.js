@@ -10,9 +10,13 @@ export const HeaderWrapper = styled.div`
   left: 0;
   right: 0;
   top: 0;
-  z-index: 3;
   box-shadow: 0 1px 0 ${(props) => props.theme['header/boxShadowColor']};
   justify-content: center;
+  overflow: hidden;
+  &.hide-header {
+    transform: translate3d(0, -100%, 0);
+  }
+  transition: all ease-in .2s;
 `
 
 export const Logo = styled.div`
