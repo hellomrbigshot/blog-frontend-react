@@ -34,19 +34,19 @@ function ThemeApp () {
   }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const contentScroll = useCallback(throttle(() => {
-    const root = document.querySelector('#root')
+    const root = document.documentElement
     const scrollTop = root.scrollTop
     if (scrollTop > beforeScrollTop) { // 向下滚动
-      showHeader && scrollTop - 1200 > 0 && setShowHeader(false)
+      showHeader && scrollTop - 500 > 0 && setShowHeader(false)
     } else { // 向上滚动
       !showHeader && setShowHeader(true)
     }
     setBeforeScrollTop(scrollTop)
   }, 300, { leading: false }), [showHeader, beforeScrollTop, setShowHeader, setBeforeScrollTop])
   useEffect(() => {
-    document.querySelector('#root').addEventListener('scroll', contentScroll)
+    window.addEventListener('scroll', contentScroll)
     return () => {
-      document.querySelector('#root').removeEventListener('scroll', contentScroll)
+      window.removeEventListener('scroll', contentScroll)
     }
   }, [contentScroll])
   return (

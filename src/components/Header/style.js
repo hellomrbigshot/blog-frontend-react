@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const HeaderWrapper = styled.div`
   height: 56px;
   line-height: 56px;
+  z-index: 250;
   background: ${(props) => props.theme['mainBg']};
   color: ${(props) => props.theme['mainColor']};
   position: fixed;

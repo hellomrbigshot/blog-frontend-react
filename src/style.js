@@ -29,7 +29,7 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
-	line-height: 1;
+  line-height: 1;
 }
 ol, ul {
 	list-style: none;
@@ -57,10 +57,6 @@ table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed, 
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary {
-}
-#root {
-  height: 100vh;
-  overflow-y: scroll;
 }
 .icon {
   width: 1em; height: 1em;
