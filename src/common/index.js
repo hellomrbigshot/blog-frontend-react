@@ -7,14 +7,13 @@ import { useLocation } from 'react-router-dom'
 marked.setOptions({
     renderer: new marked.Renderer(),
     highlight: function(code) {
-        return hljs.highlightAuto(code).value
+      return hljs.highlightAuto(code).value
     },
     pedantic: false,
     gfm: true,
     tables: true,
     breaks: true,
-    headerIds: true,
-    headerPrefix: 'react',
+    headerIds: false,
     sanitize: false,
     smartLists: true,
     smartypants: false,
