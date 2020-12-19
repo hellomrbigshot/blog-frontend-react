@@ -1,5 +1,15 @@
 const settings = [
   {
+    version: 'v1.1.1',
+    date: '2020-11-05',
+    desc: {
+      Feature: [
+        '使用自定义分页组件',
+        '新增新消息提醒功能'
+      ]
+    }
+  },
+  {
     version: 'v1.1.0',
     date: '2020-07-22',
     desc: {

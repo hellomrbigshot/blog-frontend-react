@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import { EditOutlined } from '@ant-design/icons'
-import { Pagination, Avatar, Message } from 'antd'
+import { Avatar, Message } from 'antd'
+import Page from '../../components/Pagination'
 import { Link } from 'react-router-dom'
 import { getUserInfo, getLimitArticleList } from './store/actionCreators'
 import { post } from '../../common/fetch'
@@ -99,7 +100,7 @@ function UserInfo ({ match: { params: { name: user } } }) {
           </LimitArticleItem>
         ))}
       </LimitArticleList>
-      {total > 10 ? <Pagination total={total} onChange={handlePageChange} /> : null}
+      {total > 10 ? <Page total={total} onChange={handlePageChange} /> : null}
       <AvatarCropper
         visible={avatarModalVisible}
         img={img}

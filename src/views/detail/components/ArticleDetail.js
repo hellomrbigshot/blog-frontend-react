@@ -2,9 +2,24 @@ import React, { Fragment } from 'react'
 import { Header, Info, Content } from '../styled'
 import { Link } from 'react-router-dom'
 import { marked, formatTime } from '../../../common'
+import ArticleDetailNav from './ArticleDetailNav'
+const nav = new ArticleDetailNav()
+const renderer = new marked.Renderer()
+renderer.heading = function (text, level) {
+  nav.add(text, level)
+  return `
+    <h${level} id="h${level}-${nav.navIndexObj[level].length + 1}">${text}</h${level}>
+    `
+}
+marked.setOptions({ renderer })
 
 function articleDetail({ article, user }) {
   const tags = article.get('tags')
+  // const contentMd = article.get('content')
+  // const regHeader = /(#{1,5})\s.*\n/g
+  // const headerArr = contentMd.match(regHeader)
+  // const showSideNav = headerArr && headerArr.length
+  nav.reset()
   return (
     <div>
       <Header>{article.get('title')}</Header>
@@ -24,6 +39,10 @@ function articleDetail({ article, user }) {
         ) : null}
       </Info>
       <Content className="m-editor-preview" dangerouslySetInnerHTML={{ __html: marked(article.get('content')) }} />
+      {
+        nav.render()
+      }
+      
     </div>
   )
 }

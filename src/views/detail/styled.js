@@ -140,6 +140,44 @@ export const CommentReplyBtn = styled.div`
   }
 `
 
+export const NavWrapper = styled.ul`
+  list-style: none;
+  position: fixed;
+  top: 30vh;
+  right: 20px;
+  max-height: 50vh;
+  background: rgba(255, 255, 255, .8);
+  padding: 10px 2px;
+  box-shadow: rgba(0, 0, 0, .8) 0 0 1px 1px;
+  overflow: hidden auto;
+  border-radius: 5px;
+  width: 250px;
+  scrollbar-width: none;
+  z-index: 999;
+  &::-webkit-scrollbar { width: 0 !important; }
+`
+
+export const NavItem = styled.li`
+  margin-top: 8px;
+  font-size: 14px;
+  color: #000;
+  font-weight: 500;
+  width: 100%;
+  padding: 0 8px;
+  border-radius: 3px;
+  &:hover {
+    color: #1989fa;
+    cursor: pointer;
+    background: rgba(255, 255, 255, .5);
+  }
+  pre {
+    display: block;
+    text-overflow: ellipsis;
+    line-height: 20px;
+    overflow: hidden;
+  }
+`
+
 export const SkeletonDiv = styled.div`
   height: 25px;
   background: ${props => props.theme['skeletonBg']};

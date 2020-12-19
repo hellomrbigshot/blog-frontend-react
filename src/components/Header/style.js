@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const HeaderWrapper = styled.div`
   height: 56px;
   line-height: 56px;
+  z-index: 250;
   background: ${(props) => props.theme['mainBg']};
   color: ${(props) => props.theme['mainColor']};
   position: fixed;
@@ -10,9 +11,13 @@ export const HeaderWrapper = styled.div`
   left: 0;
   right: 0;
   top: 0;
-  z-index: 3;
   box-shadow: 0 1px 0 ${(props) => props.theme['header/boxShadowColor']};
   justify-content: center;
+  overflow: hidden;
+  &.hide-header {
+    transform: translate3d(0, -100%, 0);
+  }
+  transition: all ease-in .2s;
 `
 
 export const Logo = styled.div`
@@ -122,7 +127,6 @@ export const Addition = styled.div`
   height: 56px;
   top: 0;
   display: flex;
-  flex-direction: row-reverse;
   @media (max-width: 750px) {
     display: none;
   }
@@ -152,7 +156,6 @@ export const Button = styled.div`
   }
   &.login {
     color: ${(props) => props.theme['header/btnLoginColor']};
-    margin-left: 20px;
     &:hover {
       color: ${(props) => props.theme['header/btnLoginHoverColor']};
     }
@@ -244,5 +247,34 @@ export const DropdownItem = styled.div`
   }
   &:hover {
     background: ${(props) => props.theme['header/avatarHoverBg']};
+  }
+`
+
+export const IconBell = styled.i`
+  font-size: 20px;
+  position: relative;
+  padding: 0 8px;
+  display: block;
+  &.icon-red {
+    &::after {
+      content: ${props => props.number ? `'${props.number}'` : '0'};
+      display: block;
+      font-size: 12px;
+      text-align: center;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: red;
+      color: #fff;
+      position: absolute;
+      right: 0px;
+      top: 12px;
+      line-height: 15px;
+      transform: scale(.8, .8)
+    }
+  }
+  &:hover {
+    cursor: pointer;
+    background: #f5f5f5;
   }
 `
