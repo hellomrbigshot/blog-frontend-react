@@ -15,9 +15,9 @@ before_install:
 - echo -e "Host 39.104.15.110\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 install:
 - git pull
-- rm -f yarn-lock.json && yarn
+- yarn
 script:
 - yarn build
 after_success:
-- rm -rf root@39.104.15.110:/home/www/react_pc/*
+- ssh root@39.104.15.110 'rm -rf /home/www/react_pc/*'
 - scp -o stricthostkeychecking=no -r ./build/* root@39.104.15.110:/home/www/react_pc
