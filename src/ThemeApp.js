@@ -54,7 +54,7 @@ function ThemeApp () {
       <Router>
         <ScrollToTop />
         <Header scrollShowHeader={showHeader}/>
-        <div style={{ background: themeInfo[theme].mainBg, overflow: 'auto' }}>
+        <div style={{ background: themeInfo[theme].mainBg, overflow: 'auto', position: 'relative', zIndex: 1 }}>
           <AppWrapper>
             <Switch>
               <Redirect exact from="/" to="/home" />
