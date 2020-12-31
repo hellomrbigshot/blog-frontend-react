@@ -1,25 +1,49 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState, useEffect, useCallback } from 'react'
+import { useDispatch } from 'react-redux'
+import {} from '../store'
 import { Header, Info, Content } from '../styled'
 import { Link } from 'react-router-dom'
 import { marked, formatTime } from '../../../common'
+import { resetNavInfo } from '../store/actionCreators'
 import ArticleDetailNav from './ArticleDetailNav'
-const nav = new ArticleDetailNav()
-const renderer = new marked.Renderer()
-renderer.heading = function (text, level) {
-  nav.add(text, level)
-  return `
-    <h${level} id="h${level}-${nav.navIndexObj[level].length + 1}">${text}</h${level}>
-    `
-}
-marked.setOptions({ renderer })
 
-function articleDetail({ article, user }) {
+function ArticleDetail({ article, user }) {
   const tags = article.get('tags')
-  // const contentMd = article.get('content')
-  // const regHeader = /(#{1,5})\s.*\n/g
-  // const headerArr = contentMd.match(regHeader)
-  // const showSideNav = headerArr && headerArr.length
-  nav.reset()
+  const dispatch = useDispatch()
+  const [renderNav, setRenderNav] = useState(false)
+  const [content, setContent] = useState('')
+  const activeNav = useCallback((ele) => {
+    const navId = ele.dataset.link
+    const navEle = document.getElementById(navId)
+    navEle.scrollIntoView({
+      // behavior: 'smooth',
+      block: 'center'
+    })
+    document.querySelectorAll('.blog-nav-header').forEach(ele => {
+      ele.classList.remove('active')
+    })
+    navEle.classList.add('active')
+  }, [])
+  const scrollObserve = useCallback(() => {
+    const navObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            activeNav(entry.target)
+          }
+      })
+    })
+    document.querySelectorAll('.blog-detail-header').forEach(ele => {
+      navObserver.observe(ele)
+    })
+  }, [activeNav])
+  useEffect(() => {
+    dispatch(resetNavInfo())
+    setContent(marked(article.get('content')))
+    setRenderNav(true)
+    setTimeout(() => {
+      scrollObserve()
+    })
+  }, [article, dispatch, scrollObserve])
   return (
     <div>
       <Header>{article.get('title')}</Header>
@@ -38,11 +62,10 @@ function articleDetail({ article, user }) {
           </span>
         ) : null}
       </Info>
-      <Content className="m-editor-preview" dangerouslySetInnerHTML={{ __html: marked(article.get('content')) }} />
+      <Content className="m-editor-preview" dangerouslySetInnerHTML={{ __html: content }} />
       {
-        nav.render()
+        renderNav ? <ArticleDetailNav/> : null
       }
-      
     </div>
   )
 }
@@ -58,4 +81,4 @@ const showTags = (tags) => {
   ))
 }
 
-export default articleDetail
+export default ArticleDetail

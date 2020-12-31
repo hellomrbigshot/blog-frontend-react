@@ -1,24 +1,6 @@
-import marked from 'marked'
-import hljs from './highlight'
+import marked from './marked'
 import * as fetch from './fetch'
 import { useLocation } from 'react-router-dom'
-
-// hljs.initHighlightingOnLoad()
-marked.setOptions({
-    renderer: new marked.Renderer(),
-    highlight: function(code) {
-      return hljs.highlightAuto(code).value
-    },
-    pedantic: false,
-    gfm: true,
-    tables: true,
-    breaks: true,
-    headerIds: false,
-    sanitize: false,
-    smartLists: true,
-    smartypants: false,
-    xhtml: false
-})
 
 /**
  * 

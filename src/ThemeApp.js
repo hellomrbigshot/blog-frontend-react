@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React from 'react'
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
@@ -22,38 +22,17 @@ import { AppWrapper } from './style'
 import { ThemeProvider } from 'styled-components'
 import { useSelector } from 'react-redux'
 import themeInfo from './theme'
-import throttle from 'lodash/throttle'
 
 function ThemeApp () {
   const theme = useSelector(state => state.getIn(['header', 'theme']))
-  const [showHeader, setShowHeader] = useState(true)
-  const [beforeScrollTop, setBeforeScrollTop] = useState(0)
   const handleInitDetail = (nextState, replace) => {
-    // console.log(nextState)
     replace({ path: '/tag/list' })
   }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const contentScroll = useCallback(throttle(() => {
-    const root = document.documentElement
-    const scrollTop = root.scrollTop
-    if (scrollTop > beforeScrollTop) { // 向下滚动
-      showHeader && scrollTop - 500 > 0 && setShowHeader(false)
-    } else { // 向上滚动
-      !showHeader && setShowHeader(true)
-    }
-    setBeforeScrollTop(scrollTop)
-  }, 300, { leading: false }), [showHeader, beforeScrollTop, setShowHeader, setBeforeScrollTop])
-  useEffect(() => {
-    window.addEventListener('scroll', contentScroll)
-    return () => {
-      window.removeEventListener('scroll', contentScroll)
-    }
-  }, [contentScroll])
   return (
     <ThemeProvider theme={themeInfo[theme]}>
       <Router>
         <ScrollToTop />
-        <Header scrollShowHeader={showHeader}/>
+        <Header/>
         <div style={{ background: themeInfo[theme].mainBg, overflow: 'auto', position: 'relative', zIndex: 1 }}>
           <AppWrapper>
             <Switch>
@@ -61,7 +40,6 @@ function ThemeApp () {
               <Route path="/home/:keywords?" component={Home} />
               <Route
                 path="/detail/:id/:refresh?"
-                exact
                 component={Detail}
                 onEnter={handleInitDetail}
               />

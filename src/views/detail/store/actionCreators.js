@@ -8,7 +8,10 @@ import {
   HANDLE_CONCAT_COMMENT,
   HANDLE_COMMENT_CHANGE,
   RESET_ARTICLE_DETAIL,
-  RESET_COMMENT_LIST
+  RESET_COMMENT_LIST,
+  ADD_NAV_INDEX,
+  RESET_NAV_INFO,
+  ADD_NAV_LIST
 } from './actionTypes'
 
 export const getArticleDetail = (id) => {
@@ -88,5 +91,26 @@ export const resetCommentList = () => {
   // 清空评论
   return {
     type: RESET_COMMENT_LIST
+  }
+}
+
+export const addNavList = (level, text) => {
+  return {
+    type: ADD_NAV_LIST,
+    level,
+    text
+  }
+}
+
+export const addNavIndex = (data) => {
+  return {
+    type: ADD_NAV_INDEX,
+    data
+  }
+}
+
+export const resetNavInfo = () => {
+  return {
+    type: RESET_NAV_INFO
   }
 }

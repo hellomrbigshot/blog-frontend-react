@@ -6,12 +6,19 @@ import {
   HANDLE_CONCAT_COMMENT,
   HANDLE_COMMENT_CHANGE,
   RESET_ARTICLE_DETAIL,
-  RESET_COMMENT_LIST
+  RESET_COMMENT_LIST,
+  RESET_NAV_INFO,
+  ADD_NAV_INDEX,
+  ADD_NAV_LIST
 } from './actionTypes'
 const initialState = fromJS({
   detail: {},
   commentList: [],
-  comment: ''
+  comment: '',
+  navInfo: {
+    navIndexObj: {},
+    navList: []
+  }
 })
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -33,6 +40,18 @@ export default (state = initialState, action) => {
       return state.set('detail', fromJS({}))
     case RESET_COMMENT_LIST:
       return state.set('commentList', fromJS([]))
+    case RESET_NAV_INFO:
+      return state.set('navInfo', fromJS({
+        navIndexObj: {},
+        navList: []
+      }))
+    case ADD_NAV_INDEX:
+      return state.updateIn(['navInfo', 'navIndexObj', action.data], item => item ? new Array(item.length + 1) : [])
+    case ADD_NAV_LIST:
+      return state.updateIn(['navInfo', 'navList'], item => item.push({
+        level: action.level,
+        no: state.getIn(['navInfo', 'navIndexObj', action.level]).length + 1,
+        text: action.text }))
     default:
       return state
   }
