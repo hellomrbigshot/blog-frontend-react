@@ -17,7 +17,6 @@ renderer.heading = (text, level) => {
       <h${level}>${text}</h${level}>
       `
   }
-  
 }
 
 // hljs.initHighlightingOnLoad()
