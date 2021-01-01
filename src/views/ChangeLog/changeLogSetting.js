@@ -1,5 +1,14 @@
 const settings = [
   {
+    version: 'v1.2.0',
+    date: '2020-12-31',
+    desc: {
+      Feature: [
+        '博客详情页新增导航栏，支持标题导航联动'
+      ]
+    }
+  },
+  {
     version: 'v1.1.1',
     date: '2020-11-05',
     desc: {
@@ -15,7 +24,6 @@ const settings = [
     desc: {
       Feature: [
         '移除暗黑模式，优化首屏加载速度',
-        '更新依赖',
         '添加更新日志界面'
       ],
       'Bug Fixes': [

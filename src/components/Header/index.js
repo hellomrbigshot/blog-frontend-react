@@ -1,11 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment, useEffect, useState, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useHistory, useLocation } from 'react-router-dom'
 import { CSSTransition } from 'react-transition-group'
 import classnames from 'classnames'
 import io from 'socket.io-client'
 import Cookies from 'js-cookie'
+import throttle from 'lodash/throttle'
 // import { Switch } from 'antd'
 // import { BulbTwoTone } from '@ant-design/icons'
 // import toggleAntdTheme from '../../common/theme'
@@ -27,7 +28,20 @@ import {
 import { actionCreators } from './store'
 import { actionCreators as loginCreator } from '../../views/user/store'
 
-function Header ({ scrollShowHeader }) {
+function Header () {
+  const [showHeader, setShowHeader] = useState(true)
+  const [beforeScrollTop, setBeforeScrollTop] = useState(0)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const contentScroll = useCallback(throttle(() => {
+    const root = document.documentElement
+    const scrollTop = root.scrollTop
+    if (scrollTop > beforeScrollTop) { // 向下滚动
+      showHeader && scrollTop - 500 > 0 && setShowHeader(false)
+    } else { // 向上滚动
+      !showHeader && setShowHeader(true)
+    }
+    setBeforeScrollTop(scrollTop)
+  }, 300, { leading: false }), [showHeader, beforeScrollTop, setShowHeader, setBeforeScrollTop])
   const dispatch = useDispatch()
   const history = useHistory()
   const { pathname } = useLocation()
@@ -36,6 +50,13 @@ function Header ({ scrollShowHeader }) {
   const mouseIn = useSelector(state => state.getIn(['header', 'mouseIn']))
   const socket = useSelector(state => state.getIn(['header', 'socket']))
   const message = useSelector(state => state.getIn(['header', 'message']))
+  
+  // useEffect(() => {
+  //   window.addEventListener('scroll', contentScroll)
+  //   return () => {
+  //     window.removeEventListener('scroll', contentScroll)
+  //   }
+  // }, [contentScroll])
   let keywords = ''
   useEffect(() => {
     if (user && !socket) {
@@ -58,9 +79,12 @@ function Header ({ scrollShowHeader }) {
         dispatch(actionCreators.socketInit(null))
       }
     }
-    // return 
+    window.addEventListener('scroll', contentScroll)
+    return () => {
+      window.removeEventListener('scroll', contentScroll)
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user, socket, message])
+  }, [user, socket, message, contentScroll])
   const getDropDown = () => {
     return (
       <DropdownWrapper
@@ -122,7 +146,7 @@ function Header ({ scrollShowHeader }) {
   const hideHeader = hideHeaderPath.includes(pathname.trim())
   const vueIcon = `<use xlink:href='#icon-vue' />`
   return hideHeader ? null : (
-    <HeaderWrapper className={classnames({ 'hide-header': !scrollShowHeader })}>
+    <HeaderWrapper className={classnames({ 'hide-header': !showHeader })}>
       <Link to="/">
         <Logo />
       </Link>

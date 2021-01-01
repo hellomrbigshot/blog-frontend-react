@@ -148,7 +148,7 @@ export const NavWrapper = styled.ul`
   max-height: 50vh;
   background: rgba(255, 255, 255, .8);
   padding: 10px 2px;
-  box-shadow: rgba(0, 0, 0, .8) 0 0 1px 1px;
+  box-shadow: rgba(64, 169, 255, .8) 0 0 2px;
   overflow: hidden auto;
   border-radius: 5px;
   width: 250px;
@@ -176,6 +176,15 @@ export const NavItem = styled.li`
     line-height: 20px;
     overflow: hidden;
   }
+  &.active {
+    color: #1989fa;
+    background: rgba(255, 255, 255, .5);
+  }
+`
+export const NavHeader = styled.li`
+  display: flex;
+  justify-content: space-between;
+  padding: 0 8px;
 `
 
 export const SkeletonDiv = styled.div`
