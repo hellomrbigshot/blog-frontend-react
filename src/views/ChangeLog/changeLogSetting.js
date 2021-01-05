@@ -1,5 +1,14 @@
 const settings = [
   {
+    version: 'v1.2.1',
+    date: '2021-01-05',
+    desc: {
+      Feature: [
+        '标题导航栏支持隐藏'
+      ]
+    }
+  },
+  {
     version: 'v1.2.0',
     date: '2020-12-31',
     desc: {

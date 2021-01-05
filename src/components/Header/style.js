@@ -237,7 +237,8 @@ export const DropdownItem = styled.div`
     color: ${(props) => props.theme['mainColor']};
     display: block;
     overflow: hidden;
-    display: flex .iconfont {
+    display: flex;
+    .iconfont {
       line-height: 30px;
     }
     span {

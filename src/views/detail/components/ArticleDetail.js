@@ -15,14 +15,14 @@ function ArticleDetail({ article, user }) {
   const activeNav = useCallback((ele) => {
     const navId = ele.dataset.link
     const navEle = document.getElementById(navId)
-    navEle.scrollIntoView({
+    navEle && navEle.scrollIntoView({
       // behavior: 'smooth',
       block: 'center'
     })
     document.querySelectorAll('.blog-nav-header').forEach(ele => {
       ele.classList.remove('active')
     })
-    navEle.classList.add('active')
+    navEle && navEle.classList.add('active')
   }, [])
   const scrollObserve = useCallback(() => {
     const navObserver = new IntersectionObserver(entries => {

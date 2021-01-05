@@ -147,14 +147,28 @@ export const NavWrapper = styled.ul`
   right: 20px;
   max-height: 50vh;
   background: rgba(255, 255, 255, .8);
-  padding: 10px 2px;
+  box-sizing: border-box;
   box-shadow: rgba(64, 169, 255, .8) 0 0 2px;
   overflow: hidden auto;
   border-radius: 5px;
-  width: 250px;
+  width: 0;
+  /* height: 0; */
   scrollbar-width: none;
   z-index: 999;
-  &::-webkit-scrollbar { width: 0 !important; }
+  opacity: 0;
+  transition: opacity 400ms, width 300ms ease-in-out 100ms;
+  &.show-nav-list {
+    width: 250px;
+    height: auto;
+    opacity: 1;
+    transition: width 300ms ease-in-out, opacity 500ms 200ms;
+  }
+  li:first-child {
+    margin-top: 10px;
+  }
+  li:last-child {
+    margin-bottom: 10px;
+  }
 `
 
 export const NavItem = styled.li`
@@ -163,7 +177,7 @@ export const NavItem = styled.li`
   color: #000;
   font-weight: 500;
   width: 100%;
-  padding: 0 8px;
+  padding: 0 10px;
   border-radius: 3px;
   &:hover {
     color: #1989fa;
@@ -184,7 +198,26 @@ export const NavItem = styled.li`
 export const NavHeader = styled.li`
   display: flex;
   justify-content: space-between;
-  padding: 0 8px;
+  padding: 0 10px;
+  margin-top: 10px;
+  i {
+    &:hover {
+      cursor: pointer;
+      color: #1989fa;
+    }
+  }
+`
+
+export const NavIcon = styled.i`
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  font-size: 25px;
+  margin-top: -12.5px;
+  &:hover {
+    cursor: pointer;
+    color: #1989fa;
+  }
 `
 
 export const SkeletonDiv = styled.div`
