@@ -1,5 +1,18 @@
 const settings = [
   {
+    version: 'v1.2.2',
+    date: '2021-10-09',
+    desc: {
+      Featrue: [
+        '博客详情启用新的样式'
+      ],
+      'Bug Fixes': [
+        '修复新用户无法注册的问题',
+        '修复markdown编辑器全屏后被导航栏遮盖的问题'
+      ]
+    }
+  },
+  {
     version: 'v1.2.1',
     date: '2021-01-05',
     desc: {

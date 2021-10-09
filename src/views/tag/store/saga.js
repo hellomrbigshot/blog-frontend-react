@@ -9,11 +9,7 @@ export function* getTagList () {
 
 function* axiosGetTagList ({ page }) {
   // 获取 tag 列表
-  const {
-    data: {
-      data: { result, total },
-    },
-  } = yield fetch.post('/api/tag/taglist', { page, pageSize: 10 })
+  const { result, total } = yield fetch.post('/api/tag/taglist', { page, pageSize: 10 }, {}, { onlyData: true })
   yield put(initTagList(result, page, total))
 }
 
@@ -23,8 +19,8 @@ export function* getTagDetail () {
 
 function* axiosGetTagDetail ({ tag }) {
   // 获取 tag 详情
-  const res = yield fetch.post('/api/tag/tagdetail', { name: tag })
-  yield put(initTagDetail(res.data.data))
+  const data = yield fetch.post('/api/tag/tagdetail', { name: tag }, {}, { onlyData: true })
+  yield put(initTagDetail(data))
 }
 
 export function* getArticleList () {
@@ -33,14 +29,14 @@ export function* getArticleList () {
 
 function* axiosGetArticleList ({ tag, page }) {
   // 获取 tag 相关文章列表
-  const { data: { data: { result, total } } } = yield fetch.post('/api/page/pagelist', {
+  const { result, total } = yield fetch.post('/api/page/pagelist', {
     type: 'tag',
     content: tag,
     page: page,
     pageSize: 10,
     status: 'normal',
     secret: false,
-  })
+  }, {}, { onlyData: true })
   yield put(initArticleList(result, page, total))
   window.scrollTo(0, 0)
 }

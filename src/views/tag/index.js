@@ -20,7 +20,6 @@ function TagList() {
       dispatch(actionCreators.resetTagList())
       dispatch(actionCreators.getTagList(_page))
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, _page])
   const pageChange = (page) => {
     history.push(`?page=${page}`)

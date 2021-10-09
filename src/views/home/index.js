@@ -25,7 +25,6 @@ function Home () {
       dispatch(actionCreators.resetArticleList())
       dispatch(actionCreators.getArticleList(_page || 1, _keywords))
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, _keywords, _page])
   const changePage = (page) => {
     history.push(`/home${keywords ? `/${keywords}` : ''}?page=${page}`)

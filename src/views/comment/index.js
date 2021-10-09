@@ -18,7 +18,6 @@ function Comment({ history }) {
   }
   useEffect(() => {
     getCommentList('to_user', 1)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch])
   
   const redirectUrl = encodeURIComponent('/comment/list')

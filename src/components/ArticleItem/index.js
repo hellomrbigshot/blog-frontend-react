@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react'
 import { ArticleItem, Header, Info, Article, Header2 } from './styled'
 import { Link } from 'react-router-dom'
-import { marked, formatTime } from '../../common'
+import { formatTime } from '../../common'
+import { marked } from 'react-m-editor'
 
 function articleItem({ article }) {
   const showMore = article.get('showMore')

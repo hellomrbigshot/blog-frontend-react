@@ -18,11 +18,7 @@ function* axiosCommentList(action) {
       create_user: user,
       to_user: user,
     }
-    const {
-      data: {
-        data: { result, total },
-      },
-    } = yield fetch.post('/api/comment/getusercommentlist', formData)
+    const { result, total } = yield fetch.post('/api/comment/getusercommentlist', formData, {}, { onlyData: true })
     yield put(initCommentList(result, total))
     if (action.commentType === 'to_user') {
       yield updateCommentStatus(result)
@@ -36,7 +32,7 @@ function* updateCommentStatus (list) {
   const ids = list.filter(comment => !comment.is_read).map(comment => comment._id)
   if (!ids.length) return false
   try {
-    yield fetch.post('/api/comment/updatecommentstatus', { ids })
+    yield fetch.post('/api/comment/updatecommentstatus', { ids }, {}, { onlyData: true })
   } catch (e) {
     console.log(e)
   }

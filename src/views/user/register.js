@@ -1,43 +1,21 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, Redirect } from 'react-router-dom'
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
-import { Form } from '@ant-design/compatible'
-import '@ant-design/compatible/assets/index.css'
-import { Input, Button } from 'antd'
+import { Input, Button, Form } from 'antd'
 import { LoginWrapper, LoginBox, LoginInfo, Logo } from './styled'
 import { actionCreators } from './store'
 import { useQuery } from '../../common'
 
-function RegisterForm({ form }) {
+const RegisterForm = () => {
   const dispatch = useDispatch()
   const user = useSelector(state => state.getIn(['user', 'user']))
   const queryRedirect = useQuery('redirect')
   const redirectUrl = queryRedirect ? decodeURIComponent(queryRedirect) : null
   const loginPath = queryRedirect ? `/login?redirect=${encodeURIComponent(redirectUrl)}` : '/register'
-  const { getFieldDecorator } = form
-  const compareToFirstPassword = useCallback(
-    (rule, value, callback) => {
-      // 比较两次密码
-      if (value && value !== form.getFieldValue('password')) {
-        callback('Two passwords that you enter is inconsistent!')
-      } else {
-        callback()
-      }
-    },
-    [form]
-  )
-  const handleSubmit = useCallback(
-    e => {
-      e.preventDefault()
-      form.validateFields((err, values) => {
-        if (!err) {
-          dispatch(actionCreators.register(values))
-        }
-      })
-    },
-    [dispatch, form]
-  )
+  const handleSubmit = (values) => {
+    dispatch(actionCreators.register(values))
+  }
   return user ? (
     <Redirect to={redirectUrl ? redirectUrl : '/'} />
   ) : (
@@ -53,60 +31,49 @@ function RegisterForm({ form }) {
             注册
           </Link>
         </LoginInfo>
-        <Form onSubmit={handleSubmit} className="login-form">
-          <Form.Item>
-            {getFieldDecorator('username', {
-              rules: [
-                {
-                  required: true,
-                  message: 'Please input your username!'
-                }
-              ]
-            })(
-              <Input
-                prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
-                size="large"
-                placeholder="请输入账号"
-                autoComplete="new-password"
-              />
-            )}
+        <Form className="login-form" onFinish={handleSubmit}>
+          <Form.Item
+            name="username"
+            rules={[{ required: true, message: '请输入账号!' }]}
+          >
+            <Input
+              prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+              size="large"
+              placeholder="请输入账号"
+              autoComplete="new-password"
+            />
           </Form.Item>
-          <Form.Item>
-            {getFieldDecorator('password', {
-              rules: [
-                {
-                  required: true,
-                  message: 'Please input your Password!'
-                }
-              ]
-            })(
-              <Input.Password
-                prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
-                size="large"
-                placeholder="请输入密码"
-                autoComplete="new-password"
-              />
-            )}
+          <Form.Item
+            name="password"
+            rules={[{ required: true, message: '请输入密码!' }]}
+          >
+            <Input.Password
+              prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+              size="large"
+              placeholder="请输入密码"
+              autoComplete="new-password"
+            />
           </Form.Item>
-          <Form.Item>
-            {getFieldDecorator('repassword', {
-              rules: [
-                {
-                  required: true,
-                  message: 'Please confirm your password!'
+          <Form.Item
+            name="repassword"
+            rules= {[
+              { required: true, message: '请确认密码!' },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue('password') === value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(new Error('密码不一致!'));
                 },
-                {
-                  validator: compareToFirstPassword
-                }
-              ]
-            })(
-              <Input.Password
-                prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
-                size="large"
-                placeholder="请确认密码"
-                autoComplete="new-password"
-              />
-            )}
+              })
+            ]}
+          >
+            <Input.Password
+              prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+              size="large"
+              placeholder="请确认密码"
+              autoComplete="new-password"
+            />
           </Form.Item>
           <Form.Item>
             <Button
@@ -115,7 +82,6 @@ function RegisterForm({ form }) {
               htmlType="submit"
               block
               size="large"
-              onClick={handleSubmit}
             >
               注册
             </Button>
@@ -126,6 +92,4 @@ function RegisterForm({ form }) {
   )
 }
 
-const WrappedNormalRegisterForm = Form.create({ name: 'normal_register' })(RegisterForm)
-
-export default WrappedNormalRegisterForm
+export default RegisterForm

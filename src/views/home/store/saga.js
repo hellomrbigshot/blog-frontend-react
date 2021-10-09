@@ -25,8 +25,7 @@ function* fetchArticleList ({ page, keywords }) {
           page,
           pageSize: 10
         }
-    let res = yield fetch.post(URL, formData)
-    const { result, total } = res.data.data
+    const { result, total } = yield fetch.post(URL, formData, {}, { onlyData: true })
     yield put(initArticleList(result, page, total, keywords))
     window.scrollTo(0, 0)
   } catch (e) {

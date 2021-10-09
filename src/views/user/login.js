@@ -1,29 +1,21 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, Redirect } from 'react-router-dom'
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
-import { Form } from '@ant-design/compatible'
-import '@ant-design/compatible/assets/index.css'
-import { Input, Button } from 'antd'
+import { Input, Button, Form } from 'antd'
 import { LoginWrapper, LoginBox, LoginInfo, Logo } from './styled'
 import { actionCreators } from './store'
 import { useQuery } from '../../common'
 
-function LoginForm({ form }) {
+const LoginForm = () => {
   const dispatch = useDispatch()
   const user = useSelector(state => state.getIn(['user', 'user']))
   const queryRedirect = useQuery('redirect')
   const redirectUrl = queryRedirect ? decodeURIComponent(queryRedirect) : null
   const registerPath = queryRedirect ? `/register?redirect=${encodeURIComponent(redirectUrl)}` : '/register'
-  const { getFieldDecorator } = form
-  const handleSubmit = useCallback(e => {
-    e.preventDefault()
-    form.validateFields((err, values) => {
-      if (!err) {
-        dispatch(actionCreators.login(values))
-      }
-    })
-  }, [dispatch, form])
+  const handleSubmit = (values) => {
+    dispatch(actionCreators.login(values))
+  }
   return user ? (
     <Redirect to={redirectUrl ? redirectUrl : '/'} />
   ) : (
@@ -39,19 +31,29 @@ function LoginForm({ form }) {
           <b>·</b>
           <Link to={registerPath}>注册</Link>
         </LoginInfo>
-        <Form onSubmit={handleSubmit} className="login-form">
-          <Form.Item>
-            {getFieldDecorator('username', {
-              rules: [{ required: true, message: 'Please input your username!' }]
-            })(<Input prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />} size="large" placeholder="请输入账号" />)}
+        <Form className="login-form" onFinish={handleSubmit}>
+          <Form.Item
+            name="username"
+            rules={[{ required: true, message: '请输入账号!' }]}
+          >
+            <Input
+              prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+              size="large"
+              placeholder="请输入账号"
+            />
+          </Form.Item>
+          <Form.Item
+            name="password"
+            rules={[{ required: true, message: '请输入密码!' }]}
+          >
+            <Input.Password
+              prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+              size="large"
+              placeholder="请输入密码"
+            />
           </Form.Item>
           <Form.Item>
-            {getFieldDecorator('password', {
-              rules: [{ required: true, message: 'Please input your Password!' }]
-            })(<Input.Password prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />} size="large" placeholder="请输入密码" />)}
-          </Form.Item>
-          <Form.Item>
-            <Button shape="round" type="primary" htmlType="submit" block size="large" onClick={handleSubmit}>
+            <Button shape="round" type="primary" htmlType="submit" block size="large">
               登录
             </Button>
           </Form.Item>
@@ -61,6 +63,4 @@ function LoginForm({ form }) {
   )
 }
 
-const WrappedNormalLoginForm = Form.create({ name: 'normal_login' })(LoginForm)
-
-export default WrappedNormalLoginForm
+export default LoginForm

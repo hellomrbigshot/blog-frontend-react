@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Fragment, useEffect, useState, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useHistory, useLocation } from 'react-router-dom'
@@ -31,7 +30,6 @@ import { actionCreators as loginCreator } from '../../views/user/store'
 function Header () {
   const [showHeader, setShowHeader] = useState(true)
   const [beforeScrollTop, setBeforeScrollTop] = useState(0)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const contentScroll = useCallback(throttle(() => {
     const root = document.documentElement
     const scrollTop = root.scrollTop
@@ -83,7 +81,6 @@ function Header () {
     return () => {
       window.removeEventListener('scroll', contentScroll)
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, socket, message, contentScroll])
   const getDropDown = () => {
     return (
@@ -146,7 +143,7 @@ function Header () {
   const hideHeader = hideHeaderPath.includes(pathname.trim())
   const vueIcon = `<use xlink:href='#icon-vue' />`
   return hideHeader ? null : (
-    <HeaderWrapper className={classnames({ 'hide-header': !showHeader })}>
+    <HeaderWrapper id="blogHeader" className={classnames({ 'hide-header': !showHeader })}>
       <Link to="/">
         <Logo />
       </Link>
