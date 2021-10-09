@@ -7,6 +7,7 @@ import { DetailWrapper } from './styled'
 import ArticleDetail from './components/ArticleDetail'
 import CommentList from './components/CommentList'
 import ArticleDetailSkeleton from './components/ArticleDetailSkeleton'
+
 function Detail() {
   const dispatch = useDispatch()
   const { pathname } = useLocation()
@@ -24,7 +25,6 @@ function Detail() {
       dispatch(getArticleDetail(id))
       dispatch(getCommentList(id))
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, dispatch])
   const handleSubmitComment = useCallback(() => {
     if (!comment.trim()) {

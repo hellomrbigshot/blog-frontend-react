@@ -11,9 +11,7 @@ function* axiosLogin (action) {
   // 登录
   try {
     const { username } = action.user
-    const {
-      data: { data }
-    } = yield fetch.post('/api/signin', { ...action.user })
+    const data = yield fetch.post('/api/signin', { ...action.user }, {}, { onlyData: true })
     const { token, refresh_token: refreshToken } = data
     // let userInfo = yield fetch.post('/api/signin/getUserInfo', { username: action.user.username })
     yield put(loginSuccess(username, token, refreshToken))
@@ -30,9 +28,7 @@ export function* axiosRegister (action) {
   // 注册
   try {
     const { username } = action.user
-    const {
-      data: { data }
-    } = yield fetch.post('/api/signup', { ...action.user })
+    const data = yield fetch.post('/api/signup', { ...action.user }, {}, { onlyData: true })
     const { token, refresh_token: refreshToken } = data
     // let userInfo = yield fetch.post('/api/signin/getUserInfo', { username: action.user.username })
     yield put(loginSuccess(username, token, refreshToken))
@@ -48,10 +44,8 @@ export function* logout () {
 export function* axiosLogout () {
   // 登出
   try {
-    let res = yield fetch.post('/api/signout')
-    if (res.data.code === 'OK') {
-      yield put(logoutSuccess())
-    }
+    yield fetch.post('/api/signout', {}, {}, { onlyData: true })
+    yield put(logoutSuccess())
   } catch (e) {
     console.log(e)
   }

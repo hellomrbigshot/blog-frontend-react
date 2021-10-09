@@ -42,6 +42,10 @@ export const Content = styled.div`
     background: #f8f8f8;
     color: #333;
   }
+  pre {
+    max-height: 300px;
+    overflow-y: auto;
+  }
 `
 
 export const CommentWrapper = styled.div`

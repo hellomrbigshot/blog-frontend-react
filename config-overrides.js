@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 const path = require('path')
 // const CompressionWebpackPlugin = require('compression-webpack-plugin')
-const { override, fixBabelImports, addWebpackExternals, addWebpackAlias } = require('customize-cra')
+const { override, fixBabelImports, addWebpackAlias, useBabelRc } = require('customize-cra')
 // const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 // const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
 
@@ -33,16 +34,17 @@ const Custom = config => {
     return config
 }
 module.exports = override(
-    fixBabelImports('import', {
-        libraryName: 'antd',
-        libraryDirectory: 'es',
-        style: 'css'
-    }),
-    // addWebpackExternals({
-    //     hljs: 'hljs'
-    // }),
-    addWebpackAlias({
-        '@ant-design/icons/lib/dist$': path.resolve(__dirname, './src/icons.js')
-    }),
-    Custom
+  useBabelRc(),
+  fixBabelImports('import', {
+      libraryName: 'antd',
+      libraryDirectory: 'es',
+      style: 'css'
+  }),
+  // addWebpackExternals({
+  //     hljs: 'hljs'
+  // }),
+  addWebpackAlias({
+      '@ant-design/icons/lib/dist$': path.resolve(__dirname, './src/icons.js')
+  }),
+  Custom
 )

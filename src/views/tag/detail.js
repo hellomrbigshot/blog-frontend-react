@@ -31,7 +31,6 @@ function TagDetail() {
       dispatch(resetArticleList())
       dispatch(getArticleList(tag, _page))
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, tag, _page])
   const pageChange = (page) => {
     history.push(`?page=${page}`)

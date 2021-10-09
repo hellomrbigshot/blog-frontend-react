@@ -11,7 +11,13 @@ import { createBrowserHistory } from 'history'
 import { actionCreators } from '../views/user/store'
 import { deleteFetch, addFetch } from '../store/app/actionCreators'
 
-axios.interceptors.request.use(
+const service = axios.create({
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  }
+})
+
+service.interceptors.request.use(
   (config) => {
     store.dispatch(addFetch())
     return config
@@ -22,14 +28,15 @@ axios.interceptors.request.use(
 )
 
 // axios 拦截器 未登录则跳转到登录页
-axios.interceptors.response.use(
+service.interceptors.response.use(
   (res) => {
     store.dispatch(deleteFetch())
-    if (res.data.code === 'OK') {
+    const { data: { data, code } } = res
+    if (code === 'OK') {
       return res
     } else {
       // 提示报错信息
-      message.error(res.data.data, 10)
+      message.error(data, 10)
       return Promise.reject(res)
     }
   },
@@ -43,7 +50,6 @@ axios.interceptors.response.use(
           // 登录超时 跳转登录页
           store.dispatch(actionCreators.logoutSuccess())
           window.location.href=`/login?redirect=${encodeURIComponent(pathname)}`
-          // history.push(`/login?redirect=${encodeURIComponent(pathname)}`)
           break
         default:
           break
@@ -55,61 +61,55 @@ axios.interceptors.response.use(
 
 const fetchRefreshToken = () => {
   const token = Cookies.get('refreshToken')
-  return axios({
+  return service({
     url: '/api/signin/refreshToken',
     headers: { Authorization: `Beare ${token}` },
     method: 'get',
   })
 }
 
-export const post = (url, formData, headers = {}) => {
+export const post = async (url, formData, headers = {}, restArgs = { onlyData: false }) => {
   const token = Cookies.get('token')
+  const { onlyData } = restArgs
   headers = Object.assign({}, headers, { Authorization: `Beare ${token}` })
-  return axios({
-    url,
-    headers,
-    method: 'post',
-    data: qs.stringify(formData),
-  })
-    .then((res) => {
-      return res
+  try {
+    const res = await service({
+      url,
+      headers,
+      method: 'post',
+      data: qs.stringify(formData),
     })
-    .catch((e) => {
-      if (e.response.status === 401) {
-        // token 超时，访问刷新 token 接口
-        return fetchRefreshToken().then((res) => {
-          const { data } = res.data
-          const { token, refresh_token: refreshToken } = data
-          Cookies.set('token', token)
-          Cookies.set('refreshToken', refreshToken)
-          return post(url, formData, headers) // 重新调用这个接口
-        })
-      }
-    })
+    return onlyData ? res.data.data : res
+  } catch ({ response: { status } }) {
+    if (status === 401) {
+      // token 超时，访问刷新 token 接口
+      const { data: { token, refresh_token: refreshToken } } = await fetchRefreshToken()
+      Cookies.set('token', token)
+      Cookies.set('refreshToken', refreshToken)
+      return post(url, formData, headers, restArgs) // 重新调用这个接口
+    }
+  }
 }
 
-export const get = (url, formData, headers = {}) => {
+export const get = async (url, formData, headers = {}, restArgs = { onlyData: false }) => {
   const token = Cookies.get('token')
+  const { onlyData } = restArgs
   headers = Object.assign({}, headers, { Authorization: `Beare ${token}` })
-  return axios({
-    url,
-    headers,
-    method: 'get',
-    data: formData,
-  })
-    .then((res) => {
-      return res
+  try {
+    const res = await service({
+      url,
+      headers,
+      method: 'get',
+      data: formData,
     })
-    .catch((e) => {
-      if (e.response.status === 401) {
-        // token 超时，访问刷新 token 接口
-        fetchRefreshToken().then((res) => {
-          const { data } = res.data
-          const { token, refresh_token: refreshToken } = data
-          Cookies.set('token', token)
-          Cookies.set('refreshToken', refreshToken)
-          return get(url, formData, headers) // 重新调用这个接口
-        })
-      }
-    })
+    return onlyData ? res.data.data : res
+  } catch ({ response: { status } }) {
+    if (status === 401) {
+      // token 超时，访问刷新 token 接口
+      const { data: { token, refresh_token: refreshToken } } = await fetchRefreshToken()
+      Cookies.set('token', token)
+      Cookies.set('refreshToken', refreshToken)
+      return get(url, formData, headers, restArgs) // 重新调用这个接口
+    }
+  }
 }

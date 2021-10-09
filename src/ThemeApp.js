@@ -23,6 +23,8 @@ import { ThemeProvider } from 'styled-components'
 import { useSelector } from 'react-redux'
 import themeInfo from './theme'
 
+import 'react-m-editor/dist/index.min.css'
+
 function ThemeApp () {
   const theme = useSelector(state => state.getIn(['header', 'theme']))
   const handleInitDetail = (nextState, replace) => {
