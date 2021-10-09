@@ -19,7 +19,7 @@
     "immutable": "^4.0.0-rc.12",
     "js-cookie": "^2.2.0",
     "lodash": "^4.17.20",
-    "marked": "^1.1.1",
+    "marked": "^2.0.0",
     "node-gyp": "^7.0.0",
     "react": "^17.0.2",
     "react-app-rewired": "^2.1.6",
