@@ -1,5 +1,14 @@
 const settings = [
   {
+    version: 'v1.2.3',
+    date: '2021-10-18',
+    desc: {
+      'Bug Fixes': [
+        '修复新增文章后跳转到详情页报错的问题'
+      ]
+    }
+  },
+  {
     version: 'v1.2.2',
     date: '2021-10-09',
     desc: {
