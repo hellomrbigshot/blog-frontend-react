@@ -108,9 +108,9 @@ function Write ({ match: { params = null }, history }) {
     } else {
       url = '/api/page/new'
     }
-    await fetch.post(url, sendData, {}, { onlyData: true })
+    const { id: _id } = await fetch.post(url, sendData, {}, { onlyData: true })
     if (sendData.status === 'normal') {
-      history.push({ pathname: `/detail/${id}/true` })
+      history.push({ pathname: `/detail/${_id}/true` })
     } else {
       history.push('/user/draft')
     }
