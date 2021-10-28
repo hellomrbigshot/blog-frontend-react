@@ -12,7 +12,7 @@ git clone https://github.com/hellomrbigshot/blog-frontend-react.git
 ### 推荐使用 yarn
 
 ```
-yarn install
+yarn
 yarn start
 ```
 

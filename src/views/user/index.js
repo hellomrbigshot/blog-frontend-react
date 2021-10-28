@@ -93,7 +93,7 @@ function UserInfo ({ match: { params: { name: user } } }) {
         <h2>相关文章</h2>
         {articleList.map(article => (
           <LimitArticleItem key={article.get('_id')}>
-            <Link to={`/detail/${article.get('_id')}`}>
+            <Link title={article.get('title')} to={`/detail/${article.get('_id')}`}>
               <h1 className="title">{article.get('title')}</h1>
             </Link>
             <div className="time">{article.get('create_time').slice(5, 10)}</div>
