@@ -83,7 +83,7 @@ export const post = async (url, formData, headers = {}, restArgs = { onlyData: f
   } catch ({ response: { status } }) {
     if (status === 401) {
       // token 超时，访问刷新 token 接口
-      const { data: { token, refresh_token: refreshToken } } = await fetchRefreshToken()
+      const { data: { data: { token, refresh_token: refreshToken } } } = await fetchRefreshToken()
       Cookies.set('token', token)
       Cookies.set('refreshToken', refreshToken)
       return post(url, formData, headers, restArgs) // 重新调用这个接口
@@ -106,7 +106,7 @@ export const get = async (url, formData, headers = {}, restArgs = { onlyData: fa
   } catch ({ response: { status } }) {
     if (status === 401) {
       // token 超时，访问刷新 token 接口
-      const { data: { token, refresh_token: refreshToken } } = await fetchRefreshToken()
+      const { data: { data: { token, refresh_token: refreshToken } } } = await fetchRefreshToken()
       Cookies.set('token', token)
       Cookies.set('refreshToken', refreshToken)
       return get(url, formData, headers, restArgs) // 重新调用这个接口
