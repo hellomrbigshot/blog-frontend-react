@@ -146,14 +146,16 @@ export const ArticleItem = styled.div`
   }
 `
 
-export const ArticleTime = styled.span`
+export const ArticleTime = styled.div`
+  width: 40px;
   font-size: 12px;
   color: ${(props) => props.theme['user/articleTime']};
 `
 
-export const ArticleTitle = styled.span`
+export const ArticleTitle = styled.div`
   padding-left: 10px;
   white-space: nowrap;
+  flex: 1;
   overflow: hidden;
   font-size: 16px;
   text-overflow: ellipsis;
@@ -285,6 +287,12 @@ export const LimitArticleItem = styled.div`
     left: 20px;
     width: 40px;
     line-height: 2;
+  }
+  .title {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   a {
     transition: all 0.2s ease-in-out;

@@ -1,5 +1,14 @@
 const settings = [
   {
+    version: 'v1.2.4',
+    date: '2021-10-28',
+    desc: {
+      'Bug Fixes': [
+        '修复我的文章界面文章标题过长引起的样式显示错误的问题'
+      ]
+    }
+  },
+  {
     version: 'v1.2.3',
     date: '2021-10-18',
     desc: {

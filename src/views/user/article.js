@@ -60,7 +60,7 @@ function LimitArticleList () {
                     <ArticleItem>
                       <Link to={`/detail/${article.get('_id')}`}>
                         <ArticleTime>{article.get('create_time').slice(5, 10)}</ArticleTime>
-                        <ArticleTitle>{article.get('title')}</ArticleTitle>
+                        <ArticleTitle title={article.get('title')}>{article.get('title')}</ArticleTitle>
                         {article.get('secret') ? (
                           <Fragment>
                             <span>&nbsp;|&nbsp;</span>
