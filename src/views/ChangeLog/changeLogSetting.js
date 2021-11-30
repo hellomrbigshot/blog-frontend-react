@@ -1,5 +1,14 @@
 const settings = [
   {
+    version: 'v1.2.5',
+    date: '2021-11-30',
+    desc: {
+      'Bug Fixes': [
+        '修复部分文章详情页目录不出现的问题'
+      ]
+    }
+  },
+  {
     version: 'v1.2.4',
     date: '2021-10-28',
     desc: {

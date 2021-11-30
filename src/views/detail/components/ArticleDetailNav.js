@@ -37,7 +37,7 @@ function ArticleDetailNav () {
                   onClick={() => toHeader(`h${item.level}-${item.no}`)}
                 >
                   <pre>
-                  { `${('  ').repeat(item.level - rootLevel) + item.text}` }
+                  { `${('  ').repeat(item.level - rootLevel) + item.text.replaceAll(/<([a-z]*)?\/?([a-z]*)?>/g, '')}` }
                   </pre>
                 </NavItem>
               ))
