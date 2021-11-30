@@ -3,10 +3,9 @@ import { useDispatch } from 'react-redux'
 import {} from '../store'
 import { Header, Info, Content } from '../styled'
 import { Link } from 'react-router-dom'
-import { formatTime } from '../../../common'
+import { formatTime, marked } from '../../../common'
 import { resetNavInfo } from '../store/actionCreators'
 import ArticleDetailNav from './ArticleDetailNav'
-import { marked } from 'react-m-editor'
 
 function ArticleDetail({ article, user }) {
   const tags = article.get('tags')

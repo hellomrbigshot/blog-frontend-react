@@ -36,4 +36,6 @@ marked.setOptions({
   xhtml: false
 })
 
-export default marked
+const betterMarked = (str) => marked(str).replace(/<code( class="language-[A-Za-z]*")?>/g, '<code class="hljs">') // replace <code> tags to <code class="hljs">
+
+export default betterMarked

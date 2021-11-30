@@ -14,7 +14,7 @@ before_install:
 - chmod 600 ~/.ssh/id_rsa
 - echo -e "Host 39.104.15.110\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 install:
-- git pull
+- git pull --rebase
 - yarn
 script:
 - yarn build
