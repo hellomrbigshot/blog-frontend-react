@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import { EditOutlined } from '@ant-design/icons'
-import { Avatar, Message } from 'antd'
+import { Avatar, message } from 'antd'
 import Page from '../../components/Pagination'
 import { Link } from 'react-router-dom'
 import { getUserInfo, getLimitArticleList } from './store/actionCreators'
@@ -57,7 +57,7 @@ function UserInfo ({ match: { params: { name: user } } }) {
   }
   const handleBioOk = async bio => {
     if (!bio.trim()) {
-      Message.error('描述不能为空')
+      message.error('描述不能为空')
       return false
     }
     const username = loginUser

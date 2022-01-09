@@ -220,10 +220,12 @@ function Header () {
         ) : (
           <Fragment>
             <Link to={`/login?redirect=${encodeURIComponent(pathname)}`}>
-              <Button className="login">登录</Button>
+              {/* <Button className="login">登录</Button> */}
+              <button className='text-base rounded-lg'>登录</button>
             </Link>
             <Link to={`/register?redirect=${encodeURIComponent(pathname)}`}>
-              <Button className="reg">注册</Button>
+              {/* <Button className="reg">注册</Button> */}
+              <button className='text-base px-4 py-1.5 border rounded-2xl'>注册</button>
             </Link>
           </Fragment>
         )}
