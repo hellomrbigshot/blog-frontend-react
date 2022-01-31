@@ -4,8 +4,8 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import Home from './views/home'
 import Detail from './views/detail'
-import Login from './views/user/login'
-import Register from './views/user/register'
+import SignIn from './views/user/signin'
+import SignUp from './views/user/signup'
 import NoMatch from './views/404'
 import ScrollToTop from './components/ScrollTop'
 import TagList from './views/tag'
@@ -45,8 +45,8 @@ function ThemeApp () {
                 component={Detail}
                 onEnter={handleInitDetail}
               />
-              <Route path="/login" exact component={Login} />
-              <Route path="/register" exact component={Register} />
+              <Route path="/signin" exact component={SignIn} />
+              <Route path="/signup" exact component={SignUp} />
               <Route path="/tag/list" exact component={TagList} />
               <Route path="/user/draft" exact component={Draft} />
               <Route path="/user/list" exact component={LimitList} />

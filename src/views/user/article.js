@@ -36,7 +36,7 @@ function LimitArticleList () {
   }
   const redirectUrl = encodeURIComponent('/user/list')
   return !user ? (
-    <Redirect to={`/login?redirect=${redirectUrl}`} />
+    <Redirect to={`/signin?redirect=${redirectUrl}`} />
   ) : (
     <ArticleWrapper>
       <h2>我的文章</h2>

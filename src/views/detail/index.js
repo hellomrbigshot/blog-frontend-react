@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Input, Button } from 'antd'
+import { Input, Avatar } from 'antd'
 import { useParams, useHistory, useLocation } from 'react-router-dom'
 import { handleCommentChange, getArticleDetail, resetArticleDetail, resetCommentList, getCommentList, handleSubmitComment as submitComment } from './store/actionCreators'
 import { DetailWrapper } from './styled'
@@ -41,7 +41,7 @@ function Detail() {
   const handleFocus = useCallback(() => {
     if (!user) {
       const redirectUrl = encodeURIComponent(pathname)
-      history.push(`/login?redirect=${redirectUrl}`)
+      history.push(`/signin?redirect=${redirectUrl}`)
     }
   }, [user, history, pathname])
   const handleInputChange = useCallback(
@@ -53,25 +53,37 @@ function Detail() {
   const { TextArea } = Input
   return (
     <DetailWrapper>
-      {detail.get('content') ? <ArticleDetail article={detail} user={user} /> : <ArticleDetailSkeleton />}
-      { commentList && commentList.size > 0 ? <CommentList article={detail} user={user} commentList={commentList} /> : null}
-      {detail.get('content')
-        ? <div>
-            <h2 style={{ fontSize: '20px', fontWeight: 'normal', marginBottom: '10px' }}>留言：</h2>
-            <TextArea
-              value={comment}
-              rows={5}
-              onChange={input => handleInputChange(input.target.value)}
-              onFocus={handleFocus}
-              onPressEnter={handleSubmitComment}
-            />
-            <div style={{ display: 'flex', marginTop: '10px', flexDirection: 'row-reverse' }}>
-              <Button size="small" onClick={handleSubmitComment}>
-                提交
-              </Button>
+      { detail.get('content')
+        ? <ArticleDetail article={detail} user={user} />
+        : <ArticleDetailSkeleton /> }
+      { detail.get('content')
+          ? <div>
+              <h2 className='text-lg font-semibold mb-6'>评论</h2>
+              <div className='flex'>
+                <Avatar className='mr-4' size={40} src={`/api/file/avatar/user?username=${user}`} alt={user} />
+                <TextArea
+                  placeholder='输入评论（Enter换行，⌘ + Enter发送）'
+                  className='rounded-md'
+                  value={comment}
+                  rows={3}
+                  onChange={input => handleInputChange(input.target.value)}
+                  onFocus={handleFocus}
+                  onPressEnter={handleSubmitComment}
+                />
+              </div>
+              <div className='flex flex-row-reverse mt-2'>
+                <button className='py-2 px-4 text-sm rounded text-white font-500 bg-blue-500 hover:bg-blue-600' onClick={handleSubmitComment}>发表评论</button>
+              </div>
             </div>
-          </div>
-        : null}
+          : null }
+      { commentList && commentList.size > 0
+        ? <CommentList
+          article={detail}
+          user={user}
+          commentList={commentList}
+          articleUser={detail.get('create_user')}
+        />
+        : null }
     </DetailWrapper>
   )
 }

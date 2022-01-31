@@ -1,34 +1,32 @@
 import React, { Fragment } from 'react'
-import { ArticleItem, Header, Info, Article, Header2 } from './styled'
 import { Link } from 'react-router-dom'
 import { formatTime } from '../../common'
 import { marked } from 'react-m-editor'
 
 function articleItem({ article }) {
   const showMore = article.get('showMore')
-
     return (
-        <ArticleItem>
-            <Link to={`/detail/${article.get('_id')}`}>
-                <Header title={article.get('title')}>{article.get('title')}</Header>
-            </Link>
-            <Info>
+        <div className='mb-24'>
+            <Link
+              title={article.get('title')}
+              to={`/detail/${article.get('_id')}`}
+              className='text-3xl font-semibold text-gray-600 hover:text-gray-700 pb-3 block whitespace-nowrap overflow-hidden overflow-ellipsis'
+            >{article.get('title')}</Link>
+            <div className='text-xs mb-3 text-gray-500'>
                 <span>更新于 {formatTime(article.get('update_time'))}</span>
                 <span>
                     {' '}
-                    | 作者<Link to={`/user/info/${article.get('create_user')}`}>{article.get('create_user')}</Link>
+                    | 作者<Link to={`/user/info/${article.get('create_user')}`} className='ml-1 border-b border-solid border-gray-500 hover:text-gray-700 hover:border-gray-700'>{article.get('create_user')}</Link>
                 </span>
                 <span> | 标签{showTags(article.get('tags'))}</span>
-            </Info>
-            <Article className="m-editor-preview" dangerouslySetInnerHTML={{ __html: marked(article.get('content')) }} />
+            </div>
+            <div className="m-editor-preview" dangerouslySetInnerHTML={{ __html: marked(article.get('content')) }} />
             {
               showMore ? (
-                <Link to={`/detail/${article.get('_id')}`}>
-                  <Header2>阅读全文 »</Header2>
-                </Link>
+                <Link to={`/detail/${article.get('_id')}`} className='text-sm text-gray-500 mt-4 border-b-2 border-solid border-gray-500 inline-block pb-2 hover:text-gray-700 hover:border-gray-700'>阅读全文 »</Link>
               ) : null
             }
-        </ArticleItem>
+        </div>
     )
 }
 
@@ -37,7 +35,7 @@ function showTags(tags) {
     return tags.map((tag, i) => {
         return (
           <Fragment key={i}>
-            <Link to={`/tag/detail/${tag}`}>{tag}</Link>
+            <Link className='ml-1 border-b border-solid border-gray-500 hover:text-gray-700 hover:border-gray-700' to={`/tag/detail/${tag}`}>{tag}</Link>
             {
               i === tags.size - 1 ? null : <Fragment> ,</Fragment>
             }

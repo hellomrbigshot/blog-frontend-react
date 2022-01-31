@@ -49,7 +49,7 @@ service.interceptors.response.use(
           const { pathname } = history.location
           // 登录超时 跳转登录页
           store.dispatch(actionCreators.logoutSuccess())
-          window.location.href=`/login?redirect=${encodeURIComponent(pathname)}`
+          window.location.href=`/signin?redirect=${encodeURIComponent(pathname)}`
           break
         default:
           break

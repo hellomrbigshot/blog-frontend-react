@@ -10,6 +10,7 @@ import { actionCreators } from './store'
 import { actionCreators as loginCreator } from '../../views/user/store'
 
 const navList = {
+  '/home': '首页',
   '/tag/list': '标签',
   '/comment/list': '留言',
   '/lab/list': '实验室',
@@ -143,7 +144,7 @@ function Header () {
   //   toggleAntdTheme(val ? 'light' : 'dark')
   //   dispatch(actionCreators.themeSwitch(val ? 'light' : 'dark'))
   // }
-  const hideHeaderPath = ['/login', '/register', '/404']
+  const hideHeaderPath = ['/signin', '/signup', '/404']
   const hideHeader = hideHeaderPath.includes(pathname.trim())
   const vueIcon = `<use xlink:href='#icon-vue' />`
   return hideHeader ? null : (
@@ -157,7 +158,7 @@ function Header () {
             <div className="text-base mx-5 h-full" key={key}>
               <Link
                 to={key}
-                className='box-border text-gray-600 border-b-3 border-solid border-transparent h-full flex items-center hover:text-gray-900 hover:border-blue-500'
+                className={classnames('box-border text-gray-600 border-b-3 border-solid border-transparent h-full flex items-center font-medium hover:text-gray-900 hover:border-blue-500', { 'text-blue-500': key === pathname })}
               >{ navList[key] }</Link>
             </div>
           ))
@@ -224,7 +225,7 @@ function Header () {
           </Fragment>
         ) : (
           <Fragment>
-            <Link className='rounded border border-blue-500 px-5 py-0.75 text-sm text-blue-500 border-solid font-500 h-8 ml-4 mr-8 leading-6' to={`/login?redirect=${encodeURIComponent(pathname)}`}>登录</Link>
+            <Link className='rounded border border-blue-500 px-5 py-0.75 text-sm text-blue-500 border-solid font-500 h-8 ml-4 mr-8 leading-6' to={`/signin?redirect=${encodeURIComponent(pathname)}`}>登录</Link>
           </Fragment>
         )}
       </div>

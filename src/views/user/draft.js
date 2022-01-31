@@ -14,7 +14,7 @@ function Draft () {
   }, [dispatch])
   const redirectUrl = encodeURIComponent('/draft')
   return !user ? (
-    <Redirect to={`/login?redirect=${redirectUrl}`} />
+    <Redirect to={`/signin?redirect=${redirectUrl}`} />
   ) : (
     <DraftWrapper>
       <h2>草稿箱</h2>

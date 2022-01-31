@@ -3,7 +3,7 @@ import {
   GET_ARTICLE_DETAIL,
   GET_COMMENT_LIST,
   INIT_COMMENT_LIST,
-  SHOW_REPLY_INPUT,
+  TOGGLE_REPLY_INPUT,
   HANDLE_SUBMIT_COMMENT,
   HANDLE_CONCAT_COMMENT,
   HANDLE_COMMENT_CHANGE,
@@ -46,10 +46,10 @@ export const initCommentList = (list) => {
   }
 }
 
-export const showReplyInput = (index) => {
-  // 显示回复框
+export const toggleReplyInput = (index) => {
+  // 显示/隐藏回复框
   return {
-    type: SHOW_REPLY_INPUT,
+    type: TOGGLE_REPLY_INPUT,
     index,
   }
 }

@@ -22,27 +22,27 @@ function ArticleDetailNav () {
                 onClick={() => setShowSideNav(true)}
               />
           )}
-          <NavWrapper className={classnames({ 'show-nav-list': showSideNav })}>
-            <NavHeader>
-              <h3>目录</h3>
-              <i className="iconfont icon-arrow-right" onClick={() => setShowSideNav(false)}/>
-            </NavHeader>
+          <div className={classnames({ 'fixed z-10 rounded p-4 top-28 h-80 w-60 right-4 shadow-inner bg-white overflow-y-auto': true, 'show-nav-list': showSideNav })}>
+            <div className='text-base font-medium flex mb-3 items-center'>
+              <h3 className='flex-1'>目录</h3>
+              <i className="iconfont icon-arrow-right text-xl" onClick={() => setShowSideNav(false)}/>
+            </div>
             {
               navList.map((item) => (
-                <NavItem
+                <div
                   title={item.text}
                   key={`h${item.level}-${item.no}`}
                   id={`linkToh${item.level}${item.no}`}
-                  className='blog-nav-header'
+                  className='w-full p-2 box-border rounded-sm text-sm overflow-hidden font-medium cursor-pointer hover:bg-gray-100'
                   onClick={() => toHeader(`h${item.level}-${item.no}`)}
                 >
-                  <pre>
+                  <pre className='overflow-ellipsis'>
                   { `${('  ').repeat(item.level - rootLevel) + item.text.replaceAll(/<([a-z]*)?\/?([a-z]*)?>/g, '')}` }
                   </pre>
-                </NavItem>
+                </div>
               ))
             }
-          </NavWrapper>
+          </div>
         </Fragment>
       )
     : null

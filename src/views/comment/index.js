@@ -22,7 +22,7 @@ function Comment({ history }) {
   
   const redirectUrl = encodeURIComponent('/comment/list')
   return !user ? (
-    <Redirect to={`/login?redirect=${redirectUrl}`} />
+    <Redirect to={`/signin?redirect=${redirectUrl}`} />
   ) : (
     <Tabs defaultActiveKey="to_user" onChange={key => getCommentList(key, 1)}>
       <TabPane tab="我收到的" key="to_user">
