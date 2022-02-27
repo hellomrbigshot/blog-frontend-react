@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Input, Avatar } from 'antd'
 import { useParams, useHistory, useLocation } from 'react-router-dom'
 import { handleCommentChange, getArticleDetail, resetArticleDetail, resetCommentList, getCommentList, handleSubmitComment as submitComment } from './store/actionCreators'
-import { DetailWrapper } from './styled'
 import ArticleDetail from './components/ArticleDetail'
 import CommentList from './components/CommentList'
 import ArticleDetailSkeleton from './components/ArticleDetailSkeleton'
+import 'react-m-editor/dist/index.min.css'
 
-function Detail() {
+function Detail () {
   const dispatch = useDispatch()
   const { pathname } = useLocation()
   const { id, refresh } = useParams()
@@ -52,11 +52,11 @@ function Detail() {
   )
   const { TextArea } = Input
   return (
-    <DetailWrapper>
+    <div>
       { detail.get('content')
         ? <ArticleDetail article={detail} user={user} />
         : <ArticleDetailSkeleton /> }
-      { detail.get('content')
+      { detail.get('content') && user
           ? <div>
               <h2 className='text-lg font-semibold mb-6'>评论</h2>
               <div className='flex'>
@@ -72,19 +72,19 @@ function Detail() {
                 />
               </div>
               <div className='flex flex-row-reverse mt-2'>
-                <button className='py-2 px-4 text-sm rounded text-white font-500 bg-blue-500 hover:bg-blue-600' onClick={handleSubmitComment}>发表评论</button>
+                <button className='py-2 px-4 text-sm cursor-pointer border-none rounded text-white font-500 bg-blue-500 hover:bg-blue-600' onClick={handleSubmitComment}>发表评论</button>
               </div>
             </div>
           : null }
       { commentList && commentList.size > 0
         ? <CommentList
-          article={detail}
-          user={user}
-          commentList={commentList}
-          articleUser={detail.get('create_user')}
-        />
+            article={detail}
+            user={user}
+            commentList={commentList}
+            articleUser={detail.get('create_user')}
+          />
         : null }
-    </DetailWrapper>
+    </div>
   )
 }
 

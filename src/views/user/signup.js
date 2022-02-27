@@ -7,9 +7,7 @@ import SignWrapper from './components/SignWrapper'
 
 const RegisterForm = () => {
   const dispatch = useDispatch()
-  const handleSubmit = (values) => {
-    dispatch(actionCreators.register(values))
-  }
+  const handleSubmit = values => dispatch(actionCreators.register(values))
   return (
     <SignWrapper type="SIGNUP">
       <Form className="mt-10" onFinish={handleSubmit}>
@@ -62,9 +60,7 @@ const RegisterForm = () => {
             block
             size="large"
             type="primary"
-          >
-            注册
-          </Button>
+          >注册</Button>
         </Form.Item>
       </Form> 
     </SignWrapper>

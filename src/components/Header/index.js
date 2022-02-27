@@ -135,7 +135,6 @@ function Header () {
   const handleMouseIn = useCallback(() => {
     if (dropdownTimer.current) {
       clearTimeout(dropdownTimer.current)
-      console.log('dropdownTimeout', dropdownTimer.current)
     } else {
       dispatch(actionCreators.mouseIn())
     }
@@ -187,10 +186,10 @@ function Header () {
         <div className='flex w-72'>
           <div className={classnames('flex flex-1 items-center rounded overflow-hidden pr-2 border border-solid', {'border-blue-500 bg-white': focused, 'bg-gray-200 border-white': !focused})}>
             <input
-              placeholder="搜索"
+              placeholder="搜索标题或内容"
               onFocus={() => dispatch(actionCreators.searchFocus())}
               onBlur={() => dispatch(actionCreators.searchBlur())}
-              className={classnames('text-xs', 'pl-3', 'py-2', 'bg-gray-200', 'outline-none', 'flex-1', 'h-8', 'focus:bg-white')}
+              className={classnames('text-xs', 'pl-3', 'py-2', 'bg-gray-200', 'outline-none', 'border-transparent', 'flex-1', 'h-8', 'focus:bg-white')}
               ref={input => {
                 keywords = input
               }}

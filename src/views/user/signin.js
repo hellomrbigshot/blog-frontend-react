@@ -7,9 +7,7 @@ import SignWrapper from './components/SignWrapper'
 
 const SignInForm = () => {
   const dispatch = useDispatch()
-  const handleSubmit = (values) => {
-    dispatch(actionCreators.login(values))
-  }
+  const handleSubmit = values => dispatch(actionCreators.login(values))
   return (
     <SignWrapper type="SIGNIN">
       <Form className='mt-10' onFinish={handleSubmit}>
@@ -34,9 +32,7 @@ const SignInForm = () => {
           />
         </Form.Item>
         <Form.Item>
-          <Button type="primary" htmlType="submit" block size="large">
-            登录
-          </Button>
+          <Button type="primary" htmlType="submit" block size="large">登录</Button>
         </Form.Item>
       </Form>
     </SignWrapper>

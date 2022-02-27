@@ -1,7 +1,5 @@
 import React, { Fragment, useState, useEffect, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
-import {} from '../store'
-import { Content } from '../styled'
 import { Link } from 'react-router-dom'
 import { formatTime, marked } from '../../../common'
 import { resetNavInfo } from '../store/actionCreators'
@@ -12,17 +10,19 @@ function ArticleDetail({ article, user }) {
   const dispatch = useDispatch()
   const [renderNav, setRenderNav] = useState(false)
   const [content, setContent] = useState('')
+  const [activeNavId, setActiveNavId] = useState('')
   const activeNav = useCallback((ele) => {
     const navId = ele.dataset.link
-    const navEle = document.getElementById(navId)
-    navEle && navEle.scrollIntoView({
-      // behavior: 'smooth',
-      block: 'center'
-    })
-    document.querySelectorAll('.blog-nav-header').forEach(ele => {
-      ele.classList.remove('active')
-    })
-    navEle && navEle.classList.add('active')
+    navId && setActiveNavId(navId)
+    // const navEle = document.getElementById(navId)
+    // navEle && navEle.scrollIntoView({
+    //   // behavior: 'smooth',
+    //   block: 'center'
+    // })
+    // document.querySelectorAll('.blog-nav-header').forEach(ele => {
+    //   ele.classList.remove('active')
+    // })
+    // navEle && navEle.classList.add('active')
   }, [])
   const scrollObserve = useCallback(() => {
     const navObserver = new IntersectionObserver(entries => {
@@ -50,16 +50,16 @@ function ArticleDetail({ article, user }) {
       <div className='text-xs text-gray-500 flex justify-center'>
         <span>更新于 {formatTime(article.get('update_time'))}&nbsp;</span>
         <span>| 创建于 {formatTime(article.get('create_time'))}&nbsp;</span>
-        <span>| 作者 <Link className='border-b border-gray-500 border-solid hover:text-gray-700 hover:border-gray-700' to={`/user/info/${article.get('create_user')}`}>{article.get('create_user')}&nbsp;</Link>
+        <span>| 作者 <Link className='border-b border-solid border-transparent text-gray-600 hover:text-gray-700 hover:border-gray-700' to={`/user/info/${article.get('create_user')}`}>{article.get('create_user')}&nbsp;</Link>
         </span>
         <span>| 标签 {showTags(tags)}&nbsp;</span>
         {user && user === article.get('create_user') ? (
-          <span>| <Link className='border-b border-gray-500 border-solid hover:text-gray-700 hover:border-gray-700' to={`/edit/${article.get('_id')}`}>编辑</Link></span>
+          <span>| <Link className='border-b border-solid border-transparent text-gray-600 hover:text-gray-700 hover:border-gray-700' to={`/edit/${article.get('_id')}`}>编辑</Link></span>
         ) : null}
       </div>
       <div className="m-editor-preview mt-5" dangerouslySetInnerHTML={{ __html: content }} />
       {
-        renderNav ? <ArticleDetailNav/> : null
+        renderNav ? <ArticleDetailNav activeNavId={activeNavId}/> : null
       }
     </div>
   )
@@ -70,7 +70,7 @@ const showTags = (tags) => {
 
   return tags.map((tag, i) => (
     <Fragment key={i}>
-      <Link className='border-b border-gray-500 border-solid hover:text-gray-700 hover:border-gray-700' to={`/tag/detail/${tag}`}>{tag}</Link>
+      <Link className='border-b border-solid border-transparent text-gray-600 hover:text-gray-700 hover:border-gray-700' to={`/tag/detail/${tag}`}>{tag}</Link>
       {i === tags.size - 1 ? null : <Fragment> ,</Fragment>}
     </Fragment>
   ))

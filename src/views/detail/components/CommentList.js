@@ -2,9 +2,6 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import {
-  CommentReplyBtn
-} from '../styled'
 import { Avatar, Input } from 'antd'
 import { formatTime } from '../../../common'
 import { toggleReplyInput, handleSubmitComment } from '../store/actionCreators'

@@ -1,22 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 import { EditOutlined } from '@ant-design/icons'
-import { Avatar, message } from 'antd'
+import { message } from 'antd'
 import Page from '../../components/Pagination'
 import { Link } from 'react-router-dom'
 import { getUserInfo, getLimitArticleList } from './store/actionCreators'
 import { post } from '../../common/fetch'
 import AvatarCropper from './components/AvatarCropper'
 import BioEditModal from './components/BioEditModal'
-import {
-  UserInfoWrapper,
-  UserAvatarWrapper,
-  UserInfoDetailWrapper,
-  BioWrapper,
-  LimitArticleList,
-  LimitArticleItem,
-  AvatarSelectButton
-} from './styled'
 
 function UserInfo ({ match: { params: { name: user } } }) {
   const dispatch = useDispatch()
@@ -71,35 +62,40 @@ function UserInfo ({ match: { params: { name: user } } }) {
   }, [dispatch, user])
   return (
     <div>
-      <UserInfoWrapper>
-        <UserAvatarWrapper>
-          <Avatar size={150} src={`/api/file/avatar/user/?username=${user}`} />
-          {canEdit ? (
-            <AvatarSelectButton className="avatar-select">
-              更换头像
-              <input type="file" onChange={e => handleFileChange(e.target.files[0])} />
-            </AvatarSelectButton>
-          ) : null}
-        </UserAvatarWrapper>
-        <UserInfoDetailWrapper>
-          <h2>{user}</h2>
-          <BioWrapper>
+      <div className='flex'>
+        <div className='group w-36 h-36 rounded-full overflow-hidden relative'>
+          <img className='w-36 h-36 rounded-full' src={`/api/file/avatar/user/?username=${user}`} alt="头像" />
+          {
+            canEdit ? (
+              <div className='absolute left-0 right-0 bottom-0 h-0 leading-7 z-10 opacity-70 bg-white text-center text-xs overflow-hidden transition-all duration-200 ease-linear group-hover:h-7'>
+                更换头像
+                <input
+                  type="file"
+                  className='absolute left-0 right-0 bottom-0 top-0 z-20 border-none cursor-pointer outline-none opacity-0'
+                  onChange={e => handleFileChange(e.target.files[0])}
+                />
+              </div>
+            ) : null
+          }
+        </div>
+        <div className='flex-1 flex flex-col ml-10'>
+          <h2 className='text-2xl font-bold'>{user}</h2>
+          <div className='pl-5 py-3 pr-8 rounded bg-gray-200 text-sm relative group flex-1 mt-3'>
             {userInfo.get('bio') || '暂时没有个人简介(lll￢ω￢)'}
-            {canEdit ? <EditOutlined className="editIcon" onClick={() => setBioModalVisible(true)} /> : null}
-          </BioWrapper>
-        </UserInfoDetailWrapper>
-      </UserInfoWrapper>
-      <LimitArticleList>
-        <h2>相关文章</h2>
+            {canEdit ? <EditOutlined className="editIcon absolute top-2 right-3 hidden cursor-pointer group-hover:block" onClick={() => setBioModalVisible(true)} /> : null}
+          </div>
+        </div>
+      </div>
+      <div className='mt-8'>
+        <h2 className='text-2xl font-bold'>相关文章</h2>
         {articleList.map(article => (
-          <LimitArticleItem key={article.get('_id')}>
-            <Link title={article.get('title')} to={`/detail/${article.get('_id')}`}>
-              <h1 className="title">{article.get('title')}</h1>
-            </Link>
-            <div className="time">{article.get('create_time').slice(5, 10)}</div>
-          </LimitArticleItem>
+          <div className='flex items-baseline border-b border-dashed border-gray-300 pb-2.5 hover:border-gray-400' key={article.get('_id')}>
+            <div className='w-1.5 h-1.5 rounded-full bg-gray-600'></div>
+            <div className="text-xs text-gray-400 ml-4">{article.get('create_time').slice(5, 10)}</div>
+            <Link className='text-base ml-2 text-gray-500 leading-8 mt-5 flex-1 overflow-ellipsis whitespace-nowrap overflow-hidden hover:text-gray-600' title={article.get('title')} to={`/detail/${article.get('_id')}`}>{article.get('title')}</Link>
+          </div>
         ))}
-      </LimitArticleList>
+      </div>
       {total > 10 ? <Page total={total} onChange={handlePageChange} /> : null}
       <AvatarCropper
         visible={avatarModalVisible}
