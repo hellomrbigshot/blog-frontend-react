@@ -145,51 +145,53 @@ function Header () {
   // }
   const hideHeaderPath = ['/signin', '/signup', '/404']
   const hideHeader = hideHeaderPath.includes(pathname.trim())
-  const vueIcon = `<use xlink:href='#icon-vue' />`
+  // const vueIcon = `<use xlink:href='#icon-vue' />`
   return hideHeader ? null : (
     <div id="blogHeader" className={classnames('flex', 'items-center', 'h-15', 'shadow-sm', 'fixed', 'top-0', 'left-0', 'right-0', 'z-10', 'bg-white', 'transform', 'transition-transform', { '-translate-y-full': !showHeader })}>
-      <Link to="/">
-        <img src={blackLogo} alt="logo" className='w-36 px-4 mx-2 box-content' />
-      </Link>
-      <div className='flex-1 flex h-full'>
-        {
-          Object.keys(navList).map((key) => (
-            <div className="text-base mx-5 h-full" key={key}>
-              <Link
-                to={key}
-                className={classnames('box-border text-gray-600 border-b-3 border-solid border-transparent h-full flex items-center font-medium hover:text-gray-900 hover:border-blue-500', { 'text-blue-500': key === pathname })}
-              >{ navList[key] }</Link>
-            </div>
-          ))
-        }
-        <div className="text-base mx-5">
-          <a href="https://vue.hellomrbigbigshot.xyz" className='box-border text-gray-600 border-b-3 border-solid border-transparent h-full flex items-center hover:text-gray-900 hover:border-blue-500'>
-            <svg
-              className="icon"
-              style={{ fontSize: '22px' }}
-              aria-hidden="true"
-              dangerouslySetInnerHTML={{ __html: vueIcon }}
+      <div className='flex items-center flex-1 h-full'>
+        <Link to="/">
+          <img src={blackLogo} alt="logo" className='w-36 px-4 mx-2 box-content' />
+        </Link>
+        <div className='flex-1 h-full hidden md:flex'>
+          {
+            Object.keys(navList).map((key) => (
+              <div className="text-base mx-5 h-full" key={key}>
+                <Link
+                  to={key}
+                  className={classnames('box-border text-gray-600 border-b-3 border-solid border-transparent h-full flex items-center font-medium hover:text-gray-900 hover:border-blue-500', { 'text-blue-500': key === pathname })}
+                >{ navList[key] }</Link>
+              </div>
+            ))
+          }
+          {/* <div className="text-base mx-5">
+            <a href="https://vue.hellomrbigbigshot.xyz" className='box-border text-gray-600 border-b-3 border-solid border-transparent h-full flex items-center hover:text-gray-900 hover:border-blue-500'>
+              <svg
+                className="icon"
+                style={{ fontSize: '22px' }}
+                aria-hidden="true"
+                dangerouslySetInnerHTML={{ __html: vueIcon }}
+              />
+              版本
+            </a>
+          </div> */}
+          {/* <div>
+            <Switch
+              defaultChecked
+              checkedChildren={<BulbTwoTone twoToneColor="#fff" />}
+              unCheckedChildren={<BulbTwoTone twoToneColor="#fcee80" />}
+              onChange={handleSwitch}
             />
-            版本
-          </a>
+          </div> */}
         </div>
-        {/* <div>
-          <Switch
-            defaultChecked
-            checkedChildren={<BulbTwoTone twoToneColor="#fff" />}
-            unCheckedChildren={<BulbTwoTone twoToneColor="#fcee80" />}
-            onChange={handleSwitch}
-          />
-        </div> */}
       </div>
       <div className='flex items-center'>
-        <div className='flex w-72'>
-          <div className={classnames('flex flex-1 items-center rounded overflow-hidden pr-2 border border-solid', {'border-blue-500 bg-white': focused, 'bg-gray-200 border-white': !focused})}>
+        <div className='w-72 hidden lg:flex'>
+          <div className={classnames('hidden flex-1 items-center rounded overflow-hidden pr-2 border border-solid md:flex', {'border-blue-500 bg-white': focused, 'bg-gray-200 border-white': !focused})}>
             <input
               placeholder="搜索标题或内容"
               onFocus={() => dispatch(actionCreators.searchFocus())}
               onBlur={() => dispatch(actionCreators.searchBlur())}
-              className={classnames('text-xs', 'pl-3', 'py-2', 'bg-gray-200', 'outline-none', 'border-transparent', 'flex-1', 'h-8', 'focus:bg-white')}
+              className={classnames('text-xs pl-3 py-2 bg-gray-200 outline-none border-transparent flex-1 h-8 focus:bg-white')}
               ref={input => {
                 keywords = input
               }}

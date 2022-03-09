@@ -1,12 +1,14 @@
 import React, { useEffect, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Input, Avatar } from 'antd'
+import { Avatar } from 'antd'
 import { useParams, useHistory, useLocation } from 'react-router-dom'
 import { handleCommentChange, getArticleDetail, resetArticleDetail, resetCommentList, getCommentList, handleSubmitComment as submitComment } from './store/actionCreators'
 import ArticleDetail from './components/ArticleDetail'
 import CommentList from './components/CommentList'
 import ArticleDetailSkeleton from './components/ArticleDetailSkeleton'
+import CommentTextarea from './components/CommentTextarea'
 import 'react-m-editor/dist/index.min.css'
+import { isMac } from '../../common'
 
 function Detail () {
   const dispatch = useDispatch()
@@ -26,6 +28,11 @@ function Detail () {
       dispatch(getCommentList(id))
     }
   }, [id, dispatch])
+  const handleKeyDown = useCallback(e => {
+    if ((isMac && e.metaKey && e.keyCode === 13) || (!isMac && e.ctrlKey && e.keyCode === 13)) { // mac command+enter windows ctrl+enter 提交
+      handleSubmitComment()
+    }
+  })
   const handleSubmitComment = useCallback(() => {
     if (!comment.trim()) {
       return false
@@ -46,11 +53,11 @@ function Detail () {
   }, [user, history, pathname])
   const handleInputChange = useCallback(
     comment => {
+      console.log(comment)
       dispatch(handleCommentChange(comment))
     },
     [dispatch]
   )
-  const { TextArea } = Input
   return (
     <div>
       { detail.get('content')
@@ -61,14 +68,12 @@ function Detail () {
               <h2 className='text-lg font-semibold mb-6'>评论</h2>
               <div className='flex'>
                 <Avatar className='mr-4' size={40} src={`/api/file/avatar/user?username=${user}`} alt={user} />
-                <TextArea
-                  placeholder='输入评论（Enter换行，⌘ + Enter发送）'
-                  className='rounded-md'
-                  value={comment}
-                  rows={3}
-                  onChange={input => handleInputChange(input.target.value)}
+                <CommentTextarea
+                  placeholder={`输入评论（Enter换行，${isMac && '⌘' || 'ctrl'} + Enter发送）`}
+                  isMac={isMac}
+                  onChange={e => handleInputChange(e.target.value)}
                   onFocus={handleFocus}
-                  onPressEnter={handleSubmitComment}
+                  onEnter={handleSubmitComment}
                 />
               </div>
               <div className='flex flex-row-reverse mt-2'>
@@ -77,13 +82,14 @@ function Detail () {
             </div>
           : null }
       { commentList && commentList.size > 0
-        ? <CommentList
-            article={detail}
-            user={user}
-            commentList={commentList}
-            articleUser={detail.get('create_user')}
-          />
-        : null }
+          ? <CommentList
+              article={detail}
+              user={user}
+              commentList={commentList}
+              isMac={isMac}
+              articleUser={detail.get('create_user')}
+            />
+          : null }
     </div>
   )
 }

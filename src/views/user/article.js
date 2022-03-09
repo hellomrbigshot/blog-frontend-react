@@ -6,7 +6,7 @@ import Page from '../../components/Pagination'
 import classnames from 'classnames'
 import { Link, Redirect } from 'react-router-dom'
 import { getArticleList } from './store/actionCreators'
-import { ArticleWrapper, ArticleList, ArticleItem, TimelineDot, ArticleYear, ArticleTime, ArticleTitle } from './styled'
+import TimelineDot from './components/TimelineDot'
 
 function LimitArticleList () {
   const dispatch = useDispatch()
@@ -38,46 +38,44 @@ function LimitArticleList () {
   return !user ? (
     <Redirect to={`/signin?redirect=${redirectUrl}`} />
   ) : (
-    <ArticleWrapper>
+    <div>
       <h2>我的文章</h2>
-      <ArticleList>
+      <div className='mt-8'>
         <Timeline>
           <Timeline.Item dot={<TimelineDot />}>
-            <div style={{ fontSize: '12px' }}>嗯..！目前共计 {total} 篇文章。继续努力！</div>
+            <div className='text-xs'>嗯..！目前共计 {total} 篇文章。继续努力！</div>
           </Timeline.Item>
           {formatArr(articleList).map((item, i, arr) => (
             <Fragment key={item.get('year')}>
               <Timeline.Item dot={<TimelineDot />}>
-                <ArticleYear>{item.get('year')}</ArticleYear>
+                <div className='text-2xl text-gray-400 font-normal'>{ item.get('year') }</div>
               </Timeline.Item>
               <Fragment>
                 {item.get('children').map((article, j, children) => (
                   <Timeline.Item
+                    dot={<TimelineDot />}
                     className={classnames({ 'ant-timeline-item-last': j === children.size - 1 && i === arr.size - 1 })}
                     key={article.get('_id')}
-                    dot={<TimelineDot />}
                   >
-                    <ArticleItem>
-                      <Link to={`/detail/${article.get('_id')}`}>
-                        <ArticleTime>{article.get('create_time').slice(5, 10)}</ArticleTime>
-                        <ArticleTitle title={article.get('title')}>{article.get('title')}</ArticleTitle>
-                        {article.get('secret') ? (
-                          <Fragment>
-                            <span>&nbsp;|&nbsp;</span>
-                            <Tag color="#f50">私密</Tag>
-                          </Fragment>
-                        ) : null}
-                      </Link>
-                    </ArticleItem>
+                    <Link className='flex group pb-2.5 items-center border-dashed border-gray-300 border-b hover:border-gray-600' to={`/detail/${article.get('_id')}`}>
+                      <div className='text-xs text-gray-500 w-10'>{article.get('create_time').slice(5, 10)}</div>
+                      <div className='text-base ml-2 text-gray-600 font-medium overflow-hidden overflow-ellipsis whitespace-nowrap group-hover:text-gray-800' title={article.get('title')}>{article.get('title')}</div>
+                      {article.get('secret') ? (
+                        <Fragment>
+                          <span>&nbsp;|&nbsp;</span>
+                          <Tag color="#f50">私密</Tag>
+                        </Fragment>
+                      ) : null}
+                    </Link>
                   </Timeline.Item>
                 ))}
               </Fragment>
             </Fragment>
           ))}
         </Timeline>
-      </ArticleList>
+      </div>
       {total > 10 ? <Page total={total} onChange={handlePageChange} /> : null}
-    </ArticleWrapper>
+    </div>
   )
 }
 export default LimitArticleList

@@ -18,7 +18,6 @@ import Write from './views/write'
 import Lab from './views/lab'
 import Cup from './views/lab/cup'
 import ChangeLog from './views/ChangeLog'
-import { AppWrapper } from './style'
 import { ThemeProvider } from 'styled-components'
 import { useSelector } from 'react-redux'
 import themeInfo from './theme'
@@ -30,13 +29,17 @@ function ThemeApp () {
   const handleInitDetail = (nextState, replace) => {
     replace({ path: '/tag/list' })
   }
+  const style = {
+    minHeight: 'calc(100vh - 129px)'
+  }
   return (
     <ThemeProvider theme={themeInfo[theme]}>
       <Router>
         <ScrollToTop />
         <Header/>
         <div style={{ background: themeInfo[theme].mainBg, overflow: 'auto', position: 'relative', zIndex: 1 }}>
-          <AppWrapper>
+          {/* <AppWrapper> */}
+          <div className='py-9 mx-auto mt-24 w-11/12 lg:w-4/5 max-w-4xl' style={style}>
             <Switch>
               <Redirect exact from="/" to="/home" />
               <Route path="/home/:keywords?" component={Home} />
@@ -61,7 +64,8 @@ function ThemeApp () {
               <Route path="/changelog" component={ChangeLog}/>
               <Redirect from="*" to="/404" />
             </Switch>
-          </AppWrapper>
+          </div>
+          {/* </AppWrapper> */}
         </div>
         <Footer />
       </Router>

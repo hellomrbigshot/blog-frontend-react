@@ -28,7 +28,8 @@ module.exports = {
    variants: {
     extend: {
       height: ['group-hover'],
-      display: ['group-hover']
+      display: ['group-hover'],
+      borderWidth: ['hover']
     }
    }
 }

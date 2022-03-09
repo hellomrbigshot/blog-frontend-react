@@ -86,7 +86,7 @@ function UserInfo ({ match: { params: { name: user } } }) {
           </div>
         </div>
       </div>
-      <div className='mt-8'>
+      <div className='my-8'>
         <h2 className='text-2xl font-bold'>相关文章</h2>
         {articleList.map(article => (
           <div className='flex items-baseline border-b border-dashed border-gray-300 pb-2.5 hover:border-gray-400' key={article.get('_id')}>
@@ -96,7 +96,11 @@ function UserInfo ({ match: { params: { name: user } } }) {
           </div>
         ))}
       </div>
-      {total > 10 ? <Page total={total} onChange={handlePageChange} /> : null}
+      {
+        total > 10
+          ? <Page total={total} onChange={handlePageChange} />
+          : null
+      }
       <AvatarCropper
         visible={avatarModalVisible}
         img={img}
