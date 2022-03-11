@@ -27,11 +27,14 @@ function Comment({ history }) {
     <Tabs defaultActiveKey="to_user" onChange={key => getCommentList(key, 1)}>
       <TabPane tab="我收到的" key="to_user">
         {showCommentList(commentList, history.push, 'to_user')}
-        {total > 10 ? <Page style={{ marginTop: '20px' }} total={total} onChange={page => getCommentList('to_user', page)} /> : null}
+        {total > 10
+          ? <Page className='mt-8' total={total} onChange={page => getCommentList('to_user', page)} /> : null}
       </TabPane>
       <TabPane tab="我发起的" key="create_user">
         {showCommentList(commentList, history.push, 'create_user')}
-        {total > 10 ? <Page style={{ marginTop: '20px' }} total={total} onChange={page => getCommentList('create_user', page)} /> : null}
+        {total > 10
+          ? <Page className='mt-8' total={total} onChange={page => getCommentList('create_user', page)} />
+          : null}
       </TabPane>
     </Tabs>
   )

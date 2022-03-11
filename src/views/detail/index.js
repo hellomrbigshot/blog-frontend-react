@@ -28,11 +28,6 @@ function Detail () {
       dispatch(getCommentList(id))
     }
   }, [id, dispatch])
-  const handleKeyDown = useCallback(e => {
-    if ((isMac && e.metaKey && e.keyCode === 13) || (!isMac && e.ctrlKey && e.keyCode === 13)) { // mac command+enter windows ctrl+enter 提交
-      handleSubmitComment()
-    }
-  })
   const handleSubmitComment = useCallback(() => {
     if (!comment.trim()) {
       return false

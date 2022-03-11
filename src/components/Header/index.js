@@ -158,7 +158,7 @@ function Header () {
               <div className="text-base mx-5 h-full" key={key}>
                 <Link
                   to={key}
-                  className={classnames('box-border text-gray-600 border-b-3 border-solid border-transparent h-full flex items-center font-medium hover:text-gray-900 hover:border-blue-500', { 'text-blue-500': key === pathname })}
+                  className={classnames('box-border text-gray-600 border-b-3 border-solid border-transparent h-full flex items-center font-medium hover:text-gray-900 hover:border-blue-600', { 'text-blue-600': key === pathname })}
                 >{ navList[key] }</Link>
               </div>
             ))

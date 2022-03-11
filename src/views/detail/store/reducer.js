@@ -2,7 +2,6 @@ import { fromJS } from 'immutable'
 import {
   INIT_ARTICLE_DETAIL,
   INIT_COMMENT_LIST,
-  TOGGLE_REPLY_INPUT,
   HANDLE_CONCAT_COMMENT,
   HANDLE_COMMENT_CHANGE,
   RESET_ARTICLE_DETAIL,
@@ -28,14 +27,8 @@ export default (state = initialState, action) => {
       return state.set('detail', fromJS(action.detail))
     case INIT_COMMENT_LIST:
       return state.set('commentList', fromJS(action.list))
-    case TOGGLE_REPLY_INPUT:
-      return state.setIn(['commentList', action.index, 'showReplyInput'], !state.getIn(['commentList', action.index, 'showReplyInput']))
     case HANDLE_CONCAT_COMMENT:
-      if (action.index !== undefined)
-        return state
-          .set('comment', '')
-          .set('commentList', fromJS([action.data]).concat(state.get('commentList').setIn([action.index, 'showReplyInput'], false)))
-      else return state.set('comment', '').set('commentList', fromJS([action.data]).concat(state.get('commentList')))
+      return state.set('comment', '').set('commentList', fromJS([action.data]).concat(state.get('commentList')))
     case RESET_ARTICLE_DETAIL:
       return state.set('detail', fromJS({}))
     case RESET_COMMENT_LIST:

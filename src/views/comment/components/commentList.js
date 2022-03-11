@@ -6,7 +6,7 @@ import classnames from 'classnames'
 
 export default (commentList, push, type = 'to_user') => {
   return (
-    <Fragment>
+    <div className='mb-8'>
       {commentList.map((comment) => (
         <div key={comment.get('_id')} className='mt-4 flex pl-4 py-2'>
           <div>
@@ -19,7 +19,7 @@ export default (commentList, push, type = 'to_user') => {
               <div className='flex-1 flex items-baseline'>
                 {type === 'to_user' ? (
                   <Fragment>
-                    <Link className='cursor-pointer' to={`/user/info/${comment.get('create_user')}`}>{comment.get('create_user')} </Link>
+                    <Link className='cursor-pointer text-gray-600 hover:text-blue-600' to={`/user/info/${comment.get('create_user')}`}>{comment.get('create_user')} </Link>
                     <div className='text-gray-400 text-xs ml-1'>回复我说：</div>
                   </Fragment>
                 ) : (
@@ -28,26 +28,26 @@ export default (commentList, push, type = 'to_user') => {
               </div>
               <div className='text-gray-400 text-xs'>{formatTime(comment.get('create_time'))}</div>
             </div>
-            <div className='text-gray-400 font-medium'>{comment.get('content')}</div>
-            <div className='my-2.5 p-2.5 rounded shadow-md text-gray-500' onClick={() => handleToDetail(comment.get('page_id'))}>
+            <div className='text-gray-600 mt-1.5'>{comment.get('content')}</div>
+            <div className='mb-2.5 mt-1.5 p-2.5 rounded shadow-md text-gray-500 cursor-pointer' onClick={() => handleToDetail(comment.get('page_id'))}>
               {comment.get('reply_user') ? (
                 <Fragment>
                   <Link
-                    className='cursor-pointer'
+                    className='cursor-pointer text-gray-600 hover:text-blue-600'
                     to={`/user/info/${comment.get('reply_user')}`}
                     onClick={(e) => e.stopPropagation()}
                   >{comment.get('reply_user')}: </Link>
                   {comment.get('reply_content')}
                 </Fragment>
               ) : (
-                <div className="text-base font-medium text-gray-500">{comment.get('page_title')}</div>
+                <div className="text-base font-medium text-gray-600 cursor-pointer hover:text-blue-600">{comment.get('page_title')}</div>
               )}
             </div>
           </div>
           <div className={classnames({ 'invisible': !(type === 'to_user' && !comment.get('is_read')) }, 'w-2 h-2 rounded-full bg-red-500 ml-1.5')}></div>
         </div>
       ))}
-    </Fragment>
+    </div>
   )
   function handleToDetail(id) {
     push(`/detail/${id}`)

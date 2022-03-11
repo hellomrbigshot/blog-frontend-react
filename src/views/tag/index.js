@@ -34,10 +34,10 @@ function TagList() {
           ? <TagListSkeleton/>
           : tagList.map(tag => (
             <div key={tag.get('_id')} className='p-5 rounded-md shadow w-11/12 ml-1 mt-6'>
-              <Link to={`/tag/detail/${tag.get('name')}`} className='py-3 pl-1 text-lg font-medium block w-full border-b border-solid border-gray-100 text-blue-400 hover:text-blue-500'>{tag.get('name')}</Link>
+              <Link to={`/tag/detail/${tag.get('name')}`} className='py-3 pl-1 text-lg font-medium block w-full border-b border-solid border-gray-100 text-blue-500 hover:text-blue-600'>{tag.get('name')}</Link>
               <div className='text-xs text-gray-500 py-3 pl-1 border-b border-solid border-gray-100'>{tag.get('description')}</div>
               <div className='text-sm py-3 pl-1'>
-                共有 <Link to={`/tag/detail/${tag.get('name')}`} className='text-blue-400 hover:text-blue-500'>{tag.get('page_num')}</Link> 篇文章
+                共有 <Link to={`/tag/detail/${tag.get('name')}`} className='text-blue-500 font-medium hover:text-blue-600'>{tag.get('page_num')}</Link> 篇文章
               </div>
             </div>
           ))}

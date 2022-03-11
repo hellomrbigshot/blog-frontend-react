@@ -27,23 +27,24 @@ function ArticleDetailNav (props) {
           {showSideNav ? null : (
             <i
               title="点击显示标题导航栏"
-              className="iconfont icon-mulu text-2xl fixed top-1/2  right-5 -mt-4 cursor-pointer hover:text-blue-400"
+              className="iconfont icon-mulu text-2xl fixed top-1/2  right-5 -mt-4 cursor-pointer hover:text-blue-600"
               onClick={() => setShowSideNav(true)}
             />
           )}
           <div className={classnames({ 'w-60 opacity-100': showSideNav }, 'fixed z-10 rounded top-1/2 -mt-40 h-80 w-0 right-4 shadow-sm opacity-0 bg-white flex flex-col overflow-hidden transition-all')}>
-            <div className='text-base font-medium flex mb-3 items-center shadow-sm px-2.5 pt-2.5'>
+            <div className='text-base font-medium flex items-center shadow-sm px-2.5 py-1.5 pt-2.5'>
               <h3 className='flex-1'>目录</h3>
-              <i className="iconfont icon-arrow-right text-xl cursor-pointer rounded hover:text-blue-400" onClick={() => setShowSideNav(false)}/>
+              <i className="iconfont icon-arrow-right text-xl cursor-pointer rounded hover:text-blue-600" onClick={() => setShowSideNav(false)}/>
             </div>
-            <div className='flex-1 overflow-y-scroll'>
+            <div className='flex-1 overflow-y-auto'>
+              <div className='py-3'>
               {
                 navList.map((item) => (
                   <div
                     title={item.text}
                     key={`h${item.level}-${item.no}`}
                     id={`linkToh${item.level}${item.no}`}
-                    className={classnames({ 'w-full py-1 box-border rounded-sm text-sm overflow-hidden font-medium cursor-pointer px-2.5 hover:bg-gray-100': true,  'text-blue-400': activeNavId === `linkToh${item.level}${item.no}` })}
+                    className={classnames({ 'w-full py-1.5 box-border rounded-sm text-sm overflow-hidden font-medium cursor-pointer text-gray-600 px-3 hover:bg-gray-100': true,  'text-blue-600': activeNavId === `linkToh${item.level}${item.no}`, 'hover:text-blue-600': activeNavId !== `linkToh${item.level}${item.no}` })}
                     onClick={() => toHeader(`h${item.level}-${item.no}`)}
                   >
                     <pre className='overflow-ellipsis'>
@@ -52,6 +53,7 @@ function ArticleDetailNav (props) {
                   </div>
                 ))
               }
+              </div>
             </div>
           </div>
         </Fragment>
