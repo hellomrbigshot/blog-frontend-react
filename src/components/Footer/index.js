@@ -1,9 +1,8 @@
 import React from 'react'
-import { Footer, Content } from './styled'
 export default function () {
   return (
-    <Footer>
-      <Content target="_blank" href="http://www.beian.miit.gov.cn">备案号：浙ICP备18011593号-1</Content>
-    </Footer>
+    <div className='text-xs text-center py-2 border-t border-solid border-gray-100'>
+      <a target="_blank" href="http://beian.miit.gov.cn" className='text-gray-600 hover:text-blue-600'>备案号：浙ICP备18011593号-1</a>
+    </div>
   )
 }

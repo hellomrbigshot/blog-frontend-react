@@ -117,7 +117,7 @@ function Write ({ match: { params = null }, history }) {
   }
   const redirectUrl = encodeURIComponent('/write')
   return !user ? (
-    <Redirect to={`/login?redirect=${redirectUrl}`} />
+    <Redirect to={`/signin?redirect=${redirectUrl}`} />
   ) : (
     <>
       <Form

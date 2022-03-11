@@ -1,5 +1,14 @@
 const settings = [
   {
+    version: 'v1.2.6',
+    date: '2022-03-11',
+    desc: {
+      Featrue: [
+        '使用 tailwind.css 重构样式'
+      ]
+    }
+  },
+  {
     version: 'v1.2.5',
     date: '2021-11-30',
     desc: {
@@ -30,7 +39,7 @@ const settings = [
     version: 'v1.2.2',
     date: '2021-10-09',
     desc: {
-      Featrue: [
+      Feature: [
         '博客详情启用新的样式'
       ],
       'Bug Fixes': [
