@@ -1,14 +1,9 @@
 import React from 'react'
-import { TagWrapper, TagHeader, TagDesc } from './styled'
 export default function () {
   return (
-    <TagWrapper>
-      <TagHeader/>
-      {
-        [1, 2].map(_ => (
-          <TagDesc key={_}/>
-        ))
-      }
-    </TagWrapper>
+    <div>
+      <div className='skeleton h-8 w-40 rounded'></div>
+      <div className='skeleton h-5 w-60 rounded-sm mt-2'></div>
+    </div>
   )
 }

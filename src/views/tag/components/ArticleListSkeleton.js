@@ -1,12 +1,11 @@
 import React from 'react'
-import { ArticleWrapper, ArticleItem } from './styled'
 export default function () {
   const Arr = Array(10).fill('')
   return (
-    <ArticleWrapper>
+    <div className='mt-10'>
       {Arr.map((_, i) => (
-        <ArticleItem key={i}/>
+        <div key={i} className='rounded w-full mt-4 mb-2.5 h-7 skeleton'/>
       ))}
-    </ArticleWrapper>
+    </div>
   )
 }

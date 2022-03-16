@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { TagWrapper, Header, ListWrapper, TagItem, TagHeader, TagDesc, TagBottom } from './styled'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory, Link } from 'react-router-dom'
 import Page from '../../components/Pagination'
@@ -25,11 +24,11 @@ function TagList() {
     history.push(`?page=${page}`)
   }
   return (
-    <TagWrapper>
+    <div>
       <div className='text-lg mb-5'>
         当前总共 <span className='text-3xl font-bold italic'>{total}</span> 个标签
       </div>
-      <ListWrapper>
+      <div className='mt-2 mb-10'>
         {!tagList.size
           ? <TagListSkeleton/>
           : tagList.map(tag => (
@@ -41,9 +40,9 @@ function TagList() {
               </div>
             </div>
           ))}
-      </ListWrapper>
+      </div>
       {tagList.size === 0 ? null : <Page current={page} total={total} onChange={pageChange} />}
-    </TagWrapper>
+    </div>
   )
 }
 

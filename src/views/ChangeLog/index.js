@@ -1,7 +1,5 @@
-import classnames from 'classnames'
 import React, { Fragment } from 'react'
 import settings from './changeLogSetting'
-import { LogItem, LogItemHeader, LogItemDate, LogItemDescHeader, LogItemDescItemWrapper, LogItemDescItem } from './styled'
 function ChangeLog () {
   return (
     <div>
