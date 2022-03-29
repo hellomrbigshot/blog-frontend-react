@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { actionCreators } from './store'
-import { HomeWrapper } from './styled'
 import ArticleItem from '../../components/ArticleItem'
 import ArticleItemSkeleton from '../../components/ArticleItem/skeleton'
 import { BackTop } from 'antd'
@@ -30,7 +29,7 @@ function Home () {
     history.push(`/home${keywords ? `/${keywords}` : ''}?page=${page}`)
   }
   return (
-    <HomeWrapper>
+    <div>
       {
         !fetchArray.size
         ? (articleList.map((article, i) => (<ArticleItem article={article} key={article.get('_id')} />)))
@@ -38,7 +37,7 @@ function Home () {
       }
       <BackTop />
       {total > 10 ? <Page total={total} current={page} onChange={changePage} /> : null}
-    </HomeWrapper>
+    </div>
   )
 }
 

@@ -6,8 +6,6 @@ export const PaginationWrapper = styled.ul`
   font-variant: tabular-nums;
   line-height: 1.5715;
   list-style: none;
-  margin: 0;
-  padding: 0;
 `
 
 export const PaginationItem = styled.li`

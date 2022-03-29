@@ -4,8 +4,8 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import Home from './views/home'
 import Detail from './views/detail'
-import Login from './views/user/login'
-import Register from './views/user/register'
+import SignIn from './views/user/signin'
+import SignUp from './views/user/signup'
 import NoMatch from './views/404'
 import ScrollToTop from './components/ScrollTop'
 import TagList from './views/tag'
@@ -18,7 +18,6 @@ import Write from './views/write'
 import Lab from './views/lab'
 import Cup from './views/lab/cup'
 import ChangeLog from './views/ChangeLog'
-import { AppWrapper } from './style'
 import { ThemeProvider } from 'styled-components'
 import { useSelector } from 'react-redux'
 import themeInfo from './theme'
@@ -30,13 +29,17 @@ function ThemeApp () {
   const handleInitDetail = (nextState, replace) => {
     replace({ path: '/tag/list' })
   }
+  const style = {
+    minHeight: 'calc(100vh - 129px)'
+  }
   return (
     <ThemeProvider theme={themeInfo[theme]}>
       <Router>
         <ScrollToTop />
         <Header/>
         <div style={{ background: themeInfo[theme].mainBg, overflow: 'auto', position: 'relative', zIndex: 1 }}>
-          <AppWrapper>
+          {/* <AppWrapper> */}
+          <div className='py-9 mx-auto mt-24 w-11/12 lg:w-4/5 max-w-4xl' style={style}>
             <Switch>
               <Redirect exact from="/" to="/home" />
               <Route path="/home/:keywords?" component={Home} />
@@ -45,8 +48,8 @@ function ThemeApp () {
                 component={Detail}
                 onEnter={handleInitDetail}
               />
-              <Route path="/login" exact component={Login} />
-              <Route path="/register" exact component={Register} />
+              <Route path="/signin" exact component={SignIn} />
+              <Route path="/signup" exact component={SignUp} />
               <Route path="/tag/list" exact component={TagList} />
               <Route path="/user/draft" exact component={Draft} />
               <Route path="/user/list" exact component={LimitList} />
@@ -61,7 +64,8 @@ function ThemeApp () {
               <Route path="/changelog" component={ChangeLog}/>
               <Redirect from="*" to="/404" />
             </Switch>
-          </AppWrapper>
+          </div>
+          {/* </AppWrapper> */}
         </div>
         <Footer />
       </Router>

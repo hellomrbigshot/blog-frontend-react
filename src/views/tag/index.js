@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { TagWrapper, Header, ListWrapper, TagItem, TagHeader, TagDesc, TagBottom } from './styled'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory, Link } from 'react-router-dom'
 import Page from '../../components/Pagination'
@@ -25,27 +24,25 @@ function TagList() {
     history.push(`?page=${page}`)
   }
   return (
-    <TagWrapper>
-      <Header>
-        当前总共 <span>{total}</span> 个标签
-      </Header>
-      <ListWrapper>
-        {tagList.size === 0
+    <div>
+      <div className='text-lg mb-5'>
+        当前总共 <span className='text-3xl font-bold italic'>{total}</span> 个标签
+      </div>
+      <div className='mt-2 mb-10'>
+        {!tagList.size
           ? <TagListSkeleton/>
           : tagList.map(tag => (
-            <TagItem key={tag.get('_id')}>
-              <TagHeader>
-                <Link to={`/tag/detail/${tag.get('name')}`}>{tag.get('name')}</Link>
-              </TagHeader>
-              <TagDesc>{tag.get('description')}</TagDesc>
-              <TagBottom>
-                共有 <Link to={`/tag/detail/${tag.get('name')}`}>{tag.get('page_num')}</Link> 篇文章
-              </TagBottom>
-            </TagItem>
+            <div key={tag.get('_id')} className='p-5 rounded-md shadow w-11/12 ml-1 mt-6'>
+              <Link to={`/tag/detail/${tag.get('name')}`} className='py-3 pl-1 text-lg font-medium block w-full border-b border-solid border-gray-100 text-blue-500 hover:text-blue-600'>{tag.get('name')}</Link>
+              <div className='text-xs text-gray-500 py-3 pl-1 border-b border-solid border-gray-100'>{tag.get('description')}</div>
+              <div className='text-sm py-3 pl-1'>
+                共有 <Link to={`/tag/detail/${tag.get('name')}`} className='text-blue-500 font-medium hover:text-blue-600'>{tag.get('page_num')}</Link> 篇文章
+              </div>
+            </div>
           ))}
-      </ListWrapper>
+      </div>
       {tagList.size === 0 ? null : <Page current={page} total={total} onChange={pageChange} />}
-    </TagWrapper>
+    </div>
   )
 }
 

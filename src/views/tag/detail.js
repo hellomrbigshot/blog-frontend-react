@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Page from '../../components/Pagination'
 import { getTagDetail, getArticleList, resetArticleList, resetTagDetail } from './store/actionCreators'
-import { TagDetailWrapper, ArticleListWrapper } from './styled'
 import { useParams, useHistory } from 'react-router-dom'
 import { useQuery } from '../../common'
 import ArticleListSkeleton from './components/ArticleListSkeleton'
@@ -40,28 +39,35 @@ function TagDetail() {
       {
         detail.get('name')
           ? (
-              <TagDetailWrapper>
-                <h2>
-                  {detail.get('name')} <small>标签</small>
-                </h2>
-                <div>{detail.get('description')}</div>
-              </TagDetailWrapper>
+              <div className='mb-10 relative'>
+                <div className='flex items-center'>
+                  <div className='w-2 h-2 rounded-full bg-gray-400'></div>
+                  <div className='flex items-baseline ml-5'>
+                    <div className='text-2xl text-gray-800 font-bold'>{detail.get('name')}</div>
+                    <div className='text-base text-gray-400 ml-2 font-bold'>标签</div>
+                  </div>
+                </div>
+                <div className='mt-2.5 ml-7 text-xs text-gray-800'>{detail.get('description')}</div>
+              </div>
             )
           : (<TagDetailSkeleton/>)
       }
       {
         !fetchArray.size
           ? (
-              <ArticleListWrapper>
+              <div className='mb-10'>
                 {articleList.map(article => (
-                  <article key={article.get('_id')}>
-                    <Link to={`/detail/${article.get('_id')}`}>
-                      <span>{article.get('create_time').substring(5, 10)}</span>
-                      <h2>{article.get('title')}</h2>
-                    </Link>
-                  </article>
+                  <Link
+                    key={article.get('_id')}
+                    to={`/detail/${article.get('_id')}`}
+                    className='group flex items-center pt-6 pb-3 border-b border-dashed border-gray-200 hover:border-gray-400'
+                  >
+                    <div className='w-1.5 h-1.5 rounded-full bg-gray-400 group-hover:bg-gray-600'></div>
+                    <div className='ml-5 text-xs text-gray-400'>{article.get('create_time').substring(5, 10)}</div>
+                    <div className='ml-1.25 text-gray-500 font-bold text-base group-hover:text-gray-700'>{article.get('title')}</div>
+                  </Link>
                 ))}
-              </ArticleListWrapper>
+              </div>
             )
           : <ArticleListSkeleton/>
       }

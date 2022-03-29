@@ -102,4 +102,6 @@ const useQuery = (key) => {
   return query.get(key)
 }
 
-export { marked, formatTime, fetch, debounce, throttle, useQuery }
+const isMac = /macintosh|mac os x/i.test(navigator.userAgent)
+
+export { marked, formatTime, fetch, debounce, throttle, useQuery, isMac }

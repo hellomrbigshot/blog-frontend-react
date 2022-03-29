@@ -1,86 +1,22 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
-import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import {
-  CommentWrapper,
-  CommentItem,
-  CommentAvatar,
-  CommentFloor,
-  CommentContent,
-  CommentContentDetail,
-  CommentInfo,
-  CommentInfoTime,
-  ReplyContent,
-  CommentAction,
-  CommentReply,
-  CommentReplyBtn
-} from '../styled'
-import { Avatar, Input } from 'antd'
-import { formatTime } from '../../../common'
-import { showReplyInput, handleSubmitComment } from '../store/actionCreators'
+import CommentListItem from './CommentListItem'
 
-function CommentList({ commentList, article, user, history, location }) {
-  let replyContent = null
-  const dispatch = useDispatch()
-  const handleInputChange = input => {
-    // 获取 input 的值
-    replyContent = input.target.value
-  }
-  const redirectUrl = encodeURIComponent(location.pathname)
-  const handleReplyComment = (i, user) => {
-    !user && history.push(`/login?redirect=${redirectUrl}`)
-    dispatch(showReplyInput(i))
-  }
-  const handleSubmitReply = (comment, i, replyContent) => {
-    const formData = {
-      content: replyContent,
-      reply_user: comment.get('create_user'),
-      reply_content: comment.get('content')
-    }
-    dispatch(handleSubmitComment(formData, i))
-    document.querySelector('#commentList').scrollIntoView()
-  }
+function CommentList({ commentList, article, user, articleUser, isMac }) {
   return (
-    <CommentWrapper id="commentList">
-      <h2>留言板：</h2>
+    <div id="commentList">
+      <h2 className='text-lg font-semibold mb-2 mt-8'>全部评论</h2>
       {commentList.map((comment, i) => (
-        <CommentItem key={comment.get('_id')}>
-          <CommentAvatar>
-            <Link to={`/user/info/${comment.get('create_user')}`}>
-              <Avatar size={40} src={`/api/file/avatar/user?username=${comment.get('create_user')}`} alt={comment.create_user} />
-            </Link>
-            <CommentFloor>{commentList.size - i}楼</CommentFloor>
-          </CommentAvatar>
-          <CommentContent>
-            <CommentInfo>
-              <CommentInfoTime>{formatTime(comment.get('create_time'))}</CommentInfoTime>
-              <Link to={`/user/info/${comment.get('create_user')}`}>{comment.get('create_user')}</Link>
-            </CommentInfo>
-            {comment.get('reply_user') ? (
-              <ReplyContent>
-                <Link to={`/user/info/${comment.get('reply_user')}`}>{comment.get('reply_user')}</Link>：{comment.get('reply_content')}
-              </ReplyContent>
-            ) : null}
-            <CommentContentDetail>{comment.get('content')}</CommentContentDetail>
-            <CommentAction>
-              <div onClick={() => handleReplyComment(i, user)}>回复</div>
-            </CommentAction>
-            {comment.get('showReplyInput') ? (
-              <CommentReply>
-                <Input size="small" onChange={handleInputChange} onPressEnter={() => handleSubmitReply(comment, i, replyContent, article)} />
-                <div style={{ marginTop: '5px', display: 'flex', flexDirection: 'row-reverse' }}>
-                  <CommentReplyBtn type="primary" onClick={() => handleSubmitReply(comment, i, replyContent, article)}>
-                    提交
-                  </CommentReplyBtn>
-                </div>
-              </CommentReply>
-            ) : null}
-          </CommentContent>
-        </CommentItem>
+        <CommentListItem
+          comment={comment}
+          key={i}
+          article={article}
+          user={user}
+          articleUser={articleUser}
+          isMac={isMac}
+        />
       ))}
-    </CommentWrapper>
+    </div>
   )
 }
 
-export default withRouter(CommentList)
+export default CommentList

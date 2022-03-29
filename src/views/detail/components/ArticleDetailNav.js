@@ -1,11 +1,20 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState, Fragment, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { NavWrapper, NavItem, NavHeader, NavIcon } from '../styled'
 import classnames from 'classnames'
-function ArticleDetailNav () {
+function ArticleDetailNav (props) {
   const navList = useSelector(state => state.getIn(['detail', 'navInfo', 'navList']))
   const [showSideNav, setShowSideNav] = useState(true)
+  const { activeNavId } = props
   const rootLevel = Math.min(...navList.map(item => item.level))
+  useEffect(() => {
+    if (activeNavId) {
+      const navEle = document.getElementById(activeNavId)
+      navEle && navEle.scrollIntoView({
+        // behavior: 'smooth',
+        block: 'center'
+      })
+    }
+  }, [activeNavId])
   const toHeader = (id) => {
     document.getElementById(id).scrollIntoView({
       // behavior: 'smooth',
@@ -16,33 +25,37 @@ function ArticleDetailNav () {
     ? (
         <Fragment>
           {showSideNav ? null : (
-              <NavIcon
-                title="点击显示标题导航栏"
-                className="iconfont icon-mulu"
-                onClick={() => setShowSideNav(true)}
-              />
+            <i
+              title="点击显示标题导航栏"
+              className="iconfont icon-mulu text-2xl fixed top-1/2  right-5 -mt-4 cursor-pointer hover:text-blue-600"
+              onClick={() => setShowSideNav(true)}
+            />
           )}
-          <NavWrapper className={classnames({ 'show-nav-list': showSideNav })}>
-            <NavHeader>
-              <h3>目录</h3>
-              <i className="iconfont icon-arrow-right" onClick={() => setShowSideNav(false)}/>
-            </NavHeader>
-            {
-              navList.map((item) => (
-                <NavItem
-                  title={item.text}
-                  key={`h${item.level}-${item.no}`}
-                  id={`linkToh${item.level}${item.no}`}
-                  className='blog-nav-header'
-                  onClick={() => toHeader(`h${item.level}-${item.no}`)}
-                >
-                  <pre>
-                  { `${('  ').repeat(item.level - rootLevel) + item.text.replaceAll(/<([a-z]*)?\/?([a-z]*)?>/g, '')}` }
-                  </pre>
-                </NavItem>
-              ))
-            }
-          </NavWrapper>
+          <div className={classnames({ 'w-60 opacity-100': showSideNav }, 'fixed z-10 rounded top-1/2 -mt-40 h-80 w-0 right-4 shadow-sm opacity-0 bg-white flex flex-col overflow-hidden transition-all')}>
+            <div className='text-base font-medium flex items-center shadow-sm px-2.5 py-1.5 pt-2.5'>
+              <h3 className='flex-1'>目录</h3>
+              <i className="iconfont icon-arrow-right text-xl cursor-pointer rounded hover:text-blue-600" onClick={() => setShowSideNav(false)}/>
+            </div>
+            <div className='flex-1 overflow-y-auto'>
+              <div className='py-3'>
+              {
+                navList.map((item) => (
+                  <div
+                    title={item.text}
+                    key={`h${item.level}-${item.no}`}
+                    id={`linkToh${item.level}${item.no}`}
+                    className={classnames({ 'w-full py-1.5 box-border rounded-sm text-sm overflow-hidden font-medium cursor-pointer text-gray-600 px-3 hover:bg-gray-100': true,  'text-blue-600': activeNavId === `linkToh${item.level}${item.no}`, 'hover:text-blue-600': activeNavId !== `linkToh${item.level}${item.no}` })}
+                    onClick={() => toHeader(`h${item.level}-${item.no}`)}
+                  >
+                    <pre className='overflow-ellipsis'>
+                    { `${('  ').repeat(item.level - rootLevel) + item.text.replaceAll(/<([a-z]*)?\/?([a-z]*)?>/g, '')}` }
+                    </pre>
+                  </div>
+                ))
+              }
+              </div>
+            </div>
+          </div>
         </Fragment>
       )
     : null

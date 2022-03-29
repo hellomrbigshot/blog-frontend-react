@@ -1,6 +1,5 @@
 import React from 'react'
 import { Modal } from 'antd'
-import { BioTextArea } from '../styled'
 function bioEditModal(props) {
   const { visible, onCancel, onOk } = props
   let bio = ''
@@ -14,7 +13,9 @@ function bioEditModal(props) {
       onCancel={onCancel}
       onOk={() => onOk(bio)}
     >
-        <BioTextArea
+        <textarea
+          rows='4'
+          className='w-full rounded px-2 py-2 resize-none text-sm border-gray-400 outline-none focus:border-blue-400'
           onChange={e => bio = e.target.value}
         />
     </Modal>

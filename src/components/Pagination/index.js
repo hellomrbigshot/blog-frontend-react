@@ -11,10 +11,10 @@ function Pagination ({ current = 1, total, pageSize = 10, onChange }) {
     setPage(_page)
     onChange && onChange(_page)
   }
-  const leftMiss = page >= 5 ? true : false // 显示左边省略号
-  const rightMiss = pageNum - page > 3 ? true : false // 显示右边省略号
+  const leftMiss = page >= 5 // 显示左边省略号
+  const rightMiss = pageNum - page > 3 // 显示右边省略号
   return (
-    <PaginationWrapper>
+    <div className='text-sm list-none tabular-nums flex items-center'>
       <PaginationItem
         className={classnames({ disabled: page === 1 })}
         onClick={() => handlePageChange(page - 1)}
@@ -84,7 +84,7 @@ function Pagination ({ current = 1, total, pageSize = 10, onChange }) {
       >
         <i className="iconfont icon-arrow-right" />
       </PaginationItem>
-    </PaginationWrapper>
+    </div>
   )
 }
 

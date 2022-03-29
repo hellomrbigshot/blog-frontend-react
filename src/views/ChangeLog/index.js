@@ -1,27 +1,31 @@
 import React, { Fragment } from 'react'
 import settings from './changeLogSetting'
-import { LogItem, LogItemHeader, LogItemDate, LogItemDescHeader, LogItemDescItemWrapper, LogItemDescItem } from './styled'
 function ChangeLog () {
   return (
     <div>
       {
         settings.map(item => (
-          <LogItem key={item.version}>
-            <LogItemHeader>{ item.version }</LogItemHeader>
-            <LogItemDate>{ item.date }</LogItemDate>
+          <div key={item.version} className='p-6 rounded shadow w-11/12 mx-auto mb-6'>
+            <div className='text-lg font-medium mb-4'>{ item.version }</div>
+            <div className='px-1.5 py-1 rounded w-24 text-center bg-gray-100 text-gray-600'>{ item.date }</div>
             {
               Object.keys(item.desc).map(key => (
                 <Fragment key={key}>
-                  <LogItemDescHeader>{ key }</LogItemDescHeader>
-                  <LogItemDescItemWrapper>{
+                  <div className='mt-6 mb-3 font-bold'>{ key }</div>
+                  {
                     item.desc[key].map(_item => (
-                    <LogItemDescItem key={_item}>{ _item }</LogItemDescItem>
+                      <div key={_item} className='my-1.25 ml-2.5 flex items-stretch'>
+                        <div className='w-4 flex items-center'>
+                          <div className='w-1.5 h-1.5 rounded-full border border-solid border-gray-500'></div>
+                        </div>
+                        <div className='text-sm leading-7 text-gray-600'>{ _item }</div>
+                      </div>
                     ))
-                  }</LogItemDescItemWrapper>
+                  }
                 </Fragment>
               ))
             }
-          </LogItem>
+          </div>
         ))
       }
     </div>
