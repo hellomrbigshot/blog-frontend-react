@@ -188,11 +188,15 @@ function Header () {
         </div>
         {user ? (
           <Fragment>
-            <Link to="/comment/list">
+            <Link to="/comment/list" className='relative' title='查看评论'>
               <i
-                className={classnames('iconfont icon-bell1 text-xl text-gray-500 ml-4', { 'icon-red': message > 0 })}
-                number={message}
+                className='iconfont icon-bell1 text-xl text-gray-500 ml-4'
               />
+              {
+                message > 0
+                  ? (<div className='w-1.5 h-1.5 rounded-full bg-red-500 absolute top-0.5 right-0'></div>)
+                  : null
+              }
             </Link>
             <div
               className='ml-4 mr-4 cursor-pointer relative'

@@ -8,7 +8,7 @@ export default ({ placeholder, onChange, onFocus, onEnter, isMac, innerRef }) =>
   return (
     <textarea
       ref={innerRef}
-      className='rounded-md outline-none border bg-gray-200 border-gray-200 w-full px-3 py-2 text-sm resize-none focus:border-blue-500 focus:bg-white'
+      className='rounded-md outline-none border bg-gray-200 border-solid border-gray-200 w-full px-3 py-2 text-sm resize-none focus:border-blue-500 focus:bg-white'
       rows='3'
       placeholder={placeholder}
       onChange={onChange}
