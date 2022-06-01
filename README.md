@@ -7,20 +7,23 @@
 ### 克隆项目
 
 ```
-git clone https://github.com/hellomrbigshot/blog-frontend-react.git
+$ git clone https://github.com/hellomrbigshot/blog-frontend-react.git
 ```
-### 推荐使用 yarn
+### 本地运行
 
 ```
-yarn
-yarn start
+$ pnpm install
+$ pnpm start
 ```
 
-### 使用 npm
-
+### 本地构建
 ```
-npm install
-npm start
+$ pnpm build
+```
+
+### 分析构建文件
+```
+$ pnpm analyze
 ```
 
 # 技术栈
