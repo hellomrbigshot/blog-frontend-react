@@ -76,40 +76,30 @@ function Header () {
   const getDropDown = () => {
     return (
       <div
-        className={classnames('absolute right-0 top-12 w-36 shadow z-10 bg-white flex flex-col overflow-hidden box-border transition-all', { 'h-0 p-0': !mouseIn, 'py-3': mouseIn })}
+        className={classnames('absolute right-0 top-12 w-36 shadow z-10 bg-white flex flex-col overflow-hidden box-border transition-all', { 'h-0 p-0': !mouseIn, 'py-1': mouseIn })}
         onMouseEnter={handleMouseIn}
         onMouseLeave={handleMouseLeave}
       >
-        <div className='py-2 px-4 hover:bg-gray-200'>
-          <Link className='text-sm text-gray-600 hover:text-gray-600' to={`/user/info/${user}`}>
-            <i className="iconfont icon-UserSettings" />
-            <span className='ml-2'>我的主页</span>
-          </Link>
-        </div>
-        <div className='py-2 px-4 hover:bg-gray-200'>
-          <Link className='text-sm text-gray-600 hover:text-gray-600' to="/user/list">
-            <i className="iconfont icon-blogs" />
-            <span className='ml-2'>我的文章</span>
-          </Link>
-        </div>
-        <div className='py-2 px-4 hover:bg-gray-200'>
-          <Link className='text-sm text-gray-600 hover:text-gray-600' to="/user/draft">
-            <i className="iconfont icon-draft" />
-            <span className='ml-2'>我的草稿</span>
-          </Link>
-        </div>
-        <div className='py-2 px-4 hover:bg-gray-200'>
-          <Link className='text-sm text-gray-600 hover:text-gray-600' to="/comment/list">
-            <i className="iconfont icon-comment" />
-            <span className='ml-2'>我的评论</span>
-          </Link>
-        </div>
-        <div className='py-2 px-4 hover:bg-gray-200'>
-          <a className='text-sm text-gray-600 hover:text-gray-600' onClick={() => dispatch(loginCreator.logout())}>
-            <i className="iconfont icon-signout_detail_toil" />
-            <span className='ml-2'>退出</span>
-          </a>
-        </div>
+        <Link className='text-sm text-gray-600 hover:text-gray-600 block px-4 py-2 hover:bg-gray-200' to={`/user/info/${user}`}>
+          <i className="iconfont icon-UserSettings" />
+          <span className='ml-2'>我的主页</span>
+        </Link>
+        <Link className='text-sm text-gray-600 hover:text-gray-600 block px-4 py-2 hover:bg-gray-200' to="/user/list">
+          <i className="iconfont icon-blogs" />
+          <span className='ml-2'>我的文章</span>
+        </Link>
+        <Link className='text-sm text-gray-600 hover:text-gray-600 block px-4 py-2 hover:bg-gray-200' to="/user/draft">
+          <i className="iconfont icon-draft" />
+          <span className='ml-2'>我的草稿</span>
+        </Link>
+        <Link className='text-sm text-gray-600 hover:text-gray-600 block px-4 py-2 hover:bg-gray-200' to="/comment/list">
+          <i className="iconfont icon-comment" />
+          <span className='ml-2'>我的评论</span>
+        </Link>
+        <a className='text-sm text-gray-600 block px-4 py-2 hover:text-gray-600 hover:bg-gray-200' onClick={() => dispatch(loginCreator.logout())}>
+          <i className="iconfont icon-signout_detail_toil" />
+          <span className='ml-2'>退出</span>
+        </a>
       </div>
     )
   }
@@ -163,17 +153,6 @@ function Header () {
               </div>
             ))
           }
-          {/* <div className="text-base mx-5">
-            <a href="https://vue.hellomrbigbigshot.xyz" className='box-border text-gray-600 border-b-3 border-solid border-transparent h-full flex items-center hover:text-gray-900 hover:border-blue-500'>
-              <svg
-                className="icon"
-                style={{ fontSize: '22px' }}
-                aria-hidden="true"
-                dangerouslySetInnerHTML={{ __html: vueIcon }}
-              />
-              版本
-            </a>
-          </div> */}
           {/* <div>
             <Switch
               defaultChecked
@@ -209,11 +188,15 @@ function Header () {
         </div>
         {user ? (
           <Fragment>
-            <Link to="/comment/list">
+            <Link to="/comment/list" className='relative' title='查看评论'>
               <i
-                className={classnames('iconfont icon-bell1 text-xl text-gray-500 ml-4', { 'icon-red': message > 0 })}
-                number={message}
+                className='iconfont icon-bell1 text-xl text-gray-500 ml-4'
               />
+              {
+                message > 0
+                  ? (<div className='w-1.5 h-1.5 rounded-full bg-red-500 absolute top-0.5 right-0'></div>)
+                  : null
+              }
             </Link>
             <div
               className='ml-4 mr-4 cursor-pointer relative'

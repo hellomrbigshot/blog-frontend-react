@@ -29,7 +29,7 @@ export default (commentList, push, type = 'to_user') => {
               <div className='text-gray-400 text-xs'>{formatTime(comment.get('create_time'))}</div>
             </div>
             <div className='text-gray-600 mt-1.5'>{comment.get('content')}</div>
-            <div className='mb-2.5 mt-1.5 p-2.5 rounded shadow-md text-gray-500 cursor-pointer' onClick={() => handleToDetail(comment.get('page_id'))}>
+            <div className='mb-2.5 mt-1.5 p-2.5 rounded shadow-md text-gray-500 cursor-pointer' onClick={() => push(`/detail/${comment.get('page_id')}`)}>
               {comment.get('reply_user') ? (
                 <Fragment>
                   <Link
@@ -49,7 +49,4 @@ export default (commentList, push, type = 'to_user') => {
       ))}
     </div>
   )
-  function handleToDetail(id) {
-    push(`/detail/${id}`)
-  }
 }

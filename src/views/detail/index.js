@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react'
+import React, { useEffect, useCallback, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Avatar } from 'antd'
 import { useParams, useHistory, useLocation } from 'react-router-dom'
@@ -14,6 +14,7 @@ function Detail () {
   const dispatch = useDispatch()
   const { pathname } = useLocation()
   const { id, refresh } = useParams()
+  const textareaRef = useRef(null)
   const history = useHistory()
   let detail = useSelector(state => state.getIn(['detail', 'detail']))
   const _id = useSelector(state => state.getIn(['detail', 'detail', '_id']))
@@ -38,7 +39,8 @@ function Detail () {
       reply_content: ''
     }
     dispatch(submitComment(formData))
-    document.querySelector('#commentList') && document.querySelector('#commentList').scrollIntoView()
+    textareaRef.current.value = ''
+    document.querySelector('#commentList')?.scrollIntoView()
   }, [dispatch, comment])
   const handleFocus = useCallback(() => {
     if (!user) {
@@ -48,7 +50,6 @@ function Detail () {
   }, [user, history, pathname])
   const handleInputChange = useCallback(
     comment => {
-      console.log(comment)
       dispatch(handleCommentChange(comment))
     },
     [dispatch]
@@ -64,6 +65,7 @@ function Detail () {
               <div className='flex'>
                 <Avatar className='mr-4' size={40} src={`/api/file/avatar/user?username=${user}`} alt={user} />
                 <CommentTextarea
+                  innerRef={textareaRef}
                   placeholder={`输入评论（Enter换行，${isMac && '⌘' || 'ctrl'} + Enter发送）`}
                   isMac={isMac}
                   onChange={e => handleInputChange(e.target.value)}

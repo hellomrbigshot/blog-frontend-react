@@ -33,6 +33,7 @@ export default ({ comment, article, user, articleUser, isMac }) => {
       reply_content: comment.get('content')
     }
     dispatch(handleSubmitComment(formData))
+    commentTextareaRef.current.value = ''
     setShowInput(false)
     document.querySelector('#commentList').scrollIntoView()
   }

@@ -54,7 +54,7 @@ function UserInfo ({ match: { params: { name: user } } }) {
     const username = loginUser
     await post('/api/user/updatebio', { username, bio })
     setBioModalVisible(false)
-    dispatch(getUserInfo())
+    dispatch(getUserInfo(user))
   }
   const canEdit = loginUser === user
   const handlePageChange = useCallback(page => {
@@ -112,6 +112,7 @@ function UserInfo ({ match: { params: { name: user } } }) {
       {userInfo.get('username') ? (
         <BioEditModal
           visible={bioModalVisible}
+          placeholder={userInfo.get('bio')}
           onCancel={() => setBioModalVisible(false)}
           onOk={input => handleBioOk(input)}
         />

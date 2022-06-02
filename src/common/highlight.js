@@ -14,9 +14,25 @@ import stylus from 'highlight.js/lib/languages/stylus'
 import typescript from 'highlight.js/lib/languages/typescript'
 import xml from 'highlight.js/lib/languages/xml'
 
-const languageMapping = {javascript, java, css, less, json, markdown, go, php, python, ruby, rust, stylus, typescript, xml}
-Object.keys(languageMapping).forEach(language => {
-    hljs.registerLanguage(language, languageMapping[language])
+const languagesMapping = {
+  javascript,
+  java,
+  css,
+  less,
+  json,
+  markdown,
+  go,
+  php,
+  python,
+  ruby,
+  rust,
+  stylus,
+  typescript,
+  xml
+}
+
+Object.keys(languagesMapping).forEach(language => {
+  hljs.registerLanguage(language, languagesMapping[language])
 })
 
 export default hljs
