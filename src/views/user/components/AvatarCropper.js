@@ -2,11 +2,12 @@ import React, { useRef } from 'react'
 import Cropper from 'react-cropper'
 import { Modal } from 'antd'
 import { debounce } from '../../../common'
+import 'cropperjs/dist/cropper.css'
 
 function AvatarCropperModal({ visible, img, cropImgData, onCropper, onCancel, onOk }) {
   const cropperEl = useRef(null)
   const _crop = () => {
-    const imgData = cropperEl.current.getCroppedCanvas().toDataURL()
+    const imgData = cropperEl.current.cropper.getCroppedCanvas().toDataURL()
     onCropper(imgData)
   }
   const handleCrop = debounce(_crop, 200)
