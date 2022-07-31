@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { formatTime } from '../../../common'
 import { handleSubmitComment } from '../store/actionCreators'
 import CommentTextarea from './CommentTextarea'
+import Avatar from '../../../components/Avatar'
 export default ({ comment, article, user, articleUser, isMac }) => {
   const { pathname } = useLocation()
   const commentTextareaRef = useRef(null)
@@ -40,7 +41,8 @@ export default ({ comment, article, user, articleUser, isMac }) => {
   return (
     <div className='flex px-3.5 py-1.5 mt-5' key={comment.get('_id')}>
       <Link className='mr-4' to={`/user/info/${comment.get('create_user')}`}>
-        <img className='w-10 h-10 rounded-full overflow-hidden' src={`/api/file/avatar/user?username=${comment.get('create_user')}`} alt={comment.get('create_user')} />
+
+        <Avatar size='40' src={`/api/file/avatar/user?username=${comment.get('create_user')}`} alt={comment.get('create_user')} />
       </Link>
       <div className='flex-1'>
         <div className='flex items-center'>

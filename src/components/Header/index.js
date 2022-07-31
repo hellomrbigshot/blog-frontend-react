@@ -8,6 +8,7 @@ import throttle from 'lodash/throttle'
 import blackLogo from '../../statics/image/logo_black_transparent.png'
 import { actionCreators } from './store'
 import { actionCreators as loginCreator } from '../../views/user/store'
+import Avatar from '../../components/Avatar'
 
 const navList = {
   '/home': '首页',
@@ -199,11 +200,11 @@ function Header () {
               }
             </Link>
             <div
-              className='ml-4 mr-4 cursor-pointer relative'
+              className='ml-4 mr-4 rounded-full cursor-pointer relative'
               onMouseEnter={handleMouseIn}
               onMouseLeave={handleMouseLeave}
             >
-              <img className='w-8 h-8 rounded-full' src={`/api/file/avatar/user/?username=${user}`} />
+              <Avatar size='32' src={`/api/file/avatar/user/?username=${user}`}></Avatar>
               {getDropDown()}
             </div>
           </Fragment>

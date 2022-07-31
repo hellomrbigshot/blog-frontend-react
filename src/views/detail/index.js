@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Avatar } from 'antd'
+import Avatar from '../../components/Avatar'
 import { useParams, useHistory, useLocation } from 'react-router-dom'
 import { handleCommentChange, getArticleDetail, resetArticleDetail, resetCommentList, getCommentList, handleSubmitComment as submitComment } from './store/actionCreators'
 import ArticleDetail from './components/ArticleDetail'
