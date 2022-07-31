@@ -8,6 +8,7 @@ import { getUserInfo, getLimitArticleList } from './store/actionCreators'
 import { post } from '../../common/fetch'
 import AvatarCropper from './components/AvatarCropper'
 import BioEditModal from './components/BioEditModal'
+import Avatar from '../../components/Avatar'
 
 function UserInfo ({ match: { params: { name: user } } }) {
   const dispatch = useDispatch()
@@ -64,7 +65,7 @@ function UserInfo ({ match: { params: { name: user } } }) {
     <div>
       <div className='flex'>
         <div className='group w-36 h-36 rounded-full overflow-hidden relative'>
-          <img className='w-36 h-36 rounded-full' src={`/api/file/avatar/user/?username=${user}`} alt="头像" />
+          <Avatar size='144' src={`/api/file/avatar/user/?username=${user}`}/>
           {
             canEdit ? (
               <div className='absolute left-0 right-0 bottom-0 h-0 leading-7 z-10 opacity-70 bg-white text-center text-xs overflow-hidden transition-all duration-200 ease-linear group-hover:h-7'>

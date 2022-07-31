@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom'
-import { Avatar } from 'antd'
+import Avatar from '../../../components/Avatar'
 import { formatTime } from '../../../common/index'
 import classnames from 'classnames'
 
@@ -11,7 +11,7 @@ export default (commentList, push, type = 'to_user') => {
         <div key={comment.get('_id')} className='mt-4 flex pl-4 py-2'>
           <div>
             <Link className='cursor-pointer' to={`/user/info/${comment.get('create_user')}`}>
-              <Avatar size="large" src={`/api/file/avatar/user/?username=${comment.get('create_user')}`} alt="头像" />
+              <Avatar size="40" src={`/api/file/avatar/user/?username=${comment.get('create_user')}`} alt="头像" />
             </Link>
           </div>
           <div className='flex-1 ml-4'>
