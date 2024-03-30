@@ -1,9 +1,10 @@
-import React, { Fragment, useState, useEffect, useCallback } from 'react'
+import React, { Fragment, useState, useEffect, useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { formatTime, marked } from '../../../common'
 import { resetNavInfo } from '../store/actionCreators'
 import ArticleDetailNav from './ArticleDetailNav'
+import { useMemoizedFn } from 'ahooks'
 
 function ArticleDetail({ article, user }) {
   const tags = article.get('tags')
@@ -11,20 +12,16 @@ function ArticleDetail({ article, user }) {
   const [renderNav, setRenderNav] = useState(false)
   const [content, setContent] = useState('')
   const [activeNavId, setActiveNavId] = useState('')
-  const activeNav = useCallback((ele) => {
+  const isHeaderClick = useRef(false)
+  const toggleHeaderClick = (toggle) => {
+    isHeaderClick.current = toggle
+  }
+  const activeNav = useMemoizedFn((ele) => {
+    if (isHeaderClick.current) return
     const navId = ele.dataset.link
     navId && setActiveNavId(navId)
-    // const navEle = document.getElementById(navId)
-    // navEle && navEle.scrollIntoView({
-    //   // behavior: 'smooth',
-    //   block: 'center'
-    // })
-    // document.querySelectorAll('.blog-nav-header').forEach(ele => {
-    //   ele.classList.remove('active')
-    // })
-    // navEle && navEle.classList.add('active')
-  }, [])
-  const scrollObserve = useCallback(() => {
+  })
+  const scrollObserve = useMemoizedFn(() => {
     const navObserver = new IntersectionObserver(entries => {
       entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -35,13 +32,15 @@ function ArticleDetail({ article, user }) {
     document.querySelectorAll('.blog-detail-header').forEach(ele => {
       navObserver.observe(ele)
     })
-  }, [activeNav])
+  })
   useEffect(() => {
     dispatch(resetNavInfo())
     setContent(marked(article.get('content')))
-    setRenderNav(true)
     setTimeout(() => {
-      scrollObserve()
+      setRenderNav(true)
+      setTimeout(() => {
+        scrollObserve()
+      })
     })
   }, [article, dispatch, scrollObserve])
   return (
@@ -59,7 +58,13 @@ function ArticleDetail({ article, user }) {
       </div>
       <div className="m-editor-preview mt-5" dangerouslySetInnerHTML={{ __html: content }} />
       {
-        renderNav ? <ArticleDetailNav activeNavId={activeNavId}/> : null
+        renderNav
+          ? <ArticleDetailNav
+              activeNavId={activeNavId}
+              onHeaderClick={toggleHeaderClick}
+              onActiveNavChange={setActiveNavId}
+            />
+          : null
       }
     </div>
   )

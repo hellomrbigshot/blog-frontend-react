@@ -26,7 +26,7 @@ time, mark, audio, video {
 	padding: 0;
 	border: 0;
   vertical-align: baseline;
-  font-family: "PingFang SC", "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+  font-family: "Helvetica Neue For Number", "Monospaced Number", "PingFang SC", "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
 }
 a {
   text-decoration: none;
@@ -69,4 +69,25 @@ table {
   100% {
       background-position: 0 50%;
   }
+}
+@font-face {
+  font-family: "Helvetica Neue For Number";
+  src: local("Helvetica Neue");
+  unicode-range: U+30-39;
+}
+@font-face {
+  font-family: "Monospaced Number";
+  src: local("Menlo"), local("Consolas");
+  unicode-range: U+30-39;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: #efefef;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #cdcdcd;
+  border-radius: 10px;
+  width: 6px;
 }

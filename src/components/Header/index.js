@@ -52,7 +52,8 @@ function Header () {
     if (user && !socket) {
       let newSocket = io.connect(`${process.env.NODE_ENV === 'development' ? 'http://localhost:8082' : 'https://hellomrbigbigshot.xyz'}`, {
         reconnection: false, // 禁止自动重连
-        query: `token=${Cookies.get('token')}`
+        query: `token=${Cookies.get('token')}`,
+        transports: ['websocket']
       })
       newSocket.on('unread-comment', data => {
         dispatch(actionCreators.messageChange(data))

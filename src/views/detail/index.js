@@ -7,7 +7,7 @@ import ArticleDetail from './components/ArticleDetail'
 import CommentList from './components/CommentList'
 import ArticleDetailSkeleton from './components/ArticleDetailSkeleton'
 import CommentTextarea from './components/CommentTextarea'
-import 'react-m-editor/dist/index.min.css'
+// import 'react-m-editor/dist/style.css'
 import { isMac } from '../../common'
 
 function Detail () {
