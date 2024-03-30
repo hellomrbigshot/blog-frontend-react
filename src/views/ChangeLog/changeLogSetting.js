@@ -1,5 +1,20 @@
 const settings = [
   {
+    version: 'v1.2.8',
+    date: '2024-03-30',
+    desc: {
+      Feature: [
+        '升级 react-m-editor 版本',
+        '升级 marked 版本',
+        '数字使用等宽字体'
+      ],
+      'Bug Fixes': [
+        '修复 ws 连接失败的问题',
+        '修复详情页目录栏不出现的问题'
+      ]
+    }
+  },
+  {
     version: 'v1.2.7',
     date: '2022-07-31',
     desc: {
