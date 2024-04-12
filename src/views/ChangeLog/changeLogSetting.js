@@ -1,5 +1,14 @@
 const settings = [
   {
+    version: 'v1.2.9',
+    date: '2024-04-05',
+    desc: {
+      Featrue: [
+        '使用 github acitons 代替 travis 自动打包发布'
+      ]
+    }
+  },
+  {
     version: 'v1.2.8',
     date: '2024-03-30',
     desc: {
