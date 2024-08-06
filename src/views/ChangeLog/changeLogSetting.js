@@ -1,5 +1,14 @@
 const settings = [
   {
+    version: 'v1.2.10',
+    date: '2024-08-06',
+    desc: {
+      Featrue: [
+        '使用 @simple-m-editor/react 替代 react-m-editor 编辑器组件'
+      ]
+    }
+  },
+  {
     version: 'v1.2.9',
     date: '2024-04-05',
     desc: {
