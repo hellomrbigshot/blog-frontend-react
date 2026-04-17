@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { Select, Input, Switch, Button, Form } from 'antd'
 import { Redirect } from 'react-router-dom'
 import CreateTagModal from './components/CreateTagModal'
-import { MEditor } from 'react-m-editor'
+import { MEditor } from '@simple-m-editor/react'
 import { fetch } from '../../common'
 import cloneDeep from 'lodash/cloneDeep'
 

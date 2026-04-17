@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState, useCallback, useRef } from 'react
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useHistory, useLocation } from 'react-router-dom'
 import classnames from 'classnames'
-import io from 'socket.io-client'
+import { io } from 'socket.io-client'
 import Cookies from 'js-cookie'
 import throttle from 'lodash/throttle'
 import blackLogo from '../../statics/image/logo_black_transparent.png'
@@ -50,7 +50,7 @@ function Header () {
   let keywords = ''
   useEffect(() => {
     if (user && !socket) {
-      let newSocket = io.connect(`${process.env.NODE_ENV === 'development' ? 'http://localhost:8082' : 'https://hellomrbigbigshot.xyz'}`, {
+      let newSocket = io(`${process.env.NODE_ENV === 'development' ? 'http://localhost:8082' : 'https://www.hellomrbigbigshot.xyz'}`, {
         reconnection: false, // 禁止自动重连
         query: `token=${Cookies.get('token')}`,
         transports: ['websocket']
